@@ -11,14 +11,7 @@ namespace D4Companion.Entities
         public string Id { get; set; } = string.Empty;
         public string Name { get; set; } = string.Empty;
         public string ProfileName { get; set; } = string.Empty;
-
-        public string Url
-        { 
-            get
-            {
-                return $"https://mobalytics.gg/diablo-4/profile/{ProfileName}";
-            }
-        }
+        public string Url { get; set; } = string.Empty;
 
         public List<MobalyticsProfileBuildVariant> Variants { get; set; } = new();
     }

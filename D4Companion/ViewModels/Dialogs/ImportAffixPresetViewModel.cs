@@ -574,6 +574,12 @@ namespace D4Companion.ViewModels.Dialogs
                 {
                     urlValidStatusMobalytics = TranslationSource.Instance["rsCapBuildUrlDetected"];
                 }
+                else if (BuildIdMobalytics.Contains("mobalytics.gg", StringComparison.OrdinalIgnoreCase) &&
+                   !BuildIdMobalytics.Contains("profile", StringComparison.OrdinalIgnoreCase) &&
+                   BuildIdMobalytics.Contains("builds", StringComparison.OrdinalIgnoreCase))
+                {
+                    urlValidStatusMobalytics = TranslationSource.Instance["rsCapBuildUrlDetected"];
+                }
                 else if(BuildIdMobalytics.Contains("mobalytics.gg", StringComparison.OrdinalIgnoreCase) &&
                    BuildIdMobalytics.Contains("profile", StringComparison.OrdinalIgnoreCase))
                 {
@@ -686,8 +692,9 @@ namespace D4Companion.ViewModels.Dialogs
         private bool CanAddMobalyticsBuildExecute()
         {
             return !string.IsNullOrWhiteSpace(BuildIdMobalytics) && BuildIdMobalytics.StartsWith("https://mobalytics.gg") &&
-                ((BuildIdMobalytics.Contains("profile") && !BuildIdMobalytics.Contains("builds")) ||
-                (BuildIdMobalytics.Contains("profile") && BuildIdMobalytics.Contains("builds")));
+                ((BuildIdMobalytics.Contains("profile") && !BuildIdMobalytics.Contains("builds")) || // profile page
+                (!BuildIdMobalytics.Contains("profile") && BuildIdMobalytics.Contains("builds")) || // build page with slug name format
+                (BuildIdMobalytics.Contains("profile") && BuildIdMobalytics.Contains("builds"))); // build page with id format
         }
 
         private async void AddMobalyticsBuildExecute()

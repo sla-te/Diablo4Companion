@@ -278,9 +278,8 @@ namespace D4Companion.Services
                             var resultProperty = task?.GetType().GetProperty("Result");
                             dynamic? body = resultProperty?.GetValue(task);
 
-                            //System.Diagnostics.Debug.WriteLine($"Response body for {args.Response.Url}: {body?.Body}");
                             string json = body?.Body ?? string.Empty;
-
+                            //System.Diagnostics.Debug.WriteLine($"Response body for {args.Response.Url}: {json.Substring(0,100)}");
                             if (json.StartsWith("{\"data\":{\"game\":{\"documents\":{\"userGeneratedDocumentById\":"))
                             {
                                 ParseJsonBuild(json);
@@ -675,10 +674,11 @@ namespace D4Companion.Services
                     Status = $"Downloading {buildUrl}."
                 }));
                 _webDriver.Navigate().GoToUrl(buildUrl);
-
-                // For profile page use javascript to extract data.
+                
                 if (buildUrl.Contains("/profile/") && !buildUrl.Contains("/builds/"))
                 {
+                    // For profile page use javascript to extract data.
+
                     // Wait until all required resources are loaded
                     var result = _webDriverWait.Until(driver =>
                     {
@@ -695,6 +695,29 @@ namespace D4Companion.Services
                         {
                             string jsonString = JsonSerializer.Serialize(jsonDictionary["diablo4State"]);
                             ParseJsonProfile(buildUrl, jsonString);
+                        }
+                    }
+                }                
+                else if (!buildUrl.Contains("/profile/") && buildUrl.Contains("/builds/"))
+                {
+                    // For build page with slug name instead of id use javascript to extract data.
+
+                    // Wait until all required resources are loaded
+                    var result = _webDriverWait.Until(driver =>
+                    {
+                        var js = (IJavaScriptExecutor)driver;
+                        return js.ExecuteScript("return typeof window.__PRELOADED_STATE__ !== 'undefined';");
+                    });
+
+                    if (result != null)
+                    {
+                        var js = (IJavaScriptExecutor)_webDriver;
+                        Dictionary<string, object>? jsonDictionary = js.ExecuteScript("return window.__PRELOADED_STATE__;") as Dictionary<string, object>;
+
+                        if (jsonDictionary != null && jsonDictionary.ContainsKey("diablo4State"))
+                        {
+                            string jsonString = JsonSerializer.Serialize(jsonDictionary["diablo4State"]);
+                            ParseJsonBuildBySlug(jsonString);
                         }
                     }
                 }
@@ -1308,6 +1331,56 @@ namespace D4Companion.Services
             FinalizeBuildDownload();
         }
 
+        private void ParseJsonBuildBySlug(string json)
+        {
+            var deserializeOptions = new JsonSerializerOptions();
+            deserializeOptions.Converters.Add(new BoolConverter());
+            deserializeOptions.Converters.Add(new IntConverter());
+            MobalyticsBuildWrapperJson? mobalyticsBuildWrapperJson = JsonSerializer.Deserialize<MobalyticsBuildWrapperJson>(json, deserializeOptions);
+            MobalyticsBuildUserGeneratedDocumentByIdJson? mobalyticsBuildUserGeneratedDocumentByIdJson = mobalyticsBuildWrapperJson?.Apollo.GraphqlV2.Queries.FirstOrDefault(q => !string.IsNullOrWhiteSpace(q.State.Data[0].Game.Documents.UserGeneratedDocumentBySlug.Data.Id))?.State.Data[0].Game.Documents.UserGeneratedDocumentBySlug;
+
+            if (mobalyticsBuildUserGeneratedDocumentByIdJson != null)
+            {
+                MobalyticsBuildJson mobalyticsBuildJson = new();
+                mobalyticsBuildJson.Data.Game.Documents.UserGeneratedDocumentById = mobalyticsBuildUserGeneratedDocumentByIdJson;
+
+                // Valid json - Convert to MobalyticsBuild
+                MobalyticsBuild mobalyticsBuild = new MobalyticsBuild
+                {
+                    Id = mobalyticsBuildJson.Data.Game.Documents.UserGeneratedDocumentById.Data.Id,
+                    Url = _buildUrl,
+                    Name = mobalyticsBuildJson.Data.Game.Documents.UserGeneratedDocumentById.Data.Data.Name,
+                    Date = mobalyticsBuildJson.Data.Game.Documents.UserGeneratedDocumentById.Data.UpdatedAt
+                };
+
+                WeakReferenceMessenger.Default.Send(new MobalyticsStatusUpdateMessage(new MobalyticsStatusUpdateMessageParams
+                {
+                    Build = mobalyticsBuild,
+                    Status = $"Exporting {mobalyticsBuild.Name}."
+                }));
+
+                ExportBuildVariants(mobalyticsBuild, mobalyticsBuildJson);
+                ConvertBuildVariants(mobalyticsBuild);
+
+                // Save build
+                Directory.CreateDirectory(@".\Builds\Mobalytics");
+                using (FileStream stream = File.Create(@$".\Builds\Mobalytics\{mobalyticsBuild.Id}.json"))
+                {
+                    var options = new JsonSerializerOptions { WriteIndented = true };
+                    JsonSerializer.Serialize(stream, mobalyticsBuild, options);
+                }
+                LoadAvailableMobalyticsBuilds();
+
+                WeakReferenceMessenger.Default.Send(new MobalyticsStatusUpdateMessage(new MobalyticsStatusUpdateMessageParams
+                {
+                    Build = mobalyticsBuild,
+                    Status = $"Done."
+                }));
+            }
+
+            FinalizeBuildDownload();
+        }
+
         private void ParseJsonProfile(string url, string json)
         {
             MobalyticsProfileJson? mobalyticsProfileJson = JsonSerializer.Deserialize<MobalyticsProfileJson>(json);
@@ -1325,6 +1398,11 @@ namespace D4Companion.Services
                     string name = ngfDocumentAuthorJson.Name;
                     string profileName = ngfDocumentAuthorJson.Creator.ProfileName;
 
+                    if (string.IsNullOrWhiteSpace(name))
+                    {
+                        name = ngfDocumentAuthorJson.User.DisplayName;
+                    }
+
                     // Parse url
                     string filters = url.Split('?').Length > 1 ? url.Split('?')[1] : string.Empty;
                     List<string> filterList = filters.Split('&').ToList();
@@ -1339,7 +1417,8 @@ namespace D4Companion.Services
                     {
                         Id = profileId,
                         Name = name,
-                        ProfileName = profileName
+                        ProfileName = profileName,
+                        Url = url
                     };
 
                     WeakReferenceMessenger.Default.Send(new MobalyticsStatusUpdateMessage(new MobalyticsStatusUpdateMessageParams
@@ -1361,7 +1440,7 @@ namespace D4Companion.Services
                             Date = build.UpdatedAt,
                             Id = build.Id,
                             Name = build.Data.Name,
-                            Url = $"{mobalyticsProfile.Url}/builds/{build.Id}"
+                            Url = $"https://mobalytics.gg/diablo-4/profile/{profileId}/builds/{build.Id}"
                         };
                         mobalyticsProfile.Variants.Add(mobalyticsBuildVariant);
 
