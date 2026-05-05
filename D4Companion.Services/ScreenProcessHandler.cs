@@ -412,7 +412,7 @@ namespace D4Companion.Services
                     {
                         _currentTooltip.ItemAffixLocations.Clear();
                         _currentTooltip.ItemAspectLocation = new Rectangle();
-                    }      
+                    }
                 }
 
                 // Skip disabled item types
@@ -435,39 +435,49 @@ namespace D4Companion.Services
                 // - Requires item type information
                 if (_currentTooltip.ItemAffixLocations.Any())
                 {
-                    UpdateItemAffixAreas();
+                    // Ignore for now. Most items no longer have implicit affixes.
+
+                    // Weapons: no implicits
+                    // Armor: no implicits
+                    // Jewelry: no implicits
+                    // Uniques: no implicits
+                    // Mythics: some have fixed implicit / inherent properties
+                    // Shields: block and other implicits
+                    // Boots: implicits no longer seperated from normal affixes.
+
+                    //UpdateItemAffixAreas();
                 }
 
                 Parallel.Invoke(
-                    () =>
-                    {
-                        // Only search for affixes when the item tooltip contains them.
-                        if (_currentTooltip.ItemAffixLocations.Any())
-                        {
-                            FindItemAffixes();
-                            UpdateItemAffixAreasWithOcrResults();
-                        }
-                    },
-                    () =>
-                    {
-                        // Aspect detection should be enabled,
-                        // and only search for aspects when the item tooltip contains one.
-                        if (_settingsManager.Settings.IsAspectDetectionEnabled &&
-                        !_currentTooltip.ItemAspectLocation.IsEmpty && !_currentTooltip.IsUniqueItem)
-                        {
-                            FindItemAspects();
-                        }
-                        else if (_settingsManager.Settings.IsUniqueDetectionEnabled &&
-                        !_currentTooltip.ItemAspectLocation.IsEmpty && _currentTooltip.IsUniqueItem)
-                        {
-                            FindItemUniqueAspects();
-                        }
-                        else
-                        {
-                            // Remove unique aspect
-                            _currentTooltip.ItemAspectLocation = new Rectangle();
-                        }
-                    });
+                                () =>
+                                {
+                                    // Only search for affixes when the item tooltip contains them.
+                                    if (_currentTooltip.ItemAffixLocations.Any())
+                                    {
+                                        FindItemAffixes();
+                                        UpdateItemAffixAreasWithOcrResults();
+                                    }
+                                },
+                                () =>
+                                {
+                                    // Aspect detection should be enabled,
+                                    // and only search for aspects when the item tooltip contains one.
+                                    if (_settingsManager.Settings.IsAspectDetectionEnabled &&
+                                    !_currentTooltip.ItemAspectLocation.IsEmpty && !_currentTooltip.IsUniqueItem)
+                                    {
+                                        FindItemAspects();
+                                    }
+                                    else if (_settingsManager.Settings.IsUniqueDetectionEnabled &&
+                                    !_currentTooltip.ItemAspectLocation.IsEmpty && _currentTooltip.IsUniqueItem)
+                                    {
+                                        FindItemUniqueAspects();
+                                    }
+                                    else
+                                    {
+                                        // Remove unique aspect
+                                        _currentTooltip.ItemAspectLocation = new Rectangle();
+                                    }
+                                });
 
                 // Find tradable item
                 if (_settingsManager.Settings.IsTradeOverlayEnabled && _currentTooltip.ItemAffixes.Any())
@@ -949,17 +959,18 @@ namespace D4Companion.Services
         /// </summary>
         private void UpdateItemAffixAreas()
         {
+            // Note: Boots: Implicit affixes are no longer seperated and are now listed under the normal affixes. (Season 13)
+            //       Shield: Still has implicit affixes but item type is the same for all offhands. (Season 13)
+
             //_logger.LogDebug($"{MethodBase.GetCurrentMethod()?.Name}");
 
             // Check if there are any areas with implicit affixes.
-            // - Types with implicit affixes: Amulet, Boots, Offhand, Ranged, Ring, Weapon.
+            // - Types with implicit affixes:
+            //   - All rarities: Shield
+            //   - Legendaries: Boots
+            //   - Mythics: All
             // - Implicit area is between a top splitter and the first normal splitter.
-            if (_currentTooltip.ItemType.Equals(ItemTypeConstants.Amulet) ||
-                _currentTooltip.ItemType.Equals(ItemTypeConstants.Boots) ||
-                _currentTooltip.ItemType.Equals(ItemTypeConstants.Offhand) ||
-                _currentTooltip.ItemType.Equals(ItemTypeConstants.Ranged) ||
-                _currentTooltip.ItemType.Equals(ItemTypeConstants.Ring) ||
-                _currentTooltip.ItemType.Equals(ItemTypeConstants.Weapon))
+            if (_currentTooltip.ItemType.Equals(ItemTypeConstants.Boots) && _currentTooltip.ItemRarity.Equals(ItemRarityConstants.Legendary))
             {
                 //_logger.LogDebug($"{MethodBase.GetCurrentMethod()?.Name}: ItemType: {_currentTooltip.ItemType}");
                 //_logger.LogDebug($"{MethodBase.GetCurrentMethod()?.Name}: HasTooltipTopSplitter: {_currentTooltip.HasTooltipTopSplitter}");
