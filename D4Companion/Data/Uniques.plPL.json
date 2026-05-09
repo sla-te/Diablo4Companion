@@ -76,7 +76,7 @@
       "Pants_Unique_Paladin_002",
       "Talisman_Charm_Unique_Pants_Unique_Paladin_002"
     ],
-    "IdNameItemActor": "Generic_Charm_Flippy",
+    "IdNameItemActor": "Pants_Unique_Paladin_95",
     "Name": "Arkadia",
     "Description": "Mobilizacja zapewnia ci umocnienie o wartości #% twojego maksymalnego zdrowia. Za każdym razem, kiedy odzyskujesz #% maksymalnego zdrowia, zyskujesz ładunek Mobilizacji.",
     "DescriptionClean": "Mobilizacja zapewnia ci umocnienie o wartości twojego maksymalnego zdrowia. Za każdym razem, kiedy odzyskujesz maksymalnego zdrowia, zyskujesz ładunek Mobilizacji.",
@@ -332,7 +332,7 @@
       "Ring_Unique_Sorc_104_x2",
       "Talisman_Charm_Unique_Ring_Unique_Sorc_104_x2"
     ],
-    "IdNameItemActor": "Icons_Ring_Unique_018",
+    "IdNameItemActor": "Generic_Charm_Flippy",
     "Name": "Boleść Drognana",
     "Description": "Użycie umiejętności Piromancji wywołuje twoje podpalenie zadające obrażenia równe #% twojego maksymalnego zdrowia w ciągu # sek. Zadajesz obrażenia od podpalenia zwiększone o #% na podstawie wartości twojego zdrowia objętego podpaleniem.",
     "DescriptionClean": "Użycie umiejętności Piromancji wywołuje twoje podpalenie zadające obrażenia równe twojego maksymalnego zdrowia w ciągu sek. Zadajesz obrażenia od podpalenia zwiększone o na podstawie wartości twojego zdrowia objętego podpaleniem.",
@@ -620,7 +620,7 @@
       "Boots_Unique_Generic_003",
       "Talisman_Charm_Unique_Boots_Unique_Generic_003"
     ],
-    "IdNameItemActor": "Boots_Unique_Generic_125",
+    "IdNameItemActor": "Generic_Charm_Flippy",
     "Name": "Błogosławieństwo Yen",
     "Description": "Użycie umiejętności daje #% szans na wywołanie efektu umiejętności (innej niż umiejętność Mobilności i Moc Specjalna), która jest w trakcie odnawiania. Efekt może wystąpić tylko raz na # sek.",
     "DescriptionClean": "Użycie umiejętności daje szans na wywołanie efektu umiejętności (innej niż umiejętność Mobilności i Moc Specjalna), która jest w trakcie odnawiania. Efekt może wystąpić tylko raz na sek.",
@@ -1270,7 +1270,7 @@
       "Gloves_Unique_Necro_105",
       "Talisman_Charm_Unique_Gloves_Unique_Necro_105"
     ],
-    "IdNameItemActor": "Gloves_Unique_Necromancer_98",
+    "IdNameItemActor": "Generic_Charm_Flippy",
     "Name": "Dłoń Grabarza",
     "Description": "Generowanie esencji jest zwiększone o #%. Umiejętności Kości zadają obrażenia zwiększone o #% za każdy punkt esencji posiadany w momencie użycia, maksymalnie do #%.",
     "DescriptionClean": "Generowanie esencji jest zwiększone o. Umiejętności Kości zadają obrażenia zwiększone o za każdy punkt esencji posiadany w momencie użycia, maksymalnie do.",
@@ -1458,7 +1458,7 @@
       "1HSword_Unique_Generic_002",
       "Talisman_Charm_Unique_1HSword_Unique_Generic_002"
     ],
-    "IdNameItemActor": "sword_uniq24",
+    "IdNameItemActor": "Generic_Charm_Flippy",
     "Name": "El’druin, Miecz Sprawiedliwości",
     "Description": "Pokonanie zgrai wrogów elitarnych skraca czasy odnowienia o # sek. na # sek.",
     "DescriptionClean": "Pokonanie zgrai wrogów elitarnych skraca czasy odnowienia o sek. na sek.",
@@ -1524,7 +1524,7 @@
       "Amulet_Unique_Barb_102_x2",
       "Talisman_Charm_Unique_Amulet_Unique_Barb_102_x2"
     ],
-    "IdNameItemActor": "Icons_Amulet_Unique_005",
+    "IdNameItemActor": "Generic_Charm_Flippy",
     "Name": "Emblemat Staalbreak",
     "Description": "Premia do obrażeń berserkowania jest zwiększona o #%. Gdy nie jesteś w pełni sił, zawsze masz status berserkowania.",
     "DescriptionClean": "Premia do obrażeń berserkowania jest zwiększona o. Gdy nie jesteś w pełni sił, zawsze masz status berserkowania.",
@@ -2062,7 +2062,7 @@
       "Helm_Unique_Paladin_002",
       "Talisman_Charm_Unique_Helm_Unique_Paladin_002"
     ],
-    "IdNameItemActor": "Generic_Charm_Flippy",
+    "IdNameItemActor": "Helm_Unique_Paladin_95",
     "Name": "Hełm Rozjemcy",
     "Description": "Szczęśliwy traf: Umiejętności Sędziego mają maksymalnie #% szans na przyzwanie Błogosławionej Włóczni, która nosi piętno Osądu i zadaje obrażenia od Osądu przy trafieniu.",
     "DescriptionClean": "Szczęśliwy traf: Umiejętności Sędziego mają maksymalnie szans na przyzwanie Błogosławionej Włóczni, która nosi piętno Osądu i zadaje obrażenia od Osądu przy trafieniu.",
@@ -2126,7 +2126,7 @@
       "Amulet_Unique_Warlock_001",
       "Talisman_Charm_Unique_Amulet_Unique_Warlock_001"
     ],
-    "IdNameItemActor": "Generic_Charm_Flippy",
+    "IdNameItemActor": "Icons_Amulet_Warlock_Unique_02",
     "Name": "Horazońskie Ziarno",
     "Description": "Umiejętności Demonologii zadają obrażenia zwiększone o #% za każdy punkt gniewu, który posiadasz. Odnosisz obrażenia zmniejszone o #% za każdy punkt dominacji, który posiadasz.",
     "DescriptionClean": "Umiejętności Demonologii zadają obrażenia zwiększone o za każdy punkt gniewu, który posiadasz. Odnosisz obrażenia zmniejszone o za każdy punkt dominacji, który posiadasz.",
@@ -2699,7 +2699,7 @@
       "Pants_Unique_Barb_101",
       "Talisman_Charm_Unique_Pants_Unique_Barb_101"
     ],
-    "IdNameItemActor": "Generic_Charm_Flippy",
+    "IdNameItemActor": "LEG_uniq101",
     "Name": "Kolczuga Okowów",
     "Description": "Użycie raniącej umiejętności Bijatyki wyłącza ją po zakończeniu jej działania. Gdy wszystkie takie umiejętności na pasku akcji zostaną wyłączone, włączą się z powrotem, a ich czasy odnowienia zostaną wyzerowane. Używane przez ciebie umiejętności Bijatyki zadają obrażenia zwiększone o #% za każdą wyłączoną umiejętność.",
     "DescriptionClean": "Użycie raniącej umiejętności Bijatyki wyłącza ją po zakończeniu jej działania. Gdy wszystkie takie umiejętności na pasku akcji zostaną wyłączone, włączą się z powrotem, a ich czasy odnowienia zostaną wyzerowane. Używane przez ciebie umiejętności Bijatyki zadają obrażenia zwiększone o za każdą wyłączoną umiejętność.",
@@ -2731,7 +2731,7 @@
       "Boots_Unique_Barb_101",
       "Talisman_Charm_Unique_Boots_Unique_Barb_101"
     ],
-    "IdNameItemActor": "Boots_Unique_Barbarian_103",
+    "IdNameItemActor": "Generic_Charm_Flippy",
     "Name": "Kopyta Górskiego Boga",
     "Description": "Gdy użyjesz umiejętności Podstawowej, dysponując maksimum furii, wartość furii zaczyna spadać, dopóki się nie wyczerpie, a w tym czasie umiejętności Podstawowe zyskują efekt rozpłatania i zadają obrażenia zwiększone o #%.",
     "DescriptionClean": "Gdy użyjesz umiejętności Podstawowej, dysponując maksimum furii, wartość furii zaczyna spadać, dopóki się nie wyczerpie, a w tym czasie umiejętności Podstawowe zyskują efekt rozpłatania i zadają obrażenia zwiększone o.",
@@ -2800,7 +2800,7 @@
       "Helm_Unique_Generic_003",
       "Talisman_Charm_Unique_Helm_Unique_Generic_003"
     ],
-    "IdNameItemActor": "Generic_Charm_Flippy",
+    "IdNameItemActor": "HLM_sets50",
     "Name": "Korona Pogromcy Bogów",
     "Description": "Kiedy podejmujesz próbę unieruchomienia wroga, oznaczasz go i wszystkich pobliskich wrogów, przyciągasz ich i zadajesz im obrażenia zwiększone o #%.",
     "DescriptionClean": "Kiedy podejmujesz próbę unieruchomienia wroga, oznaczasz go i wszystkich pobliskich wrogów, przyciągasz ich i zadajesz im obrażenia zwiększone o.",
@@ -2987,7 +2987,7 @@
       "Boots_Unique_Rogue_101",
       "Talisman_Charm_Unique_Boots_Unique_Rogue_101"
     ],
-    "IdNameItemActor": "Generic_Charm_Flippy",
+    "IdNameItemActor": "Boots_unique_Rogue_101",
     "Name": "Krok Skrytobójcy",
     "Description": "Umiejętności Mobilności zawsze są nasycone Cieniem, a ich moc jest zwiększona o #%. \r\n\r\nSzczęśliwy traf: zadanie obrażeń wrogowi elitarnemu lub bossowi za pomocą umiejętności Mobilności ma maksymalnie #% szans na natychmiastowe aktywowanie eksplozji Nasycenia Cieniem bez zużywania zasobów.",
     "DescriptionClean": "Umiejętności Mobilności zawsze są nasycone Cieniem, a ich moc jest zwiększona o.  Szczęśliwy traf: zadanie obrażeń wrogowi elitarnemu lub bossowi za pomocą umiejętności Mobilności ma maksymalnie szans na natychmiastowe aktywowanie eksplozji Nasycenia Cieniem bez zużywania zasobów.",
@@ -3244,7 +3244,7 @@
       "2HAxe_Unique_Warlock_001",
       "Talisman_Charm_Unique_2HAxe_Unique_Warlock_001"
     ],
-    "IdNameItemActor": "Generic_Charm_Flippy",
+    "IdNameItemActor": "twoHandAxe_uniq14",
     "Name": "Lament Potępienia",
     "Description": "Umiejętności Podstawowe zadają obrażenia zwiększone o #% za każdy posiadany punkt gniewu, ale tracisz #% gniewu na sekundę. Co # pkt. gniewu zyskanego ponad maksymalną wartość generuje # pkt. dominacji.",
     "DescriptionClean": "Umiejętności Podstawowe zadają obrażenia zwiększone o za każdy posiadany punkt gniewu, ale tracisz gniewu na sekundę. Co pkt. gniewu zyskanego ponad maksymalną wartość generuje pkt. dominacji.",
@@ -3276,7 +3276,7 @@
       "Quarterstaff_Unique_Spiritborn_016_x1",
       "Talisman_Charm_Unique_Quarterstaff_Unique_Spiritborn_016_x1"
     ],
-    "IdNameItemActor": "Generic_Charm_Flippy",
+    "IdNameItemActor": "twoHandQuarterstaff_uniq11",
     "Name": "Laska Kepeleke",
     "Description": "Twoje umiejętności Główne są teraz także umiejętnościami Podstawowymi i nie zużywają zasobów.\r\n\r\nGdy dysponujesz maksimum wigoru, umiejętności Główne zużywają cały wigor, by mogły zostać użyte w największym rozmiarze, i stają się gwarantowanymi trafieniami krytycznymi z obrażeniami od trafień krytycznych zwiększonymi o #% za każdy zużyty w ten sposób punkt wigoru.",
     "DescriptionClean": "Twoje umiejętności Główne są teraz także umiejętnościami Podstawowymi i nie zużywają zasobów. Gdy dysponujesz maksimum wigoru, umiejętności Główne zużywają cały wigor, by mogły zostać użyte w największym rozmiarze, i stają się gwarantowanymi trafieniami krytycznymi z obrażeniami od trafień krytycznych zwiększonymi o za każdy zużyty w ten sposób punkt wigoru.",
@@ -3420,6 +3420,75 @@
       1,
       0,
       0
+    ],
+    "AllowedItemLabels": []
+  },
+  {
+    "IdSno": "1924261",
+    "IdName": "S05_BSK_Generic_009",
+    "IdSnoList": [
+      "1924261"
+    ],
+    "IdNameList": [
+      "S05_BSK_Generic_009"
+    ],
+    "IdNameItem": "S05_BSK_Amulet_Unique_Generic_001;Talisman_Charm_Unique_S05_BSK_Amulet_Unique_Generic_001",
+    "IdNameItemList": [
+      "S05_BSK_Amulet_Unique_Generic_001",
+      "Talisman_Charm_Unique_S05_BSK_Amulet_Unique_Generic_001"
+    ],
+    "IdNameItemActor": "Generic_Charm_Flippy",
+    "Name": "Medalion Lokrana",
+    "Description": "Trafienia krytyczne zadają obrażenia zwiększone o #%, ale szansa na trafienie krytyczne jest zmniejszona o #%.",
+    "DescriptionClean": "Trafienia krytyczne zadają obrażenia zwiększone o , ale szansa na trafienie krytyczne jest zmniejszona o.",
+    "Localisation": "Trafienia krytyczne zadają obrażenia zwiększone o {c_random}[Affix_Value_1*100|%x|]{/c}, ale szansa na trafienie krytyczne jest zmniejszona o {c_number}[Affix.\"Static Value 0\"*100|%+|]{/c}.",
+    "MagicType": 2,
+    "AllowedForPlayerClass": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "AllowedItemLabels": [
+      16,
+      17,
+      30,
+      26
+    ]
+  },
+  {
+    "IdSno": "1559733",
+    "IdName": "Amulet_Unique_Generic_101",
+    "IdSnoList": [
+      "1559733"
+    ],
+    "IdNameList": [
+      "Amulet_Unique_Generic_101"
+    ],
+    "IdNameItem": "Amulet_Unique_Generic_101;Talisman_Charm_Unique_Amulet_Unique_Generic_101",
+    "IdNameItemList": [
+      "Amulet_Unique_Generic_101",
+      "Talisman_Charm_Unique_Amulet_Unique_Generic_101"
+    ],
+    "IdNameItemActor": "Icons_Amulet_Unique_001",
+    "Name": "Medalion Wygnanego Lorda",
+    "Description": "Po zużyciu # pkt. podstawowego zasobu zyskujesz # kumulacji przytłoczenia. Trafienia krytyczne zadają obrażenia zwiększone o #% za każdą kumulację przytłoczenia.",
+    "DescriptionClean": "Po zużyciu pkt. podstawowego zasobu zyskujesz kumulacji przytłoczenia. Trafienia krytyczne zadają obrażenia zwiększone o za każdą kumulację przytłoczenia.",
+    "Localisation": "Po zużyciu {c_number}[Affix.\"Static Value 0\"]{/c} pkt. podstawowego zasobu zyskujesz {c_number}[Affix.\"Static Value 1\"]{/c} |4kumulację:kumulacje:kumulacji; {c_important}{u}przytłoczenia{/u}{/c}. Trafienia krytyczne zadają obrażenia zwiększone o {c_random}[Affix_Value_1|%x|]{/c} za każdą kumulację {c_important}{u}przytłoczenia{/u}{/c}.",
+    "MagicType": 2,
+    "AllowedForPlayerClass": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
     ],
     "AllowedItemLabels": []
   },
@@ -3897,7 +3966,7 @@
       "S05_BSK_Gloves_Unique_Generic_001",
       "Talisman_Charm_Unique_S05_BSK_Gloves_Unique_Generic_001"
     ],
-    "IdNameItemActor": "Gloves_unique_generic_125",
+    "IdNameItemActor": "Generic_Charm_Flippy",
     "Name": "Niezachwiana Wiara",
     "Description": "Gdy masz odnieść obrażenia wynoszące co najmniej #% maksymalnego zdrowia, zostają one rozłożone na kolejne # sek. i zmniejszone o #%.",
     "DescriptionClean": "Gdy masz odnieść obrażenia wynoszące co najmniej maksymalnego zdrowia, zostają one rozłożone na kolejne sek. i zmniejszone o.",
@@ -4030,7 +4099,7 @@
       "Pants_Unique_Barb_100",
       "Talisman_Charm_Unique_Pants_Unique_Barb_100"
     ],
-    "IdNameItemActor": "Generic_Charm_Flippy",
+    "IdNameItemActor": "Pants_unique_Barbarian_99",
     "Name": "Nogawice z Arreat",
     "Description": "Umiejętności inne niż Moc Specjalna, które przywołują Starożytnych, przywołują dodatkowego Starożytnego. Umiejętności te zadają obrażenia zwiększone o #%.",
     "DescriptionClean": "Umiejętności inne niż Moc Specjalna, które przywołują Starożytnych, przywołują dodatkowego Starożytnego. Umiejętności te zadają obrażenia zwiększone o.",
@@ -4124,7 +4193,7 @@
       "Ring_Unique_Generic_100",
       "Talisman_Charm_Unique_Ring_Unique_Generic_100"
     ],
-    "IdNameItemActor": "Icons_Ring_Unique_015",
+    "IdNameItemActor": "Generic_Charm_Flippy",
     "Name": "Objęcia Matki",
     "Description": "Jeśli umiejętność Główna trafi # lub więcej wrogów, zwrócona zostanie równowartość #% kosztu zasobów.",
     "DescriptionClean": "Jeśli umiejętność Główna trafi lub więcej wrogów, zwrócona zostanie równowartość kosztu zasobów.",
@@ -4188,7 +4257,7 @@
       "Ring_Unique_Spiritborn_003_x1",
       "Talisman_Charm_Unique_Ring_Unique_Spiritborn_003_x1"
     ],
-    "IdNameItemActor": "Icons_Ring_Unique_052",
+    "IdNameItemActor": "Generic_Charm_Flippy",
     "Name": "Obrączka Pierwszego Tchnienia",
     "Description": "Użycie Odskoku zużywa # kumulacji Animuszu, aby zwiększyć zadawane obrażenia o #% na # sek.\r\n\r\nZyskujesz efekt pasywny Ciernistego Pancerza.",
     "DescriptionClean": "Użycie Odskoku zużywa kumulacji Animuszu, aby zwiększyć zadawane obrażenia o na sek. Zyskujesz efekt pasywny Ciernistego Pancerza.",
@@ -4314,7 +4383,7 @@
       "Gloves_Unique_Generic_003",
       "Talisman_Charm_Unique_Gloves_Unique_Generic_003"
     ],
-    "IdNameItemActor": "GLV_sets54",
+    "IdNameItemActor": "Generic_Charm_Flippy",
     "Name": "Odmrażający Płomień",
     "Description": "Szczęśliwy traf: Istnieje maksymalnie #% szans na zamrożenie wrogów na # sek.\r\n\r\nZadajesz obrażenia zwiększone o #% zamrożonym wrogom.",
     "DescriptionClean": "Szczęśliwy traf: Istnieje maksymalnie szans na zamrożenie wrogów na sek. Zadajesz obrażenia zwiększone o zamrożonym wrogom.",
@@ -4539,7 +4608,7 @@
       "Ring_Unique_Necro_102",
       "Talisman_Charm_Unique_Ring_Unique_Necro_102"
     ],
-    "IdNameItemActor": "Generic_Charm_Flippy",
+    "IdNameItemActor": "Icons_Ring_Unique_002",
     "Name": "Omen Bólu",
     "Description": "Otacza cię mroczna aura, która wywołuje u dotkniętych wrogów efekty Zniedołężnienia i Żelaznej Dziewicy. \r\n\r\nNałożone w ten sposób Klątwy roznoszą się na pobliskie cele co # sek. i trwają # sek. poza aurą.",
     "DescriptionClean": "Otacza cię mroczna aura, która wywołuje u dotkniętych wrogów efekty Zniedołężnienia i Żelaznej Dziewicy.  Nałożone w ten sposób Klątwy roznoszą się na pobliskie cele co sek. i trwają sek. poza aurą.",
@@ -4602,7 +4671,7 @@
       "Ring_Unique_Sorc_101",
       "Talisman_Charm_Unique_Ring_Unique_Sorc_101"
     ],
-    "IdNameItemActor": "Generic_Charm_Flippy",
+    "IdNameItemActor": "Icons_Ring_Unique_Malignant_Sorcerer_Master",
     "Name": "Opalizująca Obrączka Tal Rashy",
     "Description": "Użycie umiejętności Piromancji, Porażenia lub Lodu zwiększa twoje obrażenia o #% na # sek. Efekt kumuluje się raz na każdy żywioł. Ponowne użycie umiejętności odświeża czas działania wszystkich premii, jeśli poprzednia umiejętność należała do innego żywiołu.",
     "DescriptionClean": "Użycie umiejętności Piromancji, Porażenia lub Lodu zwiększa twoje obrażenia o na sek. Efekt kumuluje się raz na każdy żywioł. Ponowne użycie umiejętności odświeża czas działania wszystkich premii, jeśli poprzednia umiejętność należała do innego żywiołu.",
@@ -4670,7 +4739,7 @@
       "Helm_Unique_Spiritborn_011_x1",
       "Talisman_Charm_Unique_Helm_Unique_Spiritborn_011_x1"
     ],
-    "IdNameItemActor": "HLM_crft44",
+    "IdNameItemActor": "Generic_Charm_Flippy",
     "Name": "Opończa Lojalności",
     "Description": "Gdy twoje wybory w Komnacie Duchów się pokrywają:\r\n Ich premie są zwiększone o #%.\r\n Umiejętności podstawowego ducha zyskują #% redukcji kosztów wigoru.\r\n Umiejętności podstawowego ducha zyskują #% redukcji czasów odnowienia.",
     "DescriptionClean": "Gdy twoje wybory w Komnacie Duchów się pokrywają: Ich premie są zwiększone o. Umiejętności podstawowego ducha zyskują redukcji kosztów wigoru. Umiejętności podstawowego ducha zyskują redukcji czasów odnowienia.",
@@ -4703,7 +4772,7 @@
       "S12_1HSword_Unique_Paladin_002",
       "Talisman_Charm_Unique_1HSword_Unique_Paladin_002"
     ],
-    "IdNameItemActor": "sword_uniq20",
+    "IdNameItemActor": "Generic_Charm_Flippy",
     "Name": "Opus Magnum Griswolda",
     "Description": "Zadanie obrażeń bezpośrednich gwarantuje premię #% do obrażeń od trafień krytycznych za każdego przeciwnika trafionego w ciągu # sek. maksymalnie do #%.\r\n\r\nPrzy maksymalnej premii zyskujesz:\r\n\r\nSzczęśliwy traf: masz maksymalnie #% szans na to, że trafienia krytyczne zadadzą podwójne obrażenia, przywrócą ci # pkt. zdrowia oraz odświeżą czas działania premii.",
     "DescriptionClean": "Zadanie obrażeń bezpośrednich gwarantuje premię do obrażeń od trafień krytycznych za każdego przeciwnika trafionego w ciągu sek. maksymalnie do. Przy maksymalnej premii zyskujesz: Szczęśliwy traf: masz maksymalnie szans na to, że trafienia krytyczne zadadzą podwójne obrażenia, przywrócą ci pkt. zdrowia oraz odświeżą czas działania premii.",
@@ -4736,7 +4805,7 @@
       "S12_1HSword_Unique_Barb_101",
       "Talisman_Charm_Unique_1HSword_Unique_Barb_101"
     ],
-    "IdNameItemActor": "sword_uniq09",
+    "IdNameItemActor": "Generic_Charm_Flippy",
     "Name": "Opus Magnum Ramaladniego",
     "Description": "Umiejętności zadają obrażenia zwiększone o #% za każdy posiadany przez ciebie punkt furii, ale tracisz # pkt. furii na sekundę.",
     "DescriptionClean": "Umiejętności zadają obrażenia zwiększone o za każdy posiadany przez ciebie punkt furii, ale tracisz pkt. furii na sekundę.",
@@ -4928,7 +4997,7 @@
       "Pants_Unique_Warlock_004",
       "Talisman_Charm_Unique_Pants_Unique_Warlock_004"
     ],
-    "IdNameItemActor": "Generic_Charm_Flippy",
+    "IdNameItemActor": "LEG_sets53",
     "Name": "Osłona Morlu",
     "Description": "Nie możesz odzyskać więcej niż #% maksymalnego zdrowia, ale twoje umiejętności Defensywne zadają obrażenia zwiększone o #%.",
     "DescriptionClean": "Nie możesz odzyskać więcej niż maksymalnego zdrowia, ale twoje umiejętności Defensywne zadają obrażenia zwiększone o.",
@@ -4960,7 +5029,7 @@
       "Amulet_Unique_Barb_105_x2",
       "Talisman_Charm_Unique_Amulet_Unique_Barb_105_x2"
     ],
-    "IdNameItemActor": "Icons_Amulet_Unique_008",
+    "IdNameItemActor": "Generic_Charm_Flippy",
     "Name": "Otwarte Oko Gorgorry",
     "Description": "Kiedy zadajesz obrażenia z upływem czasu, masz szansę równą szansie na trafienie krytyczne, że obrażenia te będą zwiększone o #%.",
     "DescriptionClean": "Kiedy zadajesz obrażenia z upływem czasu, masz szansę równą szansie na trafienie krytyczne, że obrażenia te będą zwiększone o.",
@@ -5056,7 +5125,7 @@
       "Ring_Unique_Necro_100_x2",
       "Talisman_Charm_Unique_Ring_Unique_Necro_100_x2"
     ],
-    "IdNameItemActor": "Icons_Ring_Unique_047",
+    "IdNameItemActor": "Generic_Charm_Flippy",
     "Name": "Pakt Kości",
     "Description": "Twoje sługi zyskują #% premii do szybkości ataku i szans na trafienie krytyczne.\r\n\r\nKiedy jeden sługa ginie, pozostałe sługi wpadają w szał, dzięki czemu zadają obrażenia zwiększone o #% przez # sek.",
     "DescriptionClean": "Twoje sługi zyskują premii do szybkości ataku i szans na trafienie krytyczne. Kiedy jeden sługa ginie, pozostałe sługi wpadają w szał, dzięki czemu zadają obrażenia zwiększone o przez sek.",
@@ -5119,7 +5188,7 @@
       "Chest_Unique_Warlock_001",
       "Talisman_Charm_Unique_Chest_Unique_Warlock_001"
     ],
-    "IdNameItemActor": "Chest_Unique_Warlock_95",
+    "IdNameItemActor": "Generic_Charm_Flippy",
     "Name": "Pancerz Wyryty w Ciele",
     "Description": "Umiejętności Pieczęci zadają obrażenia zwiększone o #%. Aktywne Pieczęcie zyskują # zabójstw co sekundę, a niewykorzystane zabójstwa są zapisywane, kiedy przestają działać.",
     "DescriptionClean": "Umiejętności Pieczęci zadają obrażenia zwiększone o. Aktywne Pieczęcie zyskują zabójstw co sekundę, a niewykorzystane zabójstwa są zapisywane, kiedy przestają działać.",
@@ -5182,7 +5251,7 @@
       "Ring_Unique_Paladin_002",
       "Talisman_Charm_Unique_Ring_Unique_Paladin_002"
     ],
-    "IdNameItemActor": "Icons_Ring_Unique_020",
+    "IdNameItemActor": "Generic_Charm_Flippy",
     "Name": "Pieczęć Drugiej Trąby",
     "Description": "Osąd zadaje obrażenia zwiększone o #% i ma #% szans na dwukrotną eksplozję, gdy korzystasz z Przysięgi Sędziego.",
     "DescriptionClean": "Osąd zadaje obrażenia zwiększone o i ma szans na dwukrotną eksplozję, gdy korzystasz z Przysięgi Sędziego.",
@@ -5307,7 +5376,7 @@
       "Ring_Unique_Generic_101",
       "Talisman_Charm_Unique_Ring_Unique_Generic_101"
     ],
-    "IdNameItemActor": "Generic_Charm_Flippy",
+    "IdNameItemActor": "Icons_Ring_Unique_034",
     "Name": "Pierścień Bezgwiezdnej Nocy",
     "Description": "Zużywanie zasobu podstawowego zmniejsza ilość zasobu potrzebną do użycia umiejętności oraz zwiększa obrażenia o #% przez # sek., maksymalnie o #%. ",
     "DescriptionClean": "Zużywanie zasobu podstawowego zmniejsza ilość zasobu potrzebną do użycia umiejętności oraz zwiększa obrażenia o przez sek., maksymalnie o.",
@@ -5373,7 +5442,7 @@
       "Ring_Unique_Spiritborn_002_x1",
       "Talisman_Charm_Unique_Ring_Unique_Spiritborn_002_x1"
     ],
-    "IdNameItemActor": "Generic_Charm_Flippy",
+    "IdNameItemActor": "Icons_Ring_Unique_054",
     "Name": "Pierścień Dygoczącego Księżyca",
     "Description": "Co # sek. pojawia się Rój Zarazy, który zadaje # pkt. obrażeń od Trucizny przy każdym trafieniu. \r\n\r\nRoje Zarazy orbitują wokół ciebie i skracają czas odnowienia wyposażonej umiejętności Orła o # sek. za każde trafienie.",
     "DescriptionClean": "Co sek. pojawia się Rój Zarazy, który zadaje pkt. obrażeń od Trucizny przy każdym trafieniu.  Roje Zarazy orbitują wokół ciebie i skracają czas odnowienia wyposażonej umiejętności Orła o sek. za każde trafienie.",
@@ -5436,7 +5505,7 @@
       "Ring_Unique_Spiritborn_005_x1",
       "Talisman_Charm_Unique_Ring_Unique_Spiritborn_005_x1"
     ],
-    "IdNameItemActor": "Generic_Charm_Flippy",
+    "IdNameItemActor": "Icons_Ring_Unique_053",
     "Name": "Pierścień Południowych Łowów",
     "Description": "Maksymalny wigor zwiększa się o #%, a zabicie wroga zapewnia ci # pkt. wigoru. \r\n\r\nJeśli masz Zajadłość, twoje nowe efekty zatrucia będą trwać o #% dłużej. ",
     "DescriptionClean": "Maksymalny wigor zwiększa się o , a zabicie wroga zapewnia ci pkt. wigoru.  Jeśli masz Zajadłość, twoje nowe efekty zatrucia będą trwać o dłużej.",
@@ -5468,7 +5537,7 @@
       "Ring_Unique_Spiritborn_006_x1",
       "Talisman_Charm_Unique_Ring_Unique_Spiritborn_006_x1"
     ],
-    "IdNameItemActor": "Icons_Ring_Unique_055",
+    "IdNameItemActor": "Generic_Charm_Flippy",
     "Name": "Pierścień Północnego Słońca",
     "Description": "Trafienia krytyczne przywracają ci #% wigoru zużytego w ciągu ostatnich # sek.\r\n\r\nZyskujesz efekt pasywny Kontrataku.",
     "DescriptionClean": "Trafienia krytyczne przywracają ci wigoru zużytego w ciągu ostatnich sek. Zyskujesz efekt pasywny Kontrataku.",
@@ -5562,7 +5631,7 @@
       "Chest_Unique_Generic_101",
       "Talisman_Charm_Unique_Chest_Unique_Generic_101"
     ],
-    "IdNameItemActor": "TRS_sets55",
+    "IdNameItemActor": "Generic_Charm_Flippy",
     "Name": "Piętno Duszy",
     "Description": "Mikstura leczenia gwarantuje barierę o mocy równej #% maksymalnego zdrowia na # sek. \r\n\r\nGdy posiadasz barierę, zyskujesz premię #% do redukcji obrażeń i możesz używać mikstur leczenia, gdy jesteś w pełni sił.",
     "DescriptionClean": "Mikstura leczenia gwarantuje barierę o mocy równej maksymalnego zdrowia na sek.  Gdy posiadasz barierę, zyskujesz premię do redukcji obrażeń i możesz używać mikstur leczenia, gdy jesteś w pełni sił.",
@@ -5594,7 +5663,7 @@
       "Ring_Unique_Generic_103",
       "Talisman_Charm_Unique_Ring_Unique_Generic_103"
     ],
-    "IdNameItemActor": "Icons_Ring_Unique_010",
+    "IdNameItemActor": "Generic_Charm_Flippy",
     "Name": "Piętno Wendigo",
     "Description": "Co #. wróg zabity w ciągu ostatnich # sek. zwiększa zadawane obrażenia o #%, a maksymalne zdrowie o #%.",
     "DescriptionClean": "Co. wróg zabity w ciągu ostatnich sek. zwiększa zadawane obrażenia o , a maksymalne zdrowie o.",
@@ -5626,7 +5695,7 @@
       "Gloves_Unique_Generic_002",
       "Talisman_Charm_Unique_Gloves_Unique_Generic_002"
     ],
-    "IdNameItemActor": "GLV_sets51",
+    "IdNameItemActor": "Generic_Charm_Flippy",
     "Name": "Pięści Przeznaczenia",
     "Description": "Twoje ataki zadają losowo wybraną równowartość #% – #% standardowych obrażeń.",
     "DescriptionClean": "Twoje ataki zadają losowo wybraną równowartość – standardowych obrażeń.",
@@ -5721,7 +5790,7 @@
       "Ring_Unique_Rogue_101",
       "Talisman_Charm_Unique_Ring_Unique_Rogue_101"
     ],
-    "IdNameItemActor": "Icons_Ring_Unique_012",
+    "IdNameItemActor": "Generic_Charm_Flippy",
     "Name": "Pocałunek Szelmy",
     "Description": "Zyskujesz # kumulacji Zajadłości co # sek., dopóki nie ma wokół ciebie pobliskich wrogów.\r\n\r\nUmiejętności Strzelectwa zadają obrażenia zwiększone o #% za każdą kumulację Zajadłości.",
     "DescriptionClean": "Zyskujesz kumulacji Zajadłości co sek., dopóki nie ma wokół ciebie pobliskich wrogów. Umiejętności Strzelectwa zadają obrażenia zwiększone o za każdą kumulację Zajadłości.",
@@ -6002,7 +6071,7 @@
       "Chest_Unique_Generic_127",
       "Talisman_Charm_Unique_Chest_Unique_Generic_127"
     ],
-    "IdNameItemActor": "Chest_unique_generic_127",
+    "IdNameItemActor": "Generic_Charm_Flippy",
     "Name": "Potęga Tyraela",
     "Description": "Kiedy jesteś w pełni sił, twoje umiejętności uwalniają boską salwę, która zadaje # pkt. obrażeń.",
     "DescriptionClean": "Kiedy jesteś w pełni sił, twoje umiejętności uwalniają boską salwę, która zadaje pkt. obrażeń.",
@@ -6035,7 +6104,7 @@
       "S12_1HDagger_Unique_Rogue_001",
       "Talisman_Charm_Unique_1HDagger_Unique_Rogue_001"
     ],
-    "IdNameItemActor": "dagger_uniq06",
+    "IdNameItemActor": "Generic_Charm_Flippy",
     "Name": "Potępienie",
     "Description": "Twoje umiejętności Główne zadają obrażenia zwiększone o #% na # sek. za każde 3 zużyte punkty kombinacji. Użycie umiejętności Podstawowych zawsze zapewnia 3 punkty kombinacji.",
     "DescriptionClean": "Twoje umiejętności Główne zadają obrażenia zwiększone o na sek. za każde 3 zużyte punkty kombinacji. Użycie umiejętności Podstawowych zawsze zapewnia 3 punkty kombinacji.",
@@ -6068,7 +6137,7 @@
       "S12_2HSword_Unique_Generic_001",
       "Talisman_Charm_Unique_2HSword_Unique_Generic_001"
     ],
-    "IdNameItemActor": "twoHandSword_uniq06",
+    "IdNameItemActor": "Generic_Charm_Flippy",
     "Name": "Pradziad",
     "Description": "Obrażenia od trafień krytycznych są zwiększone o #%.",
     "DescriptionClean": "Obrażenia od trafień krytycznych są zwiększone o.",
@@ -6575,7 +6644,7 @@
       "Amulet_Unique_Spiritborn_100",
       "Talisman_Charm_Unique_Amulet_Unique_Spiritborn_100"
     ],
-    "IdNameItemActor": "Icons_Amulet_Unique_018",
+    "IdNameItemActor": "Generic_Charm_Flippy",
     "Name": "Ryngraf Słonecznego Ptaka",
     "Description": "Podniesienie Pióra Burzy na # sek. roznieca wokół ciebie burzę ognia, która zadaje # pkt. obrażeń od Ognia co # sek.\r\n\r\nCo #. podniesione dodatkowo Pióro Burzy wzmacnia burzę ognia, dzięki czemu jej obrażenia wzrastają o #%, jednak czas działania nie jest resetowany. Pióra Burzy są teraz umiejętnościami Jaguara, a burza ognia jest umiejętnością Orła, Jaguara i Pióra Burzy.",
     "DescriptionClean": "Podniesienie Pióra Burzy na sek. roznieca wokół ciebie burzę ognia, która zadaje pkt. obrażeń od Ognia co sek. Co. podniesione dodatkowo Pióro Burzy wzmacnia burzę ognia, dzięki czemu jej obrażenia wzrastają o , jednak czas działania nie jest resetowany. Pióra Burzy są teraz umiejętnościami Jaguara, a burza ognia jest umiejętnością Orła, Jaguara i Pióra Burzy.",
@@ -6732,7 +6801,7 @@
       "Amulet_Unique_Paladin_002",
       "Talisman_Charm_Unique_Amulet_Unique_Paladin_002"
     ],
-    "IdNameItemActor": "Generic_Charm_Flippy",
+    "IdNameItemActor": "Icons_Amulet_Unique_025",
     "Name": "Sanktus Kethamaru",
     "Description": "Postać Arbitra wzmacnia efekt działania aury o #%, a obrażenia zadawane uderzeniem skrzydeł o #%.",
     "DescriptionClean": "Postać Arbitra wzmacnia efekt działania aury o , a obrażenia zadawane uderzeniem skrzydeł o.",
@@ -6795,7 +6864,7 @@
       "Quarterstaff_Unique_Spiritborn_012_x1",
       "Talisman_Charm_Unique_Quarterstaff_Unique_Spiritborn_012_x1"
     ],
-    "IdNameItemActor": "twoHandQuarterstaff_uniq01",
+    "IdNameItemActor": "Generic_Charm_Flippy",
     "Name": "Sepazontec",
     "Description": "Umiejętności Podstawowe zadają obrażenia zwiększone o #% i zawsze wyprowadzasz nimi trzeci atak. \r\n\r\nCo 3 użycia umiejętności Podstawowych uwalniają potrójne ciosy.",
     "DescriptionClean": "Umiejętności Podstawowe zadają obrażenia zwiększone o i zawsze wyprowadzasz nimi trzeci atak.  Co 3 użycia umiejętności Podstawowych uwalniają potrójne ciosy.",
@@ -7363,7 +7432,7 @@
       "Ring_Unique_Druid_02_x2",
       "Talisman_Charm_Unique_Ring_Unique_Druid_02_x2"
     ],
-    "IdNameItemActor": "Icons_Ring_Unique_019",
+    "IdNameItemActor": "Generic_Charm_Flippy",
     "Name": "Sygnet Zielonych Kroków",
     "Description": "Używanie lub podtrzymywanie umiejętności Człowieczeństwa gwarantuje #% szans na aktywowanie wyposażonej umiejętności Człowieczeństwa (nie dotyczy Mocy Specjalnej). Umiejętności Człowieczeństwa zadają obrażenia zwiększone o #%.",
     "DescriptionClean": "Używanie lub podtrzymywanie umiejętności Człowieczeństwa gwarantuje szans na aktywowanie wyposażonej umiejętności Człowieczeństwa (nie dotyczy Mocy Specjalnej). Umiejętności Człowieczeństwa zadają obrażenia zwiększone o.",
@@ -7697,75 +7766,6 @@
     "AllowedItemLabels": []
   },
   {
-    "IdSno": "1924261",
-    "IdName": "S05_BSK_Generic_009",
-    "IdSnoList": [
-      "1924261"
-    ],
-    "IdNameList": [
-      "S05_BSK_Generic_009"
-    ],
-    "IdNameItem": "S05_BSK_Amulet_Unique_Generic_001;Talisman_Charm_Unique_S05_BSK_Amulet_Unique_Generic_001",
-    "IdNameItemList": [
-      "S05_BSK_Amulet_Unique_Generic_001",
-      "Talisman_Charm_Unique_S05_BSK_Amulet_Unique_Generic_001"
-    ],
-    "IdNameItemActor": "S05_Locran_Petal_Necklace_01_Flippy",
-    "Name": "Talizman Lokrana",
-    "Description": "Trafienia krytyczne zadają obrażenia zwiększone o #%, ale szansa na trafienie krytyczne jest zmniejszona o #%.",
-    "DescriptionClean": "Trafienia krytyczne zadają obrażenia zwiększone o , ale szansa na trafienie krytyczne jest zmniejszona o.",
-    "Localisation": "Trafienia krytyczne zadają obrażenia zwiększone o {c_random}[Affix_Value_1*100|%x|]{/c}, ale szansa na trafienie krytyczne jest zmniejszona o {c_number}[Affix.\"Static Value 0\"*100|%+|]{/c}.",
-    "MagicType": 2,
-    "AllowedForPlayerClass": [
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1
-    ],
-    "AllowedItemLabels": [
-      16,
-      17,
-      30,
-      26
-    ]
-  },
-  {
-    "IdSno": "1559733",
-    "IdName": "Amulet_Unique_Generic_101",
-    "IdSnoList": [
-      "1559733"
-    ],
-    "IdNameList": [
-      "Amulet_Unique_Generic_101"
-    ],
-    "IdNameItem": "Amulet_Unique_Generic_101;Talisman_Charm_Unique_Amulet_Unique_Generic_101",
-    "IdNameItemList": [
-      "Amulet_Unique_Generic_101",
-      "Talisman_Charm_Unique_Amulet_Unique_Generic_101"
-    ],
-    "IdNameItemActor": "Icons_Amulet_Unique_001",
-    "Name": "Talizman Wygnanego Lorda",
-    "Description": "Po zużyciu # pkt. podstawowego zasobu zyskujesz # kumulacji przytłoczenia. Trafienia krytyczne zadają obrażenia zwiększone o #% za każdą kumulację przytłoczenia.",
-    "DescriptionClean": "Po zużyciu pkt. podstawowego zasobu zyskujesz kumulacji przytłoczenia. Trafienia krytyczne zadają obrażenia zwiększone o za każdą kumulację przytłoczenia.",
-    "Localisation": "Po zużyciu {c_number}[Affix.\"Static Value 0\"]{/c} pkt. podstawowego zasobu zyskujesz {c_number}[Affix.\"Static Value 1\"]{/c} |4kumulację:kumulacje:kumulacji; {c_important}{u}przytłoczenia{/u}{/c}. Trafienia krytyczne zadają obrażenia zwiększone o {c_random}[Affix_Value_1|%x|]{/c} za każdą kumulację {c_important}{u}przytłoczenia{/u}{/c}.",
-    "MagicType": 2,
-    "AllowedForPlayerClass": [
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1
-    ],
-    "AllowedItemLabels": []
-  },
-  {
     "IdSno": "578823",
     "IdName": "1HAxe_Unique_Generic_001",
     "IdSnoList": [
@@ -7979,7 +7979,7 @@
       "S12_1HSword_Unique_Generic_001",
       "Talisman_Charm_Unique_1HSword_Unique_Generic_001"
     ],
-    "IdNameItemActor": "sword_uniq10",
+    "IdNameItemActor": "Generic_Charm_Flippy",
     "Name": "Trybun Zagłady",
     "Description": "Szczęśliwy traf: Istnieje maksymalnie #% szans na zadanie # pkt. obrażeń Cienia pobliskim wrogom i zmniejszenie zadawanych przez nich obrażeń o #% na # sek.",
     "DescriptionClean": "Szczęśliwy traf: Istnieje maksymalnie szans na zadanie pkt. obrażeń Cienia pobliskim wrogom i zmniejszenie zadawanych przez nich obrażeń o na sek.",
@@ -8272,7 +8272,7 @@
       "S12_BSK_1HDagger_Unique_Rogue_001",
       "Talisman_Charm_Unique_S05_BSK_1HDagger_Unique_Rogue_001"
     ],
-    "IdNameItemActor": "Generic_Charm_Flippy",
+    "IdNameItemActor": "dagger_uniq17",
     "Name": "Umbrakruks",
     "Description": "Umiejętności Podstępu tworzą podatny na ataki Totem Cienia na # sek. Wszelkie odniesione przez niego podstawowe obrażenia są przenoszone na otaczających go wrogów z efektywnością #%. \r\n\r\nTen efekt jest uznawany za umiejętność Pułapki. Maksymalna liczba jednocześnie aktywnych Totemów Cienia: #.",
     "DescriptionClean": "Umiejętności Podstępu tworzą podatny na ataki Totem Cienia na sek. Wszelkie odniesione przez niego podstawowe obrażenia są przenoszone na otaczających go wrogów z efektywnością.  Ten efekt jest uznawany za umiejętność Pułapki. Maksymalna liczba jednocześnie aktywnych Totemów Cienia:.",
@@ -8469,7 +8469,7 @@
       "Amulet_Unique_Spiritborn_103",
       "Talisman_Charm_Unique_Amulet_Unique_Spiritborn_103"
     ],
-    "IdNameItemActor": "Generic_Charm_Flippy",
+    "IdNameItemActor": "Icons_Amulet_Unique_022",
     "Name": "Wdowia Sieć",
     "Description": "Trafienia krytyczne powodują wybuch zatrucia nałożonego na trafionego wroga i natychmiast zadają obrażenia o wartości #% łącznego zatrucia oraz #% tych obrażeń otaczającym wrogom, a następnie zdejmują efekt zatrucia z głównego celu.",
     "DescriptionClean": "Trafienia krytyczne powodują wybuch zatrucia nałożonego na trafionego wroga i natychmiast zadają obrażenia o wartości łącznego zatrucia oraz tych obrażeń otaczającym wrogom, a następnie zdejmują efekt zatrucia z głównego celu.",
@@ -8753,7 +8753,7 @@
       "Pants_Unique_Generic_102",
       "Talisman_Charm_Unique_Pants_Unique_Generic_102"
     ],
-    "IdNameItemActor": "Generic_Charm_Flippy",
+    "IdNameItemActor": "LEG_sets50",
     "Name": "Wola Tybalta",
     "Description": "Zadajesz obrażenia zwiększone o #% i zyskujesz # pkt. regeneracji podstawowego zasobu, kiedy dysponujesz Nieustępliwością i przez # sek. po jej utracie.",
     "DescriptionClean": "Zadajesz obrażenia zwiększone o i zyskujesz pkt. regeneracji podstawowego zasobu, kiedy dysponujesz Nieustępliwością i przez sek. po jej utracie.",
@@ -8911,7 +8911,7 @@
       "Chest_Unique_Barb_100",
       "Talisman_Charm_Unique_Chest_Unique_Barb_100"
     ],
-    "IdNameItemActor": "Generic_Charm_Flippy",
+    "IdNameItemActor": "TRS_sets52",
     "Name": "Wściekłość Harrogath",
     "Description": "Kiedy wywołujesz obrażenia z upływem czasu, masz maksymalnie #% szans na skrócenie czasów odnowienia twoich umiejętności o # sek.",
     "DescriptionClean": "Kiedy wywołujesz obrażenia z upływem czasu, masz maksymalnie szans na skrócenie czasów odnowienia twoich umiejętności o sek.",
@@ -9201,7 +9201,7 @@
       "Gloves_Unique_Rogue_002_x2",
       "Talisman_Charm_Unique_Gloves_Unique_Rogue_002_x2"
     ],
-    "IdNameItemActor": "GLV_sets52",
+    "IdNameItemActor": "Generic_Charm_Flippy",
     "Name": "Znakomite Rękawice Morskiego Władcy",
     "Description": "Użycie lub podtrzymywanie umiejętności Napaści daje ładunek Impetu, maksymalnie #. Użycie umiejętności Strzelectwa usuwa ładunek Impetu. \r\n\r\nZa każdy ładunek Impetu otrzymujesz:\r\n #% maksimum energii;\r\n #% premii do regeneracji energii;\r\n #% premii do obrażeń.",
     "DescriptionClean": "Użycie lub podtrzymywanie umiejętności Napaści daje ładunek Impetu, maksymalnie. Użycie umiejętności Strzelectwa usuwa ładunek Impetu.  Za każdy ładunek Impetu otrzymujesz:  maksimum energii;  premii do regeneracji energii;  premii do obrażeń.",
@@ -9304,7 +9304,7 @@
       "S12_2HPolearm_Unique_Generic_001",
       "Talisman_Charm_Unique_2HPolearm_Unique_Generic_001"
     ],
-    "IdNameItemActor": "twoHandPolearm_uniq16",
+    "IdNameItemActor": "Generic_Charm_Flippy",
     "Name": "Złamana Przysięga",
     "Description": "Dokonujesz Egzekucji wrogów, których obrażenia z upływem czasu są większe niż pozostałe zdrowie. ",
     "DescriptionClean": "Dokonujesz Egzekucji wrogów, których obrażenia z upływem czasu są większe niż pozostałe zdrowie.",

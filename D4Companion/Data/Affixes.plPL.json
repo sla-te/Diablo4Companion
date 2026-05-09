@@ -6503,12 +6503,12 @@
         "LocalisationId": "Damage_Type_Percent_Bonus",
         "LocalisationParameter": 3,
         "LocalisationAttributeFormulaValue": "0",
-        "Localisation": "+[{VALUE2}*100|%|] {VALUE1} obrażeń"
+        "Localisation": "+[{VALUE2}*100|%|] obrażeń typu: {VALUE1} "
       }
     ],
     "ClassRestriction": "",
-    "Description": "+#% Zimno obrażeń",
-    "DescriptionClean": "Zimno obrażeń"
+    "Description": "+#% obrażeń typu: Zimno ",
+    "DescriptionClean": "obrażeń typu: Zimno"
   },
   {
     "IdSno": "1862355;1938710;1939851;2061718;2113002;2592107;577065",
@@ -6555,12 +6555,12 @@
         "LocalisationId": "Damage_Type_Percent_Bonus",
         "LocalisationParameter": 1,
         "LocalisationAttributeFormulaValue": "0",
-        "Localisation": "+[{VALUE2}*100|%|] {VALUE1} obrażeń"
+        "Localisation": "+[{VALUE2}*100|%|] obrażeń typu: {VALUE1} "
       }
     ],
     "ClassRestriction": "",
-    "Description": "+#% Ogień obrażeń",
-    "DescriptionClean": "Ogień obrażeń"
+    "Description": "+#% obrażeń typu: Ogień ",
+    "DescriptionClean": "obrażeń typu: Ogień"
   },
   {
     "IdSno": "1862357;1938712;1939853;2063529;2387523;577073",
@@ -6605,12 +6605,12 @@
         "LocalisationId": "Damage_Type_Percent_Bonus",
         "LocalisationParameter": 2,
         "LocalisationAttributeFormulaValue": "0",
-        "Localisation": "+[{VALUE2}*100|%|] {VALUE1} obrażeń"
+        "Localisation": "+[{VALUE2}*100|%|] obrażeń typu: {VALUE1} "
       }
     ],
     "ClassRestriction": "",
-    "Description": "+#% Błyskawice obrażeń",
-    "DescriptionClean": "Błyskawice obrażeń"
+    "Description": "+#% obrażeń typu: Błyskawice ",
+    "DescriptionClean": "obrażeń typu: Błyskawice"
   },
   {
     "IdSno": "1290758;1439263;1661280;2052119;2066253",
@@ -6705,12 +6705,12 @@
         "LocalisationId": "Damage_Type_Percent_Bonus",
         "LocalisationParameter": 0,
         "LocalisationAttributeFormulaValue": "0",
-        "Localisation": "+[{VALUE2}*100|%|] {VALUE1} obrażeń"
+        "Localisation": "+[{VALUE2}*100|%|] obrażeń typu: {VALUE1} "
       }
     ],
     "ClassRestriction": "",
-    "Description": "+#% Fizyczne obrażeń",
-    "DescriptionClean": "Fizyczne obrażeń"
+    "Description": "+#% obrażeń typu: Fizyczne ",
+    "DescriptionClean": "obrażeń typu: Fizyczne"
   },
   {
     "IdSno": "1862361;1938716;1939857;2064632;2333271;577075",
@@ -6755,12 +6755,12 @@
         "LocalisationId": "Damage_Type_Percent_Bonus",
         "LocalisationParameter": 4,
         "LocalisationAttributeFormulaValue": "0",
-        "Localisation": "+[{VALUE2}*100|%|] {VALUE1} obrażeń"
+        "Localisation": "+[{VALUE2}*100|%|] obrażeń typu: {VALUE1} "
       }
     ],
     "ClassRestriction": "",
-    "Description": "+#% Trucizna obrażeń",
-    "DescriptionClean": "Trucizna obrażeń"
+    "Description": "+#% obrażeń typu: Trucizna ",
+    "DescriptionClean": "obrażeń typu: Trucizna"
   },
   {
     "IdSno": "1862363;1938718;1939859;2113216;577079",
@@ -6803,12 +6803,12 @@
         "LocalisationId": "Damage_Type_Percent_Bonus",
         "LocalisationParameter": 5,
         "LocalisationAttributeFormulaValue": "0",
-        "Localisation": "+[{VALUE2}*100|%|] {VALUE1} obrażeń"
+        "Localisation": "+[{VALUE2}*100|%|] obrażeń typu: {VALUE1} "
       }
     ],
     "ClassRestriction": "",
-    "Description": "+#% Cień obrażeń",
-    "DescriptionClean": "Cień obrażeń"
+    "Description": "+#% obrażeń typu: Cień ",
+    "DescriptionClean": "obrażeń typu: Cień"
   },
   {
     "IdSno": "1321856;1862109;1937177;1939757",
@@ -30974,12 +30974,12 @@
         "LocalisationId": "Damage_Type_Percent_Bonus",
         "LocalisationParameter": 6,
         "LocalisationAttributeFormulaValue": "0",
-        "Localisation": "+[{VALUE2}*100|%|] {VALUE1} obrażeń"
+        "Localisation": "+[{VALUE2}*100|%|] obrażeń typu: {VALUE1} "
       }
     ],
     "ClassRestriction": "",
-    "Description": "+#% Niefizyczne obrażeń",
-    "DescriptionClean": "Niefizyczne obrażeń"
+    "Description": "+#% obrażeń typu: Niefizyczne ",
+    "DescriptionClean": "obrażeń typu: Niefizyczne"
   },
   {
     "IdSno": "1862334;1938729;1939867",
