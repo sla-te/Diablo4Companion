@@ -513,6 +513,8 @@ namespace D4Companion.Services
             memoryStream.Position = 0;
 
             var engine = _engines.Get();
+            engine.SetVariable("preserve_interword_spaces", "1");
+            //engine.SetVariable("tessedit_write_unlv", "1");
             try
             {
                 using (var img = TesseractOCR.Pix.Image.LoadFromMemory(memoryStream))
@@ -558,6 +560,10 @@ namespace D4Companion.Services
             }
             finally
             {
+                // Reset before returning to pool
+                engine.SetVariable("preserve_interword_spaces", "0");
+                //engine.SetVariable("tessedit_write_unlv", "0");
+
                 _engines.Return(engine);
             }
         }
