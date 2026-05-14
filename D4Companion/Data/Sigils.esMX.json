@@ -464,7 +464,7 @@
     "Name": "Caverna de Rimescar",
     "Description": "Una cueva reclamada por demonios y enferma por su magia. ",
     "DungeonZoneInfo": "en Cumbres Fracturadas",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -527,7 +527,7 @@
     "Name": "Ciudad Cambiante",
     "Description": "Estas ruinas fueron alguna vez un refugio para la gente de Qara-Yisu.",
     "DungeonZoneInfo": "en Estepas Áridas",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -680,7 +680,7 @@
     "Name": "Cubil de los Salvajes",
     "Description": "Un albergue corrupto por el odio de los druidas.",
     "DungeonZoneInfo": "en Escosglen",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -698,7 +698,7 @@
     "Name": "Cuevas de Kutokue",
     "Description": "Las paredes hacen eco de gritos de desesperación.",
     "DungeonZoneInfo": "en Nahantu",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -833,7 +833,7 @@
     "Name": "Descenso Pálido",
     "Description": "Los caníbales guardan un oscuro poder en las minas derruidas.",
     "DungeonZoneInfo": "en Estepas Áridas",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -1013,12 +1013,39 @@
     "Name": "Excavación Miserable",
     "Description": "Una plaga demoníaca infecta ahora las viejas tumbas de Túr Dúlra.",
     "DungeonZoneInfo": "en Escosglen",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
     "IdSno": 2613077,
     "IdName": "DungeonAffix_Positive_IncreasedRewards",
+    "Name": "Expedición de calabozo",
+    "Description": "Completar el calabozo otorga experiencia y recompensas adicionales.",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
+    "IdSno": 2646845,
+    "IdName": "DungeonAffix_Positive_Torment_AncestralElites",
+    "Name": "Expedición de calabozo",
+    "Description": "Completar el calabozo otorga experiencia y recompensas adicionales.",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
+    "IdSno": 2646843,
+    "IdName": "DungeonAffix_Positive_Torment_TreasureGoblins",
+    "Name": "Expedición de calabozo",
+    "Description": "Completar el calabozo otorga experiencia y recompensas adicionales.",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
+    "IdSno": 2646836,
+    "IdName": "DungeonAffix_Positive_Torment_MythicElites",
     "Name": "Expedición de calabozo",
     "Description": "Completar el calabozo otorga experiencia y recompensas adicionales.",
     "DungeonZoneInfo": "",
@@ -1265,7 +1292,7 @@
     "Name": "Hekma Derruido",
     "Description": "Una catacumba infestada de odio de la fe Zakarum. ",
     "DungeonZoneInfo": "en Kehjistán",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -2475,8 +2502,8 @@
     "Type": "Dungeon"
   },
   {
-    "IdSno": 2579464,
-    "IdName": "World_DGN_QST_Skov_Skar_Sphinx_01_B",
+    "IdSno": 2579458,
+    "IdName": "World_DGN_QST_Skov_Skar_Sphinx_01_A",
     "Name": "Senda Escoriácea",
     "Description": "Para las almas recias, las cuevas talladas en la lava conducen a riquezas impensables.",
     "DungeonZoneInfo": "en ",
@@ -2484,8 +2511,8 @@
     "Type": "Dungeon"
   },
   {
-    "IdSno": 2579458,
-    "IdName": "World_DGN_QST_Skov_Skar_Sphinx_01_A",
+    "IdSno": 2579464,
+    "IdName": "World_DGN_QST_Skov_Skar_Sphinx_01_B",
     "Name": "Senda Escoriácea",
     "Description": "Para las almas recias, las cuevas talladas en la lava conducen a riquezas impensables.",
     "DungeonZoneInfo": "en ",
@@ -2507,7 +2534,7 @@
     "Name": "Sepulcro del Abjurador",
     "Description": "La maldad se agita debajo del altar de Baal.",
     "DungeonZoneInfo": "en Kehjistán",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -2651,7 +2678,7 @@
     "Name": "Tumba Traicionada",
     "Description": "Los espíritus se retuercen mientras vacuos gritan en su monstruosa agonía.",
     "DungeonZoneInfo": "en Nahantu",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -2714,7 +2741,7 @@
     "Name": "Valle Retorcido",
     "Description": "Una auténtica reserva de vida salvaje donde pueden encontrarse respuestas.",
     "DungeonZoneInfo": "en Escosglen",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {

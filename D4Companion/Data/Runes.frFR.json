@@ -200,6 +200,16 @@
     "RuneOverflowBehavior": "Gain de plusieurs ombres"
   },
   {
+    "IdSno": "2155996",
+    "IdName": "Item_Rune_Condition_Summons",
+    "RuneType": "condition",
+    "Name": "Nagu",
+    "Description": "Vous maintenez au moins 1\u00A0créature invoquée active pendant 5\u00A0s et recevez des offrandes pour chacune d’entre elles jusqu’à 5\u00A0créatures invoquées.",
+    "DescriptionClean": "Vous maintenez au moins 1\u00A0créature invoquée active pendant 5\u00A0s et recevez des offrandes pour chacune d’entre elles jusqu’à 5\u00A0créatures invoquées.",
+    "RuneDescription": "{c_RuneCondition}Vous maintenez au moins {c_number}1{/c}\u00A0{c_important}créature invoquée{/c} active pendant {c_number}5{/c}\u00A0s et recevez des offrandes pour chacune d’entre elles jusqu’à {c_number}5{/c}\u00A0{c_important}créatures invoquées{/c}.{/c}",
+    "RuneOverflowBehavior": ""
+  },
+  {
     "IdSno": "2063987",
     "IdName": "Item_Rune_Condition_OnAvoidDamage",
     "RuneType": "condition",
@@ -508,15 +518,5 @@
     "DescriptionClean": "Vous invoquez la lance sacrée des paladins, qui frappe les adversaires à proximité.",
     "RuneDescription": "{c_RuneEffect}Vous invoquez la {c_important}lance sacrée{/c} des paladins, qui frappe les adversaires à proximité.{/c}",
     "RuneOverflowBehavior": "Augmentation de dégâts"
-  },
-  {
-    "IdSno": "2155996",
-    "IdName": "Item_Rune_Condition_Summons",
-    "RuneType": "condition",
-    "Name": "de Nagu",
-    "Description": "Vous maintenez au moins 1\u00A0créature invoquée active pendant 5\u00A0s et recevez des offrandes pour chacune d’entre elles jusqu’à 5\u00A0créatures invoquées.",
-    "DescriptionClean": "Vous maintenez au moins 1\u00A0créature invoquée active pendant 5\u00A0s et recevez des offrandes pour chacune d’entre elles jusqu’à 5\u00A0créatures invoquées.",
-    "RuneDescription": "{c_RuneCondition}Vous maintenez au moins {c_number}1{/c}\u00A0{c_important}créature invoquée{/c} active pendant {c_number}5{/c}\u00A0s et recevez des offrandes pour chacune d’entre elles jusqu’à {c_number}5{/c}\u00A0{c_important}créatures invoquées{/c}.{/c}",
-    "RuneOverflowBehavior": ""
   }
 ]

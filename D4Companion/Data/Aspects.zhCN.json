@@ -4338,7 +4338,7 @@
     "Name": "威势",
     "Description": "命中精英敌人会使造成的伤害提高 #%，但需要消耗 # 层 压制。如果敌人中了妖术，则不会消耗任何层数。",
     "DescriptionClean": "命中精英敌人会使造成的伤害提高 ，但需要消耗 层 压制。如果敌人中了妖术，则不会消耗任何层数。",
-    "Localisation": "命中精英敌人会使造成的伤害提高 {c_random}[Affix_Value_1|x%|]{/c}，但需要消耗 {c_number}[Affix.\"Static Value 0\"]{/c} 层 {c_important}{u}压制{/u}{/c}。如果敌人{c_important}{u}中了妖术{/u}{/c}，则不会消耗任何层数。",
+    "Localisation": "命中精英敌人会使造成的伤害提高 {c_random}[Affix_Value_1|x%|]{/c}，但需要消耗 {c_number}[Affix.\"Static Value 0\"]{/c} 层 {c_important}{u}压制{/u}{/c}。如果敌人中了{c_important}{u}妖术{/u}{/c}，则不会消耗任何层数。",
     "IsSeasonal": false,
     "IsCodex": true,
     "Dungeon": "",

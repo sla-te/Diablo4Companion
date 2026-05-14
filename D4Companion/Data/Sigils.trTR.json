@@ -693,15 +693,6 @@
     "Type": "Minor"
   },
   {
-    "IdSno": 2579466,
-    "IdName": "World_DGN_QST_Skov_Skar_Sphinx_01_C",
-    "Name": "Cüruflu Yol",
-    "Description": "Bu lavla şekillenmiş mağaralar, cesur olanlar için akıl almaz zenginliklere çıkıyor.",
-    "DungeonZoneInfo": ":  içinde ",
-    "IsSeasonal": false,
-    "Type": "Dungeon"
-  },
-  {
     "IdSno": 2579464,
     "IdName": "World_DGN_QST_Skov_Skar_Sphinx_01_B",
     "Name": "Cüruflu Yol",
@@ -720,12 +711,21 @@
     "Type": "Dungeon"
   },
   {
+    "IdSno": 2579466,
+    "IdName": "World_DGN_QST_Skov_Skar_Sphinx_01_C",
+    "Name": "Cüruflu Yol",
+    "Description": "Bu lavla şekillenmiş mağaralar, cesur olanlar için akıl almaz zenginliklere çıkıyor.",
+    "DungeonZoneInfo": ":  içinde ",
+    "IsSeasonal": false,
+    "Type": "Dungeon"
+  },
+  {
     "IdSno": 1113392,
     "IdName": "World_DGN_Kehj_CrumblingHekma",
     "Name": "Dağılan Hekma",
     "Description": "Zakarum inancının nefret dolu bir yer altı mezarı. ",
     "DungeonZoneInfo": ":  içinde Kehjistan",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -806,7 +806,7 @@
     "Name": "Değişen Şehir",
     "Description": "Bu harabeler bir zamanlar Qara-Yisu halkı için bir sığınaktı.",
     "DungeonZoneInfo": ":  içinde Kurak Bozkırlar",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -1044,8 +1044,8 @@
     "Type": "Positive"
   },
   {
-    "IdSno": 2511994,
-    "IdName": "DungeonAffix_Positive_AncestralElites",
+    "IdSno": 2516764,
+    "IdName": "DungeonAffix_Positive_LegendaryElites",
     "Name": "Gizli Silah Deposu",
     "Description": "Olağanüstü öğeler burada tutulur, seçkin canavarlara güçlü bir ganimet eki verirler.",
     "DungeonZoneInfo": "",
@@ -1053,8 +1053,8 @@
     "Type": "Positive"
   },
   {
-    "IdSno": 2516764,
-    "IdName": "DungeonAffix_Positive_LegendaryElites",
+    "IdSno": 2511994,
+    "IdName": "DungeonAffix_Positive_AncestralElites",
     "Name": "Gizli Silah Deposu",
     "Description": "Olağanüstü öğeler burada tutulur, seçkin canavarlara güçlü bir ganimet eki verirler.",
     "DungeonZoneInfo": "",
@@ -1508,7 +1508,7 @@
     "Name": "Kireçli Yara İzi Mağarası",
     "Description": "İblislerin geri aldığı ve sihirleriyle hastalık bulaştırdığı bir mağara. ",
     "DungeonZoneInfo": ":  içinde Kırık Tepeler",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -1598,7 +1598,7 @@
     "Name": "Kutokue Mağaraları",
     "Description": "Duvarlardan çaresizlik çığlıkları yankılanıyor.",
     "DungeonZoneInfo": ":  içinde Nahantu",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -2129,7 +2129,7 @@
     "Name": "Solgun Oyuk",
     "Description": "Yamyamlar, çöken madenlerde karanlık bir güç himaye ediyor.",
     "DungeonZoneInfo": ":  içinde Kurak Bozkırlar",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -2471,7 +2471,7 @@
     "Name": "Yabanilerin İni",
     "Description": "Druidlerin nefreti ile yozlaşmış bir kulübe.",
     "DungeonZoneInfo": ":  içinde Scosglen",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -2552,7 +2552,7 @@
     "Name": "Yeminlilerin Mezarı",
     "Description": "Baal sunağının aşağısında kötülükler dönüyor.",
     "DungeonZoneInfo": ":  içinde Kehjistan",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -2745,6 +2745,33 @@
     "Type": "Positive"
   },
   {
+    "IdSno": 2646845,
+    "IdName": "DungeonAffix_Positive_Torment_AncestralElites",
+    "Name": "Zindan Oyuğu",
+    "Description": "Zindanı tamamlamak fazladan Tecrübe ve Ödüller kazandırır.",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
+    "IdSno": 2646836,
+    "IdName": "DungeonAffix_Positive_Torment_MythicElites",
+    "Name": "Zindan Oyuğu",
+    "Description": "Zindanı tamamlamak fazladan Tecrübe ve Ödüller kazandırır.",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
+    "IdSno": 2646843,
+    "IdName": "DungeonAffix_Positive_Torment_TreasureGoblins",
+    "Name": "Zindan Oyuğu",
+    "Description": "Zindanı tamamlamak fazladan Tecrübe ve Ödüller kazandırır.",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
     "IdSno": 2613077,
     "IdName": "DungeonAffix_Positive_IncreasedRewards",
     "Name": "Zindan Oyuğu",
@@ -2786,7 +2813,7 @@
     "Name": "Çarpık Boşluk",
     "Description": "Cevapların gizlenebileceği gerçek bir vahşi yaşam sarnıcı.",
     "DungeonZoneInfo": ":  içinde Scosglen",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -2921,7 +2948,7 @@
     "Name": "İhanete Uğramış Mezar",
     "Description": "Ruhlar, boşluklardan gelen korkunç ızdırap çığlıkları arasında kıvranıyor.",
     "DungeonZoneInfo": ":  içinde Nahantu",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -2984,7 +3011,7 @@
     "Name": "İğrenç Oyuk",
     "Description": "Túr Dúlra'nın eski mezarlarına şeytani bir veba yayılmış.",
     "DungeonZoneInfo": ":  içinde Scosglen",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {

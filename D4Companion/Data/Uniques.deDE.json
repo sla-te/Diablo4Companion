@@ -470,7 +470,7 @@
       0,
       0,
       0,
-      1,
+      0,
       0
     ],
     "AllowedItemLabels": []
@@ -1132,7 +1132,7 @@
     "Name": "Bucranis Treter",
     "Description": "Erhöht Eure kritische Trefferchance um #% Eures Bewegungsgeschwindigkeitsbonus.\r\n\r\nAktueller Bonus: #%",
     "DescriptionClean": "Erhöht Eure kritische Trefferchance um Eures Bewegungsgeschwindigkeitsbonus. Aktueller Bonus:",
-    "Localisation": "Erhöht Eure kritische Trefferchance um {c_random}[Affix_Value_1|%|]{/c} Eures Bewegungsgeschwindigkeitsbonus.\r\n\r\nAktueller Bonus: {c_number}[(Min(Owner.Movement_Scalar_Capped_Total,2)-1) * (Affix_Value_1)|1%|]{/c}",
+    "Localisation": "Erhöht Eure kritische Trefferchance um {c_random}[Affix_Value_1|%|]{/c} Eures Bewegungsgeschwindigkeitsbonus.\r\n\r\nAktueller Bonus: {c_number}[(Min((Owner.Movement_Scalar_Capped_Total + Owner.Movement_Scalar_Temporary_Bonus),2)-1) * (Affix_Value_1)|1%|]{/c}",
     "MagicType": 2,
     "AllowedForPlayerClass": [
       1,
@@ -2398,7 +2398,7 @@
     "Name": "Etnas verlorener Dolch",
     "Description": "Verursacht Ihr # verschiedene Arten nichtphysischen Schadens, erhöht sich für #\u00A0Sek. die Potenz Eurer Infusionsfertigkeiten um #% und Euer nichtphysischer Schaden um #%.\r\n\r\nBasisfertigkeiten sind jetzt infusionsfähig.",
     "DescriptionClean": "Verursacht Ihr verschiedene Arten nichtphysischen Schadens, erhöht sich für \u00A0Sek. die Potenz Eurer Infusionsfertigkeiten um und Euer nichtphysischer Schaden um. Basisfertigkeiten sind jetzt infusionsfähig.",
-    "Localisation": "Verursacht Ihr {c_number}[Affix.\"Static Value 0\"]{/c} verschiedene Arten nichtphysischen Schadens, erhöht sich für {c_random}[Affix.\"Static Value 2\"]{/c}\u00A0Sek. die Potenz Eurer {c_important}Infusionsfertigkeiten{/c} um {c_number}[Affix_Value_1*Affix.\"Static Value 1\"|%x|]{/c} und Euer nichtphysischer Schaden um {c_number}[Affix_Value_1|%x|]{/c}.\r\n\r\n{c_important}Basisfertigkeiten{/c} sind jetzt {c_important}infusionsfähig{/c}.",
+    "Localisation": "Verursacht Ihr {c_number}[Affix.\"Static Value 0\"]{/c} verschiedene Arten nichtphysischen Schadens, erhöht sich für {c_random}[Affix.\"Static Value 2\"]{/c}\u00A0Sek. die Potenz Eurer {c_important}Infusionsfertigkeiten{/c} um {c_random}[Affix_Value_1*Affix.\"Static Value 1\"|%x|]{/c} und Euer nichtphysischer Schaden um {c_number}[Affix_Value_1|%x|]{/c}.\r\n\r\n{c_important}Basisfertigkeiten{/c} sind jetzt {c_important}infusionsfähig{/c}.",
     "MagicType": 2,
     "AllowedForPlayerClass": [
       0,
@@ -4978,7 +4978,7 @@
     "Name": "Mal des alten Wolfs",
     "Description": "Erhaltet #% Bonusgiftschaden über Zeit.\r\nDirekter Schaden durch Werwolffertigkeiten gewährt Euch einen Bonus in Höhe von #% Eures Bonusgiftschadens über Zeit, bis zu #%.\r\nGiftschaden durch Werwolffertigkeiten gewährt Euch einen Bonus in Höhe von #% Eurer Bonus-Angriffsgeschwindigkeit und kritischen Trefferchance, bis zu #%.\u00A0\r\n\r\nAktueller Bonus auf direkten Schaden: #%\r\nAktueller Bonus auf Giftschaden: #%",
     "DescriptionClean": "Erhaltet Bonusgiftschaden über Zeit. Direkter Schaden durch Werwolffertigkeiten gewährt Euch einen Bonus in Höhe von Eures Bonusgiftschadens über Zeit, bis zu. Giftschaden durch Werwolffertigkeiten gewährt Euch einen Bonus in Höhe von Eurer Bonus-Angriffsgeschwindigkeit und kritischen Trefferchance, bis zu.\u00A0 Aktueller Bonus auf direkten Schaden: Aktueller Bonus auf Giftschaden:",
-    "Localisation": "{icon:bullet,1.2}Erhaltet {c_random}[Affix_Value_1*100|x%|]{/c} Bonusgiftschaden über Zeit.\r\n{icon:bullet,1.2}Direkter Schaden durch {c_important}Werwolffertigkeiten{/c} gewährt Euch einen Bonus in Höhe von {c_number}[Affix.\"Static Value 0\"*100|x%|]{/c} Eures Bonusgiftschadens über Zeit, bis zu {c_number}[Affix.\"Static Value 2\"*100|x%|]{/c}.\r\n{icon:bullet,1.2}Giftschaden durch Werwolffertigkeiten gewährt Euch einen Bonus in Höhe von {c_number}[Affix.\"Static Value 1\"*100|x%|]{/c} Eurer Bonus-Angriffsgeschwindigkeit und kritischen Trefferchance, bis zu {c_number}[Affix.\"Static Value 2\"*100|x%|]{/c}.\u00A0\r\n\r\nAktueller Bonus auf direkten Schaden: {c_number}[min((Owner.DOT_DPS_Bonus_Percent+Owner.DOT_DPS_Bonus_Percent_Per_Damage_Type#Poison)*Affix.\"Static Value 0\"*100, Affix.\"Static Value 2\" * 100)|%x|]{/c}\r\nAktueller Bonus auf Giftschaden: {c_number}[min((Owner.Attack_Speed_Percent_Bonus_Total+Owner.Cast_Speed_Percent_Bonus+Owner.Crit_Percent_Base+Owner.Crit_Percent_Bonus)*Affix.\"Static Value 1\"*100, Affix.\"Static Value 2\" * 100)|x%|]{/c}",
+    "Localisation": "{icon:bullet,1.2}Erhaltet {c_random}[Affix_Value_1*100|x%|]{/c} Bonusgiftschaden über Zeit.\r\n{icon:bullet,1.2}Direkter Schaden durch {c_important}Werwolffertigkeiten{/c} gewährt Euch einen Bonus in Höhe von {c_number}[Affix.\"Static Value 0\"*100|x%|]{/c} Eures Bonusgiftschadens über Zeit, bis zu {c_number}[Affix.\"Static Value 2\"*100|x%|]{/c}.\r\n{icon:bullet,1.2}Giftschaden durch Werwolffertigkeiten gewährt Euch einen Bonus in Höhe von {c_number}[Affix.\"Static Value 1\"*100|x%|]{/c} Eurer Bonus-Angriffsgeschwindigkeit und kritischen Trefferchance, bis zu {c_number}[Affix.\"Static Value 2\"*100|x%|]{/c}.\u00A0\r\n\r\nAktueller Bonus auf direkten Schaden: {c_number}[min((Owner.DOT_DPS_Bonus_Percent+Owner.DOT_DPS_Bonus_Percent_Per_Damage_Type#Poison +Owner.Bucketed_Multiplicative_DoT_Damage)*Affix.\"Static Value 0\"*100, Affix.\"Static Value 2\" * 100)|%x|]{/c}\r\nAktueller Bonus auf Giftschaden: {c_number}[min((Owner.Attack_Speed_Percent_Bonus_Total+Owner.Cast_Speed_Percent_Bonus+Owner.Crit_Percent_Base+Owner.Crit_Percent_Bonus)*Affix.\"Static Value 1\"*100, Affix.\"Static Value 2\" * 100)|x%|]{/c}",
     "MagicType": 2,
     "AllowedForPlayerClass": [
       0,
@@ -5358,9 +5358,9 @@
     ],
     "IdNameItemActor": "Generic_Charm_Flippy",
     "Name": "Omen der Pein",
-    "Description": "Euch umgibt eine dunkle Aura, die Gegner, die sie berühren, mit Altern und Eiserne Jungfrau verflucht.\r\n\r\nFlüche, die auf diese Weise gewirkt werden, verteilen sich alle # Sek. auf Ziele in der Umgebung und halten außerhalb der Aura # Sek. lang an.",
-    "DescriptionClean": "Euch umgibt eine dunkle Aura, die Gegner, die sie berühren, mit Altern und Eiserne Jungfrau verflucht. Flüche, die auf diese Weise gewirkt werden, verteilen sich alle Sek. auf Ziele in der Umgebung und halten außerhalb der Aura Sek. lang an.",
-    "Localisation": "Euch umgibt eine dunkle Aura, die Gegner, die sie berühren, mit {c_important}Altern{/c} und {c_important}Eiserne Jungfrau{/c} verflucht.\r\n\r\n{c_important}Flüche{/c}, die auf diese Weise gewirkt werden, verteilen sich alle {c_random}[Affix_Value_1|1|]{/c} Sek. auf Ziele in der Umgebung und halten außerhalb der Aura {c_number}[Affix_Value_2]{/c} Sek. lang an.",
+    "Description": "Euch umgibt eine dunkle Aura, die Gegner in der Umgebung mit Altern und Eiserne Jungfrau verflucht.\r\n\r\nFlüche, die auf diese Weise gewirkt werden, verteilen sich alle # Sek. auf Ziele in der Umgebung und halten außerhalb der Aura # Sek. lang an.",
+    "DescriptionClean": "Euch umgibt eine dunkle Aura, die Gegner in der Umgebung mit Altern und Eiserne Jungfrau verflucht. Flüche, die auf diese Weise gewirkt werden, verteilen sich alle Sek. auf Ziele in der Umgebung und halten außerhalb der Aura Sek. lang an.",
+    "Localisation": "Euch umgibt eine dunkle Aura, die Gegner in der Umgebung mit {c_important}Altern{/c} und {c_important}Eiserne Jungfrau{/c} verflucht.\r\n\r\n{c_important}Flüche{/c}, die auf diese Weise gewirkt werden, verteilen sich alle {c_random}[Affix_Value_1|1|]{/c} Sek. auf Ziele in der Umgebung und halten außerhalb der Aura {c_number}[Affix_Value_2]{/c} Sek. lang an.",
     "MagicType": 2,
     "AllowedForPlayerClass": [
       0,
@@ -6446,9 +6446,9 @@
     ],
     "IdNameItemActor": "shield_uniq18",
     "Name": "Schild der Weißen Taube",
-    "Description": "Gesegneter Schild verursacht um #% erhöhten Schaden. Beim Einsatz einer anderen Fertigkeit wird dieser Bonus für Euren nächsten # Gesegneten Schild verdoppelt und die Glaubenskosten sind um # verringert.",
-    "DescriptionClean": "Gesegneter Schild verursacht um erhöhten Schaden. Beim Einsatz einer anderen Fertigkeit wird dieser Bonus für Euren nächsten Gesegneten Schild verdoppelt und die Glaubenskosten sind um verringert.",
-    "Localisation": "{c_important}Gesegneter Schild{/c} verursacht um {c_random}[Affix_Value_1*100|%x|]{/c} erhöhten Schaden. Beim Einsatz einer anderen Fertigkeit wird dieser Bonus für Euren nächsten {c_number}[Affix.\"Static Value 0\"]{/c} {c_important}Gesegneten Schild{/c} verdoppelt und die Glaubenskosten sind um {c_number}[Affix.\"Static Value 1\"]{/c} verringert.",
+    "Description": "Gesegneter Schild verursacht um #% erhöhten Schaden. Beim Einsatz einer anderen Fertigkeit wird dieser Bonus für Eure nächsten # Einsätze von Gesegneter Schild verdoppelt und die Glaubenskosten sind um # verringert.",
+    "DescriptionClean": "Gesegneter Schild verursacht um erhöhten Schaden. Beim Einsatz einer anderen Fertigkeit wird dieser Bonus für Eure nächsten Einsätze von Gesegneter Schild verdoppelt und die Glaubenskosten sind um verringert.",
+    "Localisation": "{c_important}Gesegneter Schild{/c} verursacht um {c_random}[Affix_Value_1*100|%x|]{/c} erhöhten Schaden. Beim Einsatz einer anderen Fertigkeit wird dieser Bonus für Eure nächsten {c_number}[Affix.\"Static Value 0\"]{/c} Einsätze von {c_important}Gesegneter Schild{/c} verdoppelt und die Glaubenskosten sind um {c_number}[Affix.\"Static Value 1\"]{/c} verringert.",
     "MagicType": 2,
     "AllowedForPlayerClass": [
       0,

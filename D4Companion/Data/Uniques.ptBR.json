@@ -343,7 +343,7 @@
     "Name": "Adaga Perdida de Etna",
     "Description": "Causar # tipos distintos de dano não físico aumenta a potência das suas habilidades de Imbuição em #% e o dano não físico em #% por # s. \r\n\r\nHabilidades básicas agora são Imbuíveis.",
     "DescriptionClean": "Causar tipos distintos de dano não físico aumenta a potência das suas habilidades de Imbuição em e o dano não físico em por s.  Habilidades básicas agora são Imbuíveis.",
-    "Localisation": "Causar {c_number}[Affix.\"Static Value 0\"]{/c} tipos distintos de dano não físico aumenta a potência das suas habilidades de {c_important}Imbuição{/c} em {c_random}[Affix_Value_1*Affix.\"Static Value 1\"|%x|]{/c} e o dano não físico em {c_number}[Affix_Value_1|%x|]{/c} por {c_number}[Affix.\"Static Value 2\"]{/c} s. \r\n\r\nHabilidades {c_important}básicas{/c} agora são {c_important}Imbuíveis{/c}.",
+    "Localisation": "Causar {c_number}[Affix.\"Static Value 0\"]{/c} tipos distintos de dano não físico aumenta a potência das suas habilidades de {c_important}Imbuição{/c} em {c_random}[Affix_Value_1*Affix.\"Static Value 1\"|%x|]{/c} e o dano não físico em {c_random}[Affix_Value_1|%x|]{/c} por {c_number}[Affix.\"Static Value 2\"]{/c} s. \r\n\r\nHabilidades {c_important}básicas{/c} agora são {c_important}Imbuíveis{/c}.",
     "MagicType": 2,
     "AllowedForPlayerClass": [
       0,
@@ -1166,9 +1166,9 @@
     ],
     "IdNameItemActor": "Generic_Charm_Flippy",
     "Name": "Augúrio da Dor",
-    "Description": "Uma aura sombria rodeia você, causando Decrepitar e Dama de Ferro aos inimigos que a tocam. \r\n\r\nMaldições causadas assim se espalham para os alvos em redor a cada # s e duram # s fora da aura.",
-    "DescriptionClean": "Uma aura sombria rodeia você, causando Decrepitar e Dama de Ferro aos inimigos que a tocam.  Maldições causadas assim se espalham para os alvos em redor a cada s e duram s fora da aura.",
-    "Localisation": "Uma aura sombria rodeia você, causando {c_important}Decrepitar{/c} e {c_important}Dama de Ferro{/c} aos inimigos que a tocam. \r\n\r\n{c_important}Maldições{/c} causadas assim se espalham para os alvos em redor a cada {c_random}[Affix_Value_1|1|]{/c} s e duram {c_number}[Affix_Value_2]{/c} s fora da aura.",
+    "Description": "Uma aura sombria rodeia você, causando Decrepitar e Dama de Ferro aos inimigos ao seu redor.\r\n\r\nMaldições causadas assim se espalham para os alvos em redor a cada # s e duram # s fora da aura.",
+    "DescriptionClean": "Uma aura sombria rodeia você, causando Decrepitar e Dama de Ferro aos inimigos ao seu redor. Maldições causadas assim se espalham para os alvos em redor a cada s e duram s fora da aura.",
+    "Localisation": "Uma aura sombria rodeia você, causando {c_important}Decrepitar{/c} e {c_important}Dama de Ferro{/c} aos inimigos ao seu redor.\r\n\r\n{c_important}Maldições{/c} causadas assim se espalham para os alvos em redor a cada {c_random}[Affix_Value_1|1|]{/c} s e duram {c_number}[Affix_Value_2]{/c} s fora da aura.",
     "MagicType": 2,
     "AllowedForPlayerClass": [
       0,
@@ -1393,9 +1393,9 @@
     ],
     "IdNameItemActor": "Boots_unique_Sorcerer_96",
     "Name": "Botina de Bucrani",
-    "Description": "Sua chance de acerto crítico aumenta em #% do seu bônus de velocidade de movimento.\r\n\r\nBônus atual: #%",
-    "DescriptionClean": "Sua chance de acerto crítico aumenta em do seu bônus de velocidade de movimento. Bônus atual:",
-    "Localisation": "Sua chance de acerto crítico aumenta em {c_random}[Affix_Value_1|%|]{/c} do seu bônus de velocidade de movimento.\r\n\r\nBônus atual: {c_number}[(Min(Owner.Movement_Scalar_Capped_Total,2)-1) * (Affix_Value_1)|1%|]{/c}",
+    "Description": "Sua chance de acerto crítico aumenta em #% do seu bônus de velocidade de movimento.\r\n\r\nBônus atual: #%.",
+    "DescriptionClean": "Sua chance de acerto crítico aumenta em do seu bônus de velocidade de movimento. Bônus atual:.",
+    "Localisation": "Sua chance de acerto crítico aumenta em {c_random}[Affix_Value_1|%|]{/c} do seu bônus de velocidade de movimento.\r\n\r\nBônus atual: {c_number}[(Min((Owner.Movement_Scalar_Capped_Total + Owner.Movement_Scalar_Temporary_Bonus),2)-1) * (Affix_Value_1)|1%|]{/c}.",
     "MagicType": 2,
     "AllowedForPlayerClass": [
       1,
@@ -3078,7 +3078,7 @@
       0,
       0,
       0,
-      1,
+      0,
       0
     ],
     "AllowedItemLabels": []
@@ -3578,9 +3578,9 @@
     ],
     "IdNameItemActor": "mace_uniq15",
     "Name": "Espinha de Tathamet",
-    "Description": "Fratura Infernal causa #% a mais de dano, e a cada º# lançamento, cria uma fratura tripla.",
+    "Description": "Fratura Infernal causa #% a mais de dano, e a cada #º lançamento, cria uma fratura tripla.",
     "DescriptionClean": "Fratura Infernal causa a mais de dano, e a cada º lançamento, cria uma fratura tripla.",
-    "Localisation": "{c_important}Fratura Infernal{/c} causa {c_random}[Affix_Value_1*100|%x|]{/c} a mais de dano, e a cada {c_number}º[Affix.\"Static Value 0\"]{/c} lançamento, cria uma fratura tripla.",
+    "Localisation": "{c_important}Fratura Infernal{/c} causa {c_random}[Affix_Value_1*100|%x|]{/c} a mais de dano, e a cada {c_number}[Affix.\"Static Value 0\"]º{/c} lançamento, cria uma fratura tripla.",
     "MagicType": 2,
     "AllowedForPlayerClass": [
       0,
@@ -5430,9 +5430,9 @@
     ],
     "IdNameItemActor": "Generic_Charm_Flippy",
     "Name": "Marca do Velho Lobo",
-    "Description": "Recebe #% de bônus de dano venenoso.\r\nDano direto de habilidades de Lobisomem recebe um bônus igual a #% do seu bônus de dano venenoso, até #%.\r\nDano venenoso de habilidades de Lobisomem recebe um bônus igual a #% do bônus de velocidade de ataque e chance de acerto crítico, até #%.\r\n\r\nBônus de dano direto atual: #%\r\nBônus de dano venenoso atual: #%",
-    "DescriptionClean": "Recebe de bônus de dano venenoso. Dano direto de habilidades de Lobisomem recebe um bônus igual a do seu bônus de dano venenoso, até. Dano venenoso de habilidades de Lobisomem recebe um bônus igual a do bônus de velocidade de ataque e chance de acerto crítico, até. Bônus de dano direto atual: Bônus de dano venenoso atual:",
-    "Localisation": "{icon:bullet,1.2}Recebe {c_random}[Affix_Value_1*100|x%|]{/c} de bônus de dano venenoso.\r\n{icon:bullet,1.2}Dano direto de habilidades de {c_important}Lobisomem{/c} recebe um bônus igual a {c_number}[Affix.\"Static Value 0\"*100|x%|]{/c} do seu bônus de dano venenoso, até {c_number}[Affix.\"Static Value 2\"*100|x%|]{/c}.\r\n{icon:bullet,1.2}Dano venenoso de habilidades de Lobisomem recebe um bônus igual a {c_number}[Affix.\"Static Value 1\"*100|x%|]{/c} do bônus de velocidade de ataque e chance de acerto crítico, até {c_number}[Affix.\"Static Value 2\"*100|x%|]{/c}.\r\n\r\nBônus de dano direto atual: {c_number}[min((Owner.DOT_DPS_Bonus_Percent+Owner.DOT_DPS_Bonus_Percent_Per_Damage_Type#Poison)*Affix.\"Static Value 0\"*100, Affix.\"Static Value 2\" * 100)|%x|]{/c}\r\nBônus de dano venenoso atual: {c_number}[min((Owner.Attack_Speed_Percent_Bonus_Total+Owner.Cast_Speed_Percent_Bonus+Owner.Crit_Percent_Base+Owner.Crit_Percent_Bonus)*Affix.\"Static Value 1\"*100, Affix.\"Static Value 2\" * 100)|x%|]{/c}",
+    "Description": "Recebe #% de bônus de dano venenoso.\r\nDano direto de habilidades de Lobisomem recebe um bônus igual a #% do seu bônus de dano venenoso, até #%.\r\nDano venenoso de habilidades de Lobisomem recebe um bônus igual a #% do seu bônus de velocidade de ataque e chance de acerto crítico, até #%.\r\n\r\nBônus de dano direto atual: #%\r\nBônus de dano venenoso atual: #%.",
+    "DescriptionClean": "Recebe de bônus de dano venenoso. Dano direto de habilidades de Lobisomem recebe um bônus igual a do seu bônus de dano venenoso, até. Dano venenoso de habilidades de Lobisomem recebe um bônus igual a do seu bônus de velocidade de ataque e chance de acerto crítico, até. Bônus de dano direto atual: Bônus de dano venenoso atual:.",
+    "Localisation": "{icon:bullet,1.2}Recebe {c_random}[Affix_Value_1*100|x%|]{/c} de bônus de dano venenoso.\r\n{icon:bullet,1.2}Dano direto de habilidades de {c_important}Lobisomem{/c} recebe um bônus igual a {c_number}[Affix.\"Static Value 0\"*100|x%|]{/c} do seu bônus de dano venenoso, até {c_number}[Affix.\"Static Value 2\"*100|x%|]{/c}.\r\n{icon:bullet,1.2}Dano venenoso de habilidades de Lobisomem recebe um bônus igual a {c_number}[Affix.\"Static Value 1\"*100|x%|]{/c} do seu bônus de velocidade de ataque e chance de acerto crítico, até {c_number}[Affix.\"Static Value 2\"*100|x%|]{/c}.\r\n\r\nBônus de dano direto atual: {c_number}[min((Owner.DOT_DPS_Bonus_Percent+Owner.DOT_DPS_Bonus_Percent_Per_Damage_Type#Poison +Owner.Bucketed_Multiplicative_DoT_Damage)*Affix.\"Static Value 0\"*100, Affix.\"Static Value 2\" * 100)|%x|]{/c}\r\nBônus de dano venenoso atual: {c_number}[min((Owner.Attack_Speed_Percent_Bonus_Total+Owner.Cast_Speed_Percent_Bonus+Owner.Crit_Percent_Base+Owner.Crit_Percent_Bonus)*Affix.\"Static Value 1\"*100, Affix.\"Static Value 2\" * 100)|x%|]{/c}.",
     "MagicType": 2,
     "AllowedForPlayerClass": [
       0,

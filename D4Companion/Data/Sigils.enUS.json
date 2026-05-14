@@ -275,7 +275,7 @@
     "Name": "Betrayed Tomb",
     "Description": "Spirits writhe as hollows screech out in monstrous agony.",
     "DungeonZoneInfo": "in Nahantu",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -509,7 +509,7 @@
     "Name": "Caves of Kutokue",
     "Description": "Screams of desperation echo in the walls.",
     "DungeonZoneInfo": "in Nahantu",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -617,7 +617,7 @@
     "Name": "Crumbling Hekma",
     "Description": "A hate-infested catacomb of the Zakarum faith. ",
     "DungeonZoneInfo": "in Kehjistan",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -774,8 +774,35 @@
     "Type": "Major"
   },
   {
+    "IdSno": 2646845,
+    "IdName": "DungeonAffix_Positive_Torment_AncestralElites",
+    "Name": "Dungeon Delve",
+    "Description": "Completing the dungeon grants extra Experience and Rewards.",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
+    "IdSno": 2646836,
+    "IdName": "DungeonAffix_Positive_Torment_MythicElites",
+    "Name": "Dungeon Delve",
+    "Description": "Completing the dungeon grants extra Experience and Rewards.",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
     "IdSno": 2613077,
     "IdName": "DungeonAffix_Positive_IncreasedRewards",
+    "Name": "Dungeon Delve",
+    "Description": "Completing the dungeon grants extra Experience and Rewards.",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
+    "IdSno": 2646843,
+    "IdName": "DungeonAffix_Positive_Torment_TreasureGoblins",
     "Name": "Dungeon Delve",
     "Description": "Completing the dungeon grants extra Experience and Rewards.",
     "DungeonZoneInfo": "",
@@ -941,7 +968,7 @@
     "Name": "Ferals' Den",
     "Description": "A lodge corrupted by the druids' hate.",
     "DungeonZoneInfo": "in Scosglen",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -2048,7 +2075,7 @@
     "Name": "Pallid Delve",
     "Description": "Cannibals guard a dark power in the crumbling mines.",
     "DungeonZoneInfo": "in Dry Steppes",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -2345,7 +2372,7 @@
     "Name": "Rimescar Cavern",
     "Description": "A cave reclaimed by demons and sickened with their magic. ",
     "DungeonZoneInfo": "in Fractured Peaks",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -2489,7 +2516,7 @@
     "Name": "Sepulcher of The Forsworn",
     "Description": "Evil stirs below the altar of Baal.",
     "DungeonZoneInfo": "in Kehjistan",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -2543,7 +2570,7 @@
     "Name": "Shifting City",
     "Description": "These ruins were once a refuge for the people of Qara-Yisu.",
     "DungeonZoneInfo": "in Dry Steppes",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -2700,15 +2727,6 @@
     "Type": "Dungeon"
   },
   {
-    "IdSno": 2355995,
-    "IdName": "DungeonAffix_Minor_S9_Suppressor",
-    "Name": "Suppressor Elites",
-    "Description": "Elite monsters have the \"Suppressor\" affix and deal 20% more damage.",
-    "DungeonZoneInfo": "",
-    "IsSeasonal": false,
-    "Type": "Minor"
-  },
-  {
     "IdSno": 1314333,
     "IdName": "DungeonAffix_Major_Empowered Elites (Suppressor)",
     "Name": "Suppressor Elites",
@@ -2716,6 +2734,15 @@
     "DungeonZoneInfo": "",
     "IsSeasonal": false,
     "Type": "Major"
+  },
+  {
+    "IdSno": 2355995,
+    "IdName": "DungeonAffix_Minor_S9_Suppressor",
+    "Name": "Suppressor Elites",
+    "Description": "Elite monsters have the \"Suppressor\" affix and deal 20% more damage.",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Minor"
   },
   {
     "IdSno": 2358423,
@@ -2831,7 +2858,7 @@
     "Name": "Twisted Hollow",
     "Description": "A veritable reservoir of wildlife where answers may lurk.",
     "DungeonZoneInfo": "in Scosglen",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -3011,7 +3038,7 @@
     "Name": "Wretched Delve",
     "Description": "Demonic plague festers now in the old tombs of Túr Dúlra.",
     "DungeonZoneInfo": "in Scosglen",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {

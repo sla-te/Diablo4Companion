@@ -5,7 +5,7 @@
     "Name": "Abysses Livides",
     "Description": "Les cannibales protègent une sombre puissance dans les mines délabrées.",
     "DungeonZoneInfo": "dans\u00A0: Steppes Arides",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -14,7 +14,7 @@
     "Name": "Abysses Répugnants",
     "Description": "Une peste d’origine démoniaque infeste les anciennes sépultures de Túr Dúlra.",
     "DungeonZoneInfo": "dans\u00A0: Scosglen",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -59,7 +59,7 @@
     "Name": "Antre de Ferals",
     "Description": "Un pavillon corrompu par la haine des druides.",
     "DungeonZoneInfo": "dans\u00A0: Scosglen",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -126,8 +126,8 @@
     "Type": "Major"
   },
   {
-    "IdSno": 2511994,
-    "IdName": "DungeonAffix_Positive_AncestralElites",
+    "IdSno": 2516764,
+    "IdName": "DungeonAffix_Positive_LegendaryElites",
     "Name": "Armurerie cachée",
     "Description": "Des objets exceptionnels sont conservés ici, conférant aux monstres élites un puissant affixe de butin.",
     "DungeonZoneInfo": "",
@@ -135,8 +135,8 @@
     "Type": "Positive"
   },
   {
-    "IdSno": 2516764,
-    "IdName": "DungeonAffix_Positive_LegendaryElites",
+    "IdSno": 2511994,
+    "IdName": "DungeonAffix_Positive_AncestralElites",
     "Name": "Armurerie cachée",
     "Description": "Des objets exceptionnels sont conservés ici, conférant aux monstres élites un puissant affixe de butin.",
     "DungeonZoneInfo": "",
@@ -531,6 +531,15 @@
     "Type": "Minor"
   },
   {
+    "IdSno": 2579458,
+    "IdName": "World_DGN_QST_Skov_Skar_Sphinx_01_A",
+    "Name": "Chemin des Scories",
+    "Description": "Accessibles uniquement aux plus braves, ces grottes sculptées par la lave mènent à des richesses inestimables.",
+    "DungeonZoneInfo": "dans\u00A0: ",
+    "IsSeasonal": false,
+    "Type": "Dungeon"
+  },
+  {
     "IdSno": 2579464,
     "IdName": "World_DGN_QST_Skov_Skar_Sphinx_01_B",
     "Name": "Chemin des Scories",
@@ -542,15 +551,6 @@
   {
     "IdSno": 2579466,
     "IdName": "World_DGN_QST_Skov_Skar_Sphinx_01_C",
-    "Name": "Chemin des Scories",
-    "Description": "Accessibles uniquement aux plus braves, ces grottes sculptées par la lave mènent à des richesses inestimables.",
-    "DungeonZoneInfo": "dans\u00A0: ",
-    "IsSeasonal": false,
-    "Type": "Dungeon"
-  },
-  {
-    "IdSno": 2579458,
-    "IdName": "World_DGN_QST_Skov_Skar_Sphinx_01_A",
     "Name": "Chemin des Scories",
     "Description": "Accessibles uniquement aux plus braves, ces grottes sculptées par la lave mènent à des richesses inestimables.",
     "DungeonZoneInfo": "dans\u00A0: ",
@@ -590,7 +590,7 @@
     "Name": "Cité mouvante",
     "Description": "Ces ruines étaient autrefois un abri pour le peuple de Qara-Yisu.",
     "DungeonZoneInfo": "dans\u00A0: Steppes Arides",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -770,7 +770,7 @@
     "Name": "Creux-du-Supplice",
     "Description": "Un véritable réservoir d’espèces animales et végétales, où certaines réponses se cachent peut-être.",
     "DungeonZoneInfo": "dans\u00A0: Scosglen",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -932,7 +932,7 @@
     "Name": "Effondrement d’Hekma",
     "Description": "Des catacombes de la foi du Zakarum, infestées par la haine. ",
     "DungeonZoneInfo": "dans\u00A0: Kehjistan",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -967,6 +967,33 @@
     "IdName": "DungeonAffix_Positive_EvadeLeavesPoison",
     "Name": "Esquive empoisonnée",
     "Description": "Esquiver libère une flaque de poison sous le premier adversaire esquivé ou à votre point d’arrivée. ",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
+    "IdSno": 2646836,
+    "IdName": "DungeonAffix_Positive_Torment_MythicElites",
+    "Name": "Exploration de donjon",
+    "Description": "En terminant un donjon, vous obtenez de l’expérience et des récompenses supplémentaires.",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
+    "IdSno": 2646845,
+    "IdName": "DungeonAffix_Positive_Torment_AncestralElites",
+    "Name": "Exploration de donjon",
+    "Description": "En terminant un donjon, vous obtenez de l’expérience et des récompenses supplémentaires.",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
+    "IdSno": 2646843,
+    "IdName": "DungeonAffix_Positive_Torment_TreasureGoblins",
+    "Name": "Exploration de donjon",
+    "Description": "En terminant un donjon, vous obtenez de l’expérience et des récompenses supplémentaires.",
     "DungeonZoneInfo": "",
     "IsSeasonal": false,
     "Type": "Positive"
@@ -1274,7 +1301,7 @@
     "Name": "Grotte de Balafraîche",
     "Description": "Une caverne envahie par les démons et corrompue par leur magie. ",
     "DungeonZoneInfo": "dans\u00A0: Pics Brisés",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -1292,7 +1319,7 @@
     "Name": "Grottes de Kutokue",
     "Description": "Des hurlements de désespoir résonnent contre les parois.",
     "DungeonZoneInfo": "dans\u00A0: Nahantu",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -2480,7 +2507,7 @@
     "Name": "Sépulcre du parjure",
     "Description": "Le mal est à l’œuvre sous l’autel de Baal.",
     "DungeonZoneInfo": "dans\u00A0: Kehjistan",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -2561,7 +2588,7 @@
     "Name": "Tombe profanée",
     "Description": "En ce lieu où les moindres recoins hurlent leur terrible agonie, les esprits se tordent de douleur.",
     "DungeonZoneInfo": "dans\u00A0: Nahantu",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -2862,15 +2889,6 @@
     "Type": "Minor"
   },
   {
-    "IdSno": 2355995,
-    "IdName": "DungeonAffix_Minor_S9_Suppressor",
-    "Name": "Élites de suppression",
-    "Description": "Les élites ont toujours l’affixe «\u00A0Suppression\u00A0» et infligent 20\u00A0% de dégâts supplémentaires.",
-    "DungeonZoneInfo": "",
-    "IsSeasonal": false,
-    "Type": "Minor"
-  },
-  {
     "IdSno": 1314333,
     "IdName": "DungeonAffix_Major_Empowered Elites (Suppressor)",
     "Name": "Élites de suppression",
@@ -2878,6 +2896,15 @@
     "DungeonZoneInfo": "",
     "IsSeasonal": false,
     "Type": "Major"
+  },
+  {
+    "IdSno": 2355995,
+    "IdName": "DungeonAffix_Minor_S9_Suppressor",
+    "Name": "Élites de suppression",
+    "Description": "Les élites ont toujours l’affixe «\u00A0Suppression\u00A0» et infligent 20\u00A0% de dégâts supplémentaires.",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Minor"
   },
   {
     "IdSno": 2511947,

@@ -2027,7 +2027,7 @@
     "Name": "埃特娜的失落匕首",
     "Description": "造成 # 种不同类型的非物理伤害会使你灌注技能的强度提高 #%，非物理伤害提高 #%，持续 # 秒。\r\n\r\n基础技能现在可灌注。",
     "DescriptionClean": "造成 种不同类型的非物理伤害会使你灌注技能的强度提高 ，非物理伤害提高 ，持续 秒。 基础技能现在可灌注。",
-    "Localisation": "造成 {c_number}[Affix.\"Static Value 0\"]{/c} 种不同类型的非物理伤害会使你{c_important}灌注{/c}技能的强度提高 {c_random}[Affix_Value_1*Affix.\"Static Value 1\"|%x|]{/c}，非物理伤害提高 {c_number}[Affix_Value_1|%x|]{/c}，持续 {c_number}[Affix.\"Static Value 2\"]{/c} 秒。\r\n\r\n{c_important}基础{/c}技能现在{c_important}可灌注{/c}。",
+    "Localisation": "造成 {c_number}[Affix.\"Static Value 0\"]{/c} 种不同类型的非物理伤害会使你{c_important}灌注{/c}技能的强度提高 {c_random}[Affix_Value_1*Affix.\"Static Value 1\"|%x|]{/c}，非物理伤害提高 {c_random}[Affix_Value_1|%x|]{/c}，持续 {c_number}[Affix.\"Static Value 2\"]{/c} 秒。\r\n\r\n{c_important}基础{/c}技能现在{c_important}可灌注{/c}。",
     "MagicType": 2,
     "AllowedForPlayerClass": [
       0,
@@ -3018,7 +3018,7 @@
     "Name": "布克拉尼之履",
     "Description": "你的暴击几率提高，数值相当于你的移动速度加成的 #%。\r\n\r\n当前加成: #%",
     "DescriptionClean": "你的暴击几率提高，数值相当于你的移动速度加成的 。 当前加成:",
-    "Localisation": "你的暴击几率提高，数值相当于你的移动速度加成的 {c_random}[Affix_Value_1|%|]{/c}。\r\n\r\n当前加成: {c_number}[(Min(Owner.Movement_Scalar_Capped_Total,2)-1) * (Affix_Value_1)|1%|]{/c}",
+    "Localisation": "你的暴击几率提高，数值相当于你的移动速度加成的 {c_random}[Affix_Value_1|%|]{/c}。\r\n\r\n当前加成: {c_number}[(Min((Owner.Movement_Scalar_Capped_Total + Owner.Movement_Scalar_Temporary_Bonus),2)-1) * (Affix_Value_1)|1%|]{/c}",
     "MagicType": 2,
     "AllowedForPlayerClass": [
       1,
@@ -3832,9 +3832,9 @@
     ],
     "IdNameItemActor": "Generic_Charm_Flippy",
     "Name": "拉斯玛的意志",
-    "Description": "处于易伤、虚弱、控制或腐化状态的敌人视为被折磨，受到来自你的伤害提高 #%。\r\n\r\n对被折磨的敌人施加诅咒技能时，会造成 # 点暗影伤害。",
-    "DescriptionClean": "处于易伤、虚弱、控制或腐化状态的敌人视为被折磨，受到来自你的伤害提高 。 对被折磨的敌人施加诅咒技能时，会造成 点暗影伤害。",
-    "Localisation": "处于{c_important}{u}易伤{/c}{/u}、{c_important}{u}虚弱{/c}{/u}、控制或腐化状态的敌人视为被{c_important}折磨{/c}，受到来自你的伤害提高 {c_number}[Affix.\"Static Value 0\"|%|]{/c}。\r\n\r\n对被{c_important}折磨{/c}的敌人施加{c_important}诅咒{/c}技能时，会造成 {c_random}[(Owner.Weapon_Damage_Min_Total + Owner.Weapon_Damage_Delta_Total) * Affix_Value_1]{/c} 点暗影伤害。",
+    "Description": "处于易伤、虚弱、被控制或腐化状态的敌人视为被折磨，受到来自你的伤害提高 #%。\r\n\r\n对被折磨的敌人施加诅咒技能时，会造成 # 点暗影伤害。",
+    "DescriptionClean": "处于易伤、虚弱、被控制或腐化状态的敌人视为被折磨，受到来自你的伤害提高 。 对被折磨的敌人施加诅咒技能时，会造成 点暗影伤害。",
+    "Localisation": "处于{c_important}{u}易伤{/c}{/u}、{c_important}{u}虚弱{/c}{/u}、被控制或腐化状态的敌人视为被{c_important}折磨{/c}，受到来自你的伤害提高 {c_number}[Affix.\"Static Value 0\"|%|]{/c}。\r\n\r\n对被{c_important}折磨{/c}的敌人施加{c_important}诅咒{/c}技能时，会造成 {c_random}[(Owner.Weapon_Damage_Min_Total + Owner.Weapon_Damage_Delta_Total) * Affix_Value_1]{/c} 点暗影伤害。",
     "MagicType": 2,
     "AllowedForPlayerClass": [
       0,
@@ -5860,9 +5860,9 @@
     ],
     "IdNameItemActor": "Generic_Charm_Flippy",
     "Name": "痛苦之兆",
-    "Description": "一股黑暗气息笼罩在你周围，对接触到的敌人施加衰老和铁处女效果。\r\n\r\n以这种方式施加的诅咒每隔 # 秒便会扩散至周围的目标，且在离开黑暗气息之后，还会持续 # 秒。",
-    "DescriptionClean": "一股黑暗气息笼罩在你周围，对接触到的敌人施加衰老和铁处女效果。 以这种方式施加的诅咒每隔 秒便会扩散至周围的目标，且在离开黑暗气息之后，还会持续 秒。",
-    "Localisation": "一股黑暗气息笼罩在你周围，对接触到的敌人施加{c_important}衰老{/c}和{c_important}铁处女{/c}效果。\r\n\r\n以这种方式施加的{c_important}诅咒{/c}每隔 {c_random}[Affix_Value_1|1|]{/c} 秒便会扩散至周围的目标，且在离开黑暗气息之后，还会持续 {c_number}[Affix_Value_2]{/c} 秒。",
+    "Description": "一股黑暗气息笼罩在你周围，对周围的敌人施加衰老和铁处女。\r\n\r\n以此方式施加的诅咒每 # 秒扩散至周围的目标，且在离开光环后持续 # 秒。",
+    "DescriptionClean": "一股黑暗气息笼罩在你周围，对周围的敌人施加衰老和铁处女。 以此方式施加的诅咒每 秒扩散至周围的目标，且在离开光环后持续 秒。",
+    "Localisation": "一股黑暗气息笼罩在你周围，对周围的敌人施加{c_important}衰老{/c}和{c_important}铁处女{/c}。\r\n\r\n以此方式施加的{c_important}诅咒{/c}每 {c_random}[Affix_Value_1|1|]{/c} 秒扩散至周围的目标，且在离开光环后持续 {c_number}[Affix_Value_2]{/c} 秒。",
     "MagicType": 2,
     "AllowedForPlayerClass": [
       0,
@@ -6801,7 +6801,7 @@
     "Name": "老狼的印记",
     "Description": "获得 #% 毒素伤害加成。\r\n狼人技能造成的直接伤害，获得等同于你毒素伤害加成 #% 的加成，最多 #%。\r\n狼人技能造成的毒素伤害，获得等同于你额外攻击速度和暴击几率总和 #% 的加成，最多 #%。\r\n\r\n当前直接伤害加成: #%\r\n当前毒素伤害加成: #%",
     "DescriptionClean": "获得 毒素伤害加成。 狼人技能造成的直接伤害，获得等同于你毒素伤害加成 的加成，最多 。 狼人技能造成的毒素伤害，获得等同于你额外攻击速度和暴击几率总和 的加成，最多 。 当前直接伤害加成: 当前毒素伤害加成:",
-    "Localisation": "{icon:bullet,1.2}获得 {c_random}[Affix_Value_1*100|x%|]{/c} 毒素伤害加成。\r\n{icon:bullet,1.2}{c_important}狼人{/c}技能造成的直接伤害，获得等同于你毒素伤害加成 {c_number}[Affix.\"Static Value 0\"*100|x%|]{/c} 的加成，最多 {c_number}[Affix.\"Static Value 2\"*100|x%|]{/c}。\r\n{icon:bullet,1.2}狼人技能造成的毒素伤害，获得等同于你额外攻击速度和暴击几率总和 {c_number}[Affix.\"Static Value 1\"*100|x%|]{/c} 的加成，最多 {c_number}[Affix.\"Static Value 2\"*100|x%|]{/c}。\r\n\r\n当前直接伤害加成: {c_number}[min((Owner.DOT_DPS_Bonus_Percent+Owner.DOT_DPS_Bonus_Percent_Per_Damage_Type#Poison)*Affix.\"Static Value 0\"*100, Affix.\"Static Value 2\" * 100)|%x|]{/c}\r\n当前毒素伤害加成: {c_number}[min((Owner.Attack_Speed_Percent_Bonus_Total+Owner.Cast_Speed_Percent_Bonus+Owner.Crit_Percent_Base+Owner.Crit_Percent_Bonus)*Affix.\"Static Value 1\"*100, Affix.\"Static Value 2\" * 100)|x%|]{/c}",
+    "Localisation": "{icon:bullet,1.2}获得 {c_random}[Affix_Value_1*100|x%|]{/c} 毒素伤害加成。\r\n{icon:bullet,1.2}{c_important}狼人{/c}技能造成的直接伤害，获得等同于你毒素伤害加成 {c_number}[Affix.\"Static Value 0\"*100|x%|]{/c} 的加成，最多 {c_number}[Affix.\"Static Value 2\"*100|x%|]{/c}。\r\n{icon:bullet,1.2}狼人技能造成的毒素伤害，获得等同于你额外攻击速度和暴击几率总和 {c_number}[Affix.\"Static Value 1\"*100|x%|]{/c} 的加成，最多 {c_number}[Affix.\"Static Value 2\"*100|x%|]{/c}。\r\n\r\n当前直接伤害加成: {c_number}[min((Owner.DOT_DPS_Bonus_Percent+Owner.DOT_DPS_Bonus_Percent_Per_Damage_Type#Poison +Owner.Bucketed_Multiplicative_DoT_Damage)*Affix.\"Static Value 0\"*100, Affix.\"Static Value 2\" * 100)|%x|]{/c}\r\n当前毒素伤害加成: {c_number}[min((Owner.Attack_Speed_Percent_Bonus_Total+Owner.Cast_Speed_Percent_Bonus+Owner.Crit_Percent_Base+Owner.Crit_Percent_Bonus)*Affix.\"Static Value 1\"*100, Affix.\"Static Value 2\" * 100)|x%|]{/c}",
     "MagicType": 2,
     "AllowedForPlayerClass": [
       0,
@@ -7409,7 +7409,7 @@
       0,
       0,
       0,
-      1,
+      0,
       0
     ],
     "AllowedItemLabels": []
@@ -9052,9 +9052,9 @@
     ],
     "IdNameItemActor": "Icons_Ring_Warlock_05",
     "Name": "骇人契约",
-    "Description": "横冲直撞造成的伤害提高 #%。每个被横冲直撞消灭的敌人或恶魔都会使蛮魔的体型及其猛击范围扩大 #%，最多扩大 #%。",
-    "DescriptionClean": "横冲直撞造成的伤害提高 。每个被横冲直撞消灭的敌人或恶魔都会使蛮魔的体型及其猛击范围扩大 ，最多扩大 。",
-    "Localisation": "{c_important}横冲直撞{/c}造成的伤害提高 {c_random}[Affix_Value_1*100|%x|]{/c}。每个被{c_important}横冲直撞{/c}消灭的敌人或恶魔都会使蛮魔的体型及其猛击范围扩大 {c_number}[Affix.\"Static Value 0\"*100|%|]{/c}，最多扩大 {c_number}[Affix.\"Static Value 0\"*Affix.\"Static Value 1\"*100|%|]{/c}。",
+    "Description": "横冲直撞造成的伤害提高 #%。每个被横冲直撞消灭的敌人或恶魔都会使恶魔蛮兵的体型及其猛击范围扩大 #%，最多扩大 #%。",
+    "DescriptionClean": "横冲直撞造成的伤害提高 。每个被横冲直撞消灭的敌人或恶魔都会使恶魔蛮兵的体型及其猛击范围扩大 ，最多扩大 。",
+    "Localisation": "{c_important}横冲直撞{/c}造成的伤害提高 {c_random}[Affix_Value_1*100|%x|]{/c}。每个被{c_important}横冲直撞{/c}消灭的敌人或恶魔都会使恶魔蛮兵的体型及其猛击范围扩大 {c_number}[Affix.\"Static Value 0\"*100|%|]{/c}，最多扩大 {c_number}[Affix.\"Static Value 0\"*Affix.\"Static Value 1\"*100|%|]{/c}。",
     "MagicType": 2,
     "AllowedForPlayerClass": [
       0,

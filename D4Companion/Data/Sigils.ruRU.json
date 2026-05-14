@@ -113,7 +113,7 @@
     "Name": "Безжизненная впадина",
     "Description": "Каннибалы охраняют источник темной силы в старой шахте.",
     "DungeonZoneInfo": "в области Сухие степи",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -333,8 +333,35 @@
     "Type": "Dungeon"
   },
   {
+    "IdSno": 2646836,
+    "IdName": "DungeonAffix_Positive_Torment_MythicElites",
+    "Name": "Вылазка в подземелье",
+    "Description": "За прохождение подземелья дается больше опыта и наград.",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
     "IdSno": 2613077,
     "IdName": "DungeonAffix_Positive_IncreasedRewards",
+    "Name": "Вылазка в подземелье",
+    "Description": "За прохождение подземелья дается больше опыта и наград.",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
+    "IdSno": 2646843,
+    "IdName": "DungeonAffix_Positive_Torment_TreasureGoblins",
+    "Name": "Вылазка в подземелье",
+    "Description": "За прохождение подземелья дается больше опыта и наград.",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
+    "IdSno": 2646845,
+    "IdName": "DungeonAffix_Positive_Torment_AncestralElites",
     "Name": "Вылазка в подземелье",
     "Description": "За прохождение подземелья дается больше опыта и наград.",
     "DungeonZoneInfo": "",
@@ -428,7 +455,7 @@
     "Name": "Гнилая низина",
     "Description": "Богатый заповедник дикой природы, где могут скрываться разгадки тайн.",
     "DungeonZoneInfo": "в области Скосглен",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -878,7 +905,7 @@
     "Name": "Изменчивый город",
     "Description": "Эти руины когда-то служили убежищем для жителей Кара-Ису.",
     "DungeonZoneInfo": "в области Сухие степи",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -1175,7 +1202,7 @@
     "Name": "Логово диких зверей",
     "Description": "Хижина стала жертвой ненависти друидов.",
     "DungeonZoneInfo": "в области Скосглен",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -1346,7 +1373,7 @@
     "Name": "Обветшавшая Хекма",
     "Description": "Полные ненависти катакомбы закарумитов. ",
     "DungeonZoneInfo": "в области Кеджистан",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -1647,15 +1674,6 @@
     "Type": "Major"
   },
   {
-    "IdSno": 1314333,
-    "IdName": "DungeonAffix_Major_Empowered Elites (Suppressor)",
-    "Name": "Особые монстры-душители",
-    "Description": "Особые монстры получают свойство \"Душитель\" и наносят на 20% больше урона.",
-    "DungeonZoneInfo": "",
-    "IsSeasonal": false,
-    "Type": "Major"
-  },
-  {
     "IdSno": 2355995,
     "IdName": "DungeonAffix_Minor_S9_Suppressor",
     "Name": "Особые монстры-душители",
@@ -1663,6 +1681,15 @@
     "DungeonZoneInfo": "",
     "IsSeasonal": false,
     "Type": "Minor"
+  },
+  {
+    "IdSno": 1314333,
+    "IdName": "DungeonAffix_Major_Empowered Elites (Suppressor)",
+    "Name": "Особые монстры-душители",
+    "Description": "Особые монстры получают свойство \"Душитель\" и наносят на 20% больше урона.",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Major"
   },
   {
     "IdSno": 2355993,
@@ -1796,7 +1823,7 @@
     "Name": "Пещера Ледяного Шрама",
     "Description": "Пещера, которую захватили демоны. Теперь она отравлена их темной магией. ",
     "DungeonZoneInfo": "в области Расколотые вершины",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -1823,7 +1850,7 @@
     "Name": "Пещеры Кутоке",
     "Description": "Крики отчаяния эхом отдаются среди стен.",
     "DungeonZoneInfo": "в области Наханту",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -2021,7 +2048,7 @@
     "Name": "Предательская гробница",
     "Description": "Духи корчатся в судорогах, пока оболочки визжат в чудовищной агонии.",
     "DungeonZoneInfo": "в области Наханту",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -2300,7 +2327,7 @@
     "Name": "Склеп отступников",
     "Description": "Зло пробуждается под алтарем Баала.",
     "DungeonZoneInfo": "в области Кеджистан",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -2660,7 +2687,7 @@
     "Name": "Угрюмая лощина",
     "Description": "Демоническая чума разлагает старые склепы в Тур Дулра.",
     "DungeonZoneInfo": "в области Скосглен",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -2961,15 +2988,6 @@
     "Type": "Minor"
   },
   {
-    "IdSno": 2579466,
-    "IdName": "World_DGN_QST_Skov_Skar_Sphinx_01_C",
-    "Name": "Шлаковый путь",
-    "Description": "Высеченные лавой пещеры обещают невероятные богатства тем, кто силен духом.",
-    "DungeonZoneInfo": "в области ",
-    "IsSeasonal": false,
-    "Type": "Dungeon"
-  },
-  {
     "IdSno": 2579458,
     "IdName": "World_DGN_QST_Skov_Skar_Sphinx_01_A",
     "Name": "Шлаковый путь",
@@ -2981,6 +2999,15 @@
   {
     "IdSno": 2579464,
     "IdName": "World_DGN_QST_Skov_Skar_Sphinx_01_B",
+    "Name": "Шлаковый путь",
+    "Description": "Высеченные лавой пещеры обещают невероятные богатства тем, кто силен духом.",
+    "DungeonZoneInfo": "в области ",
+    "IsSeasonal": false,
+    "Type": "Dungeon"
+  },
+  {
+    "IdSno": 2579466,
+    "IdName": "World_DGN_QST_Skov_Skar_Sphinx_01_C",
     "Name": "Шлаковый путь",
     "Description": "Высеченные лавой пещеры обещают невероятные богатства тем, кто силен духом.",
     "DungeonZoneInfo": "в области ",
@@ -3015,19 +3042,19 @@
     "Type": "Positive"
   },
   {
-    "IdSno": 1314405,
-    "IdName": "DungeonAffix_Minor_Monster_ExtraPoison",
+    "IdSno": 2373240,
+    "IdName": "DungeonAffix_Minor_Monster_ExtraPoisonDirect",
     "Name": "Ядовитые удары",
-    "Description": "Монстры наносят еще 30% физического урона как урон от отравления за 3 сек.",
+    "Description": "Монстры наносят еще 20% физического урона как урон от яда.",
     "DungeonZoneInfo": "",
     "IsSeasonal": false,
     "Type": "Minor"
   },
   {
-    "IdSno": 2373240,
-    "IdName": "DungeonAffix_Minor_Monster_ExtraPoisonDirect",
+    "IdSno": 1314405,
+    "IdName": "DungeonAffix_Minor_Monster_ExtraPoison",
     "Name": "Ядовитые удары",
-    "Description": "Монстры наносят еще 20% физического урона как урон от яда.",
+    "Description": "Монстры наносят еще 30% физического урона как урон от отравления за 3 сек.",
     "DungeonZoneInfo": "",
     "IsSeasonal": false,
     "Type": "Minor"

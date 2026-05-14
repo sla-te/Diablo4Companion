@@ -503,12 +503,12 @@
         "LocalisationId": "Block_Chance",
         "LocalisationParameter": 4294967295,
         "LocalisationAttributeFormulaValue": "0.1",
-        "Localisation": "[{vALUE}*100|%1|] de probabilidad de bloqueo."
+        "Localisation": "[{vALUE}*100|%1|] de probabilidad de bloqueo"
       }
     ],
     "ClassRestriction": "",
-    "Description": "#% de probabilidad de bloqueo.",
-    "DescriptionClean": "de probabilidad de bloqueo."
+    "Description": "#% de probabilidad de bloqueo",
+    "DescriptionClean": "de probabilidad de bloqueo"
   },
   {
     "IdSno": "1290786;1867463;1938733;1939869;2067876",
@@ -13125,7 +13125,7 @@
     ],
     "AffixType": 2,
     "Category": 3,
-    "Flags": 1027,
+    "Flags": 1028,
     "IsTemperingAvailable": true,
     "MagicType": 0,
     "AllowedForPlayerClass": [
@@ -30739,12 +30739,9 @@
     "DescriptionClean": "de daño de Versátil"
   },
   {
-    "IdSno": "2614081;2614083;2614085;2618017;2618019;2618025",
-    "IdName": "Tempered_Damage_Generic_LuckHit_Weakened_BarbRogue_Tier1;Tempered_Damage_Generic_LuckHit_Weakened_BarbRogue_Tier2;Tempered_Damage_Generic_LuckHit_Weakened_BarbRogue_Tier3;Tempered_Damage_Generic_LuckHit_Weakened_Tier1;Tempered_Damage_Generic_LuckHit_Weakened_Tier2;Tempered_Damage_Generic_LuckHit_Weakened_Tier3",
+    "IdSno": "2618017;2618019;2618025",
+    "IdName": "Tempered_Damage_Generic_LuckHit_Weakened_BarbRogue_Tier1;Tempered_Damage_Generic_LuckHit_Weakened_BarbRogue_Tier2;Tempered_Damage_Generic_LuckHit_Weakened_BarbRogue_Tier3",
     "IdSnoList": [
-      "2614081",
-      "2614083",
-      "2614085",
       "2618017",
       "2618019",
       "2618025"
@@ -30752,10 +30749,7 @@
     "IdNameList": [
       "Tempered_Damage_Generic_LuckHit_Weakened_BarbRogue_Tier1",
       "Tempered_Damage_Generic_LuckHit_Weakened_BarbRogue_Tier2",
-      "Tempered_Damage_Generic_LuckHit_Weakened_BarbRogue_Tier3",
-      "Tempered_Damage_Generic_LuckHit_Weakened_Tier1",
-      "Tempered_Damage_Generic_LuckHit_Weakened_Tier2",
-      "Tempered_Damage_Generic_LuckHit_Weakened_Tier3"
+      "Tempered_Damage_Generic_LuckHit_Weakened_BarbRogue_Tier3"
     ],
     "AffixType": -1,
     "Category": -1,
@@ -33714,7 +33708,7 @@
     "AllowedItemLabels": [],
     "AffixAttributes": [
       {
-        "LocalisationId": "Per_Skill_Tag_Buff_Duration_Bonus_Percent",
+        "LocalisationId": "Custom_Duration_Bonus_Per_Skill_Tag",
         "LocalisationParameter": 3360437049,
         "LocalisationAttributeFormulaValue": "0",
         "Localisation": "+[{VALUE2}*100|1%|] de duración de {c_important}{VALUE1}{/c}"

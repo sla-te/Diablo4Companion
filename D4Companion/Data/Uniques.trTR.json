@@ -77,9 +77,9 @@
     ],
     "IdNameItemActor": "Generic_Charm_Flippy",
     "Name": "Acı Alameti",
-    "Description": "Çevreni, temas ettiği düşmanlara Yıprat ve Çivili Tabut uygulayan karanlık bir hare kaplar.\r\n\r\nBu yöntemle uygulanan Lanetler, her # saniyede bir çevredeki hedeflere de yayılır ve hare dışında # saniye sürer.",
-    "DescriptionClean": "Çevreni, temas ettiği düşmanlara Yıprat ve Çivili Tabut uygulayan karanlık bir hare kaplar. Bu yöntemle uygulanan Lanetler, her saniyede bir çevredeki hedeflere de yayılır ve hare dışında saniye sürer.",
-    "Localisation": "Çevreni, temas ettiği düşmanlara {c_important}Yıprat{/c} ve {c_important}Çivili Tabut{/c} uygulayan karanlık bir hare kaplar.\r\n\r\nBu yöntemle uygulanan {c_important}Lanetler{/c}, her {c_random}[Affix_Value_1|1|]{/c} saniyede bir çevredeki hedeflere de yayılır ve hare dışında {c_number}[Affix_Value_2]{/c} saniye sürer.",
+    "Description": "Çevreni, etrafındaki düşmanlara Yıprat ve Çivili Tabut uygulayan karanlık bir hare kaplar.\r\n\r\nBu yöntemle uygulanan Lanetler, her # saniyede bir çevredeki hedeflere de yayılır ve hare dışında # saniye sürer.",
+    "DescriptionClean": "Çevreni, etrafındaki düşmanlara Yıprat ve Çivili Tabut uygulayan karanlık bir hare kaplar. Bu yöntemle uygulanan Lanetler, her saniyede bir çevredeki hedeflere de yayılır ve hare dışında saniye sürer.",
+    "Localisation": "Çevreni, etrafındaki düşmanlara {c_important}Yıprat{/c} ve {c_important}Çivili Tabut{/c} uygulayan karanlık bir hare kaplar.\r\n\r\nBu yöntemle uygulanan {c_important}Lanetler{/c}, her {c_random}[Affix_Value_1|1|]{/c} saniyede bir çevredeki hedeflere de yayılır ve hare dışında {c_number}[Affix_Value_2]{/c} saniye sürer.",
     "MagicType": 2,
     "AllowedForPlayerClass": [
       0,
@@ -974,7 +974,7 @@
       0,
       0,
       0,
-      1,
+      0,
       0
     ],
     "AllowedItemLabels": []
@@ -1355,7 +1355,7 @@
     "Name": "Bucrani Çizmesi",
     "Description": "Kritik Vuruş İhtimalin, Hareket Hızı bonusunun #% kadarı artar.\r\n\r\nMevcut Bonus: #%",
     "DescriptionClean": "Kritik Vuruş İhtimalin, Hareket Hızı bonusunun kadarı artar. Mevcut Bonus:",
-    "Localisation": "Kritik Vuruş İhtimalin, Hareket Hızı bonusunun {c_random}[Affix_Value_1|%|]{/c} kadarı artar.\r\n\r\nMevcut Bonus: {c_number}[(Min(Owner.Movement_Scalar_Capped_Total,2)-1) * (Affix_Value_1)|1%|]{/c}",
+    "Localisation": "Kritik Vuruş İhtimalin, Hareket Hızı bonusunun {c_random}[Affix_Value_1|%|]{/c} kadarı artar.\r\n\r\nMevcut Bonus: {c_number}[(Min((Owner.Movement_Scalar_Capped_Total + Owner.Movement_Scalar_Temporary_Bonus),2)-1) * (Affix_Value_1)|1%|]{/c}",
     "MagicType": 2,
     "AllowedForPlayerClass": [
       1,
@@ -2800,7 +2800,7 @@
     "Name": "Etna'nın Kayıp Hançeri",
     "Description": "# farklı türde Fiziksel Olmayan hasar vermek, Aşılama Yeteneklerinin Tesirini #% artırır ve Fiziksel Olmayan hasarı ise # saniye boyunca #% artırır. \r\n\r\nTemel Yetenekler artık Aşılanabilir.",
     "DescriptionClean": "farklı türde Fiziksel Olmayan hasar vermek, Aşılama Yeteneklerinin Tesirini artırır ve Fiziksel Olmayan hasarı ise saniye boyunca artırır.  Temel Yetenekler artık Aşılanabilir.",
-    "Localisation": "{c_number}[Affix.\"Static Value 0\"]{/c} farklı türde Fiziksel Olmayan hasar vermek, {c_important}Aşılama{/c} Yeteneklerinin Tesirini {c_random}[Affix_Value_1*Affix.\"Static Value 1\"|%x|]{/c} artırır ve Fiziksel Olmayan hasarı ise {c_number}[Affix.\"Static Value 2\"]{/c} saniye boyunca {c_number}[Affix_Value_1|%x|]{/c} artırır. \r\n\r\n{c_important}Temel{/c} Yetenekler artık {c_important}Aşılanabilir{/c}.",
+    "Localisation": "{c_number}[Affix.\"Static Value 0\"]{/c} farklı türde Fiziksel Olmayan hasar vermek, {c_important}Aşılama{/c} Yeteneklerinin Tesirini {c_random}[Affix_Value_1*Affix.\"Static Value 1\"|%x|]{/c} artırır ve Fiziksel Olmayan hasarı ise {c_random}[Affix.\"Static Value 2\"]{/c} saniye boyunca {c_number}[Affix_Value_1|%x|]{/c} artırır. \r\n\r\n{c_important}Temel{/c} Yetenekler artık {c_important}Aşılanabilir{/c}.",
     "MagicType": 2,
     "AllowedForPlayerClass": [
       0,
@@ -8065,7 +8065,7 @@
     "Name": "Yaşlı Kurdun Simgesi",
     "Description": "#% Bonus Zehirleme hasarı kazan.\r\nKurt Adam Yeteneklerinden gelen doğrudan hasar, bonus Zehirleme hasarının #% kadarına eşit bir bonus kazanır. Bu miktar en fazla #% olabilir.\r\nKurt Adam Yeteneklerinden gelen zehir hasarı, bonus Saldırı Hızı ve Kritik Vuruş İhtimalinin #% kadarına eşit bir bonus kazanır. Bu miktar en fazla #% olabilir.\r\n\r\nMevcut Doğrudan Hasar bonusu: #%\r\nMevcut Zehir Hasarı bonusu: #%",
     "DescriptionClean": "Bonus Zehirleme hasarı kazan. Kurt Adam Yeteneklerinden gelen doğrudan hasar, bonus Zehirleme hasarının kadarına eşit bir bonus kazanır. Bu miktar en fazla olabilir. Kurt Adam Yeteneklerinden gelen zehir hasarı, bonus Saldırı Hızı ve Kritik Vuruş İhtimalinin kadarına eşit bir bonus kazanır. Bu miktar en fazla olabilir. Mevcut Doğrudan Hasar bonusu: Mevcut Zehir Hasarı bonusu:",
-    "Localisation": "{icon:bullet,1.2}{c_random}[Affix_Value_1*100|x%|]{/c} Bonus Zehirleme hasarı kazan.\r\n{icon:bullet,1.2}{c_important}Kurt Adam{/c} Yeteneklerinden gelen doğrudan hasar, bonus Zehirleme hasarının {c_number}[Affix.\"Static Value 0\"*100|x%|]{/c} kadarına eşit bir bonus kazanır. Bu miktar en fazla {c_number}[Affix.\"Static Value 2\"*100|x%|]{/c} olabilir.\r\n{icon:bullet,1.2}Kurt Adam Yeteneklerinden gelen zehir hasarı, bonus Saldırı Hızı ve Kritik Vuruş İhtimalinin {c_number}[Affix.\"Static Value 1\"*100|x%|]{/c} kadarına eşit bir bonus kazanır. Bu miktar en fazla {c_number}[Affix.\"Static Value 2\"*100|x%|]{/c} olabilir.\r\n\r\nMevcut Doğrudan Hasar bonusu: {c_number}[min((Owner.DOT_DPS_Bonus_Percent+Owner.DOT_DPS_Bonus_Percent_Per_Damage_Type#Poison)*Affix.\"Static Value 0\"*100, Affix.\"Static Value 2\" * 100)|%x|]{/c}\r\nMevcut Zehir Hasarı bonusu: {c_number}[min((Owner.Attack_Speed_Percent_Bonus_Total+Owner.Cast_Speed_Percent_Bonus+Owner.Crit_Percent_Base+Owner.Crit_Percent_Bonus)*Affix.\"Static Value 1\"*100, Affix.\"Static Value 2\" * 100)|x%|]{/c}",
+    "Localisation": "{icon:bullet,1.2}{c_random}[Affix_Value_1*100|x%|]{/c} Bonus Zehirleme hasarı kazan.\r\n{icon:bullet,1.2}{c_important}Kurt Adam{/c} Yeteneklerinden gelen doğrudan hasar, bonus Zehirleme hasarının {c_number}[Affix.\"Static Value 0\"*100|x%|]{/c} kadarına eşit bir bonus kazanır. Bu miktar en fazla {c_number}[Affix.\"Static Value 2\"*100|x%|]{/c} olabilir.\r\n{icon:bullet,1.2}Kurt Adam Yeteneklerinden gelen zehir hasarı, bonus Saldırı Hızı ve Kritik Vuruş İhtimalinin {c_number}[Affix.\"Static Value 1\"*100|x%|]{/c} kadarına eşit bir bonus kazanır. Bu miktar en fazla {c_number}[Affix.\"Static Value 2\"*100|x%|]{/c} olabilir.\r\n\r\nMevcut Doğrudan Hasar bonusu: {c_number}[min((Owner.DOT_DPS_Bonus_Percent+Owner.DOT_DPS_Bonus_Percent_Per_Damage_Type#Poison +Owner.Bucketed_Multiplicative_DoT_Damage)*Affix.\"Static Value 0\"*100, Affix.\"Static Value 2\" * 100)|%x|]{/c}\r\nMevcut Zehir Hasarı bonusu: {c_number}[min((Owner.Attack_Speed_Percent_Bonus_Total+Owner.Cast_Speed_Percent_Bonus+Owner.Crit_Percent_Base+Owner.Crit_Percent_Bonus)*Affix.\"Static Value 1\"*100, Affix.\"Static Value 2\" * 100)|x%|]{/c}",
     "MagicType": 2,
     "AllowedForPlayerClass": [
       0,

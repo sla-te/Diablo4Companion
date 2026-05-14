@@ -827,9 +827,9 @@
     ],
     "IdNameItemActor": "Generic_Charm_Flippy",
     "Name": "고통의 징조",
-    "Description": "암흑의 오라가 플레이어를 감싸, 오라에 닿은 적에게 노화와 가시 박힌 철관을 겁니다.\r\n\r\n이렇게 시전된 저주는 #초마다 주위의 다른 대상에게 퍼져 나가며 오라 밖에서 #초 동안 지속됩니다.",
-    "DescriptionClean": "암흑의 오라가 플레이어를 감싸, 오라에 닿은 적에게 노화와 가시 박힌 철관을 겁니다. 이렇게 시전된 저주는 초마다 주위의 다른 대상에게 퍼져 나가며 오라 밖에서 초 동안 지속됩니다.",
-    "Localisation": "암흑의 오라가 플레이어를 감싸, 오라에 닿은 적에게 {c_important}노화{/c}와 {c_important}가시 박힌 철관{/c}을 겁니다.\r\n\r\n이렇게 시전된 {c_important}저주{/c}는 {c_random}[Affix_Value_1|1|]{/c}초마다 주위의 다른 대상에게 퍼져 나가며 오라 밖에서 {c_number}[Affix_Value_2]{/c}초 동안 지속됩니다.",
+    "Description": "암흑의 오라가 플레이어를 감싸, 주변의 적에게 노화와 가시 박힌 철관을 겁니다.\r\n\r\n이렇게 시전된 저주는 #초마다 주위의 다른 대상에게 퍼져 나가며 오라 밖에서 #초 동안 지속됩니다.",
+    "DescriptionClean": "암흑의 오라가 플레이어를 감싸, 주변의 적에게 노화와 가시 박힌 철관을 겁니다. 이렇게 시전된 저주는 초마다 주위의 다른 대상에게 퍼져 나가며 오라 밖에서 초 동안 지속됩니다.",
+    "Localisation": "암흑의 오라가 플레이어를 감싸, 주변의 적에게 {c_important}노화{/c}와 {c_important}가시 박힌 철관{/c}을 겁니다.\r\n\r\n이렇게 시전된 {c_important}저주{/c}는 {c_random}[Affix_Value_1|1|]{/c}초마다 주위의 다른 대상에게 퍼져 나가며 오라 밖에서 {c_number}[Affix_Value_2]{/c}초 동안 지속됩니다.",
     "MagicType": 2,
     "AllowedForPlayerClass": [
       0,
@@ -1028,7 +1028,7 @@
       0,
       0,
       0,
-      1,
+      0,
       0
     ],
     "AllowedItemLabels": []
@@ -1593,9 +1593,9 @@
     ],
     "IdNameItemActor": "Icons_Ring_Unique_008",
     "Name": "늙은 늑대의 징표",
-    "Description": " #%의 추가 중독 피해를 획득합니다.\r\n 늑대인간 기술로 주는 직접 피해가 추가 중독 피해의 #%만큼 보너스를 획득합니다. 최대 #%까지 보너스를 획득할 수 있습니다.\r\n 늑대인간 기술로 주는 독 피해가 추가 공격 속도와 극대화 확률의 #%만큼 보너스를 획득합니다. 최대 #%까지 보너스를 획득할 수 있습니다.\u00A0\r\n\r\n현재 직접 피해 보너스: #%\r\n현재 독 피해 보너스: #%",
+    "Description": "#%의 추가 중독 피해를 획득합니다.\r\n늑대인간 기술로 주는 직접 피해가 추가 중독 피해의 #%만큼 보너스를 획득합니다. 최대 #%까지 보너스를 획득할 수 있습니다.\r\n늑대인간 기술로 주는 독 피해가 추가 공격 속도와 극대화 확률의 #%만큼 보너스를 획득합니다. 최대 #%까지 보너스를 획득할 수 있습니다.\u00A0\r\n\r\n현재 직접 피해 보너스: #%\r\n현재 독 피해 보너스: #%",
     "DescriptionClean": "의 추가 중독 피해를 획득합니다. 늑대인간 기술로 주는 직접 피해가 추가 중독 피해의 만큼 보너스를 획득합니다. 최대 까지 보너스를 획득할 수 있습니다. 늑대인간 기술로 주는 독 피해가 추가 공격 속도와 극대화 확률의 만큼 보너스를 획득합니다. 최대 까지 보너스를 획득할 수 있습니다.\u00A0 현재 직접 피해 보너스: 현재 독 피해 보너스:",
-    "Localisation": "{icon:bullet,1.2}{c_random} [Affix_Value_1*100|x%|]{/c}의 추가 중독 피해를 획득합니다.\r\n{icon:bullet,1.2}{c_important} 늑대인간{/c} 기술로 주는 직접 피해가 추가 중독 피해의 {c_number}[Affix.\"Static Value 0\"*100|x%|]{/c}만큼 보너스를 획득합니다. 최대 {c_number}[Affix.\"Static Value 2\"*100|x%|]{/c}까지 보너스를 획득할 수 있습니다.\r\n{icon:bullet,1.2} 늑대인간 기술로 주는 독 피해가 추가 공격 속도와 극대화 확률의 {c_number}[Affix.\"Static Value 1\"*100|x%|]{/c}만큼 보너스를 획득합니다. 최대 {c_number}[Affix.\"Static Value 2\"*100|x%|]{/c}까지 보너스를 획득할 수 있습니다.\u00A0\r\n\r\n현재 직접 피해 보너스: {c_number}[min((Owner.DOT_DPS_Bonus_Percent+Owner.DOT_DPS_Bonus_Percent_Per_Damage_Type#Poison)*Affix.\"Static Value 0\"*100, Affix.\"Static Value 2\" * 100)|%x|]{/c}\r\n현재 독 피해 보너스: {c_number}[min((Owner.Attack_Speed_Percent_Bonus_Total+Owner.Cast_Speed_Percent_Bonus+Owner.Crit_Percent_Base+Owner.Crit_Percent_Bonus)*Affix.\"Static Value 1\"*100, Affix.\"Static Value 2\" * 100)|x%|]{/c}",
+    "Localisation": "{icon:bullet,1.2}{c_random}[Affix_Value_1*100|x%|]{/c}의 추가 중독 피해를 획득합니다.\r\n{icon:bullet,1.2}{c_important}늑대인간{/c} 기술로 주는 직접 피해가 추가 중독 피해의 {c_number}[Affix.\"Static Value 0\"*100|x%|]{/c}만큼 보너스를 획득합니다. 최대 {c_number}[Affix.\"Static Value 2\"*100|x%|]{/c}까지 보너스를 획득할 수 있습니다.\r\n{icon:bullet,1.2}늑대인간 기술로 주는 독 피해가 추가 공격 속도와 극대화 확률의 {c_number}[Affix.\"Static Value 1\"*100|x%|]{/c}만큼 보너스를 획득합니다. 최대 {c_number}[Affix.\"Static Value 2\"*100|x%|]{/c}까지 보너스를 획득할 수 있습니다.\u00A0\r\n\r\n현재 직접 피해 보너스: {c_number}[min((Owner.DOT_DPS_Bonus_Percent+Owner.DOT_DPS_Bonus_Percent_Per_Damage_Type#Poison +Owner.Bucketed_Multiplicative_DoT_Damage)*Affix.\"Static Value 0\"*100, Affix.\"Static Value 2\" * 100)|%x|]{/c}\r\n현재 독 피해 보너스: {c_number}[min((Owner.Attack_Speed_Percent_Bonus_Total+Owner.Cast_Speed_Percent_Bonus+Owner.Crit_Percent_Base+Owner.Crit_Percent_Bonus)*Affix.\"Static Value 1\"*100, Affix.\"Static Value 2\" * 100)|x%|]{/c}",
     "MagicType": 2,
     "AllowedForPlayerClass": [
       0,
@@ -3472,7 +3472,7 @@
     "Name": "부크라니의 발 보호대",
     "Description": "극대화 확률이 자신의 이동 속도 보너스의 #%만큼 증가합니다.\r\n\r\n현재 보너스: #%",
     "DescriptionClean": "극대화 확률이 자신의 이동 속도 보너스의 만큼 증가합니다. 현재 보너스:",
-    "Localisation": "극대화 확률이 자신의 이동 속도 보너스의 {c_random}[Affix_Value_1|%|]{/c}만큼 증가합니다.\r\n\r\n현재 보너스: {c_number}[(Min(Owner.Movement_Scalar_Capped_Total,2)-1) * (Affix_Value_1)|1%|]{/c}",
+    "Localisation": "극대화 확률이 자신의 이동 속도 보너스의 {c_random}[Affix_Value_1|%|]{/c}만큼 증가합니다.\r\n\r\n현재 보너스: {c_number}[(Min((Owner.Movement_Scalar_Capped_Total + Owner.Movement_Scalar_Temporary_Bonus),2)-1) * (Affix_Value_1)|1%|]{/c}",
     "MagicType": 2,
     "AllowedForPlayerClass": [
       1,
@@ -5641,7 +5641,7 @@
     "Name": "에트나의 잃어버린 단검",
     "Description": "#가지 유형의 비물리 피해를 주면 #초 동안 주입 기술의 지속 효력이 #%, 비물리 피해가 #% 증가합니다. \r\n\r\n기본 기술에 주입할 수 있습니다.",
     "DescriptionClean": "가지 유형의 비물리 피해를 주면 초 동안 주입 기술의 지속 효력이 , 비물리 피해가 증가합니다.  기본 기술에 주입할 수 있습니다.",
-    "Localisation": "{c_number}[Affix.\"Static Value 0\"]{/c}가지 유형의 비물리 피해를 주면 {c_random}[Affix.\"Static Value 2\"]{/c}초 동안 {c_important}주입{/c} 기술의 지속 효력이 {c_number}[Affix_Value_1*Affix.\"Static Value 1\"|%x|]{/c}, 비물리 피해가 {c_number}[Affix_Value_1|%x|]{/c} 증가합니다. \r\n\r\n{c_important}기본{/c} 기술에 {c_important}주입{/c}할 수 있습니다.",
+    "Localisation": "{c_number}[Affix.\"Static Value 0\"]{/c}가지 유형의 비물리 피해를 주면 {c_number}[Affix.\"Static Value 2\"]{/c}초 동안 {c_important}주입{/c} 기술의 지속 효력이 {c_random}[Affix_Value_1*Affix.\"Static Value 1\"|%x|]{/c}, 비물리 피해가 {c_random}[Affix_Value_1|%x|]{/c} 증가합니다. \r\n\r\n{c_important}기본{/c} 기술에 {c_important}주입{/c}할 수 있습니다.",
     "MagicType": 2,
     "AllowedForPlayerClass": [
       0,

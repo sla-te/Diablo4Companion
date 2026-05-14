@@ -1898,9 +1898,9 @@
       "legendary_warlock_020_x2"
     ],
     "Name": "Misantrópica",
-    "Description": "Recebe #% a mais de vida máxima se você não tiver tido mais de # demônios ativos nos últimos # s.",
-    "DescriptionClean": "Recebe a mais de vida máxima se você não tiver tido mais de demônios ativos nos últimos s.",
-    "Localisation": "Recebe {c_random}[Affix_Value_1|%+|]{/c} a mais de vida máxima se você não tiver tido mais de {c_number}[Affix.\"Static Value 0\"]{/c} demônios ativos nos últimos {c_number}[Affix.\"Static Value 1\"]{/c} s.",
+    "Description": "Recebe #% a mais de vida máxima se você não tiver tido mais de # |4demônio ativo:demônios ativos; nos últimos # s.",
+    "DescriptionClean": "Recebe a mais de vida máxima se você não tiver tido mais de |4demônio ativo:demônios ativos; nos últimos s.",
+    "Localisation": "Recebe {c_random}[Affix_Value_1|%+|]{/c} a mais de vida máxima se você não tiver tido mais de {c_number}[Affix.\"Static Value 0\"]{/c} |4demônio ativo:demônios ativos; nos últimos {c_number}[Affix.\"Static Value 1\"]{/c} s.",
     "IsSeasonal": false,
     "IsCodex": true,
     "Dungeon": "",
@@ -8507,44 +8507,6 @@
     ]
   },
   {
-    "IdSno": "2547945",
-    "IdName": "legendary_warlock_019_x2",
-    "IdSnoList": [
-      "2547945"
-    ],
-    "IdNameList": [
-      "legendary_warlock_019_x2"
-    ],
-    "Name": "da Sombras Intensas",
-    "Description": "O máximo de acúmulos de Forma de Sombra é aumentado em #.",
-    "DescriptionClean": "O máximo de acúmulos de Forma de Sombra é aumentado em.",
-    "Localisation": "O máximo de acúmulos de {c_important}{u}Forma de Sombra{/u}{/c} é aumentado em {c_random}[Affix_Value_1]{/c}.",
-    "IsSeasonal": false,
-    "IsCodex": true,
-    "Dungeon": "",
-    "Category": "FILTER_Legendary_Utility",
-    "MagicType": 1,
-    "AllowedForPlayerClass": [
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      1
-    ],
-    "AllowedItemLabels": [
-      16,
-      17,
-      29,
-      28,
-      26,
-      30,
-      15
-    ]
-  },
-  {
     "IdSno": "2567355",
     "IdName": "legendary_spiritborn_052",
     "IdSnoList": [
@@ -10016,6 +9978,44 @@
       0,
       28,
       26,
+      15
+    ]
+  },
+  {
+    "IdSno": "2547945",
+    "IdName": "legendary_warlock_019_x2",
+    "IdSnoList": [
+      "2547945"
+    ],
+    "IdNameList": [
+      "legendary_warlock_019_x2"
+    ],
+    "Name": "das Sombras Intensas",
+    "Description": "O máximo de acúmulos de Forma de Sombra é aumentado em #.",
+    "DescriptionClean": "O máximo de acúmulos de Forma de Sombra é aumentado em.",
+    "Localisation": "O máximo de acúmulos de {c_important}{u}Forma de Sombra{/u}{/c} é aumentado em {c_random}[Affix_Value_1]{/c}.",
+    "IsSeasonal": false,
+    "IsCodex": true,
+    "Dungeon": "",
+    "Category": "FILTER_Legendary_Utility",
+    "MagicType": 1,
+    "AllowedForPlayerClass": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1
+    ],
+    "AllowedItemLabels": [
+      16,
+      17,
+      29,
+      28,
+      26,
+      30,
       15
     ]
   },
@@ -14008,9 +14008,9 @@
       "legendary_sorc_035_x2"
     ],
     "Name": "do Frio Implacável",
-    "Description": "Seu dano gélido direto faz com que os inimigos recebam #% a mais dede dano gélido por # s, acumulando até # vezes.",
-    "DescriptionClean": "Seu dano gélido direto faz com que os inimigos recebam a mais dede dano gélido por s, acumulando até vezes.",
-    "Localisation": "Seu dano gélido direto faz com que os inimigos recebam {c_random}[Affix_Value_1|1%|]{/c} a mais dede dano gélido por {c_number}[Affix.\"Static Value 0\"]{/c} s, acumulando até {c_number}[Affix.\"Static Value 1\"]{/c} vezes.",
+    "Description": "Seu dano gélido direto faz com que os inimigos recebam #% a mais de dano gélido por # s, acumulando até # vezes.",
+    "DescriptionClean": "Seu dano gélido direto faz com que os inimigos recebam a mais de dano gélido por s, acumulando até vezes.",
+    "Localisation": "Seu dano gélido direto faz com que os inimigos recebam {c_random}[Affix_Value_1|1%|]{/c} a mais de dano gélido por {c_number}[Affix.\"Static Value 0\"]{/c} s, acumulando até {c_number}[Affix.\"Static Value 1\"]{/c} vezes.",
     "IsSeasonal": false,
     "IsCodex": true,
     "Dungeon": "",
@@ -15927,9 +15927,9 @@
       "legendary_sorc_109_x2"
     ],
     "Name": "do Rastro Congelado",
-    "Description": "Criar um Espeto de Gelo aumenta o dano deles em #% por # s, acumulando até # vezes.",
-    "DescriptionClean": "Criar um Espeto de Gelo aumenta o dano deles em por s, acumulando até vezes.",
-    "Localisation": "Criar um {u}{c_important}Espeto de Gelo{/c}{/u} aumenta o dano deles em {c_random}[Affix_Value_1|1%x|]{/c} por {c_number}[Affix.\"Static Value 1\"]{/c} s, acumulando até {c_number}[Affix.\"Static Value 0\"]{/c} vezes.",
+    "Description": "Criar um Espeto de Gelo aumenta o dano dele em #% por # s, acumulando até # vezes.",
+    "DescriptionClean": "Criar um Espeto de Gelo aumenta o dano dele em por s, acumulando até vezes.",
+    "Localisation": "Criar um {u}{c_important}Espeto de Gelo{/c}{/u} aumenta o dano dele em {c_random}[Affix_Value_1|1%x|]{/c} por {c_number}[Affix.\"Static Value 1\"]{/c} s, acumulando até {c_number}[Affix.\"Static Value 0\"]{/c} vezes.",
     "IsSeasonal": false,
     "IsCodex": true,
     "Dungeon": "",

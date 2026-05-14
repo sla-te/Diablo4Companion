@@ -1374,7 +1374,7 @@
     "Name": "Botines de Bucrani",
     "Description": "Tu probabilidad de golpe crítico aumenta una cantidad equivalente a un #% de tu bonus de velocidad de movimiento.\r\n\r\nBonus actual: #%",
     "DescriptionClean": "Tu probabilidad de golpe crítico aumenta una cantidad equivalente a un de tu bonus de velocidad de movimiento. Bonus actual:",
-    "Localisation": "Tu probabilidad de golpe crítico aumenta una cantidad equivalente a un {c_random}[Affix_Value_1|%|]{/c} de tu bonus de velocidad de movimiento.\r\n\r\nBonus actual: {c_number}[(Min(Owner.Movement_Scalar_Capped_Total,2)-1) * (Affix_Value_1)|1%|]{/c}",
+    "Localisation": "Tu probabilidad de golpe crítico aumenta una cantidad equivalente a un {c_random}[Affix_Value_1|%|]{/c} de tu bonus de velocidad de movimiento.\r\n\r\nBonus actual: {c_number}[(Min((Owner.Movement_Scalar_Capped_Total + Owner.Movement_Scalar_Temporary_Bonus),2)-1) * (Affix_Value_1)|1%|]{/c}",
     "MagicType": 2,
     "AllowedForPlayerClass": [
       1,
@@ -2821,7 +2821,7 @@
     "Name": "Daga perdida de Etna",
     "Description": "Infligir daño no físico de # tipos distintos aumenta un #% la potencia de tus habilidades de imbuición y un #% tu daño no físico durante #\u00A0s.\r\n\r\nLas habilidades básicas ahora son imbuibles.",
     "DescriptionClean": "Infligir daño no físico de tipos distintos aumenta un la potencia de tus habilidades de imbuición y un tu daño no físico durante \u00A0s. Las habilidades básicas ahora son imbuibles.",
-    "Localisation": "Infligir daño no físico de {c_number}[Affix.\"Static Value 0\"]{/c} tipos distintos aumenta un {c_random}[Affix_Value_1*Affix.\"Static Value 1\"|%x|]{/c} la potencia de tus habilidades de {c_important}imbuición{/c} y un {c_number}[Affix_Value_1|%x|]{/c} tu daño no físico durante {c_number}[Affix.\"Static Value 2\"]{/c}\u00A0s.\r\n\r\nLas habilidades {c_important}básicas{/c} ahora son {c_important}imbuibles{/c}.",
+    "Localisation": "Infligir daño no físico de {c_number}[Affix.\"Static Value 0\"]{/c} tipos distintos aumenta un {c_random}[Affix_Value_1*Affix.\"Static Value 1\"|%x|]{/c} la potencia de tus habilidades de {c_important}imbuición{/c} y un {c_random}[Affix_Value_1|%x|]{/c} tu daño no físico durante {c_number}[Affix.\"Static Value 2\"]{/c}\u00A0s.\r\n\r\nLas habilidades {c_important}básicas{/c} ahora son {c_important}imbuibles{/c}.",
     "MagicType": 2,
     "AllowedForPlayerClass": [
       0,
@@ -3538,7 +3538,7 @@
       0,
       0,
       0,
-      1,
+      0,
       0
     ],
     "AllowedItemLabels": []
@@ -5620,7 +5620,7 @@
     "Name": "Marca del Viejo Lobo",
     "Description": "Obtienes un #% más de daño de veneno.\r\nEl daño directo de las habilidades de hombre lobo obtiene un bonus igual al #% del daño de veneno adicional, hasta un #%.\r\nEl daño de veneno de las habilidades de hombre lobo obtiene un bonus igual al #% de tu velocidad de ataque y probabilidad de golpe crítico adicionales, hasta un #%.\u00A0\r\n\r\nBonus de daño directo actual: #%\r\nBonus de daño de veneno actual: #%",
     "DescriptionClean": "Obtienes un más de daño de veneno. El daño directo de las habilidades de hombre lobo obtiene un bonus igual al del daño de veneno adicional, hasta un. El daño de veneno de las habilidades de hombre lobo obtiene un bonus igual al de tu velocidad de ataque y probabilidad de golpe crítico adicionales, hasta un.\u00A0 Bonus de daño directo actual: Bonus de daño de veneno actual:",
-    "Localisation": "{icon:bullet,1.2}Obtienes un {c_random}[Affix_Value_1*100|x%|]{/c} más de daño de veneno.\r\n{icon:bullet,1.2}El daño directo de las habilidades de {c_important}hombre lobo{/c} obtiene un bonus igual al {c_number}[Affix.\"Static Value 0\"*100|x%|]{/c} del daño de veneno adicional, hasta un {c_number}[Affix.\"Static Value 2\"*100|x%|]{/c}.\r\n{icon:bullet,1.2}El daño de veneno de las habilidades de hombre lobo obtiene un bonus igual al {c_number}[Affix.\"Static Value 1\"*100|x%|]{/c} de tu velocidad de ataque y probabilidad de golpe crítico adicionales, hasta un {c_number}[Affix.\"Static Value 2\"*100|x%|]{/c}.\u00A0\r\n\r\nBonus de daño directo actual: {c_number}[min((Owner.DOT_DPS_Bonus_Percent+Owner.DOT_DPS_Bonus_Percent_Per_Damage_Type#Poison)*Affix.\"Static Value 0\"*100, Affix.\"Static Value 2\" * 100)|%x|]{/c}\r\nBonus de daño de veneno actual: {c_number}[min((Owner.Attack_Speed_Percent_Bonus_Total+Owner.Cast_Speed_Percent_Bonus+Owner.Crit_Percent_Base+Owner.Crit_Percent_Bonus)*Affix.\"Static Value 1\"*100, Affix.\"Static Value 2\" * 100)|x%|]{/c}",
+    "Localisation": "{icon:bullet,1.2}Obtienes un {c_random}[Affix_Value_1*100|x%|]{/c} más de daño de veneno.\r\n{icon:bullet,1.2}El daño directo de las habilidades de {c_important}hombre lobo{/c} obtiene un bonus igual al {c_number}[Affix.\"Static Value 0\"*100|x%|]{/c} del daño de veneno adicional, hasta un {c_number}[Affix.\"Static Value 2\"*100|x%|]{/c}.\r\n{icon:bullet,1.2}El daño de veneno de las habilidades de hombre lobo obtiene un bonus igual al {c_number}[Affix.\"Static Value 1\"*100|x%|]{/c} de tu velocidad de ataque y probabilidad de golpe crítico adicionales, hasta un {c_number}[Affix.\"Static Value 2\"*100|x%|]{/c}.\u00A0\r\n\r\nBonus de daño directo actual: {c_number}[min((Owner.DOT_DPS_Bonus_Percent+Owner.DOT_DPS_Bonus_Percent_Per_Damage_Type#Poison +Owner.Bucketed_Multiplicative_DoT_Damage)*Affix.\"Static Value 0\"*100, Affix.\"Static Value 2\" * 100)|%x|]{/c}\r\nBonus de daño de veneno actual: {c_number}[min((Owner.Attack_Speed_Percent_Bonus_Total+Owner.Cast_Speed_Percent_Bonus+Owner.Crit_Percent_Base+Owner.Crit_Percent_Bonus)*Affix.\"Static Value 1\"*100, Affix.\"Static Value 2\" * 100)|x%|]{/c}",
     "MagicType": 2,
     "AllowedForPlayerClass": [
       0,
@@ -7087,9 +7087,9 @@
     ],
     "IdNameItemActor": "Generic_Charm_Flippy",
     "Name": "Presagio de dolor",
-    "Description": "Un aura siniestra te rodea y aplica Decrepitud y Doncella de hierro a los enemigos al tocarlos. \r\n\r\nLas maldiciones aplicadas de este modo se propagan a objetivos cercanos cada #\u00A0s y duran #\u00A0s fuera del aura.",
-    "DescriptionClean": "Un aura siniestra te rodea y aplica Decrepitud y Doncella de hierro a los enemigos al tocarlos.  Las maldiciones aplicadas de este modo se propagan a objetivos cercanos cada \u00A0s y duran \u00A0s fuera del aura.",
-    "Localisation": "Un aura siniestra te rodea y aplica {c_important}Decrepitud{/c} y {c_important}Doncella de hierro{/c} a los enemigos al tocarlos. \r\n\r\nLas {c_important}maldiciones{/c} aplicadas de este modo se propagan a objetivos cercanos cada {c_random}[Affix_Value_1|1|]{/c}\u00A0s y duran {c_number}[Affix_Value_2]{/c}\u00A0s fuera del aura.",
+    "Description": "Un aura siniestra te rodea y aplica Decrepitud y Doncella de hierro a los enemigos a tu alrededor.\r\n\r\nLas maldiciones aplicadas de este modo se propagan a los objetivos cercanos cada #\u00A0s y duran #\u00A0s fuera del aura.",
+    "DescriptionClean": "Un aura siniestra te rodea y aplica Decrepitud y Doncella de hierro a los enemigos a tu alrededor. Las maldiciones aplicadas de este modo se propagan a los objetivos cercanos cada \u00A0s y duran \u00A0s fuera del aura.",
+    "Localisation": "Un aura siniestra te rodea y aplica {c_important}Decrepitud{/c} y {c_important}Doncella de hierro{/c} a los enemigos a tu alrededor.\r\n\r\nLas {c_important}maldiciones{/c} aplicadas de este modo se propagan a los objetivos cercanos cada {c_random}[Affix_Value_1|1|]{/c}\u00A0s y duran {c_number}[Affix_Value_2]{/c}\u00A0s fuera del aura.",
     "MagicType": 2,
     "AllowedForPlayerClass": [
       0,
@@ -9175,9 +9175,9 @@
     ],
     "IdNameItemActor": "Generic_Charm_Flippy",
     "Name": "Voluntad de Rathma",
-    "Description": "Los enemigos vulnerables, debilitados, afectado por control de masas o corrompidos quedan afectados, lo que hace que les inflijas un #% más de daño.\r\n\r\nLas habilidades de maldición infligen un # de daño de sombra a los enemigos afectados.",
-    "DescriptionClean": "Los enemigos vulnerables, debilitados, afectado por control de masas o corrompidos quedan afectados, lo que hace que les inflijas un más de daño. Las habilidades de maldición infligen un de daño de sombra a los enemigos afectados.",
-    "Localisation": "Los enemigos {c_important}{u}vulnerables{/c}{/u}, {c_important}{u}debilitados{/c}{/u}, afectado por control de masas o corrompidos quedan {c_important}afectados{/c}, lo que hace que les inflijas un {c_number}[Affix.\"Static Value 0\"|%|]{/c} más de daño.\r\n\r\nLas habilidades de {c_important}maldición{/c} infligen un {c_random}[(Owner.Weapon_Damage_Min_Total + Owner.Weapon_Damage_Delta_Total) * Affix_Value_1]{/c} de daño de sombra a los enemigos {c_important}afectados{/c}.",
+    "Description": "Los enemigos vulnerables, debilitados, afectados por control de masas o corruptos quedan afectados, lo que hace que les inflijas un #% más de daño.\r\n\r\nLas habilidades de maldición infligen # de daño de sombra cuando se aplican a los enemigos afectados.",
+    "DescriptionClean": "Los enemigos vulnerables, debilitados, afectados por control de masas o corruptos quedan afectados, lo que hace que les inflijas un más de daño. Las habilidades de maldición infligen de daño de sombra cuando se aplican a los enemigos afectados.",
+    "Localisation": "Los enemigos {c_important}{u}vulnerables{/c}{/u}, {c_important}{u}debilitados{/c}{/u}, afectados por control de masas o corruptos quedan {c_important}afectados{/c}, lo que hace que les inflijas un {c_number}[Affix.\"Static Value 0\"|%|]{/c} más de daño.\r\n\r\nLas habilidades de {c_important}maldición{/c} infligen {c_random}[(Owner.Weapon_Damage_Min_Total + Owner.Weapon_Damage_Delta_Total) * Affix_Value_1]{/c} de daño de sombra cuando se aplican a los enemigos {c_important}afectados{/c}.",
     "MagicType": 2,
     "AllowedForPlayerClass": [
       0,
@@ -9238,9 +9238,9 @@
     ],
     "IdNameItemActor": "HLM_sets55",
     "Name": "Voluntad de piedra",
-    "Description": "Aguja de tierra ahora se lanza como un proyectil. Al impactar, el proyectil inflige # de daño al objetivo e invoca 2-4Agujas de tierra adicionales.",
-    "DescriptionClean": "Aguja de tierra ahora se lanza como un proyectil. Al impactar, el proyectil inflige de daño al objetivo e invoca 2-4Agujas de tierra adicionales.",
-    "Localisation": "{c_important}Aguja de tierra{/c} ahora se lanza como un proyectil. Al impactar, el proyectil inflige {c_random}[(Owner.Weapon_Damage_Min_Total + Owner.Weapon_Damage_Delta_Total) * Affix_Value_1]{/c} de daño al objetivo e invoca {c_number}2-4{/c}{c_important}Agujas de tierra{/c} adicionales.",
+    "Description": "Aguja de tierra ahora se lanza como un proyectil. Al impactar, el proyectil inflige # de daño al objetivo e invoca 2-4 Agujas de tierra adicionales.",
+    "DescriptionClean": "Aguja de tierra ahora se lanza como un proyectil. Al impactar, el proyectil inflige de daño al objetivo e invoca 2-4 Agujas de tierra adicionales.",
+    "Localisation": "{c_important}Aguja de tierra{/c} ahora se lanza como un proyectil. Al impactar, el proyectil inflige {c_random}[(Owner.Weapon_Damage_Min_Total + Owner.Weapon_Damage_Delta_Total) * Affix_Value_1]{/c} de daño al objetivo e invoca {c_number}2-4{/c} {c_important}Agujas de tierra{/c} adicionales.",
     "MagicType": 2,
     "AllowedForPlayerClass": [
       0,

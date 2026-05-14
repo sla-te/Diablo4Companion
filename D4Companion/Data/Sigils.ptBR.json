@@ -572,7 +572,7 @@
     "Name": "Caverna Geatriz",
     "Description": "Uma caverna tomada por demônios e adoecida pela magia deles. ",
     "DungeonZoneInfo": "em Cimeiras Fraturadas",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -608,7 +608,7 @@
     "Name": "Cavernas de Kutokue",
     "Description": "Gritos de desespero ecoam nas paredes.",
     "DungeonZoneInfo": "em Nahantu",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -698,7 +698,7 @@
     "Name": "Cidade Movediça",
     "Description": "Estas ruínas já foram um refúgio para o povo de Qara Yisu.",
     "DungeonZoneInfo": "em Estepes Secas",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -1562,7 +1562,7 @@
     "Name": "Hekma Desmoronante",
     "Description": "Uma catacumba da fé Zakarum infestada pelo ódio. ",
     "DungeonZoneInfo": "em Kehjistão",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -1627,6 +1627,33 @@
     "DungeonZoneInfo": "",
     "IsSeasonal": false,
     "Type": "Major"
+  },
+  {
+    "IdSno": 2646845,
+    "IdName": "DungeonAffix_Positive_Torment_AncestralElites",
+    "Name": "Imersão na Masmorra",
+    "Description": "Ao concluir a masmorra, você ganha experiência e recompensas extras.",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
+    "IdSno": 2646843,
+    "IdName": "DungeonAffix_Positive_Torment_TreasureGoblins",
+    "Name": "Imersão na Masmorra",
+    "Description": "Ao concluir a masmorra, você ganha experiência e recompensas extras.",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
+    "IdSno": 2646836,
+    "IdName": "DungeonAffix_Positive_Torment_MythicElites",
+    "Name": "Imersão na Masmorra",
+    "Description": "Ao concluir a masmorra, você ganha experiência e recompensas extras.",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
   },
   {
     "IdSno": 2613077,
@@ -2102,7 +2129,7 @@
     "Name": "Profundeza Pálida",
     "Description": "Os canibais guardam um poder sombrio nas minas arruinadas.",
     "DungeonZoneInfo": "em Estepes Secas",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -2111,7 +2138,7 @@
     "Name": "Profundeza Terrível",
     "Description": "Uma praga demoníaca contamina as antigas tumbas de Túr Dúlra.",
     "DungeonZoneInfo": "em Scosglen",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -2741,7 +2768,7 @@
     "Name": "Sepulcro do Apóstata",
     "Description": "O mal agita-se sob o altar de Baal.",
     "DungeonZoneInfo": "em Kehjistão",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -2795,7 +2822,7 @@
     "Name": "Toca da Fera",
     "Description": "Uma cabana corrompida pelo ódio dos druidas.",
     "DungeonZoneInfo": "em Scosglen",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -2849,7 +2876,7 @@
     "Name": "Tumba da Traição",
     "Description": "Espíritos se contorcem enquanto Devolutos gritam em agonia horripilante.",
     "DungeonZoneInfo": "em Nahantu",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -2903,7 +2930,7 @@
     "Name": "Vazio Distorcido",
     "Description": "Uma verdadeira reserva de vida selvagem que pode conter respostas.",
     "DungeonZoneInfo": "em Scosglen",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {

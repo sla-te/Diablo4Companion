@@ -1874,7 +1874,7 @@
     "Name": "埃特納丟失的匕首",
     "Description": "造成 # 種不同類型的非物理傷害會使你的灌注技能效力提高 #%，非物理傷害提高 #%，持續 # 秒。\r\n\r\n基本技能現在可灌注。",
     "DescriptionClean": "造成 種不同類型的非物理傷害會使你的灌注技能效力提高 ，非物理傷害提高 ，持續 秒。 基本技能現在可灌注。",
-    "Localisation": "造成 {c_number}[Affix.\"Static Value 0\"]{/c} 種不同類型的非物理傷害會使你的{c_important}灌注{/c}技能效力提高 {c_random}[Affix_Value_1*Affix.\"Static Value 1\"|%x|]{/c}，非物理傷害提高 {c_number}[Affix_Value_1|%x|]{/c}，持續 {c_number}[Affix.\"Static Value 2\"]{/c} 秒。\r\n\r\n{c_important}基本{/c}技能現在{c_important}可灌注{/c}。",
+    "Localisation": "造成 {c_number}[Affix.\"Static Value 0\"]{/c} 種不同類型的非物理傷害會使你的{c_important}灌注{/c}技能效力提高 {c_random}[Affix_Value_1*Affix.\"Static Value 1\"|%x|]{/c}，非物理傷害提高 {c_random}[Affix_Value_1|%x|]{/c}，持續 {c_number}[Affix.\"Static Value 2\"]{/c} 秒。\r\n\r\n{c_important}基本{/c}技能現在{c_important}可灌注{/c}。",
     "MagicType": 2,
     "AllowedForPlayerClass": [
       0,
@@ -3158,7 +3158,7 @@
     "Name": "布卡蘭尼的足靴",
     "Description": "你的爆擊機率提高等同於移動速度加成的 #%。\r\n\r\n目前加成：#%",
     "DescriptionClean": "你的爆擊機率提高等同於移動速度加成的 。 目前加成：",
-    "Localisation": "你的爆擊機率提高等同於移動速度加成的 {c_random}[Affix_Value_1|%|]{/c}。\r\n\r\n目前加成：{c_number}[(Min(Owner.Movement_Scalar_Capped_Total,2)-1) * (Affix_Value_1)|1%|]{/c}",
+    "Localisation": "你的爆擊機率提高等同於移動速度加成的 {c_random}[Affix_Value_1|%|]{/c}。\r\n\r\n目前加成：{c_number}[(Min((Owner.Movement_Scalar_Capped_Total + Owner.Movement_Scalar_Temporary_Bonus),2)-1) * (Affix_Value_1)|1%|]{/c}",
     "MagicType": 2,
     "AllowedForPlayerClass": [
       1,
@@ -5661,9 +5661,9 @@
     ],
     "IdNameItemActor": "Generic_Charm_Flippy",
     "Name": "痛楚之兆",
-    "Description": "你的身旁會圍繞一道黑暗靈氣，對接觸靈氣的敵人造成衰老和攻擊反噬。\r\n\r\n以這種方式施加的詛咒每 # 秒會擴散至周圍目標，離開靈氣範圍後效果仍會持續 # 秒。",
-    "DescriptionClean": "你的身旁會圍繞一道黑暗靈氣，對接觸靈氣的敵人造成衰老和攻擊反噬。 以這種方式施加的詛咒每 秒會擴散至周圍目標，離開靈氣範圍後效果仍會持續 秒。",
-    "Localisation": "你的身旁會圍繞一道黑暗靈氣，對接觸靈氣的敵人造成{c_important}衰老{/c}和{c_important}攻擊反噬{/c}。\r\n\r\n以這種方式施加的{c_important}詛咒{/c}每 {c_random}[Affix_Value_1|1|]{/c} 秒會擴散至周圍目標，離開靈氣範圍後效果仍會持續 {c_number}[Affix_Value_2]{/c} 秒。",
+    "Description": "你的身旁會圍繞一道黑暗靈氣，對你周圍的敵人施加衰老和攻擊反噬。\r\n\r\n以這種方式施加的詛咒每 # 秒會擴散至周圍目標，離開靈氣範圍後效果仍會持續 # 秒。",
+    "DescriptionClean": "你的身旁會圍繞一道黑暗靈氣，對你周圍的敵人施加衰老和攻擊反噬。 以這種方式施加的詛咒每 秒會擴散至周圍目標，離開靈氣範圍後效果仍會持續 秒。",
+    "Localisation": "你的身旁會圍繞一道黑暗靈氣，對你周圍的敵人施加{c_important}衰老{/c}和{c_important}攻擊反噬{/c}。\r\n\r\n以這種方式施加的{c_important}詛咒{/c}每 {c_random}[Affix_Value_1|1|]{/c} 秒會擴散至周圍目標，離開靈氣範圍後效果仍會持續 {c_number}[Affix_Value_2]{/c} 秒。",
     "MagicType": 2,
     "AllowedForPlayerClass": [
       0,
@@ -6698,7 +6698,7 @@
     "Name": "老狼印記",
     "Description": " 中毒傷害提高 #%。\r\n 狼人技能造成的直接傷害提高，效果等同於中毒傷害加成的 #%，最多提高 #%。\r\n 狼人技能造成的毒素傷害提高，效果等同於額外攻擊速度及爆擊機率的 #%，最多提高 #%。\r\n\r\n當前直接傷害加成：#%\r\n當前毒素傷害加成：#%",
     "DescriptionClean": "中毒傷害提高 。 狼人技能造成的直接傷害提高，效果等同於中毒傷害加成的 ，最多提高 。 狼人技能造成的毒素傷害提高，效果等同於額外攻擊速度及爆擊機率的 ，最多提高 。 當前直接傷害加成： 當前毒素傷害加成：",
-    "Localisation": "{icon:bullet,1.2} 中毒傷害提高 {c_random}[Affix_Value_1*100|x%|]{/c}。\r\n{icon:bullet,1.2} {c_important}狼人{/c}技能造成的直接傷害提高，效果等同於中毒傷害加成的 {c_number}[Affix.\"Static Value 0\"*100|x%|]{/c}，最多提高 {c_number}[Affix.\"Static Value 2\"*100|x%|]{/c}。\r\n{icon:bullet,1.2} 狼人技能造成的毒素傷害提高，效果等同於額外攻擊速度及爆擊機率的 {c_number}[Affix.\"Static Value 1\"*100|x%|]{/c}，最多提高 {c_number}[Affix.\"Static Value 2\"*100|x%|]{/c}。\r\n\r\n當前直接傷害加成：{c_number}[min((Owner.DOT_DPS_Bonus_Percent+Owner.DOT_DPS_Bonus_Percent_Per_Damage_Type#Poison)*Affix.\"Static Value 0\"*100, Affix.\"Static Value 2\" * 100)|%x|]{/c}\r\n當前毒素傷害加成：{c_number}[min((Owner.Attack_Speed_Percent_Bonus_Total+Owner.Cast_Speed_Percent_Bonus+Owner.Crit_Percent_Base+Owner.Crit_Percent_Bonus)*Affix.\"Static Value 1\"*100, Affix.\"Static Value 2\" * 100)|x%|]{/c}",
+    "Localisation": "{icon:bullet,1.2} 中毒傷害提高 {c_random}[Affix_Value_1*100|x%|]{/c}。\r\n{icon:bullet,1.2} {c_important}狼人{/c}技能造成的直接傷害提高，效果等同於中毒傷害加成的 {c_number}[Affix.\"Static Value 0\"*100|x%|]{/c}，最多提高 {c_number}[Affix.\"Static Value 2\"*100|x%|]{/c}。\r\n{icon:bullet,1.2} 狼人技能造成的毒素傷害提高，效果等同於額外攻擊速度及爆擊機率的 {c_number}[Affix.\"Static Value 1\"*100|x%|]{/c}，最多提高 {c_number}[Affix.\"Static Value 2\"*100|x%|]{/c}。\r\n\r\n當前直接傷害加成：{c_number}[min((Owner.DOT_DPS_Bonus_Percent+Owner.DOT_DPS_Bonus_Percent_Per_Damage_Type#Poison +Owner.Bucketed_Multiplicative_DoT_Damage)*Affix.\"Static Value 0\"*100, Affix.\"Static Value 2\" * 100)|%x|]{/c}\r\n當前毒素傷害加成：{c_number}[min((Owner.Attack_Speed_Percent_Bonus_Total+Owner.Cast_Speed_Percent_Bonus+Owner.Crit_Percent_Base+Owner.Crit_Percent_Bonus)*Affix.\"Static Value 1\"*100, Affix.\"Static Value 2\" * 100)|x%|]{/c}",
     "MagicType": 2,
     "AllowedForPlayerClass": [
       0,
@@ -7371,7 +7371,7 @@
       0,
       0,
       0,
-      1,
+      0,
       0
     ],
     "AllowedItemLabels": []

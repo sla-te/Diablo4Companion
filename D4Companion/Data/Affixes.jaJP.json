@@ -10659,11 +10659,11 @@
         "LocalisationId": "On_Hit_CC_Proc_Chance",
         "LocalisationParameter": 7,
         "LocalisationAttributeFormulaValue": "0",
-        "Localisation": "{c_label}幸運の一撃: {/c} 2秒間、最大[{VALUE2} * 100|1%|]の確率で{VALUE1}を付与する。"
+        "Localisation": "{c_label}幸運の一撃: {/c}2秒間、最大[{VALUE2} * 100|1%|]の確率で{VALUE1}を付与する。"
       }
     ],
     "ClassRestriction": "",
-    "Description": "幸運の一撃:  2秒間、最大#%の確率で眩暈を付与する。",
+    "Description": "幸運の一撃: 2秒間、最大#%の確率で眩暈を付与する。",
     "DescriptionClean": "幸運の一撃: 2秒間、最大の確率で眩暈を付与する。"
   },
   {
@@ -10700,11 +10700,11 @@
         "LocalisationId": "On_Hit_CC_Proc_Chance",
         "LocalisationParameter": 13,
         "LocalisationAttributeFormulaValue": "0",
-        "Localisation": "{c_label}幸運の一撃: {/c} 2秒間、最大[{VALUE2} * 100|1%|]の確率で{VALUE1}を付与する。"
+        "Localisation": "{c_label}幸運の一撃: {/c}2秒間、最大[{VALUE2} * 100|1%|]の確率で{VALUE1}を付与する。"
       }
     ],
     "ClassRestriction": "",
-    "Description": "幸運の一撃:  2秒間、最大#%の確率で恐怖を付与する。",
+    "Description": "幸運の一撃: 2秒間、最大#%の確率で恐怖を付与する。",
     "DescriptionClean": "幸運の一撃: 2秒間、最大の確率で恐怖を付与する。"
   },
   {
@@ -10820,11 +10820,11 @@
         "LocalisationId": "On_Hit_CC_Proc_Chance",
         "LocalisationParameter": 1,
         "LocalisationAttributeFormulaValue": "0",
-        "Localisation": "{c_label}幸運の一撃: {/c} 2秒間、最大[{VALUE2} * 100|1%|]の確率で{VALUE1}を付与する。"
+        "Localisation": "{c_label}幸運の一撃: {/c}2秒間、最大[{VALUE2} * 100|1%|]の確率で{VALUE1}を付与する。"
       }
     ],
     "ClassRestriction": "",
-    "Description": "幸運の一撃:  2秒間、最大#%の確率で移動不能を付与する。",
+    "Description": "幸運の一撃: 2秒間、最大#%の確率で移動不能を付与する。",
     "DescriptionClean": "幸運の一撃: 2秒間、最大の確率で移動不能を付与する。"
   },
   {
@@ -10932,11 +10932,11 @@
         "LocalisationId": "On_Hit_CC_Proc_Chance",
         "LocalisationParameter": 0,
         "LocalisationAttributeFormulaValue": "0",
-        "Localisation": "{c_label}幸運の一撃: {/c} 2秒間、最大[{VALUE2} * 100|1%|]の確率で{VALUE1}を付与する。"
+        "Localisation": "{c_label}幸運の一撃: {/c}2秒間、最大[{VALUE2} * 100|1%|]の確率で{VALUE1}を付与する。"
       }
     ],
     "ClassRestriction": "",
-    "Description": "幸運の一撃:  2秒間、最大#%の確率でスロウを付与する。",
+    "Description": "幸運の一撃: 2秒間、最大#%の確率でスロウを付与する。",
     "DescriptionClean": "幸運の一撃: 2秒間、最大の確率でスロウを付与する。"
   },
   {
@@ -10995,11 +10995,11 @@
         "LocalisationId": "On_Hit_CC_Proc_Chance",
         "LocalisationParameter": 2,
         "LocalisationAttributeFormulaValue": "0",
-        "Localisation": "{c_label}幸運の一撃: {/c} 2秒間、最大[{VALUE2} * 100|1%|]の確率で{VALUE1}を付与する。"
+        "Localisation": "{c_label}幸運の一撃: {/c}2秒間、最大[{VALUE2} * 100|1%|]の確率で{VALUE1}を付与する。"
       }
     ],
     "ClassRestriction": "",
-    "Description": "幸運の一撃:  2秒間、最大#%の確率でスタンを付与する。",
+    "Description": "幸運の一撃: 2秒間、最大#%の確率でスタンを付与する。",
     "DescriptionClean": "幸運の一撃: 2秒間、最大の確率でスタンを付与する。"
   },
   {
@@ -13116,7 +13116,7 @@
     ],
     "AffixType": 2,
     "Category": 3,
-    "Flags": 1027,
+    "Flags": 1028,
     "IsTemperingAvailable": true,
     "MagicType": 0,
     "AllowedForPlayerClass": [
@@ -21633,11 +21633,11 @@
         "LocalisationId": "On_Hit_CC_Proc_Chance",
         "LocalisationParameter": 9,
         "LocalisationAttributeFormulaValue": "0",
-        "Localisation": "{c_label}幸運の一撃: {/c} 2秒間、最大[{VALUE2} * 100|1%|]の確率で{VALUE1}を付与する。"
+        "Localisation": "{c_label}幸運の一撃: {/c}2秒間、最大[{VALUE2} * 100|1%|]の確率で{VALUE1}を付与する。"
       }
     ],
     "ClassRestriction": "",
-    "Description": "幸運の一撃:  2秒間、最大#%の確率で冷気を付与する。",
+    "Description": "幸運の一撃: 2秒間、最大#%の確率で冷気を付与する。",
     "DescriptionClean": "幸運の一撃: 2秒間、最大の確率で冷気を付与する。"
   },
   {
@@ -21974,11 +21974,11 @@
         "LocalisationId": "On_Hit_CC_Proc_Chance",
         "LocalisationParameter": 10,
         "LocalisationAttributeFormulaValue": "0",
-        "Localisation": "{c_label}幸運の一撃: {/c} 2秒間、最大[{VALUE2} * 100|1%|]の確率で{VALUE1}を付与する。"
+        "Localisation": "{c_label}幸運の一撃: {/c}2秒間、最大[{VALUE2} * 100|1%|]の確率で{VALUE1}を付与する。"
       }
     ],
     "ClassRestriction": "",
-    "Description": "幸運の一撃:  2秒間、最大#%の確率で凍結を付与する。",
+    "Description": "幸運の一撃: 2秒間、最大#%の確率で凍結を付与する。",
     "DescriptionClean": "幸運の一撃: 2秒間、最大の確率で凍結を付与する。"
   },
   {
@@ -22013,11 +22013,11 @@
         "LocalisationId": "On_Hit_CC_Proc_Chance",
         "LocalisationParameter": 11,
         "LocalisationAttributeFormulaValue": "0",
-        "Localisation": "{c_label}幸運の一撃: {/c} 2秒間、最大[{VALUE2} * 100|1%|]の確率で{VALUE1}を付与する。"
+        "Localisation": "{c_label}幸運の一撃: {/c}2秒間、最大[{VALUE2} * 100|1%|]の確率で{VALUE1}を付与する。"
       }
     ],
     "ClassRestriction": "",
-    "Description": "幸運の一撃:  2秒間、最大#%の確率でノックバックを付与する。",
+    "Description": "幸運の一撃: 2秒間、最大#%の確率でノックバックを付与する。",
     "DescriptionClean": "幸運の一撃: 2秒間、最大の確率でノックバックを付与する。"
   },
   {
@@ -22052,11 +22052,11 @@
         "LocalisationId": "On_Hit_CC_Proc_Chance",
         "LocalisationParameter": 4,
         "LocalisationAttributeFormulaValue": "0",
-        "Localisation": "{c_label}幸運の一撃: {/c} 2秒間、最大[{VALUE2} * 100|1%|]の確率で{VALUE1}を付与する。"
+        "Localisation": "{c_label}幸運の一撃: {/c}2秒間、最大[{VALUE2} * 100|1%|]の確率で{VALUE1}を付与する。"
       }
     ],
     "ClassRestriction": "",
-    "Description": "幸運の一撃:  2秒間、最大#%の確率で挑発を付与する。",
+    "Description": "幸運の一撃: 2秒間、最大#%の確率で挑発を付与する。",
     "DescriptionClean": "幸運の一撃: 2秒間、最大の確率で挑発を付与する。"
   },
   {
@@ -30781,12 +30781,9 @@
     "DescriptionClean": "多芸多才なるスキルのダメージ"
   },
   {
-    "IdSno": "2614081;2614083;2614085;2618017;2618019;2618025",
-    "IdName": "Tempered_Damage_Generic_LuckHit_Weakened_BarbRogue_Tier1;Tempered_Damage_Generic_LuckHit_Weakened_BarbRogue_Tier2;Tempered_Damage_Generic_LuckHit_Weakened_BarbRogue_Tier3;Tempered_Damage_Generic_LuckHit_Weakened_Tier1;Tempered_Damage_Generic_LuckHit_Weakened_Tier2;Tempered_Damage_Generic_LuckHit_Weakened_Tier3",
+    "IdSno": "2618017;2618019;2618025",
+    "IdName": "Tempered_Damage_Generic_LuckHit_Weakened_BarbRogue_Tier1;Tempered_Damage_Generic_LuckHit_Weakened_BarbRogue_Tier2;Tempered_Damage_Generic_LuckHit_Weakened_BarbRogue_Tier3",
     "IdSnoList": [
-      "2614081",
-      "2614083",
-      "2614085",
       "2618017",
       "2618019",
       "2618025"
@@ -30794,10 +30791,7 @@
     "IdNameList": [
       "Tempered_Damage_Generic_LuckHit_Weakened_BarbRogue_Tier1",
       "Tempered_Damage_Generic_LuckHit_Weakened_BarbRogue_Tier2",
-      "Tempered_Damage_Generic_LuckHit_Weakened_BarbRogue_Tier3",
-      "Tempered_Damage_Generic_LuckHit_Weakened_Tier1",
-      "Tempered_Damage_Generic_LuckHit_Weakened_Tier2",
-      "Tempered_Damage_Generic_LuckHit_Weakened_Tier3"
+      "Tempered_Damage_Generic_LuckHit_Weakened_BarbRogue_Tier3"
     ],
     "AffixType": -1,
     "Category": -1,
@@ -30820,11 +30814,11 @@
         "LocalisationId": "On_Hit_CC_Proc_Chance",
         "LocalisationParameter": 5,
         "LocalisationAttributeFormulaValue": "0",
-        "Localisation": "{c_label}幸運の一撃: {/c} 2秒間、最大[{VALUE2} * 100|1%|]の確率で{VALUE1}を付与する。"
+        "Localisation": "{c_label}幸運の一撃: {/c}2秒間、最大[{VALUE2} * 100|1%|]の確率で{VALUE1}を付与する。"
       }
     ],
     "ClassRestriction": "",
-    "Description": "幸運の一撃:  2秒間、最大#%の確率で弱体化を付与する。",
+    "Description": "幸運の一撃: 2秒間、最大#%の確率で弱体化を付与する。",
     "DescriptionClean": "幸運の一撃: 2秒間、最大の確率で弱体化を付与する。"
   },
   {
@@ -33715,7 +33709,7 @@
     "AllowedItemLabels": [],
     "AffixAttributes": [
       {
-        "LocalisationId": "Per_Skill_Tag_Buff_Duration_Bonus_Percent",
+        "LocalisationId": "Custom_Duration_Bonus_Per_Skill_Tag",
         "LocalisationParameter": 3360437049,
         "LocalisationAttributeFormulaValue": "0",
         "Localisation": "{c_important}{VALUE1}{/c}スキルの持続時間+[{VALUE2}*100|1%|]"

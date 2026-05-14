@@ -754,6 +754,42 @@
     ]
   },
   {
+    "IdSno": "1848038",
+    "IdName": "x1_legendary_necro_129",
+    "IdSnoList": [
+      "1848038"
+    ],
+    "IdNameList": [
+      "x1_legendary_necro_129"
+    ],
+    "Name": "Brutalnie Łamiący",
+    "Description": "Po wykonaniu # trafień krytycznych umiejętnościami Kości umiejętności te zadają obrażenia zwiększone o #% w ciągu kolejnych # sek.",
+    "DescriptionClean": "Po wykonaniu trafień krytycznych umiejętnościami Kości umiejętności te zadają obrażenia zwiększone o w ciągu kolejnych sek.",
+    "Localisation": "Po wykonaniu {c_number}[Affix.\"Static Value 0\"]{/c} trafień krytycznych umiejętnościami Kości umiejętności te zadają obrażenia zwiększone o {c_random}[Affix_Value_1|%x|]{/c} w ciągu kolejnych {c_number}[Affix.\"Static Value 1\"]{/c} sek.",
+    "IsSeasonal": false,
+    "IsCodex": true,
+    "Dungeon": "",
+    "Category": "FILTER_Legendary_Offensive",
+    "MagicType": 1,
+    "AllowedForPlayerClass": [
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0
+    ],
+    "AllowedItemLabels": [
+      0,
+      26,
+      19,
+      28,
+      15
+    ]
+  },
+  {
     "IdSno": "2547805",
     "IdName": "legendary_warlock_001_x2",
     "IdSnoList": [
@@ -3203,39 +3239,6 @@
     ]
   },
   {
-    "IdSno": "2548002",
-    "IdName": "legendary_warlock_034_x2",
-    "IdSnoList": [
-      "2548002"
-    ],
-    "IdNameList": [
-      "legendary_warlock_034_x2"
-    ],
-    "Name": "Impetu",
-    "Description": "Zyskujesz #% premii do szybkości ruchu, gdy jesteś blisko swoich demonów.",
-    "DescriptionClean": "Zyskujesz premii do szybkości ruchu, gdy jesteś blisko swoich demonów.",
-    "Localisation": "Zyskujesz {c_random}[Affix_Value_1|%+|]{/c} premii do szybkości ruchu, gdy jesteś blisko swoich demonów.",
-    "IsSeasonal": false,
-    "IsCodex": true,
-    "Dungeon": "",
-    "Category": "FILTER_Legendary_Movement",
-    "MagicType": 1,
-    "AllowedForPlayerClass": [
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      1
-    ],
-    "AllowedItemLabels": [
-      29,
-      26
-    ]
-  },
-  {
     "IdSno": "1983612",
     "IdName": "legendary_spiritborn_043_x1",
     "IdSnoList": [
@@ -3262,6 +3265,39 @@
       1,
       0,
       0
+    ],
+    "AllowedItemLabels": [
+      29,
+      26
+    ]
+  },
+  {
+    "IdSno": "2548002",
+    "IdName": "legendary_warlock_034_x2",
+    "IdSnoList": [
+      "2548002"
+    ],
+    "IdNameList": [
+      "legendary_warlock_034_x2"
+    ],
+    "Name": "Impetu",
+    "Description": "Zyskujesz #% premii do szybkości ruchu, gdy jesteś blisko swoich demonów.",
+    "DescriptionClean": "Zyskujesz premii do szybkości ruchu, gdy jesteś blisko swoich demonów.",
+    "Localisation": "Zyskujesz {c_random}[Affix_Value_1|%+|]{/c} premii do szybkości ruchu, gdy jesteś blisko swoich demonów.",
+    "IsSeasonal": false,
+    "IsCodex": true,
+    "Dungeon": "",
+    "Category": "FILTER_Legendary_Movement",
+    "MagicType": 1,
+    "AllowedForPlayerClass": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1
     ],
     "AllowedItemLabels": [
       29,
@@ -3384,7 +3420,7 @@
     "IdNameList": [
       "legendary_spiritborn_007_x1"
     ],
-    "Name": "Inwazji Skolopendry",
+    "Name": "Inwazji Insektów",
     "Description": "Rój Zarazy teraz zadaje także #% standardowych obrażeń w postaci obrażeń od zatrucia w ciągu # sek.",
     "DescriptionClean": "Rój Zarazy teraz zadaje także standardowych obrażeń w postaci obrażeń od zatrucia w ciągu sek.",
     "Localisation": "{c_important}{u}Rój Zarazy{/u}{/c} teraz zadaje także {c_random}[ Affix_Value_1*100|%|]{/c} standardowych obrażeń w postaci obrażeń od zatrucia w ciągu {c_number}[Affix.\"Static Value 1\"]{/c} sek.",
@@ -4351,9 +4387,9 @@
       "legendary_druid_074_x2"
     ],
     "Name": "Ludzkiej Pomysłowości",
-    "Description": "Pierwsze trafienie umiejętnościami Człowieczeństwa przyciąga pobliskich wrogów do trafionego wroga i unieruchamia ich na # sek. Może wystąpić tylko raz na # sek.\r\n\r\nSkrępowani wrogowie otrzymują o #% zwiększone obrażenia od twoich umiejętności Człowieczeństwa. ",
-    "DescriptionClean": "Pierwsze trafienie umiejętnościami Człowieczeństwa przyciąga pobliskich wrogów do trafionego wroga i unieruchamia ich na sek. Może wystąpić tylko raz na sek. Skrępowani wrogowie otrzymują o zwiększone obrażenia od twoich umiejętności Człowieczeństwa.",
-    "Localisation": "Pierwsze trafienie umiejętnościami {c_important}Człowieczeństwa{/c} przyciąga pobliskich wrogów do trafionego wroga i unieruchamia ich na {c_number}[Affix.\"Static Value 0\"]{/c} sek. Może wystąpić tylko raz na {c_number}[Affix.\"Static Value 1\"]{/c} sek.\r\n\r\n{u}{c_important}Skrępowani{/c}{/u} wrogowie otrzymują o {c_random}[Affix_Value_1*100|x%|]{/c} zwiększone obrażenia od twoich umiejętności {c_important}Człowieczeństwa{/c}. ",
+    "Description": "Pierwsze trafienie umiejętnościami Człowieczeństwa przyciąga pobliskich wrogów do trafionego wroga i unieruchamia ich na # sek. Może wystąpić tylko raz na # sek.\r\n\r\nOgraniczeni wrogowie otrzymują o #% zwiększone obrażenia od twoich umiejętności Człowieczeństwa. ",
+    "DescriptionClean": "Pierwsze trafienie umiejętnościami Człowieczeństwa przyciąga pobliskich wrogów do trafionego wroga i unieruchamia ich na sek. Może wystąpić tylko raz na sek. Ograniczeni wrogowie otrzymują o zwiększone obrażenia od twoich umiejętności Człowieczeństwa.",
+    "Localisation": "Pierwsze trafienie umiejętnościami {c_important}Człowieczeństwa{/c} przyciąga pobliskich wrogów do trafionego wroga i unieruchamia ich na {c_number}[Affix.\"Static Value 0\"]{/c} sek. Może wystąpić tylko raz na {c_number}[Affix.\"Static Value 1\"]{/c} sek.\r\n\r\n{u}{c_important}Ograniczeni{/c}{/u} wrogowie otrzymują o {c_random}[Affix_Value_1*100|x%|]{/c} zwiększone obrażenia od twoich umiejętności {c_important}Człowieczeństwa{/c}. ",
     "IsSeasonal": false,
     "IsCodex": true,
     "Dungeon": "",
@@ -12914,7 +12950,7 @@
     "IdNameList": [
       "legendary_sorc_006_x2"
     ],
-    "Name": "Tajemnej Osłony",
+    "Name": "Tajemnie Osłaniający",
     "Description": "Twoje umiejętności Mistrzostwa zapewniają #% redukcji obrażeń, gdy ich efekty są aktywne.",
     "DescriptionClean": "Twoje umiejętności Mistrzostwa zapewniają redukcji obrażeń, gdy ich efekty są aktywne.",
     "Localisation": "Twoje umiejętności {c_important}Mistrzostwa{/c} zapewniają {c_random}[Affix_Value_1|%|]{/c} redukcji obrażeń, gdy ich efekty są aktywne.",
@@ -13060,9 +13096,9 @@
       "legendary_generic_112"
     ],
     "Name": "Tchórzliwy",
-    "Description": "Każdy pobliski skrępowany wróg zapewnia ci #% premii do szybkości ruchu.",
-    "DescriptionClean": "Każdy pobliski skrępowany wróg zapewnia ci premii do szybkości ruchu.",
-    "Localisation": "Każdy pobliski {u}{c_important}skrępowany{/c}{/u} wróg zapewnia ci {c_random}[Affix_Value_1|1%+|]{/c} premii do szybkości ruchu.",
+    "Description": "Każdy pobliski ograniczony wróg zapewnia ci #% premii do szybkości ruchu.",
+    "DescriptionClean": "Każdy pobliski ograniczony wróg zapewnia ci premii do szybkości ruchu.",
+    "Localisation": "Każdy pobliski {u}{c_important}ograniczony{/c}{/u} wróg zapewnia ci {c_random}[Affix_Value_1|1%+|]{/c} premii do szybkości ruchu.",
     "IsSeasonal": false,
     "IsCodex": true,
     "Dungeon": "",
@@ -13648,44 +13684,6 @@
       17,
       30,
       26,
-      15
-    ]
-  },
-  {
-    "IdSno": "2580585",
-    "IdName": "legendary_rogue_101_x2",
-    "IdSnoList": [
-      "2580585"
-    ],
-    "IdNameList": [
-      "legendary_rogue_101_x2"
-    ],
-    "Name": "Usidlający",
-    "Description": "Szczęśliwy traf: zadawanie obrażeń wrogom, na których działają twoje umiejętności Pułapek, daje #% szans na spowodowanie eksplozji, która zadaje # pkt. obrażeń od Cienia i powoduje odsłonięcie na # sek.",
-    "DescriptionClean": "Szczęśliwy traf: zadawanie obrażeń wrogom, na których działają twoje umiejętności Pułapek, daje szans na spowodowanie eksplozji, która zadaje pkt. obrażeń od Cienia i powoduje odsłonięcie na sek.",
-    "Localisation": "{c_label}Szczęśliwy traf:{/c} zadawanie obrażeń wrogom, na których działają twoje umiejętności {c_important}Pułapek{/c}, daje {c_random}[Affix_Value_1|%|]{/c} szans na spowodowanie eksplozji, która zadaje {c_random}[(Owner.Weapon_Damage_Min_Total + Owner.Weapon_Damage_Delta_Total) * Affix_Value_2]{/c} pkt. obrażeń od Cienia i powoduje {c_important}{u}odsłonięcie{/u}{/c} na {c_number}[Affix.\"Static Value 0\"]{/c} sek.",
-    "IsSeasonal": false,
-    "IsCodex": true,
-    "Dungeon": "",
-    "Category": "FILTER_Legendary_Utility",
-    "MagicType": 1,
-    "AllowedForPlayerClass": [
-      0,
-      0,
-      0,
-      1,
-      0,
-      0,
-      0,
-      0
-    ],
-    "AllowedItemLabels": [
-      16,
-      17,
-      29,
-      28,
-      26,
-      30,
       15
     ]
   },
@@ -14581,6 +14579,44 @@
     ]
   },
   {
+    "IdSno": "2580585",
+    "IdName": "legendary_rogue_101_x2",
+    "IdSnoList": [
+      "2580585"
+    ],
+    "IdNameList": [
+      "legendary_rogue_101_x2"
+    ],
+    "Name": "Wybuchająco Usidlający",
+    "Description": "Szczęśliwy traf: zadawanie obrażeń wrogom, na których działają twoje umiejętności Pułapek, daje #% szans na spowodowanie eksplozji, która zadaje # pkt. obrażeń od Cienia i powoduje odsłonięcie na # sek.",
+    "DescriptionClean": "Szczęśliwy traf: zadawanie obrażeń wrogom, na których działają twoje umiejętności Pułapek, daje szans na spowodowanie eksplozji, która zadaje pkt. obrażeń od Cienia i powoduje odsłonięcie na sek.",
+    "Localisation": "{c_label}Szczęśliwy traf:{/c} zadawanie obrażeń wrogom, na których działają twoje umiejętności {c_important}Pułapek{/c}, daje {c_random}[Affix_Value_1|%|]{/c} szans na spowodowanie eksplozji, która zadaje {c_random}[(Owner.Weapon_Damage_Min_Total + Owner.Weapon_Damage_Delta_Total) * Affix_Value_2]{/c} pkt. obrażeń od Cienia i powoduje {c_important}{u}odsłonięcie{/u}{/c} na {c_number}[Affix.\"Static Value 0\"]{/c} sek.",
+    "IsSeasonal": false,
+    "IsCodex": true,
+    "Dungeon": "",
+    "Category": "FILTER_Legendary_Utility",
+    "MagicType": 1,
+    "AllowedForPlayerClass": [
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0
+    ],
+    "AllowedItemLabels": [
+      16,
+      17,
+      29,
+      28,
+      26,
+      30,
+      15
+    ]
+  },
+  {
     "IdSno": "2580577",
     "IdName": "legendary_rogue_102_x2",
     "IdSnoList": [
@@ -15405,29 +15441,27 @@
     "Name": "Zakazu",
     "Description": "Zyskujesz #% szansy na blok za każdą kumulację Animuszu.",
     "DescriptionClean": "Zyskujesz szansy na blok za każdą kumulację Animuszu.",
-    "Localisation": "Zyskujesz {c_random}[Affix_Value_1*100|1%+|]{/c} szansy na blok za każdą kumulację {c_important}{u}Animuszu{/u}{/c}.",
+    "Localisation": "Zyskujesz {c_random}[Affix_Value_1*100|%+|]{/c} szansy na blok za każdą kumulację {c_important}{u}Animuszu{/u}{/c}.",
     "IsSeasonal": false,
     "IsCodex": true,
     "Dungeon": "",
-    "Category": "FILTER_Legendary_Utility",
+    "Category": "FILTER_Legendary_Defensive",
     "MagicType": 1,
     "AllowedForPlayerClass": [
       0,
       0,
       0,
       0,
-      1,
-      1,
-      1,
+      0,
+      0,
+      0,
       0
     ],
     "AllowedItemLabels": [
       16,
       17,
-      29,
-      28,
-      26,
       30,
+      26,
       15
     ]
   },
@@ -16639,42 +16673,6 @@
       28,
       26,
       30,
-      15
-    ]
-  },
-  {
-    "IdSno": "1848038",
-    "IdName": "x1_legendary_necro_129",
-    "IdSnoList": [
-      "1848038"
-    ],
-    "IdNameList": [
-      "x1_legendary_necro_129"
-    ],
-    "Name": "Złamania z Przemieszczeniem",
-    "Description": "Po wykonaniu # trafień krytycznych umiejętnościami Kości umiejętności te zadają obrażenia zwiększone o #% w ciągu kolejnych # sek.",
-    "DescriptionClean": "Po wykonaniu trafień krytycznych umiejętnościami Kości umiejętności te zadają obrażenia zwiększone o w ciągu kolejnych sek.",
-    "Localisation": "Po wykonaniu {c_number}[Affix.\"Static Value 0\"]{/c} trafień krytycznych umiejętnościami Kości umiejętności te zadają obrażenia zwiększone o {c_random}[Affix_Value_1|%x|]{/c} w ciągu kolejnych {c_number}[Affix.\"Static Value 1\"]{/c} sek.",
-    "IsSeasonal": false,
-    "IsCodex": true,
-    "Dungeon": "",
-    "Category": "FILTER_Legendary_Offensive",
-    "MagicType": 1,
-    "AllowedForPlayerClass": [
-      0,
-      0,
-      0,
-      0,
-      1,
-      0,
-      0,
-      0
-    ],
-    "AllowedItemLabels": [
-      0,
-      26,
-      19,
-      28,
       15
     ]
   },

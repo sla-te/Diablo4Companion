@@ -563,7 +563,7 @@
       0,
       0,
       0,
-      1,
+      0,
       0
     ],
     "AllowedItemLabels": []
@@ -1661,7 +1661,7 @@
     "Name": "Cimelio di Esu",
     "Description": "La tua probabilità di critico aumenta di una quantità pari al #% del bonus alla velocità di movimento.\r\n\r\nBonus attuale: #%",
     "DescriptionClean": "La tua probabilità di critico aumenta di una quantità pari al del bonus alla velocità di movimento. Bonus attuale:",
-    "Localisation": "La tua probabilità di critico aumenta di una quantità pari al {c_random}[Affix_Value_1|%|]{/c} del bonus alla velocità di movimento.\r\n\r\nBonus attuale: {c_number}[(Min(Owner.Movement_Scalar_Capped_Total,2)-1) * (Affix_Value_1)|1%|]{/c}",
+    "Localisation": "La tua probabilità di critico aumenta di una quantità pari al {c_random}[Affix_Value_1|%|]{/c} del bonus alla velocità di movimento.\r\n\r\nBonus attuale: {c_number}[(Min((Owner.Movement_Scalar_Capped_Total + Owner.Movement_Scalar_Temporary_Bonus),2)-1) * (Affix_Value_1)|1%|]{/c}",
     "MagicType": 2,
     "AllowedForPlayerClass": [
       1,
@@ -5000,7 +5000,7 @@
       "Talisman_Charm_Unique_Chest_Unique_Paladin_001"
     ],
     "IdNameItemActor": "Chest_Unique_Paladin_95",
-    "Name": "Manto del Grigiume",
+    "Name": "Manto del Grigio",
     "Description": "Giuramento di Colosso rende le tue abilità di Colosso il #% più potenti, ma consuma fino a # Risolutezza, fornendo un aumento del #% ai danni delle abilità di Colosso per ogni punto consumato.",
     "DescriptionClean": "Giuramento di Colosso rende le tue abilità di Colosso il più potenti, ma consuma fino a Risolutezza, fornendo un aumento del ai danni delle abilità di Colosso per ogni punto consumato.",
     "Localisation": "{c_important}Giuramento di Colosso{/c} rende le tue abilità di {c_important}Colosso{/c} il {c_number}[Affix.\"Static Value 1\"*100|%|]{/c} più potenti, ma consuma fino a {c_number}[Affix.\"Static Value 2\"]{/c} {u}{c_important}Risolutezza{/c}{/u}, fornendo un aumento del {c_random}[Affix_Value_2*100|1%x|]{/c} ai danni delle abilità di {c_important}Colosso{/c} per ogni punto consumato.",
@@ -5132,9 +5132,9 @@
     ],
     "IdNameItemActor": "Generic_Charm_Flippy",
     "Name": "Marchio del Vecchio Lupo",
-    "Description": "Ottieni il #% di danni da veleno aggiuntivi.\r\nI danni diretti inflitti dalle abilità di Lupo Mannaro ottengono un bonus pari al #% dei tuoi danni da veleno aggiuntivi, fino al #%.\r\nI danni da veleno inflitti dalle abilità di Lupo Mannaro ottengono un bonus pari al #% della tua velocità d'attacco bonus + probabilità di critico, fino al #%.\u00A0\r\n\r\nBonus ai danni diretti attuale: #%\r\nBonus ai danni da veleno attuale: #%",
-    "DescriptionClean": "Ottieni il di danni da veleno aggiuntivi. I danni diretti inflitti dalle abilità di Lupo Mannaro ottengono un bonus pari al dei tuoi danni da veleno aggiuntivi, fino al. I danni da veleno inflitti dalle abilità di Lupo Mannaro ottengono un bonus pari al della tua velocità d'attacco bonus probabilità di critico, fino al.\u00A0 Bonus ai danni diretti attuale: Bonus ai danni da veleno attuale:",
-    "Localisation": "{icon:bullet,1.2}Ottieni il {c_random}[Affix_Value_1*100|x%|]{/c} di danni da veleno aggiuntivi.\r\n{icon:bullet,1.2}I danni diretti inflitti dalle abilità di {c_important}Lupo Mannaro{/c} ottengono un bonus pari al {c_number}[Affix.\"Static Value 0\"*100|x%|]{/c} dei tuoi danni da veleno aggiuntivi, fino al {c_number}[Affix.\"Static Value 2\"*100|x%|]{/c}.\r\n{icon:bullet,1.2}I danni da veleno inflitti dalle abilità di Lupo Mannaro ottengono un bonus pari al {c_number}[Affix.\"Static Value 1\"*100|x%|]{/c} della tua velocità d'attacco bonus + probabilità di critico, fino al {c_number}[Affix.\"Static Value 2\"*100|x%|]{/c}.\u00A0\r\n\r\nBonus ai danni diretti attuale: {c_number}[min((Owner.DOT_DPS_Bonus_Percent+Owner.DOT_DPS_Bonus_Percent_Per_Damage_Type#Poison)*Affix.\"Static Value 0\"*100, Affix.\"Static Value 2\" * 100)|%x|]{/c}\r\nBonus ai danni da veleno attuale: {c_number}[min((Owner.Attack_Speed_Percent_Bonus_Total+Owner.Cast_Speed_Percent_Bonus+Owner.Crit_Percent_Base+Owner.Crit_Percent_Bonus)*Affix.\"Static Value 1\"*100, Affix.\"Static Value 2\" * 100)|x%|]{/c}",
+    "Description": " Ottieni il #% di danni da avvelenamento aggiuntivi.\r\n I danni diretti inflitti dalle abilità di Lupo Mannaro ottengono un bonus pari al #% dei tuoi danni da avvelenamento aggiuntivi, fino al #%.\r\n I danni da veleno inflitti dalle abilità di Lupo Mannaro ottengono un bonus pari al #% della tua velocità d'attacco bonus + probabilità di critico, fino al #%.\u00A0\r\n\r\nBonus ai danni diretti attuale: #%\r\nBonus ai danni da veleno attuale: #%",
+    "DescriptionClean": "Ottieni il di danni da avvelenamento aggiuntivi. I danni diretti inflitti dalle abilità di Lupo Mannaro ottengono un bonus pari al dei tuoi danni da avvelenamento aggiuntivi, fino al. I danni da veleno inflitti dalle abilità di Lupo Mannaro ottengono un bonus pari al della tua velocità d'attacco bonus probabilità di critico, fino al.\u00A0 Bonus ai danni diretti attuale: Bonus ai danni da veleno attuale:",
+    "Localisation": "{icon:bullet,1.2} Ottieni il {c_random}[Affix_Value_1*100|x%|]{/c} di danni da avvelenamento aggiuntivi.\r\n{icon:bullet,1.2} I danni diretti inflitti dalle abilità di {c_important}Lupo Mannaro{/c} ottengono un bonus pari al {c_number}[Affix.\"Static Value 0\"*100|x%|]{/c} dei tuoi danni da avvelenamento aggiuntivi, fino al {c_number}[Affix.\"Static Value 2\"*100|x%|]{/c}.\r\n{icon:bullet,1.2} I danni da veleno inflitti dalle abilità di Lupo Mannaro ottengono un bonus pari al {c_number}[Affix.\"Static Value 1\"*100|x%|]{/c} della tua velocità d'attacco bonus + probabilità di critico, fino al {c_number}[Affix.\"Static Value 2\"*100|x%|]{/c}.\u00A0\r\n\r\nBonus ai danni diretti attuale: {c_number}[min((Owner.DOT_DPS_Bonus_Percent+Owner.DOT_DPS_Bonus_Percent_Per_Damage_Type#Poison +Owner.Bucketed_Multiplicative_DoT_Damage)*Affix.\"Static Value 0\"*100, Affix.\"Static Value 2\" * 100)|%x|]{/c}\r\nBonus ai danni da veleno attuale: {c_number}[min((Owner.Attack_Speed_Percent_Bonus_Total+Owner.Cast_Speed_Percent_Bonus+Owner.Crit_Percent_Base+Owner.Crit_Percent_Bonus)*Affix.\"Static Value 1\"*100, Affix.\"Static Value 2\" * 100)|x%|]{/c}",
     "MagicType": 2,
     "AllowedForPlayerClass": [
       0,
@@ -5703,7 +5703,7 @@
     "Name": "Omuncolo Infernale",
     "Description": "Le tue abilità di Arcidemonio infliggono danni aumentati del #% e ottengono i potenziamenti secondari dei rispettivi Demoni Minori senza alcun costo e con durate più lunghe del #%.",
     "DescriptionClean": "Le tue abilità di Arcidemonio infliggono danni aumentati del e ottengono i potenziamenti secondari dei rispettivi Demoni Minori senza alcun costo e con durate più lunghe del.",
-    "Localisation": "Le tue abilità di {c_important}Arcidemonio{/c} infliggono danni aumentati del {c_random}[Affix_Value_1*100|x%|]{/c} e ottengono i potenziamenti secondari dei rispettivi Demoni Minori senza alcun costo e con durate più lunghe del {c_number}[Affix.\"Static Value 0\"*100|%|]{/c}.",
+    "Localisation": "{c_important}Le tue abilità di {c_important}Arcidemonio{/c} infliggono danni aumentati del {c_random}[Affix_Value_1*100|x%|]{/c} e ottengono i potenziamenti secondari dei rispettivi Demoni Minori senza alcun costo e con durate più lunghe del {c_number}[Affix.\"Static Value 0\"*100|%|]{/c}.",
     "MagicType": 2,
     "AllowedForPlayerClass": [
       0,
@@ -6718,9 +6718,9 @@
     ],
     "IdNameItemActor": "Icons_Ring_Unique_002",
     "Name": "Presagio di Dolore",
-    "Description": "Un'aura oscura ti circonda e infliggi Decadimento e Vergine di Ferro ai nemici che la toccano.\r\n\r\nLe Maledizioni inflitte in questo modo si diffondono ai nemici vicini ogni # s e durano # s fuori dall'aura.",
-    "DescriptionClean": "Un'aura oscura ti circonda e infliggi Decadimento e Vergine di Ferro ai nemici che la toccano. Le Maledizioni inflitte in questo modo si diffondono ai nemici vicini ogni s e durano s fuori dall'aura.",
-    "Localisation": "Un'aura oscura ti circonda e infliggi {c_important}Decadimento{/c} e {c_important}Vergine di Ferro{/c} ai nemici che la toccano.\r\n\r\nLe {c_important}Maledizioni{/c} inflitte in questo modo si diffondono ai nemici vicini ogni {c_random}[Affix_Value_1|1|]{/c} s e durano {c_number}[Affix_Value_2]{/c} s fuori dall'aura.",
+    "Description": "Un'aura oscura ti circonda e infliggi Decadimento e Vergine di Ferro ai nemici intorno a te.\r\n\r\nLe Maledizioni inflitte in questo modo si diffondono ai nemici vicini ogni # s e durano # s fuori dall'aura.",
+    "DescriptionClean": "Un'aura oscura ti circonda e infliggi Decadimento e Vergine di Ferro ai nemici intorno a te. Le Maledizioni inflitte in questo modo si diffondono ai nemici vicini ogni s e durano s fuori dall'aura.",
+    "Localisation": "Un'aura oscura ti circonda e infliggi {c_important}Decadimento{/c} e {c_important}Vergine di Ferro{/c} ai nemici intorno a te.\r\n\r\nLe {c_important}Maledizioni{/c} inflitte in questo modo si diffondono ai nemici vicini ogni {c_random}[Affix_Value_1|1|]{/c} s e durano {c_number}[Affix_Value_2]{/c} s fuori dall'aura.",
     "MagicType": 2,
     "AllowedForPlayerClass": [
       0,
@@ -6847,7 +6847,7 @@
     "Name": "Pugnale Smarrito dell'Etna",
     "Description": "Infliggere # tipi di danni non fisici differenti aumenta la potenza delle tue abilità d'Infusione del #% e i danni non fisici del #% per # s. \r\n\r\nLe abilità Base ora sono infondibili.",
     "DescriptionClean": "Infliggere tipi di danni non fisici differenti aumenta la potenza delle tue abilità d'Infusione del e i danni non fisici del per s.  Le abilità Base ora sono infondibili.",
-    "Localisation": "Infliggere {c_number}[Affix.\"Static Value 0\"]{/c} tipi di danni non fisici differenti aumenta la potenza delle tue abilità d'{c_important}Infusione{/c} del {c_random}[Affix_Value_1*Affix.\"Static Value 1\"|%x|]{/c} e i danni non fisici del {c_number}[Affix_Value_1|%x|]{/c} per {c_number}[Affix.\"Static Value 2\"]{/c} s. \r\n\r\nLe abilità {c_important}Base{/c} ora sono {c_important}infondibili{/c}.",
+    "Localisation": "Infliggere {c_number}[Affix.\"Static Value 0\"]{/c} tipi di danni non fisici differenti aumenta la potenza delle tue abilità d'{c_important}Infusione{/c} del {c_random}[Affix_Value_1*Affix.\"Static Value 1\"|%x|]{/c} e i danni non fisici del {c_random}[Affix_Value_1|%x|]{/c} per {c_number}[Affix.\"Static Value 2\"]{/c} s. \r\n\r\nLe abilità {c_important}Base{/c} ora sono {c_important}infondibili{/c}.",
     "MagicType": 2,
     "AllowedForPlayerClass": [
       0,
@@ -8236,9 +8236,9 @@
     ],
     "IdNameItemActor": "sword_uniq22",
     "Name": "Supplica",
-    "Description": "Brandire colpisce in tutte le direzioni ma infligge danni aumentati del #%.",
-    "DescriptionClean": "Brandire colpisce in tutte le direzioni ma infligge danni aumentati del.",
-    "Localisation": "{c_important}Brandire{/c} colpisce in tutte le direzioni ma infligge danni aumentati del {c_random}[Affix_Value_1|%x|]{/c}.",
+    "Description": "Brandire colpisce in tutte le direzioni e infligge danni aumentati del #%.",
+    "DescriptionClean": "Brandire colpisce in tutte le direzioni e infligge danni aumentati del.",
+    "Localisation": "{c_important}Brandire{/c} colpisce in tutte le direzioni e infligge danni aumentati del {c_random}[Affix_Value_1|%x|]{/c}.",
     "MagicType": 2,
     "AllowedForPlayerClass": [
       0,

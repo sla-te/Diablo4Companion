@@ -77,9 +77,9 @@
     ],
     "IdNameItemActor": "Icons_Ring_Unique_041",
     "Name": "Acmé du chasseur",
-    "Description": "Lorsqu’un ouragan se termine ou après avoir duré #\u00A0s, il explose et inflige #% du total de dégâts infligé par un maximum de \u00A0coups de l’ouragan.#",
+    "Description": "Lorsqu’un ouragan se termine ou après avoir duré #\u00A0s, il explose et inflige #% du total de dégâts infligé par un maximum de  #\u00A0coups de l’ouragan.",
     "DescriptionClean": "Lorsqu’un ouragan se termine ou après avoir duré \u00A0s, il explose et inflige du total de dégâts infligé par un maximum de \u00A0coups de l’ouragan.",
-    "Localisation": "Lorsqu’un {c_important}ouragan{/c} se termine ou après avoir duré {c_number}[Affix.\"Static Value 0\"]{/c}\u00A0s, il explose et inflige {c_random}[Affix_Value_1*100|x%|]{/c} du total de dégâts infligé par un maximum de {c_number}\u00A0coups de {c_important}l’ouragan{/c}.[Affix.\"Static Value 1\"]{/c}",
+    "Localisation": "Lorsqu’un {c_important}ouragan{/c} se termine ou après avoir duré {c_number}[Affix.\"Static Value 0\"]{/c}\u00A0s, il explose et inflige {c_random}[Affix_Value_1*100|x%|]{/c} du total de dégâts infligé par un maximum de {c_number} [Affix.\"Static Value 1\"]{/c}\u00A0coups de {c_important}l’ouragan{/c}.",
     "MagicType": 2,
     "AllowedForPlayerClass": [
       0,
@@ -940,7 +940,7 @@
     "Name": "Bottines de Bucrani",
     "Description": "Vos chances d’infliger un coup critique sont augmentées de #% de votre bonus à la vitesse de déplacement.\r\n\r\nBonus actuel\u00A0: #%",
     "DescriptionClean": "Vos chances d’infliger un coup critique sont augmentées de de votre bonus à la vitesse de déplacement. Bonus actuel\u00A0:",
-    "Localisation": "Vos chances d’infliger un coup critique sont augmentées de {c_random}[Affix_Value_1|%|]{/c} de votre bonus à la vitesse de déplacement.\r\n\r\nBonus actuel\u00A0: {c_number}[(Min(Owner.Movement_Scalar_Capped_Total,2)-1) * (Affix_Value_1)|1%|]{/c}",
+    "Localisation": "Vos chances d’infliger un coup critique sont augmentées de {c_random}[Affix_Value_1|%|]{/c} de votre bonus à la vitesse de déplacement.\r\n\r\nBonus actuel\u00A0: {c_number}[(Min((Owner.Movement_Scalar_Capped_Total + Owner.Movement_Scalar_Temporary_Bonus),2)-1) * (Affix_Value_1)|1%|]{/c}",
     "MagicType": 2,
     "AllowedForPlayerClass": [
       1,
@@ -2934,7 +2934,7 @@
     "Name": "Dague perdue d’Etna",
     "Description": "Lorsque vous infligez #\u00A0sortes de dégâts non physiques, la puissance de vos compétences d’imprégnation augmente de #%\u00A0% et celle de vos dégâts non physiques de #% pendant #\u00A0s. \r\n\r\nLes compétences de base peuvent désormais être imprégnées.",
     "DescriptionClean": "Lorsque vous infligez \u00A0sortes de dégâts non physiques, la puissance de vos compétences d’imprégnation augmente de \u00A0 et celle de vos dégâts non physiques de pendant \u00A0s.  Les compétences de base peuvent désormais être imprégnées.",
-    "Localisation": "Lorsque vous infligez {c_number}[Affix.\"Static Value 0\"]{/c}\u00A0sortes de dégâts non physiques, la puissance de vos compétences {c_important}d’imprégnation{/c} augmente de {c_random}[Affix_Value_1*Affix.\"Static Value 1\"|%x|]{/c}\u00A0% et celle de vos dégâts non physiques de {c_number}[Affix_Value_1|%x|]{/c} pendant {c_number}[Affix.\"Static Value 2\"]{/c}\u00A0s. \r\n\r\nLes compétences de {c_important}base{/c} peuvent désormais être {c_important}imprégnées{/c}.",
+    "Localisation": "Lorsque vous infligez {c_number}[Affix.\"Static Value 0\"]{/c}\u00A0sortes de dégâts non physiques, la puissance de vos compétences {c_important}d’imprégnation{/c} augmente de {c_random}[Affix_Value_1*Affix.\"Static Value 1\"|%x|]{/c}\u00A0% et celle de vos dégâts non physiques de {c_random}[Affix_Value_1|%x|]{/c} pendant {c_number}[Affix.\"Static Value 2\"]{/c}\u00A0s. \r\n\r\nLes compétences de {c_important}base{/c} peuvent désormais être {c_important}imprégnées{/c}.",
     "MagicType": 2,
     "AllowedForPlayerClass": [
       0,
@@ -4210,9 +4210,9 @@
     ],
     "IdNameItemActor": "TRS_sets54",
     "Name": "Harnois de mutilation",
-    "Description": "Vous êtes sous l’effet d’un prélèvement. Au lieu de vous infligez des dégâts, Prélèvement vous octroie un montant de fortification égal à #% de votre maximum de points de vie. La compétence a également #% de chances de générer un orbe de sang.\r\n\r\nPrélèvement inflige #% de dégâts supplémentaires.",
-    "DescriptionClean": "Vous êtes sous l’effet d’un prélèvement. Au lieu de vous infligez des dégâts, Prélèvement vous octroie un montant de fortification égal à de votre maximum de points de vie. La compétence a également de chances de générer un orbe de sang. Prélèvement inflige de dégâts supplémentaires.",
-    "Localisation": "Vous êtes sous l’effet d’un {c_important}prélèvement{/c}. Au lieu de vous infligez des dégâts, {c_important}Prélèvement{/c} vous octroie un montant de {c_important}{u}fortification{/u}{/c} égal à {c_number}[Affix_Value_2|%|]{/c} de votre maximum de points de vie. La compétence a également {c_number}[Affix.\"Static Value 1\"|%|]{/c} de chances de générer un {c_important}orbe de sang{/c}.\r\n\r\n{c_important}Prélèvement{/c} inflige {c_random}[Affix_Value_1 * Affix.\"Static Value 0\"|%x|]{/c} de dégâts supplémentaires.",
+    "Description": "Vous êtes sous l’effet d’un prélèvement. Au lieu de vous infliger des dégâts, Prélèvement vous octroie un montant de fortification égal à #% de votre maximum de points de vie. La compétence a également #% de chances de générer un orbe de sang.\r\n\r\nPrélèvement inflige #% de dégâts supplémentaires.",
+    "DescriptionClean": "Vous êtes sous l’effet d’un prélèvement. Au lieu de vous infliger des dégâts, Prélèvement vous octroie un montant de fortification égal à de votre maximum de points de vie. La compétence a également de chances de générer un orbe de sang. Prélèvement inflige de dégâts supplémentaires.",
+    "Localisation": "Vous êtes sous l’effet d’un {c_important}prélèvement{/c}. Au lieu de vous infliger des dégâts, {c_important}Prélèvement{/c} vous octroie un montant de {c_important}{u}fortification{/u}{/c} égal à {c_number}[Affix_Value_2|%|]{/c} de votre maximum de points de vie. La compétence a également {c_number}[Affix.\"Static Value 1\"|%|]{/c} de chances de générer un {c_important}orbe de sang{/c}.\r\n\r\n{c_important}Prélèvement{/c} inflige {c_random}[Affix_Value_1 * Affix.\"Static Value 0\"|%x|]{/c} de dégâts supplémentaires.",
     "MagicType": 2,
     "AllowedForPlayerClass": [
       0,
@@ -5612,9 +5612,9 @@
     ],
     "IdNameItemActor": "Generic_Charm_Flippy",
     "Name": "Marque du vieux loup",
-    "Description": "Vous obtenez #% de dégâts d’empoisonnement supplémentaires.\r\nLes dégâts directs des compétences de lycanthrope obtiennent un bonus à hauteur de #% de votre bonus aux dégâts d’empoisonnement, jusqu’à un maximum de #%.\r\nLes dégâts de poison de vos compétences de lycanthrope obtiennent un bonus à hauteur de #% de la somme de votre vitesse d’attaque et de vos chances d’infliger un coup critique, jusqu’à un maximum de #%.\r\n\r\nBonus aux dégâts directs actuel\u00A0: #%\r\nBonus aux dégâts de poison actuel\u00A0: #%",
-    "DescriptionClean": "Vous obtenez de dégâts d’empoisonnement supplémentaires. Les dégâts directs des compétences de lycanthrope obtiennent un bonus à hauteur de de votre bonus aux dégâts d’empoisonnement, jusqu’à un maximum de. Les dégâts de poison de vos compétences de lycanthrope obtiennent un bonus à hauteur de de la somme de votre vitesse d’attaque et de vos chances d’infliger un coup critique, jusqu’à un maximum de. Bonus aux dégâts directs actuel\u00A0: Bonus aux dégâts de poison actuel\u00A0:",
-    "Localisation": "{icon:bullet,1.2}Vous obtenez {c_random}[Affix_Value_1*100|x%|]{/c} de dégâts d’empoisonnement supplémentaires.\r\n{icon:bullet,1.2}Les dégâts directs des compétences de {c_important}lycanthrope{/c} obtiennent un bonus à hauteur de {c_number}[Affix.\"Static Value 0\"*100|x%|]{/c} de votre bonus aux dégâts d’empoisonnement, jusqu’à un maximum de {c_number}[Affix.\"Static Value 2\"*100|x%|]{/c}.\r\n{icon:bullet,1.2}Les dégâts de poison de vos compétences de lycanthrope obtiennent un bonus à hauteur de {c_number}[Affix.\"Static Value 1\"*100|x%|]{/c} de la somme de votre vitesse d’attaque et de vos chances d’infliger un coup critique, jusqu’à un maximum de {c_number}[Affix.\"Static Value 2\"*100|x%|]{/c}.\r\n\r\nBonus aux dégâts directs actuel\u00A0: {c_number}[min((Owner.DOT_DPS_Bonus_Percent+Owner.DOT_DPS_Bonus_Percent_Per_Damage_Type#Poison)*Affix.\"Static Value 0\"*100, Affix.\"Static Value 2\" * 100)|%x|]{/c}\r\nBonus aux dégâts de poison actuel\u00A0: {c_number}[min((Owner.Attack_Speed_Percent_Bonus_Total+Owner.Cast_Speed_Percent_Bonus+Owner.Crit_Percent_Base+Owner.Crit_Percent_Bonus)*Affix.\"Static Value 1\"*100, Affix.\"Static Value 2\" * 100)|x%|]{/c}",
+    "Description": "Vous infligez #% de dégâts d’empoisonnement supplémentaires.\r\nLes dégâts directs des compétences de lycanthrope obtiennent un bonus à hauteur de #% de votre bonus aux dégâts d’empoisonnement, jusqu’à un maximum de #%.\r\nLes dégâts de poison de vos compétences de lycanthrope obtiennent un bonus à hauteur de #% de la somme de votre vitesse d’attaque et de vos chances d’infliger un coup critique, jusqu’à un maximum de #%. \r\n\r\nBonus aux dégâts directs actuel\u00A0: #%\r\nBonus aux dégâts de poison actuel\u00A0: #%",
+    "DescriptionClean": "Vous infligez de dégâts d’empoisonnement supplémentaires. Les dégâts directs des compétences de lycanthrope obtiennent un bonus à hauteur de de votre bonus aux dégâts d’empoisonnement, jusqu’à un maximum de. Les dégâts de poison de vos compétences de lycanthrope obtiennent un bonus à hauteur de de la somme de votre vitesse d’attaque et de vos chances d’infliger un coup critique, jusqu’à un maximum de.  Bonus aux dégâts directs actuel\u00A0: Bonus aux dégâts de poison actuel\u00A0:",
+    "Localisation": "{icon:bullet,1.2}Vous infligez {c_random}[Affix_Value_1*100|x%|]{/c} de dégâts d’empoisonnement supplémentaires.\r\n{icon:bullet,1.2}Les dégâts directs des compétences de {c_important}lycanthrope{/c} obtiennent un bonus à hauteur de {c_number}[Affix.\"Static Value 0\"*100|x%|]{/c} de votre bonus aux dégâts d’empoisonnement, jusqu’à un maximum de {c_number}[Affix.\"Static Value 2\"*100|x%|]{/c}.\r\n{icon:bullet,1.2}Les dégâts de poison de vos compétences de lycanthrope obtiennent un bonus à hauteur de {c_number}[Affix.\"Static Value 1\"*100|x%|]{/c} de la somme de votre vitesse d’attaque et de vos chances d’infliger un coup critique, jusqu’à un maximum de {c_number}[Affix.\"Static Value 2\"*100|x%|]{/c}. \r\n\r\nBonus aux dégâts directs actuel\u00A0: {c_number}[min((Owner.DOT_DPS_Bonus_Percent+Owner.DOT_DPS_Bonus_Percent_Per_Damage_Type#Poison +Owner.Bucketed_Multiplicative_DoT_Damage)*Affix.\"Static Value 0\"*100, Affix.\"Static Value 2\" * 100)|%x|]{/c}\r\nBonus aux dégâts de poison actuel\u00A0: {c_number}[min((Owner.Attack_Speed_Percent_Bonus_Total+Owner.Cast_Speed_Percent_Bonus+Owner.Crit_Percent_Base+Owner.Crit_Percent_Bonus)*Affix.\"Static Value 1\"*100, Affix.\"Static Value 2\" * 100)|x%|]{/c}",
     "MagicType": 2,
     "AllowedForPlayerClass": [
       0,
@@ -5810,7 +5810,7 @@
       0,
       0,
       0,
-      1,
+      0,
       0
     ],
     "AllowedItemLabels": []
@@ -7236,9 +7236,9 @@
     ],
     "IdNameItemActor": "Icons_Ring_Unique_002",
     "Name": "Présage de douleur",
-    "Description": "Une aura ténébreuse vous entoure, infligeant Décrépitude et Vierge de fer aux adversaires qui la touchent. \r\n\r\nLes malédictions infligées de la sorte affectent les cibles à proximité toutes les #\u00A0s et durent #\u00A0s en dehors de l’aura.",
-    "DescriptionClean": "Une aura ténébreuse vous entoure, infligeant Décrépitude et Vierge de fer aux adversaires qui la touchent.  Les malédictions infligées de la sorte affectent les cibles à proximité toutes les \u00A0s et durent \u00A0s en dehors de l’aura.",
-    "Localisation": "Une aura ténébreuse vous entoure, infligeant {c_important}Décrépitude{/c} et {c_important}Vierge de fer{/c} aux adversaires qui la touchent. \r\n\r\nLes {c_important}malédictions{/c} infligées de la sorte affectent les cibles à proximité toutes les {c_random}[Affix_Value_1|1|]{/c}\u00A0s et durent {c_number}[Affix_Value_2]{/c}\u00A0s en dehors de l’aura.",
+    "Description": "Une aura ténébreuse vous entoure, infligeant Décrépitude et Vierge de fer aux adversaires à proximité.\r\n\r\nLes malédictions infligées de la sorte affectent les cibles à proximité toutes les #\u00A0s et perdurent #\u00A0s en dehors de l’aura.",
+    "DescriptionClean": "Une aura ténébreuse vous entoure, infligeant Décrépitude et Vierge de fer aux adversaires à proximité. Les malédictions infligées de la sorte affectent les cibles à proximité toutes les \u00A0s et perdurent \u00A0s en dehors de l’aura.",
+    "Localisation": "Une aura ténébreuse vous entoure, infligeant {c_important}Décrépitude{/c} et {c_important}Vierge de fer{/c} aux adversaires à proximité.\r\n\r\nLes {c_important}malédictions{/c} infligées de la sorte affectent les cibles à proximité toutes les {c_random}[Affix_Value_1|1|]{/c}\u00A0s et perdurent {c_number}[Affix_Value_2]{/c}\u00A0s en dehors de l’aura.",
     "MagicType": 2,
     "AllowedForPlayerClass": [
       0,

@@ -15167,6 +15167,42 @@
     ]
   },
   {
+    "IdSno": "2574509",
+    "IdName": "legendary_generic_135_x2",
+    "IdSnoList": [
+      "2574509"
+    ],
+    "IdNameList": [
+      "legendary_generic_135_x2"
+    ],
+    "Name": "Yönlendiren",
+    "Description": "Bir Yeteneği yönlendirirken tüm hasar #% artar.",
+    "DescriptionClean": "Bir Yeteneği yönlendirirken tüm hasar artar.",
+    "Localisation": "Bir Yeteneği yönlendirirken tüm hasar {c_random}[Affix_Value_1|%x|]{/c} artar.",
+    "IsSeasonal": false,
+    "IsCodex": true,
+    "Dungeon": "",
+    "Category": "FILTER_Legendary_Offensive",
+    "MagicType": 1,
+    "AllowedForPlayerClass": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      1,
+      1
+    ],
+    "AllowedItemLabels": [
+      0,
+      26,
+      19,
+      28,
+      15
+    ]
+  },
+  {
     "IdSno": "1858284",
     "IdName": "legendary_spiritborn_021_x1",
     "IdSnoList": [
@@ -15193,42 +15229,6 @@
       1,
       1,
       0
-    ],
-    "AllowedItemLabels": [
-      0,
-      26,
-      19,
-      28,
-      15
-    ]
-  },
-  {
-    "IdSno": "2574509",
-    "IdName": "legendary_generic_135_x2",
-    "IdSnoList": [
-      "2574509"
-    ],
-    "IdNameList": [
-      "legendary_generic_135_x2"
-    ],
-    "Name": "Yönlendirme",
-    "Description": "Bir Yeteneği yönlendirirken tüm hasar #% artar.",
-    "DescriptionClean": "Bir Yeteneği yönlendirirken tüm hasar artar.",
-    "Localisation": "Bir Yeteneği yönlendirirken tüm hasar {c_random}[Affix_Value_1|%x|]{/c} artar.",
-    "IsSeasonal": false,
-    "IsCodex": true,
-    "Dungeon": "",
-    "Category": "FILTER_Legendary_Offensive",
-    "MagicType": 1,
-    "AllowedForPlayerClass": [
-      1,
-      1,
-      1,
-      1,
-      1,
-      0,
-      1,
-      1
     ],
     "AllowedItemLabels": [
       0,

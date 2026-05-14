@@ -1114,7 +1114,7 @@
     "Name": "Bucrani's Tread",
     "Description": "Your Critical Strike Chance is increased by #% of your Movement Speed bonus.\r\n\r\nCurrent Bonus: #%",
     "DescriptionClean": "Your Critical Strike Chance is increased by of your Movement Speed bonus. Current Bonus:",
-    "Localisation": "Your Critical Strike Chance is increased by {c_random}[Affix_Value_1|%|]{/c} of your Movement Speed bonus.\r\n\r\nCurrent Bonus: {c_number}[(Min(Owner.Movement_Scalar_Capped_Total,2)-1) * (Affix_Value_1)|1%|]{/c}",
+    "Localisation": "Your Critical Strike Chance is increased by {c_random}[Affix_Value_1|%|]{/c} of your Movement Speed bonus.\r\n\r\nCurrent Bonus: {c_number}[(Min((Owner.Movement_Scalar_Capped_Total + Owner.Movement_Scalar_Temporary_Bonus),2)-1) * (Affix_Value_1)|1%|]{/c}",
     "MagicType": 2,
     "AllowedForPlayerClass": [
       1,
@@ -2423,7 +2423,7 @@
     "Name": "Etna's Lost Dagger",
     "Description": "Dealing # different types of Non-Physical damage increases the Potency of your Imbuement Skills by #% and Non-Physical damage by #% for # seconds. \r\n\r\nBasic Skills are now Imbueable.",
     "DescriptionClean": "Dealing different types of Non-Physical damage increases the Potency of your Imbuement Skills by and Non-Physical damage by for seconds.  Basic Skills are now Imbueable.",
-    "Localisation": "Dealing {c_number}[Affix.\"Static Value 0\"]{/c} different types of Non-Physical damage increases the Potency of your {c_important}Imbuement{/c} Skills by {c_random}[Affix_Value_1*Affix.\"Static Value 1\"|%x|]{/c} and Non-Physical damage by {c_number}[Affix_Value_1|%x|]{/c} for {c_number}[Affix.\"Static Value 2\"]{/c} seconds. \r\n\r\n{c_important}Basic{/c} Skills are now {c_important}Imbueable{/c}.",
+    "Localisation": "Dealing {c_number}[Affix.\"Static Value 0\"]{/c} different types of Non-Physical damage increases the Potency of your {c_important}Imbuement{/c} Skills by {c_random}[Affix_Value_1*Affix.\"Static Value 1\"|%x|]{/c} and Non-Physical damage by {c_random}[Affix_Value_1|%x|]{/c} for {c_number}[Affix.\"Static Value 2\"]{/c} seconds. \r\n\r\n{c_important}Basic{/c} Skills are now {c_important}Imbueable{/c}.",
     "MagicType": 2,
     "AllowedForPlayerClass": [
       0,
@@ -4921,7 +4921,7 @@
     "Name": "Mark of the Old Wolf",
     "Description": "Gain #% bonus Poisoning damage.\r\nDirect damage from Werewolf Skills gain a bonus equal to #% of your bonus Poisoning damage, up to #%.\r\nPoison damage from Werewolf Skills gain a bonus equal to #% of your bonus Attack Speed and Critical Strike Chance, up to #%.\u00A0\r\n\r\nCurrent Direct Damage bonus: #%\r\nCurrent Poison Damage bonus: #%",
     "DescriptionClean": "Gain bonus Poisoning damage. Direct damage from Werewolf Skills gain a bonus equal to of your bonus Poisoning damage, up to. Poison damage from Werewolf Skills gain a bonus equal to of your bonus Attack Speed and Critical Strike Chance, up to.\u00A0 Current Direct Damage bonus: Current Poison Damage bonus:",
-    "Localisation": "{icon:bullet,1.2}Gain {c_random}[Affix_Value_1*100|x%|]{/c} bonus Poisoning damage.\r\n{icon:bullet,1.2}Direct damage from {c_important}Werewolf{/c} Skills gain a bonus equal to {c_number}[Affix.\"Static Value 0\"*100|x%|]{/c} of your bonus Poisoning damage, up to {c_number}[Affix.\"Static Value 2\"*100|x%|]{/c}.\r\n{icon:bullet,1.2}Poison damage from Werewolf Skills gain a bonus equal to {c_number}[Affix.\"Static Value 1\"*100|x%|]{/c} of your bonus Attack Speed and Critical Strike Chance, up to {c_number}[Affix.\"Static Value 2\"*100|x%|]{/c}.\u00A0\r\n\r\nCurrent Direct Damage bonus: {c_number}[min((Owner.DOT_DPS_Bonus_Percent+Owner.DOT_DPS_Bonus_Percent_Per_Damage_Type#Poison)*Affix.\"Static Value 0\"*100, Affix.\"Static Value 2\" * 100)|%x|]{/c}\r\nCurrent Poison Damage bonus: {c_number}[min((Owner.Attack_Speed_Percent_Bonus_Total+Owner.Cast_Speed_Percent_Bonus+Owner.Crit_Percent_Base+Owner.Crit_Percent_Bonus)*Affix.\"Static Value 1\"*100, Affix.\"Static Value 2\" * 100)|x%|]{/c}",
+    "Localisation": "{icon:bullet,1.2}Gain {c_random}[Affix_Value_1*100|x%|]{/c} bonus Poisoning damage.\r\n{icon:bullet,1.2}Direct damage from {c_important}Werewolf{/c} Skills gain a bonus equal to {c_number}[Affix.\"Static Value 0\"*100|x%|]{/c} of your bonus Poisoning damage, up to {c_number}[Affix.\"Static Value 2\"*100|x%|]{/c}.\r\n{icon:bullet,1.2}Poison damage from Werewolf Skills gain a bonus equal to {c_number}[Affix.\"Static Value 1\"*100|x%|]{/c} of your bonus Attack Speed and Critical Strike Chance, up to {c_number}[Affix.\"Static Value 2\"*100|x%|]{/c}.\u00A0\r\n\r\nCurrent Direct Damage bonus: {c_number}[min((Owner.DOT_DPS_Bonus_Percent+Owner.DOT_DPS_Bonus_Percent_Per_Damage_Type#Poison +Owner.Bucketed_Multiplicative_DoT_Damage)*Affix.\"Static Value 0\"*100, Affix.\"Static Value 2\" * 100)|%x|]{/c}\r\nCurrent Poison Damage bonus: {c_number}[min((Owner.Attack_Speed_Percent_Bonus_Total+Owner.Cast_Speed_Percent_Bonus+Owner.Crit_Percent_Base+Owner.Crit_Percent_Bonus)*Affix.\"Static Value 1\"*100, Affix.\"Static Value 2\" * 100)|x%|]{/c}",
     "MagicType": 2,
     "AllowedForPlayerClass": [
       0,
@@ -5430,9 +5430,9 @@
     ],
     "IdNameItemActor": "Generic_Charm_Flippy",
     "Name": "Omen of Pain",
-    "Description": "A dark aura surrounds you, inflicting Decrepify and Iron Maiden on enemies who touch it. \r\n\r\nCurses inflicted this way spread to surrounding targets every # seconds and last # seconds outside of the aura.",
-    "DescriptionClean": "A dark aura surrounds you, inflicting Decrepify and Iron Maiden on enemies who touch it.  Curses inflicted this way spread to surrounding targets every seconds and last seconds outside of the aura.",
-    "Localisation": "A dark aura surrounds you, inflicting {c_important}Decrepify{/c} and {c_important}Iron Maiden{/c} on enemies who touch it. \r\n\r\n{c_important}Curses{/c} inflicted this way spread to surrounding targets every {c_random}[Affix_Value_1|1|]{/c} seconds and last {c_number}[Affix_Value_2]{/c} seconds outside of the aura.",
+    "Description": "A dark aura surrounds you, inflicting Decrepify and Iron Maiden on enemies around you.\r\n\r\nCurses inflicted this way spread to surrounding targets every # seconds and last # seconds outside of the aura.",
+    "DescriptionClean": "A dark aura surrounds you, inflicting Decrepify and Iron Maiden on enemies around you. Curses inflicted this way spread to surrounding targets every seconds and last seconds outside of the aura.",
+    "Localisation": "A dark aura surrounds you, inflicting {c_important}Decrepify{/c} and {c_important}Iron Maiden{/c} on enemies around you.\r\n\r\n{c_important}Curses{/c} inflicted this way spread to surrounding targets every {c_random}[Affix_Value_1|1|]{/c} seconds and last {c_number}[Affix_Value_2]{/c} seconds outside of the aura.",
     "MagicType": 2,
     "AllowedForPlayerClass": [
       0,
@@ -5597,7 +5597,7 @@
       0,
       0,
       0,
-      1,
+      0,
       0
     ],
     "AllowedItemLabels": []
@@ -9209,9 +9209,9 @@
     ],
     "IdNameItemActor": "Generic_Charm_Flippy",
     "Name": "Will of Rathma",
-    "Description": "Vulnerable, Weakened, Crowd Controlled, or Corrupted enemies are Afflicted, taking #% increased damage from you.\r\n\r\nCurse Skills deal # Shadow Damage when applied to Afflicted enemies.",
-    "DescriptionClean": "Vulnerable, Weakened, Crowd Controlled, or Corrupted enemies are Afflicted, taking increased damage from you. Curse Skills deal Shadow Damage when applied to Afflicted enemies.",
-    "Localisation": "{c_important}{u}Vulnerable{/c}{/u}, {c_important}{u}Weakened{/c}{/u}, Crowd Controlled, or Corrupted enemies are {c_important}Afflicted{/c}, taking {c_number}[Affix.\"Static Value 0\"|%|]{/c} increased damage from you.\r\n\r\n{c_important}Curse{/c} Skills deal {c_random}[(Owner.Weapon_Damage_Min_Total + Owner.Weapon_Damage_Delta_Total) * Affix_Value_1]{/c} Shadow Damage when applied to {c_important}Afflicted{/c} enemies.",
+    "Description": "Vulnerable, Weakened, Crowd Controlled, or Corrupted enemies are Afflicted, taking #% increased damage from you.\r\n\r\nCurse Skills deal # Shadow damage when applied to Afflicted enemies.",
+    "DescriptionClean": "Vulnerable, Weakened, Crowd Controlled, or Corrupted enemies are Afflicted, taking increased damage from you. Curse Skills deal Shadow damage when applied to Afflicted enemies.",
+    "Localisation": "{c_important}{u}Vulnerable{/c}{/u}, {c_important}{u}Weakened{/c}{/u}, Crowd Controlled, or Corrupted enemies are {c_important}Afflicted{/c}, taking {c_number}[Affix.\"Static Value 0\"|%|]{/c} increased damage from you.\r\n\r\n{c_important}Curse{/c} Skills deal {c_random}[(Owner.Weapon_Damage_Min_Total + Owner.Weapon_Damage_Delta_Total) * Affix_Value_1]{/c} Shadow damage when applied to {c_important}Afflicted{/c} enemies.",
     "MagicType": 2,
     "AllowedForPlayerClass": [
       0,

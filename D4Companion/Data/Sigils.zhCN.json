@@ -203,7 +203,7 @@
     "Name": "凄凉洞窟",
     "Description": "恶魔瘟疫现在在图尔·杜拉的古墓中溃烂。",
     "DungeonZoneInfo": "在当中 索格伦",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -502,6 +502,33 @@
     "DungeonZoneInfo": "在当中 凯基斯坦",
     "IsSeasonal": false,
     "Type": "Dungeon"
+  },
+  {
+    "IdSno": 2646836,
+    "IdName": "DungeonAffix_Positive_Torment_MythicElites",
+    "Name": "地下城探险",
+    "Description": "完成地下城可获得额外经验值和奖励。",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
+    "IdSno": 2646843,
+    "IdName": "DungeonAffix_Positive_Torment_TreasureGoblins",
+    "Name": "地下城探险",
+    "Description": "完成地下城可获得额外经验值和奖励。",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
+    "IdSno": 2646845,
+    "IdName": "DungeonAffix_Positive_Torment_AncestralElites",
+    "Name": "地下城探险",
+    "Description": "完成地下城可获得额外经验值和奖励。",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
   },
   {
     "IdSno": 2613077,
@@ -905,7 +932,7 @@
     "Name": "库托克洞穴",
     "Description": "绝望的尖叫沿着洞壁，回响在洞穴深处。",
     "DungeonZoneInfo": "在当中 纳罕涂",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -959,7 +986,7 @@
     "Name": "弃誓者石墓",
     "Description": "邪恶在巴尔祭坛下不断滋长。",
     "DungeonZoneInfo": "在当中 凯基斯坦",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -1733,7 +1760,7 @@
     "Name": "漂流之城",
     "Description": "这片废墟曾是卡拉·伊苏人的避难所。",
     "DungeonZoneInfo": "在当中 干燥平原",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -2039,7 +2066,7 @@
     "Name": "破碎的赫克玛",
     "Description": "滋生憎恨的萨卡兰姆墓穴。 ",
     "DungeonZoneInfo": "在当中 凯基斯坦",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -2228,7 +2255,7 @@
     "Name": "背弃之墓",
     "Description": "在腐虚魔骇人的哀嚎声中，众灵痛苦地扭曲着。",
     "DungeonZoneInfo": "在当中 纳罕涂",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -2309,7 +2336,7 @@
     "Name": "苍白幽穴",
     "Description": "食人族在摇摇欲坠的矿井中守护着一种黑暗力量。",
     "DungeonZoneInfo": "在当中 干燥平原",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -2417,7 +2444,7 @@
     "Name": "蜿蜒迷洞",
     "Description": "一个名副其实的野外生物保护区，答案可能就藏在那里。",
     "DungeonZoneInfo": "在当中 索格伦",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -2651,7 +2678,7 @@
     "Name": "野性巢穴",
     "Description": "一个被德鲁伊的憎恨所腐化的棚屋。",
     "DungeonZoneInfo": "在当中 索格伦",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -2835,8 +2862,8 @@
     "Type": "Major"
   },
   {
-    "IdSno": 2516764,
-    "IdName": "DungeonAffix_Positive_LegendaryElites",
+    "IdSno": 2511994,
+    "IdName": "DungeonAffix_Positive_AncestralElites",
     "Name": "隐秘军械库",
     "Description": "此处存放着珍品，使精英怪物获得一个强力的战利品词缀。",
     "DungeonZoneInfo": "",
@@ -2844,8 +2871,8 @@
     "Type": "Positive"
   },
   {
-    "IdSno": 2511994,
-    "IdName": "DungeonAffix_Positive_AncestralElites",
+    "IdSno": 2516764,
+    "IdName": "DungeonAffix_Positive_LegendaryElites",
     "Name": "隐秘军械库",
     "Description": "此处存放着珍品，使精英怪物获得一个强力的战利品词缀。",
     "DungeonZoneInfo": "",
@@ -2903,7 +2930,7 @@
     "Name": "霜痕洞窟",
     "Description": "一个被恶魔占据的洞穴，遭到恶魔魔法的深度侵蚀。 ",
     "DungeonZoneInfo": "在当中 破碎群峰",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {

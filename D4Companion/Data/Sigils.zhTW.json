@@ -284,7 +284,7 @@
     "Name": "叛靈墓地",
     "Description": "不安的空洞靈魂因極度痛苦不斷發出尖叫。",
     "DungeonZoneInfo": "在 納漢圖",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -414,6 +414,33 @@
     "Type": "Positive"
   },
   {
+    "IdSno": 2646845,
+    "IdName": "DungeonAffix_Positive_Torment_AncestralElites",
+    "Name": "地城探荒",
+    "Description": "完成地城可獲得額外經驗值和獎勵。",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
+    "IdSno": 2646836,
+    "IdName": "DungeonAffix_Positive_Torment_MythicElites",
+    "Name": "地城探荒",
+    "Description": "完成地城可獲得額外經驗值和獎勵。",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
+    "IdSno": 2646843,
+    "IdName": "DungeonAffix_Positive_Torment_TreasureGoblins",
+    "Name": "地城探荒",
+    "Description": "完成地城可獲得額外經驗值和獎勵。",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
     "IdSno": 1975499,
     "IdName": "DungeonAffix_Positive_S05_Rep_Shrines",
     "Name": "地獄之觸",
@@ -518,7 +545,7 @@
     "Name": "妖邪地洞",
     "Description": "惡魔瘟疫在圖爾鐸拉的古墓之間蔓延。",
     "DungeonZoneInfo": "在 斯科斯格倫",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -621,8 +648,8 @@
     "Type": "Dungeon"
   },
   {
-    "IdSno": 2579466,
-    "IdName": "World_DGN_QST_Skov_Skar_Sphinx_01_C",
+    "IdSno": 2579464,
+    "IdName": "World_DGN_QST_Skov_Skar_Sphinx_01_B",
     "Name": "岩渣通道",
     "Description": "對體魄強健者而言，熔岩生成的洞穴是通往無數財寶的捷徑。",
     "DungeonZoneInfo": "在 ",
@@ -630,8 +657,8 @@
     "Type": "Dungeon"
   },
   {
-    "IdSno": 2579464,
-    "IdName": "World_DGN_QST_Skov_Skar_Sphinx_01_B",
+    "IdSno": 2579466,
+    "IdName": "World_DGN_QST_Skov_Skar_Sphinx_01_C",
     "Name": "岩渣通道",
     "Description": "對體魄強健者而言，熔岩生成的洞穴是通往無數財寶的捷徑。",
     "DungeonZoneInfo": "在 ",
@@ -671,7 +698,7 @@
     "Name": "崩塌的赫克馬",
     "Description": "充斥著仇恨的撒卡蘭姆教墓穴。",
     "DungeonZoneInfo": "在 卡基斯坦",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -716,7 +743,7 @@
     "Name": "幻流秘城",
     "Description": "這些廢墟曾是喀拉伊蘇人民的避難所。",
     "DungeonZoneInfo": "在 大乾原",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -734,7 +761,7 @@
     "Name": "庫托奎洞穴",
     "Description": "絕望的呼喊在洞壁間迴盪。",
     "DungeonZoneInfo": "在 納漢圖",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -1130,7 +1157,7 @@
     "Name": "扭曲穴坑",
     "Description": "一個名副其實的生態保存庫，答案可能就藏在其中。",
     "DungeonZoneInfo": "在 斯科斯格倫",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -1256,7 +1283,7 @@
     "Name": "暗淡洞穴",
     "Description": "食人族在崩塌的礦坑中守護著黑暗力量。",
     "DungeonZoneInfo": "在 大乾原",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -1310,7 +1337,7 @@
     "Name": "棄誓者石墓",
     "Description": "邪惡在巴爾祭壇深處不斷騷動。",
     "DungeonZoneInfo": "在 卡基斯坦",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -2520,20 +2547,20 @@
     "Type": "Dungeon"
   },
   {
-    "IdSno": 1585586,
-    "IdName": "World_DGN_Naha_ForgottenRemains",
-    "Name": "遺忘廢墟",
-    "Description": "多位村民在這個地帶神秘失蹤。",
-    "DungeonZoneInfo": "在 納漢圖",
-    "IsSeasonal": true,
-    "Type": "Dungeon"
-  },
-  {
     "IdSno": 1113710,
     "IdName": "World_DGN_Kehj_ForgottenRuins",
     "Name": "遺忘廢墟",
     "Description": "禁忌的法師大廳廢墟成為了毒蛇的巢穴。",
     "DungeonZoneInfo": "在 卡基斯坦",
+    "IsSeasonal": true,
+    "Type": "Dungeon"
+  },
+  {
+    "IdSno": 1585586,
+    "IdName": "World_DGN_Naha_ForgottenRemains",
+    "Name": "遺忘廢墟",
+    "Description": "多位村民在這個地帶神秘失蹤。",
+    "DungeonZoneInfo": "在 納漢圖",
     "IsSeasonal": true,
     "Type": "Dungeon"
   },
@@ -2597,7 +2624,7 @@
     "Name": "野性巢穴",
     "Description": "一間受德魯伊的憎恨腐化的小屋。",
     "DungeonZoneInfo": "在 斯科斯格倫",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -2876,7 +2903,7 @@
     "Name": "霜痕洞窟",
     "Description": "惡魔重新奪回了這座洞穴，如今這裡深受惡魔的魔法所侵蝕。",
     "DungeonZoneInfo": "在 碎峰嶺",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {

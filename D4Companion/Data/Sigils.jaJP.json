@@ -41,7 +41,7 @@
     "Name": "ねじれの虚ろ",
     "Description": "まさに野生動物の宝庫だ。ここに答えが眠っているかもしれない。",
     "DungeonZoneInfo": "の スコスグレン",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -252,15 +252,6 @@
     "Type": "Major"
   },
   {
-    "IdSno": 1314333,
-    "IdName": "DungeonAffix_Major_Empowered Elites (Suppressor)",
-    "Name": "エリート（抑圧者）",
-    "Description": "エリートモンスターが「抑圧者」の特性を持ち、ダメージが20%増加する。",
-    "DungeonZoneInfo": "",
-    "IsSeasonal": false,
-    "Type": "Major"
-  },
-  {
     "IdSno": 2355995,
     "IdName": "DungeonAffix_Minor_S9_Suppressor",
     "Name": "エリート（抑圧者）",
@@ -268,6 +259,15 @@
     "DungeonZoneInfo": "",
     "IsSeasonal": false,
     "Type": "Minor"
+  },
+  {
+    "IdSno": 1314333,
+    "IdName": "DungeonAffix_Major_Empowered Elites (Suppressor)",
+    "Name": "エリート（抑圧者）",
+    "Description": "エリートモンスターが「抑圧者」の特性を持ち、ダメージが20%増加する。",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Major"
   },
   {
     "IdSno": 1314342,
@@ -392,7 +392,7 @@
     "Name": "クトクーの洞窟",
     "Description": "岩壁の間に絶望の叫びがこだまする。",
     "DungeonZoneInfo": "の ナハントゥ",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -594,6 +594,33 @@
     "Type": "Positive"
   },
   {
+    "IdSno": 2646836,
+    "IdName": "DungeonAffix_Positive_Torment_MythicElites",
+    "Name": "ダンジョン探査",
+    "Description": "ダンジョンをクリアすると経験値と報酬を追加で獲得できる。",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
+    "IdSno": 2646845,
+    "IdName": "DungeonAffix_Positive_Torment_AncestralElites",
+    "Name": "ダンジョン探査",
+    "Description": "ダンジョンをクリアすると経験値と報酬を追加で獲得できる。",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
+    "IdSno": 2646843,
+    "IdName": "DungeonAffix_Positive_Torment_TreasureGoblins",
+    "Name": "ダンジョン探査",
+    "Description": "ダンジョンをクリアすると経験値と報酬を追加で獲得できる。",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
     "IdSno": 2613077,
     "IdName": "DungeonAffix_Positive_IncreasedRewards",
     "Name": "ダンジョン探査",
@@ -689,7 +716,7 @@
     "Name": "フェラルの住処",
     "Description": "ドルイドの憎しみにより荒れ果てた小屋。",
     "DungeonZoneInfo": "の スコスグレン",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -698,7 +725,7 @@
     "Name": "フォースウォーンの埋葬所",
     "Description": "バールの祭壇の下には邪悪が蠢いている。",
     "DungeonZoneInfo": "の ケジスタン",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -1049,7 +1076,7 @@
     "Name": "ライムスカー洞窟",
     "Description": "悪魔の手に再び渡り、魔法で汚染された洞窟。",
     "DungeonZoneInfo": "の 破砕山脈",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -1139,7 +1166,7 @@
     "Name": "不快の洞穴",
     "Description": "悪魔のような疫病が、今やトゥール・ドゥルラの古い墓に蔓延している。",
     "DungeonZoneInfo": "の スコスグレン",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -1913,7 +1940,7 @@
     "Name": "朽ちゆくヘクマ",
     "Description": "憎悪に満ちたザカラム教の地下墓地。",
     "DungeonZoneInfo": "の ケジスタン",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -2381,7 +2408,7 @@
     "Name": "移ろう街",
     "Description": "これらの廃墟は、かつてカーラ・イースの民が一時身を寄せていた場所だ。",
     "DungeonZoneInfo": "の 乾きの平原",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -2678,7 +2705,7 @@
     "Name": "裏切られし墓所",
     "Description": "悍ましい苦悶にホロウどもが絶叫を響かせ、その声に精霊たちも身をよじる。",
     "DungeonZoneInfo": "の ナハントゥ",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -2957,7 +2984,7 @@
     "Name": "青白き洞穴",
     "Description": "崩れつつあるこの鉱山では人食い族が闇の力を守っている。",
     "DungeonZoneInfo": "の 乾きの平原",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {

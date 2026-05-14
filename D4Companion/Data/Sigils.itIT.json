@@ -86,7 +86,7 @@
     "Name": "Antro Abbietto",
     "Description": "Una piaga demoniaca ora imperversa tra le vecchie tombe di Túr Dúlra.",
     "DungeonZoneInfo": "presso Scosglen",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -95,7 +95,7 @@
     "Name": "Antro Pallido",
     "Description": "Nelle miniere fatiscenti, i cannibali fanno la guardia a un potere oscuro.",
     "DungeonZoneInfo": "presso Steppe Aride",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -392,7 +392,7 @@
     "Name": "Caverna di Sfregiogelido",
     "Description": "Una caverna conquistata dai demoni e ricolma della loro magia. ",
     "DungeonZoneInfo": "presso Vette Frantumate",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -419,7 +419,7 @@
     "Name": "Caverne di Kutokue",
     "Description": "Urla di disperazione riecheggiano tra queste pareti.",
     "DungeonZoneInfo": "presso Nahantu",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -473,7 +473,7 @@
     "Name": "Città Mutevole",
     "Description": "Queste rovine un tempo erano un rifugio per il popolo di Qara-Yisu.",
     "DungeonZoneInfo": "presso Steppe Aride",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -954,8 +954,35 @@
     "Type": "Minor"
   },
   {
+    "IdSno": 2646843,
+    "IdName": "DungeonAffix_Positive_Torment_TreasureGoblins",
+    "Name": "Esplorazione delle spedizioni",
+    "Description": "Completare la spedizione fornisce esperienza e ricompense aggiuntive.",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
     "IdSno": 2613077,
     "IdName": "DungeonAffix_Positive_IncreasedRewards",
+    "Name": "Esplorazione delle spedizioni",
+    "Description": "Completare la spedizione fornisce esperienza e ricompense aggiuntive.",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
+    "IdSno": 2646836,
+    "IdName": "DungeonAffix_Positive_Torment_MythicElites",
+    "Name": "Esplorazione delle spedizioni",
+    "Description": "Completare la spedizione fornisce esperienza e ricompense aggiuntive.",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
+    "IdSno": 2646845,
+    "IdName": "DungeonAffix_Positive_Torment_AncestralElites",
     "Name": "Esplorazione delle spedizioni",
     "Description": "Completare la spedizione fornisce esperienza e ricompense aggiuntive.",
     "DungeonZoneInfo": "",
@@ -1256,7 +1283,7 @@
     "Name": "Hekma Instabile",
     "Description": "Una catacomba della fede di Zakarum ricolma d'odio. ",
     "DungeonZoneInfo": "presso Kehjistan",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -2394,8 +2421,8 @@
     "Type": "Positive"
   },
   {
-    "IdSno": 2579464,
-    "IdName": "World_DGN_QST_Skov_Skar_Sphinx_01_B",
+    "IdSno": 2579466,
+    "IdName": "World_DGN_QST_Skov_Skar_Sphinx_01_C",
     "Name": "Sentiero Scoriaceo",
     "Description": "Per i più temerari, le grotte scolpite dalla lava conducono a ricchezze inimmaginabili.",
     "DungeonZoneInfo": "presso ",
@@ -2403,8 +2430,8 @@
     "Type": "Dungeon"
   },
   {
-    "IdSno": 2579466,
-    "IdName": "World_DGN_QST_Skov_Skar_Sphinx_01_C",
+    "IdSno": 2579464,
+    "IdName": "World_DGN_QST_Skov_Skar_Sphinx_01_B",
     "Name": "Sentiero Scoriaceo",
     "Description": "Per i più temerari, le grotte scolpite dalla lava conducono a ricchezze inimmaginabili.",
     "DungeonZoneInfo": "presso ",
@@ -2435,7 +2462,7 @@
     "Name": "Sepolcro dei Rinnegati",
     "Description": "Il male si risveglia sotto l'altare di Baal.",
     "DungeonZoneInfo": "presso Kehjistan",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -2579,7 +2606,7 @@
     "Name": "Tana della Ferocia",
     "Description": "Un rifugio corrotto dall'odio dei Druidi.",
     "DungeonZoneInfo": "presso Scosglen",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -2669,7 +2696,7 @@
     "Name": "Tomba del Tradimento",
     "Description": "Gli spiriti si contorcono e i Vacui gridano la loro mostruosa agonia.",
     "DungeonZoneInfo": "presso Nahantu",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -2714,7 +2741,7 @@
     "Name": "Valle Perversa",
     "Description": "Un bacino di fauna naturale in cui potrebbero esserci delle risposte.",
     "DungeonZoneInfo": "presso Scosglen",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -2826,15 +2853,6 @@
     "Type": "Major"
   },
   {
-    "IdSno": 2355995,
-    "IdName": "DungeonAffix_Minor_S9_Suppressor",
-    "Name": "Élite (Soppressore)",
-    "Description": "I mostri élite hanno l'affisso \"Soppressore\" e infliggono il 20% di danni aggiuntivi.",
-    "DungeonZoneInfo": "",
-    "IsSeasonal": false,
-    "Type": "Minor"
-  },
-  {
     "IdSno": 1314333,
     "IdName": "DungeonAffix_Major_Empowered Elites (Suppressor)",
     "Name": "Élite (Soppressore)",
@@ -2842,6 +2860,15 @@
     "DungeonZoneInfo": "",
     "IsSeasonal": false,
     "Type": "Major"
+  },
+  {
+    "IdSno": 2355995,
+    "IdName": "DungeonAffix_Minor_S9_Suppressor",
+    "Name": "Élite (Soppressore)",
+    "Description": "I mostri élite hanno l'affisso \"Soppressore\" e infliggono il 20% di danni aggiuntivi.",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Minor"
   },
   {
     "IdSno": 1314342,

@@ -2426,9 +2426,9 @@
       "legendary_druid_062_x2"
     ],
     "Name": "degli Istinti Naturali",
-    "Description": "Ogni forma del Druido ottiene un bonus ogni # s. \r\n\r\n Lupo: # accumuli di Ferocia.\r\n Orso: # accumuli di Sopraffazione.\r\n Umano: # accumuli di Risolutezza.",
-    "DescriptionClean": "Ogni forma del Druido ottiene un bonus ogni s.  Lupo: accumuli di Ferocia. Orso: accumuli di Sopraffazione. Umano: accumuli di Risolutezza.",
-    "Localisation": "Ogni forma del Druido ottiene un bonus ogni {c_random}[Affix_Value_1|1|]{/c} s. \r\n\r\n{icon:bullet,1.2} {c_label}Lupo{/c}: {c_number}[Affix.\"Static Value 0\"]{/c} accumuli di {c_important}{u}Ferocia{/u}{/c}.\r\n{icon:bullet,1.2} {c_label}Orso{/c}: {c_number}[Affix.\"Static Value 1\"]{/c} accumuli di {c_important}{u}Sopraffazione{/u}{/c}.\r\n{icon:bullet,1.2} {c_label}Umano{/c}: {c_number}[Affix.\"Static Value 2\"]{/c} accumuli di {c_important}{u}Risolutezza{/u}{/c}.",
+    "Description": "Ogni forma del Druido ottiene un bonus ogni # s. \r\n\r\n Lupo: # accumulo di Ferocia.\r\n Orso: # accumulo di Sopraffazione.\r\n Umano: # accumulo di Risolutezza.",
+    "DescriptionClean": "Ogni forma del Druido ottiene un bonus ogni s.  Lupo: accumulo di Ferocia. Orso: accumulo di Sopraffazione. Umano: accumulo di Risolutezza.",
+    "Localisation": "Ogni forma del Druido ottiene un bonus ogni {c_random}[Affix_Value_1|1|]{/c} s. \r\n\r\n{icon:bullet,1.2} {c_label}Lupo{/c}: {c_number}[Affix.\"Static Value 0\"]{/c} accumulo di {c_important}{u}Ferocia{/u}{/c}.\r\n{icon:bullet,1.2} {c_label}Orso{/c}: {c_number}[Affix.\"Static Value 1\"]{/c} accumulo di {c_important}{u}Sopraffazione{/u}{/c}.\r\n{icon:bullet,1.2} {c_label}Umano{/c}: {c_number}[Affix.\"Static Value 2\"]{/c} accumulo di {c_important}{u}Risolutezza{/u}{/c}.",
     "IsSeasonal": false,
     "IsCodex": true,
     "Dungeon": "",
@@ -3564,42 +3564,6 @@
     ]
   },
   {
-    "IdSno": "2616408",
-    "IdName": "legendary_generic_038_x2",
-    "IdSnoList": [
-      "2616408"
-    ],
-    "IdNameList": [
-      "legendary_generic_038_x2"
-    ],
-    "Name": "del Castigo",
-    "Description": "I nemici lontani hanno una probabilità del #% di essere storditi per # s quando ti colpiscono. Infliggi danni aumentati del #% ai nemici lontani.",
-    "DescriptionClean": "I nemici lontani hanno una probabilità del di essere storditi per s quando ti colpiscono. Infliggi danni aumentati del ai nemici lontani.",
-    "Localisation": "I nemici lontani hanno una probabilità del {c_number}[Affix.\"Static Value 0\"|%|]{/c} di essere storditi per {c_number}[Affix.\"Static Value 1\"]{/c} s quando ti colpiscono. Infliggi danni aumentati del {c_random}[Affix_Value_1|%x|]{/c} ai nemici lontani.",
-    "IsSeasonal": false,
-    "IsCodex": true,
-    "Dungeon": "",
-    "Category": "FILTER_Legendary_Utility",
-    "MagicType": 1,
-    "AllowedForPlayerClass": [
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1
-    ],
-    "AllowedItemLabels": [
-      0,
-      28,
-      26,
-      19,
-      15
-    ]
-  },
-  {
     "IdSno": "2468693",
     "IdName": "legendary_paladin_075",
     "IdSnoList": [
@@ -3632,6 +3596,42 @@
       26,
       19,
       28,
+      15
+    ]
+  },
+  {
+    "IdSno": "2616408",
+    "IdName": "legendary_generic_038_x2",
+    "IdSnoList": [
+      "2616408"
+    ],
+    "IdNameList": [
+      "legendary_generic_038_x2"
+    ],
+    "Name": "del Castigo",
+    "Description": "I nemici lontani hanno una probabilità del #% di essere storditi per # s quando ti colpiscono. Infliggi danni aumentati del #% ai nemici lontani.",
+    "DescriptionClean": "I nemici lontani hanno una probabilità del di essere storditi per s quando ti colpiscono. Infliggi danni aumentati del ai nemici lontani.",
+    "Localisation": "I nemici lontani hanno una probabilità del {c_number}[Affix.\"Static Value 0\"|%|]{/c} di essere storditi per {c_number}[Affix.\"Static Value 1\"]{/c} s quando ti colpiscono. Infliggi danni aumentati del {c_random}[Affix_Value_1|%x|]{/c} ai nemici lontani.",
+    "IsSeasonal": false,
+    "IsCodex": true,
+    "Dungeon": "",
+    "Category": "FILTER_Legendary_Utility",
+    "MagicType": 1,
+    "AllowedForPlayerClass": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "AllowedItemLabels": [
+      0,
+      28,
+      26,
+      19,
       15
     ]
   },
@@ -5590,43 +5590,6 @@
     ]
   },
   {
-    "IdSno": "2535903",
-    "IdName": "legendary_druid_109_x2",
-    "IdSnoList": [
-      "2535903"
-    ],
-    "IdNameList": [
-      "legendary_druid_109_x2"
-    ],
-    "Name": "del Mutaforma",
-    "Description": "I bonus della tua forma aumentano del #%.",
-    "DescriptionClean": "I bonus della tua forma aumentano del.",
-    "Localisation": "I bonus della tua forma aumentano del {c_random}[Affix_Value_1*100|x%|]{/c}.",
-    "IsSeasonal": false,
-    "IsCodex": true,
-    "Dungeon": "",
-    "Category": "FILTER_Legendary_Utility",
-    "MagicType": 1,
-    "AllowedForPlayerClass": [
-      0,
-      1,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
-    ],
-    "AllowedItemLabels": [
-      16,
-      17,
-      29,
-      28,
-      26,
-      30
-    ]
-  },
-  {
     "IdSno": "2533703",
     "IdName": "legendary_druid_002_x2",
     "IdSnoList": [
@@ -7017,6 +6980,41 @@
     ]
   },
   {
+    "IdSno": "1937739",
+    "IdName": "x1_legendary_sorc_142",
+    "IdSnoList": [
+      "1937739"
+    ],
+    "IdNameList": [
+      "x1_legendary_sorc_142"
+    ],
+    "Name": "del Surriscaldamento",
+    "Description": "Dopo averlo canalizzato per # s, Incenerimento infligge il #% di danni aggiuntivi per # s. Lanciare Incenerimento ripristina e conserva questo bonus. ",
+    "DescriptionClean": "Dopo averlo canalizzato per s, Incenerimento infligge il di danni aggiuntivi per s. Lanciare Incenerimento ripristina e conserva questo bonus.",
+    "Localisation": "Dopo averlo canalizzato per {c_number}[PowerTag.Sorcerer_Incinerate.\"Script Formula 58\"]{/c} s, {c_important}Incenerimento{/c} infligge il {c_random}[Affix_Value_1|%x|]{/c} di danni aggiuntivi per {c_number}[Affix.\"Static Value 0\"]{/c} s. Lanciare {c_important}Incenerimento{/c} ripristina e conserva questo bonus. ",
+    "IsSeasonal": false,
+    "IsCodex": true,
+    "Dungeon": "",
+    "Category": "",
+    "MagicType": 1,
+    "AllowedForPlayerClass": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "AllowedItemLabels": [
+      0,
+      28,
+      26,
+      19
+    ]
+  },
+  {
     "IdSno": "2574616",
     "IdName": "legendary_burningUser_001_x2",
     "IdSnoList": [
@@ -7052,41 +7050,6 @@
       26,
       30,
       15
-    ]
-  },
-  {
-    "IdSno": "1937739",
-    "IdName": "x1_legendary_sorc_142",
-    "IdSnoList": [
-      "1937739"
-    ],
-    "IdNameList": [
-      "x1_legendary_sorc_142"
-    ],
-    "Name": "del Surriscaldamento",
-    "Description": "Dopo averlo canalizzato per # s, Incenerimento infligge il #% di danni aggiuntivi per # s. Lanciare Incenerimento ripristina e conserva questo bonus. ",
-    "DescriptionClean": "Dopo averlo canalizzato per s, Incenerimento infligge il di danni aggiuntivi per s. Lanciare Incenerimento ripristina e conserva questo bonus.",
-    "Localisation": "Dopo averlo canalizzato per {c_number}[PowerTag.Sorcerer_Incinerate.\"Script Formula 58\"]{/c} s, {c_important}Incenerimento{/c} infligge il {c_random}[Affix_Value_1|%x|]{/c} di danni aggiuntivi per {c_number}[Affix.\"Static Value 0\"]{/c} s. Lanciare {c_important}Incenerimento{/c} ripristina e conserva questo bonus. ",
-    "IsSeasonal": false,
-    "IsCodex": true,
-    "Dungeon": "",
-    "Category": "",
-    "MagicType": 1,
-    "AllowedForPlayerClass": [
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
-    ],
-    "AllowedItemLabels": [
-      0,
-      28,
-      26,
-      19
     ]
   },
   {
@@ -8589,41 +8552,6 @@
     ]
   },
   {
-    "IdSno": "2574567",
-    "IdName": "S05_BSK_Sorcerer_002_x2",
-    "IdSnoList": [
-      "2574567"
-    ],
-    "IdNameList": [
-      "S05_BSK_Sorcerer_002_x2"
-    ],
-    "Name": "dell'Arroganza",
-    "Description": "Le abilità di Folgore infliggono il #% di danni aggiuntivi ai nemici vicini o storditi. Questi bonus sono cumulabili.",
-    "DescriptionClean": "Le abilità di Folgore infliggono il di danni aggiuntivi ai nemici vicini o storditi. Questi bonus sono cumulabili.",
-    "Localisation": "Le abilità di {c_important}Folgore{/c} infliggono il {c_random}[Affix_Value_1|%x|]{/c} di danni aggiuntivi ai nemici vicini o storditi. Questi bonus sono cumulabili.",
-    "IsSeasonal": false,
-    "IsCodex": true,
-    "Dungeon": "",
-    "Category": "FILTER_Legendary_Offensive",
-    "MagicType": 1,
-    "AllowedForPlayerClass": [
-      1,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
-    ],
-    "AllowedItemLabels": [
-      0,
-      28,
-      26,
-      19
-    ]
-  },
-  {
     "IdSno": "578845",
     "IdName": "legendary_generic_027",
     "IdSnoList": [
@@ -8657,6 +8585,41 @@
       19,
       28,
       15
+    ]
+  },
+  {
+    "IdSno": "2574567",
+    "IdName": "S05_BSK_Sorcerer_002_x2",
+    "IdSnoList": [
+      "2574567"
+    ],
+    "IdNameList": [
+      "S05_BSK_Sorcerer_002_x2"
+    ],
+    "Name": "dell'Arroganza",
+    "Description": "Le abilità di Folgore infliggono il #% di danni aggiuntivi ai nemici vicini o storditi. Questi bonus sono cumulabili.",
+    "DescriptionClean": "Le abilità di Folgore infliggono il di danni aggiuntivi ai nemici vicini o storditi. Questi bonus sono cumulabili.",
+    "Localisation": "Le abilità di {c_important}Folgore{/c} infliggono il {c_random}[Affix_Value_1|%x|]{/c} di danni aggiuntivi ai nemici vicini o storditi. Questi bonus sono cumulabili.",
+    "IsSeasonal": false,
+    "IsCodex": true,
+    "Dungeon": "",
+    "Category": "FILTER_Legendary_Offensive",
+    "MagicType": 1,
+    "AllowedForPlayerClass": [
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "AllowedItemLabels": [
+      0,
+      28,
+      26,
+      19
     ]
   },
   {
@@ -10407,27 +10370,29 @@
     "Name": "dell'Interdizione",
     "Description": "Ottieni il #% di probabilità di parata per ogni accumulo di Risolutezza.",
     "DescriptionClean": "Ottieni il di probabilità di parata per ogni accumulo di Risolutezza.",
-    "Localisation": "Ottieni il {c_random}[Affix_Value_1*100|%+|]{/c} di probabilità di parata per ogni accumulo di {c_important}{u}Risolutezza{/u}{/c}.",
+    "Localisation": "Ottieni il {c_random}[Affix_Value_1*100|1%+|]{/c} di probabilità di parata per ogni accumulo di {c_important}{u}Risolutezza{/u}{/c}.",
     "IsSeasonal": false,
     "IsCodex": true,
     "Dungeon": "",
-    "Category": "FILTER_Legendary_Defensive",
+    "Category": "FILTER_Legendary_Utility",
     "MagicType": 1,
     "AllowedForPlayerClass": [
       0,
       0,
       0,
       0,
-      0,
-      0,
-      0,
+      1,
+      1,
+      1,
       0
     ],
     "AllowedItemLabels": [
       16,
       17,
-      30,
+      29,
+      28,
       26,
+      30,
       15
     ]
   },
@@ -12426,9 +12391,9 @@
       "legendary_necro_036"
     ],
     "Name": "della Depressione",
-    "Description": "Quando infliggi danni ai nemici con le tue abilità di Oscurità, questi subiscono il #% di danni aumentati dalle tue abilità di Oscurità per # s, fino a un massimo di # volte.",
-    "DescriptionClean": "Quando infliggi danni ai nemici con le tue abilità di Oscurità, questi subiscono il di danni aumentati dalle tue abilità di Oscurità per s, fino a un massimo di volte.",
-    "Localisation": "Quando infliggi danni ai nemici con le tue abilità di {c_important}Oscurità{/c}, questi subiscono il {c_random}[Affix_Value_1|%x|]{/c} di danni aumentati dalle tue abilità di {c_important}Oscurità{/c} per {c_number}[Affix.\"Static Value 0\"]{/c} s, fino a un massimo di {c_number}[Affix.\"Static Value 1\"]{/c} volte.",
+    "Description": "Quando infliggi danni ai nemici con le tue abilità di Oscurità, questi subiscono il #% di danni aumentati dalle tue abilità di Oscurità per # s. L'effetto può accumularsi fino a un massimo di # volte.",
+    "DescriptionClean": "Quando infliggi danni ai nemici con le tue abilità di Oscurità, questi subiscono il di danni aumentati dalle tue abilità di Oscurità per s. L'effetto può accumularsi fino a un massimo di volte.",
+    "Localisation": "Quando infliggi danni ai nemici con le tue abilità di {c_important}Oscurità{/c}, questi subiscono il {c_random}[Affix_Value_1|%x|]{/c} di danni aumentati dalle tue abilità di {c_important}Oscurità{/c} per {c_number}[Affix.\"Static Value 0\"]{/c} s. L'effetto può accumularsi fino a un massimo di {c_number}[Affix.\"Static Value 1\"]{/c} volte.",
     "IsSeasonal": false,
     "IsCodex": true,
     "Dungeon": "Alveare",
@@ -12732,6 +12697,43 @@
       28,
       19,
       15
+    ]
+  },
+  {
+    "IdSno": "2535903",
+    "IdName": "legendary_druid_109_x2",
+    "IdSnoList": [
+      "2535903"
+    ],
+    "IdNameList": [
+      "legendary_druid_109_x2"
+    ],
+    "Name": "della Forma Cangiante",
+    "Description": "I bonus della tua forma aumentano del #%.",
+    "DescriptionClean": "I bonus della tua forma aumentano del.",
+    "Localisation": "I bonus della tua forma aumentano del {c_random}[Affix_Value_1*100|x%|]{/c}.",
+    "IsSeasonal": false,
+    "IsCodex": true,
+    "Dungeon": "",
+    "Category": "FILTER_Legendary_Utility",
+    "MagicType": 1,
+    "AllowedForPlayerClass": [
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "AllowedItemLabels": [
+      16,
+      17,
+      29,
+      28,
+      26,
+      30
     ]
   },
   {
@@ -13818,7 +13820,7 @@
     "IdNameList": [
       "legendary_warlock_020_x2"
     ],
-    "Name": "della Misantopia",
+    "Name": "della Misantropia",
     "Description": "Aumenta la tua Vita massima del #% se non hai avuto più di # demone attivo negli ultimi # s.",
     "DescriptionClean": "Aumenta la tua Vita massima del se non hai avuto più di demone attivo negli ultimi s.",
     "Localisation": "Aumenta la tua Vita massima del {c_random}[Affix_Value_1|%+|]{/c} se non hai avuto più di {c_number}[Affix.\"Static Value 0\"]{/c} demone attivo negli ultimi {c_number}[Affix.\"Static Value 1\"]{/c} s.",
@@ -14860,9 +14862,9 @@
       "legendary_spiritborn_037_x1"
     ],
     "Name": "della Repressione Cinetica",
-    "Description": "Lanciare un'abilità nonBase di Mobilità fornisce # Risolutezza.\r\n\r\nLanciare un'abilità di Difesa con # accumuli di Risolutezza ne aumenta i danni del #%. ",
-    "DescriptionClean": "Lanciare un'abilità nonBase di Mobilità fornisce Risolutezza. Lanciare un'abilità di Difesa con accumuli di Risolutezza ne aumenta i danni del.",
-    "Localisation": "Lanciare un'abilità non{c_important}Base{/c} di {c_important}Mobilità{/c} fornisce {c_number}[Affix.\"Static Value 0\"]{/c} {c_important}{u}Risolutezza{/u}{/c}.\r\n\r\nLanciare un'abilità di {c_important}Difesa{/c} con {c_number}[Affix.\"Static Value 1\"]{/c} accumuli di {c_important}{u}Risolutezza{/u}{/c} ne aumenta i danni del {c_random}[Affix_Value_1 * 100 |%x|]{/c}. ",
+    "Description": "Lanciare un'abilità non Base di Mobilità fornisce # Risolutezza.\r\n\r\nLanciare un'abilità di Difesa con # accumuli di Risolutezza ne aumenta i danni del #%. ",
+    "DescriptionClean": "Lanciare un'abilità non Base di Mobilità fornisce Risolutezza. Lanciare un'abilità di Difesa con accumuli di Risolutezza ne aumenta i danni del.",
+    "Localisation": "Lanciare un'abilità non {c_important}Base{/c} di {c_important}Mobilità{/c} fornisce {c_number}[Affix.\"Static Value 0\"]{/c} {c_important}{u}Risolutezza{/u}{/c}.\r\n\r\nLanciare un'abilità di {c_important}Difesa{/c} con {c_number}[Affix.\"Static Value 1\"]{/c} accumuli di {c_important}{u}Risolutezza{/u}{/c} ne aumenta i danni del {c_random}[Affix_Value_1 * 100 |%x|]{/c}. ",
     "IsSeasonal": false,
     "IsCodex": true,
     "Dungeon": "",

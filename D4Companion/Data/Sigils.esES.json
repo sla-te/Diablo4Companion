@@ -261,8 +261,8 @@
     "Type": "Major"
   },
   {
-    "IdSno": 2511994,
-    "IdName": "DungeonAffix_Positive_AncestralElites",
+    "IdSno": 2516764,
+    "IdName": "DungeonAffix_Positive_LegendaryElites",
     "Name": "Arsenal oculto",
     "Description": "Aquí se guardan objetos excepcionales que otorgan a los enemigos de élite un afijo de botín poderoso.",
     "DungeonZoneInfo": "",
@@ -270,8 +270,8 @@
     "Type": "Positive"
   },
   {
-    "IdSno": 2516764,
-    "IdName": "DungeonAffix_Positive_LegendaryElites",
+    "IdSno": 2511994,
+    "IdName": "DungeonAffix_Positive_AncestralElites",
     "Name": "Arsenal oculto",
     "Description": "Aquí se guardan objetos excepcionales que otorgan a los enemigos de élite un afijo de botín poderoso.",
     "DungeonZoneInfo": "",
@@ -432,6 +432,15 @@
     "Type": "Dungeon"
   },
   {
+    "IdSno": 2579458,
+    "IdName": "World_DGN_QST_Skov_Skar_Sphinx_01_A",
+    "Name": "Camino Escoriáceo",
+    "Description": "Para los más fuertes, estas cuevas esculpidas por la lava conducen a riquezas inimaginables.",
+    "DungeonZoneInfo": "en ",
+    "IsSeasonal": false,
+    "Type": "Dungeon"
+  },
+  {
     "IdSno": 2579464,
     "IdName": "World_DGN_QST_Skov_Skar_Sphinx_01_B",
     "Name": "Camino Escoriáceo",
@@ -443,15 +452,6 @@
   {
     "IdSno": 2579466,
     "IdName": "World_DGN_QST_Skov_Skar_Sphinx_01_C",
-    "Name": "Camino Escoriáceo",
-    "Description": "Para los más fuertes, estas cuevas esculpidas por la lava conducen a riquezas inimaginables.",
-    "DungeonZoneInfo": "en ",
-    "IsSeasonal": false,
-    "Type": "Dungeon"
-  },
-  {
-    "IdSno": 2579458,
-    "IdName": "World_DGN_QST_Skov_Skar_Sphinx_01_A",
     "Name": "Camino Escoriáceo",
     "Description": "Para los más fuertes, estas cuevas esculpidas por la lava conducen a riquezas inimaginables.",
     "DungeonZoneInfo": "en ",
@@ -545,7 +545,7 @@
     "Name": "Caverna Escarchabrupta",
     "Description": "Una cueva conquistada por demonios y afectada por su magia. ",
     "DungeonZoneInfo": "en Cimas Quebradas",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -608,7 +608,7 @@
     "Name": "Ciudad Cambiante",
     "Description": "Estas ruinas fueron antaño un refugio para el pueblo de Qara-Yisu.",
     "DungeonZoneInfo": "en Estepas Adustas",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -707,7 +707,7 @@
     "Name": "Cubil de los Ferales",
     "Description": "Un albergue corrompido por el odio de los druidas.",
     "DungeonZoneInfo": "en Scosglen",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -725,7 +725,7 @@
     "Name": "Cuenca Retorcida",
     "Description": "Una auténtica reserva de fauna salvaje que podría ocultar respuestas.",
     "DungeonZoneInfo": "en Scosglen",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -743,7 +743,7 @@
     "Name": "Cuevas de Kutokue",
     "Description": "Unos gritos de desesperación resuenan en las paredes.",
     "DungeonZoneInfo": "en Nahantu",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -1215,8 +1215,35 @@
     "Type": "Minor"
   },
   {
+    "IdSno": 2646845,
+    "IdName": "DungeonAffix_Positive_Torment_AncestralElites",
+    "Name": "Exploración de mazmorras",
+    "Description": "Completar la mazmorra otorga experiencia y recompensas adicionales.",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
+    "IdSno": 2646843,
+    "IdName": "DungeonAffix_Positive_Torment_TreasureGoblins",
+    "Name": "Exploración de mazmorras",
+    "Description": "Completar la mazmorra otorga experiencia y recompensas adicionales.",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
     "IdSno": 2613077,
     "IdName": "DungeonAffix_Positive_IncreasedRewards",
+    "Name": "Exploración de mazmorras",
+    "Description": "Completar la mazmorra otorga experiencia y recompensas adicionales.",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
+    "IdSno": 2646836,
+    "IdName": "DungeonAffix_Positive_Torment_MythicElites",
     "Name": "Exploración de mazmorras",
     "Description": "Completar la mazmorra otorga experiencia y recompensas adicionales.",
     "DungeonZoneInfo": "",
@@ -1508,7 +1535,7 @@
     "Name": "Hekma en Ruinas",
     "Description": "Una catacumba infestada de odio de la fe Zakarum. ",
     "DungeonZoneInfo": "en Kehjistan",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -1535,7 +1562,7 @@
     "Name": "Hondonada Desgraciada",
     "Description": "Una plaga demoníaca ha infestado las antiguas tumbas de Túr Dúlra.",
     "DungeonZoneInfo": "en Scosglen",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -1544,7 +1571,7 @@
     "Name": "Hondonada Pálida",
     "Description": "Los caníbales protegen un oscuro poder en las minas desmoronadas.",
     "DungeonZoneInfo": "en Estepas Adustas",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -2777,7 +2804,7 @@
     "Name": "Sepulcro de los Abjurantes",
     "Description": "El mal se agita bajo el altar de Baal.",
     "DungeonZoneInfo": "en Kehjistan",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -2885,7 +2912,7 @@
     "Name": "Tumba de la Traición",
     "Description": "Los espíritus se retuercen mientras los vacuos chillan con una agonía monstruosa.",
     "DungeonZoneInfo": "en Nahantu",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {

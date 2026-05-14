@@ -113,7 +113,7 @@
     "Name": "Blade Zapadlisko",
     "Description": "Kanibale strzegą mrocznej mocy ukrytej w sypiących się kopalniach.",
     "DungeonZoneInfo": "w regionie Suche Stepy",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -405,6 +405,33 @@
     "Type": "Positive"
   },
   {
+    "IdSno": 2646845,
+    "IdName": "DungeonAffix_Positive_Torment_AncestralElites",
+    "Name": "Eksploracja podziemi",
+    "Description": "Ukończenie tych podziemi zapewnia dodatkowe doświadczenie i nagrody.",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
+    "IdSno": 2646836,
+    "IdName": "DungeonAffix_Positive_Torment_MythicElites",
+    "Name": "Eksploracja podziemi",
+    "Description": "Ukończenie tych podziemi zapewnia dodatkowe doświadczenie i nagrody.",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
+    "IdSno": 2646843,
+    "IdName": "DungeonAffix_Positive_Torment_TreasureGoblins",
+    "Name": "Eksploracja podziemi",
+    "Description": "Ukończenie tych podziemi zapewnia dodatkowe doświadczenie i nagrody.",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
     "IdSno": 1314413,
     "IdName": "DungeonAffix_Minor_Monster_ExtraLightning",
     "Name": "Elektryzujące Ciosy",
@@ -509,7 +536,7 @@
     "Name": "Grobowiec Zaprzysiężonych",
     "Description": "Pod ołtarzem Baala budzi się zło.",
     "DungeonZoneInfo": "w regionie Kedżystan",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -545,7 +572,7 @@
     "Name": "Grota Szronoblizny",
     "Description": "Jaskinia zajęta przez demony i wypaczona ich magią. ",
     "DungeonZoneInfo": "w regionie Strzaskane Szczyty",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -671,7 +698,7 @@
     "Name": "Jaskinie Kutokue",
     "Description": "Od ścian odbija się echo krzyków desperacji.",
     "DungeonZoneInfo": "w regionie Nahantu",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -1157,7 +1184,7 @@
     "Name": "Niszczejąca Hekma",
     "Description": "Przesiąknięte nienawiścią katakumby Zakarum. ",
     "DungeonZoneInfo": "w regionie Kedżystan",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -1580,7 +1607,7 @@
     "Name": "Parszywe Zapadlisko",
     "Description": "W starych grobowcach Túr Dúlra rozpleniła się demoniczna plaga.",
     "DungeonZoneInfo": "w regionie Scosglen",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -1931,7 +1958,7 @@
     "Name": "Siedziba Dzikunów",
     "Description": "Chata spaczona nienawiścią druidów.",
     "DungeonZoneInfo": "w regionie Scosglen",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -2408,7 +2435,7 @@
     "Name": "Wypaczona Jama",
     "Description": "Rezerwat dzikiej przyrody, w którym mogą kryć się odpowiedzi.",
     "DungeonZoneInfo": "w regionie Scosglen",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -2795,7 +2822,7 @@
     "Name": "Zdradzony Grobowiec",
     "Description": "Pustownicy wrzeszczący w potwornej agonii sprawiają, że duchy się wiją.",
     "DungeonZoneInfo": "w regionie Nahantu",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -2831,7 +2858,7 @@
     "Name": "Zmienne Miasto",
     "Description": "W tych ruinach kryli się kiedyś uchodźcy z Qara-Yisu.",
     "DungeonZoneInfo": "w regionie Suche Stepy",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -3006,6 +3033,15 @@
     "Type": "Dungeon"
   },
   {
+    "IdSno": 2579464,
+    "IdName": "World_DGN_QST_Skov_Skar_Sphinx_01_B",
+    "Name": "Żużlowa Ścieżka",
+    "Description": "Tylko niezłomni zapuszczają się do wydrążonych przez lawę jaskiń w poszukiwaniu niesamowitych skarbów.",
+    "DungeonZoneInfo": "w regionie ",
+    "IsSeasonal": false,
+    "Type": "Dungeon"
+  },
+  {
     "IdSno": 2579466,
     "IdName": "World_DGN_QST_Skov_Skar_Sphinx_01_C",
     "Name": "Żużlowa Ścieżka",
@@ -3017,15 +3053,6 @@
   {
     "IdSno": 2579458,
     "IdName": "World_DGN_QST_Skov_Skar_Sphinx_01_A",
-    "Name": "Żużlowa Ścieżka",
-    "Description": "Tylko niezłomni zapuszczają się do wydrążonych przez lawę jaskiń w poszukiwaniu niesamowitych skarbów.",
-    "DungeonZoneInfo": "w regionie ",
-    "IsSeasonal": false,
-    "Type": "Dungeon"
-  },
-  {
-    "IdSno": 2579464,
-    "IdName": "World_DGN_QST_Skov_Skar_Sphinx_01_B",
     "Name": "Żużlowa Ścieżka",
     "Description": "Tylko niezłomni zapuszczają się do wydrążonych przez lawę jaskiń w poszukiwaniu niesamowitych skarbów.",
     "DungeonZoneInfo": "w regionie ",

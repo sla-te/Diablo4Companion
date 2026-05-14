@@ -1024,9 +1024,9 @@
     ],
     "IdNameItemActor": "Generic_Charm_Flippy",
     "Name": "Augurio de Dolor",
-    "Description": "Te rodea un aura oscura que aplica Decrepitar y Doncella de Hierro a los enemigos que la tocan. Toda \r\n\r\nMaldición que inflijas de este modo se esparce a los objetivos circundantes cada # segundos y dura # segundos fuera del aura.",
-    "DescriptionClean": "Te rodea un aura oscura que aplica Decrepitar y Doncella de Hierro a los enemigos que la tocan. Toda  Maldición que inflijas de este modo se esparce a los objetivos circundantes cada segundos y dura segundos fuera del aura.",
-    "Localisation": "Te rodea un aura oscura que aplica {c_important}Decrepitar{/c} y {c_important}Doncella de Hierro{/c} a los enemigos que la tocan. Toda \r\n\r\n{c_important}Maldición{/c} que inflijas de este modo se esparce a los objetivos circundantes cada {c_random}[Affix_Value_1|1|]{/c} segundos y dura {c_number}[Affix_Value_2]{/c} segundos fuera del aura.",
+    "Description": "Te rodea un aura oscura que aplica Decrepitar y Doncella de Hierro a los enemigos a tu alrededor. Toda \r\n\r\nMaldición que inflijas de este modo se esparce a los objetivos circundantes cada # segundos y dura # segundos fuera del aura.",
+    "DescriptionClean": "Te rodea un aura oscura que aplica Decrepitar y Doncella de Hierro a los enemigos a tu alrededor. Toda  Maldición que inflijas de este modo se esparce a los objetivos circundantes cada segundos y dura segundos fuera del aura.",
+    "Localisation": "Te rodea un aura oscura que aplica {c_important}Decrepitar{/c} y {c_important}Doncella de Hierro{/c} a los enemigos a tu alrededor. Toda \r\n\r\n{c_important}Maldición{/c} que inflijas de este modo se esparce a los objetivos circundantes cada {c_random}[Affix_Value_1|1|]{/c} segundos y dura {c_number}[Affix_Value_2]{/c} segundos fuera del aura.",
     "MagicType": 2,
     "AllowedForPlayerClass": [
       0,
@@ -3033,7 +3033,7 @@
     "Name": "Daga Perdida de Etna",
     "Description": "Infligir # tipos distintos de daño no físico aumenta la potencia de tus habilidades de Imbuición un #% y el daño no físico un #% durante # segundos.\r\n\r\nAhora las habilidades básicas son imbuibles.",
     "DescriptionClean": "Infligir tipos distintos de daño no físico aumenta la potencia de tus habilidades de Imbuición un y el daño no físico un durante segundos. Ahora las habilidades básicas son imbuibles.",
-    "Localisation": "Infligir {c_number}[Affix.\"Static Value 0\"]{/c} tipos distintos de daño no físico aumenta la potencia de tus habilidades de {c_important}Imbuición{/c} un {c_random}[Affix_Value_1*Affix.\"Static Value 1\"|%x|]{/c} y el daño no físico un {c_number}[Affix_Value_1|%x|]{/c} durante {c_number}[Affix.\"Static Value 2\"]{/c} segundos.\r\n\r\nAhora las habilidades {c_important}básicas{/c} son {c_important}imbuibles{/c}.",
+    "Localisation": "Infligir {c_number}[Affix.\"Static Value 0\"]{/c} tipos distintos de daño no físico aumenta la potencia de tus habilidades de {c_important}Imbuición{/c} un {c_random}[Affix_Value_1*Affix.\"Static Value 1\"|%x|]{/c} y el daño no físico un {c_random}[Affix_Value_1|%x|]{/c} durante {c_number}[Affix.\"Static Value 2\"]{/c} segundos.\r\n\r\nAhora las habilidades {c_important}básicas{/c} son {c_important}imbuibles{/c}.",
     "MagicType": 2,
     "AllowedForPlayerClass": [
       0,
@@ -3817,7 +3817,7 @@
       0,
       0,
       0,
-      1,
+      0,
       0
     ],
     "AllowedItemLabels": []
@@ -4005,9 +4005,9 @@
     ],
     "IdNameItemActor": "Generic_Charm_Flippy",
     "Name": "Fuerza de los Osunos",
-    "Description": "Obtienes un #% de bonificación de daño por cada acumulación de Determinación que tengas en forma de Hombre Oso. Además, obtienes automáticamente # acumulación de Determinación cada # segundos mientras estás en forma de Hombre Oso.",
+    "Description": "Obtienes un #% de bonificación de daño por cada acumulación de Determinación que tengas en forma de Hombre Oso. Además, obtienes automáticamente # acumulación de Determinación cada# segundos mientras estás en forma de Hombre Oso. ",
     "DescriptionClean": "Obtienes un de bonificación de daño por cada acumulación de Determinación que tengas en forma de Hombre Oso. Además, obtienes automáticamente acumulación de Determinación cada segundos mientras estás en forma de Hombre Oso.",
-    "Localisation": "Obtienes un {c_random}[Affix_Value_1*100|x%|]{/c} de bonificación de daño por cada acumulación de {c_important}{u}Determinación{/u}{/c} que tengas en forma de Hombre Oso. Además, obtienes automáticamente {c_number}[Affix.\"Static Value 0\"]{/c} acumulación de {c_important}{u}Determinación{/u}{/c} cada {c_number}[Affix.\"Static Value 1\"]{/c} segundos mientras estás en forma de Hombre Oso.",
+    "Localisation": "Obtienes un {c_random}[Affix_Value_1*100|x%|]{/c} de bonificación de daño por cada acumulación de {c_important}{u}Determinación{/u}{/c} que tengas en forma de Hombre Oso. Además, obtienes automáticamente {c_number}[Affix.\"Static Value 0\"]{/c} acumulación de {c_important}{u}Determinación{/u}{/c} cada{c_number}[Affix.\"Static Value 1\"]{/c} |4segundo:segundos; mientras estás en forma de Hombre Oso. ",
     "MagicType": 2,
     "AllowedForPlayerClass": [
       0,
@@ -5792,7 +5792,7 @@
     "Name": "Marca del Lobo Viejo",
     "Description": " Obtienes un #% más de daño de veneno.\r\n El daño directo de tus habilidades de Hombre Lobo obtiene una bonificación equivalente al #% de tu bonificación de daño de veneno, hasta un máximo de un #%.\r\n El daño de veneno de las habilidades de Hombre Lobo obtiene una bonificación equivalente al #% de tu bonificación de velocidad de ataque y de probabilidad de golpe crítico, hasta un máximo de un #%.\r\n\r\nBonificación de daño directo actual: #%\r\nBonificación de daño de veneno actual: #%",
     "DescriptionClean": "Obtienes un más de daño de veneno. El daño directo de tus habilidades de Hombre Lobo obtiene una bonificación equivalente al de tu bonificación de daño de veneno, hasta un máximo de un. El daño de veneno de las habilidades de Hombre Lobo obtiene una bonificación equivalente al de tu bonificación de velocidad de ataque y de probabilidad de golpe crítico, hasta un máximo de un. Bonificación de daño directo actual: Bonificación de daño de veneno actual:",
-    "Localisation": "{icon:bullet,1.2} Obtienes un {c_random}[Affix_Value_1*100|x%|]{/c} más de daño de veneno.\r\n{icon:bullet,1.2} El daño directo de tus habilidades de {c_important}Hombre Lobo{/c} obtiene una bonificación equivalente al {c_number}[Affix.\"Static Value 0\"*100|x%|]{/c} de tu bonificación de daño de veneno, hasta un máximo de un {c_number}[Affix.\"Static Value 2\"*100|x%|]{/c}.\r\n{icon:bullet,1.2} El daño de veneno de las habilidades de Hombre Lobo obtiene una bonificación equivalente al {c_number}[Affix.\"Static Value 1\"*100|x%|]{/c} de tu bonificación de velocidad de ataque y de probabilidad de golpe crítico, hasta un máximo de un {c_number}[Affix.\"Static Value 2\"*100|x%|]{/c}.\r\n\r\nBonificación de daño directo actual: {c_number}[min((Owner.DOT_DPS_Bonus_Percent+Owner.DOT_DPS_Bonus_Percent_Per_Damage_Type#Poison)*Affix.\"Static Value 0\"*100, Affix.\"Static Value 2\" * 100)|%x|]{/c}\r\nBonificación de daño de veneno actual: {c_number}[min((Owner.Attack_Speed_Percent_Bonus_Total+Owner.Cast_Speed_Percent_Bonus+Owner.Crit_Percent_Base+Owner.Crit_Percent_Bonus)*Affix.\"Static Value 1\"*100, Affix.\"Static Value 2\" * 100)|x%|]{/c}",
+    "Localisation": "{icon:bullet,1.2} Obtienes un {c_random}[Affix_Value_1*100|x%|]{/c} más de daño de veneno.\r\n{icon:bullet,1.2} El daño directo de tus habilidades de {c_important}Hombre Lobo{/c} obtiene una bonificación equivalente al {c_number}[Affix.\"Static Value 0\"*100|x%|]{/c} de tu bonificación de daño de veneno, hasta un máximo de un {c_number}[Affix.\"Static Value 2\"*100|x%|]{/c}.\r\n{icon:bullet,1.2} El daño de veneno de las habilidades de Hombre Lobo obtiene una bonificación equivalente al {c_number}[Affix.\"Static Value 1\"*100|x%|]{/c} de tu bonificación de velocidad de ataque y de probabilidad de golpe crítico, hasta un máximo de un {c_number}[Affix.\"Static Value 2\"*100|x%|]{/c}.\r\n\r\nBonificación de daño directo actual: {c_number}[min((Owner.DOT_DPS_Bonus_Percent+Owner.DOT_DPS_Bonus_Percent_Per_Damage_Type#Poison +Owner.Bucketed_Multiplicative_DoT_Damage)*Affix.\"Static Value 0\"*100, Affix.\"Static Value 2\" * 100)|%x|]{/c}\r\nBonificación de daño de veneno actual: {c_number}[min((Owner.Attack_Speed_Percent_Bonus_Total+Owner.Cast_Speed_Percent_Bonus+Owner.Crit_Percent_Base+Owner.Crit_Percent_Bonus)*Affix.\"Static Value 1\"*100, Affix.\"Static Value 2\" * 100)|x%|]{/c}",
     "MagicType": 2,
     "AllowedForPlayerClass": [
       0,
@@ -6982,7 +6982,7 @@
     "Name": "Pisadas de Bucrani",
     "Description": "Tu probabilidad de golpe crítico aumenta en una cantidad equivalente al #% de tu bonificación de velocidad de movimiento.\r\n\r\nBonificación actual: #%",
     "DescriptionClean": "Tu probabilidad de golpe crítico aumenta en una cantidad equivalente al de tu bonificación de velocidad de movimiento. Bonificación actual:",
-    "Localisation": "Tu probabilidad de golpe crítico aumenta en una cantidad equivalente al {c_random}[Affix_Value_1|%|]{/c} de tu bonificación de velocidad de movimiento.\r\n\r\nBonificación actual: {c_number}[(Min(Owner.Movement_Scalar_Capped_Total,2)-1) * (Affix_Value_1)|1%|]{/c}",
+    "Localisation": "Tu probabilidad de golpe crítico aumenta en una cantidad equivalente al {c_random}[Affix_Value_1|%|]{/c} de tu bonificación de velocidad de movimiento.\r\n\r\nBonificación actual: {c_number}[(Min((Owner.Movement_Scalar_Capped_Total + Owner.Movement_Scalar_Temporary_Bonus),2)-1) * (Affix_Value_1)|1%|]{/c}",
     "MagicType": 2,
     "AllowedForPlayerClass": [
       1,

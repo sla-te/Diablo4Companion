@@ -13128,7 +13128,7 @@
     ],
     "AffixType": 2,
     "Category": 3,
-    "Flags": 1027,
+    "Flags": 1028,
     "IsTemperingAvailable": true,
     "MagicType": 0,
     "AllowedForPlayerClass": [
@@ -30712,12 +30712,9 @@
     "DescriptionClean": "de daño de Versátil"
   },
   {
-    "IdSno": "2614081;2614083;2614085;2618017;2618019;2618025",
-    "IdName": "Tempered_Damage_Generic_LuckHit_Weakened_BarbRogue_Tier1;Tempered_Damage_Generic_LuckHit_Weakened_BarbRogue_Tier2;Tempered_Damage_Generic_LuckHit_Weakened_BarbRogue_Tier3;Tempered_Damage_Generic_LuckHit_Weakened_Tier1;Tempered_Damage_Generic_LuckHit_Weakened_Tier2;Tempered_Damage_Generic_LuckHit_Weakened_Tier3",
+    "IdSno": "2618017;2618019;2618025",
+    "IdName": "Tempered_Damage_Generic_LuckHit_Weakened_BarbRogue_Tier1;Tempered_Damage_Generic_LuckHit_Weakened_BarbRogue_Tier2;Tempered_Damage_Generic_LuckHit_Weakened_BarbRogue_Tier3",
     "IdSnoList": [
-      "2614081",
-      "2614083",
-      "2614085",
       "2618017",
       "2618019",
       "2618025"
@@ -30725,10 +30722,7 @@
     "IdNameList": [
       "Tempered_Damage_Generic_LuckHit_Weakened_BarbRogue_Tier1",
       "Tempered_Damage_Generic_LuckHit_Weakened_BarbRogue_Tier2",
-      "Tempered_Damage_Generic_LuckHit_Weakened_BarbRogue_Tier3",
-      "Tempered_Damage_Generic_LuckHit_Weakened_Tier1",
-      "Tempered_Damage_Generic_LuckHit_Weakened_Tier2",
-      "Tempered_Damage_Generic_LuckHit_Weakened_Tier3"
+      "Tempered_Damage_Generic_LuckHit_Weakened_BarbRogue_Tier3"
     ],
     "AffixType": -1,
     "Category": -1,
@@ -33687,15 +33681,15 @@
     "AllowedItemLabels": [],
     "AffixAttributes": [
       {
-        "LocalisationId": "Per_Skill_Tag_Buff_Duration_Bonus_Percent",
+        "LocalisationId": "Custom_Duration_Bonus_Per_Skill_Tag",
         "LocalisationParameter": 3360437049,
         "LocalisationAttributeFormulaValue": "0",
-        "Localisation": "+[{VALUE2}*100|1%|] de duración de {c_important}{VALUE1}{/c}"
+        "Localisation": "+[{VALUE2}*100|1%|] {c_important}{VALUE1}{/c} de duración"
       }
     ],
     "ClassRestriction": "",
-    "Description": "+#% de duración de Sello",
-    "DescriptionClean": "de duración de Sello"
+    "Description": "+#% Sello de duración",
+    "DescriptionClean": "Sello de duración"
   },
   {
     "IdSno": "2478321;2478323;2478325",

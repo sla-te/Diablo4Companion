@@ -3024,7 +3024,7 @@
     "Name": "Kroki Bucrani",
     "Description": "Szansa na trafienie krytyczne jest zwiększona o równowartość #% twojej premii do szybkości ruchu.\r\n\r\nAktualna premia: #%",
     "DescriptionClean": "Szansa na trafienie krytyczne jest zwiększona o równowartość twojej premii do szybkości ruchu. Aktualna premia:",
-    "Localisation": "Szansa na trafienie krytyczne jest zwiększona o równowartość {c_random}[Affix_Value_1|%|]{/c} twojej premii do szybkości ruchu.\r\n\r\nAktualna premia: {c_number}[(Min(Owner.Movement_Scalar_Capped_Total,2)-1) * (Affix_Value_1)|1%|]{/c}",
+    "Localisation": "Szansa na trafienie krytyczne jest zwiększona o równowartość {c_random}[Affix_Value_1|%|]{/c} twojej premii do szybkości ruchu.\r\n\r\nAktualna premia: {c_number}[(Min((Owner.Movement_Scalar_Capped_Total + Owner.Movement_Scalar_Temporary_Bonus),2)-1) * (Affix_Value_1)|1%|]{/c}",
     "MagicType": 2,
     "AllowedForPlayerClass": [
       1,
@@ -3683,7 +3683,7 @@
       0,
       0,
       0,
-      1,
+      0,
       0
     ],
     "AllowedItemLabels": []
@@ -4610,9 +4610,9 @@
     ],
     "IdNameItemActor": "Icons_Ring_Unique_002",
     "Name": "Omen Bólu",
-    "Description": "Otacza cię mroczna aura, która wywołuje u dotkniętych wrogów efekty Zniedołężnienia i Żelaznej Dziewicy. \r\n\r\nNałożone w ten sposób Klątwy roznoszą się na pobliskie cele co # sek. i trwają # sek. poza aurą.",
-    "DescriptionClean": "Otacza cię mroczna aura, która wywołuje u dotkniętych wrogów efekty Zniedołężnienia i Żelaznej Dziewicy.  Nałożone w ten sposób Klątwy roznoszą się na pobliskie cele co sek. i trwają sek. poza aurą.",
-    "Localisation": "Otacza cię mroczna aura, która wywołuje u dotkniętych wrogów efekty {c_important}Zniedołężnienia{/c} i {c_important}Żelaznej Dziewicy{/c}. \r\n\r\nNałożone w ten sposób {c_important}Klątwy{/c} roznoszą się na pobliskie cele co {c_random}[Affix_Value_1|1|]{/c} sek. i trwają {c_number}[Affix_Value_2]{/c} sek. poza aurą.",
+    "Description": "Otacza cię mroczna aura, która wywołuje u pobliskich wrogów efekty Zniedołężnienia i Żelaznej Dziewicy.\r\n\r\nNałożone w ten sposób Klątwy roznoszą się na pobliskie cele co # sek. i trwają # sek. poza aurą.",
+    "DescriptionClean": "Otacza cię mroczna aura, która wywołuje u pobliskich wrogów efekty Zniedołężnienia i Żelaznej Dziewicy. Nałożone w ten sposób Klątwy roznoszą się na pobliskie cele co sek. i trwają sek. poza aurą.",
+    "Localisation": "Otacza cię mroczna aura, która wywołuje u pobliskich wrogów efekty {c_important}Zniedołężnienia{/c} i {c_important}Żelaznej Dziewicy{/c}.\r\n\r\nNałożone w ten sposób {c_important}Klątwy{/c} roznoszą się na pobliskie cele co {c_random}[Affix_Value_1|1|]{/c} sek. i trwają {c_number}[Affix_Value_2]{/c} sek. poza aurą.",
     "MagicType": 2,
     "AllowedForPlayerClass": [
       0,
@@ -8952,7 +8952,7 @@
     "Name": "Zagubiony Sztylet Etny",
     "Description": "Zadanie # różnych typów obrażeń niefizycznych zwiększa moc twoich umiejętności Nasycenia o #%, a zadawane obrażenia niefizyczne o #% na # sek. \r\n\r\nUmiejętności Podstawowe są teraz nasycalne.",
     "DescriptionClean": "Zadanie różnych typów obrażeń niefizycznych zwiększa moc twoich umiejętności Nasycenia o , a zadawane obrażenia niefizyczne o na sek.  Umiejętności Podstawowe są teraz nasycalne.",
-    "Localisation": "Zadanie {c_number}[Affix.\"Static Value 0\"]{/c} różnych typów obrażeń niefizycznych zwiększa moc twoich umiejętności {c_important}Nasycenia{/c} o {c_random}[Affix_Value_1*Affix.\"Static Value 1\"|%x|]{/c}, a zadawane obrażenia niefizyczne o {c_number}[Affix_Value_1|%x|]{/c} na {c_number}[Affix.\"Static Value 2\"]{/c} sek. \r\n\r\nUmiejętności {c_important}Podstawowe{/c} są teraz {c_important}nasycalne{/c}.",
+    "Localisation": "Zadanie {c_number}[Affix.\"Static Value 0\"]{/c} różnych typów obrażeń niefizycznych zwiększa moc twoich umiejętności {c_important}Nasycenia{/c} o {c_random}[Affix_Value_1*Affix.\"Static Value 1\"|%x|]{/c}, a zadawane obrażenia niefizyczne o {c_random}[Affix_Value_1|%x|]{/c} na {c_number}[Affix.\"Static Value 2\"]{/c} sek. \r\n\r\nUmiejętności {c_important}Podstawowe{/c} są teraz {c_important}nasycalne{/c}.",
     "MagicType": 2,
     "AllowedForPlayerClass": [
       0,
@@ -9237,7 +9237,7 @@
     "Name": "Znamię Pradawnego Wilka",
     "Description": " Zyskujesz #% premii do obrażeń od zatrucia.\r\n Obrażenia bezpośrednie umiejętności Wilkołaka zyskują premię równą #% premii do obrażeń od zatrucia, maksymalnie #%.\r\n Obrażenia od Trucizny umiejętności Wilkołaka zyskują premię równą #% premii do szybkości ataku i do szans na trafienie krytyczne, maksymalnie #%.\r\n\r\nAktualna premia do obrażeń bezpośrednich: #%\r\nAktualna premia do obrażeń od Trucizny: #%",
     "DescriptionClean": "Zyskujesz premii do obrażeń od zatrucia. Obrażenia bezpośrednie umiejętności Wilkołaka zyskują premię równą premii do obrażeń od zatrucia, maksymalnie. Obrażenia od Trucizny umiejętności Wilkołaka zyskują premię równą premii do szybkości ataku i do szans na trafienie krytyczne, maksymalnie. Aktualna premia do obrażeń bezpośrednich: Aktualna premia do obrażeń od Trucizny:",
-    "Localisation": "{icon:bullet,1.2} Zyskujesz {c_random}[Affix_Value_1*100|x%|]{/c} premii do obrażeń od zatrucia.\r\n{icon:bullet,1.2} Obrażenia bezpośrednie umiejętności {c_important}Wilkołaka{/c} zyskują premię równą {c_number}[Affix.\"Static Value 0\"*100|x%|]{/c} premii do obrażeń od zatrucia, maksymalnie {c_number}[Affix.\"Static Value 2\"*100|x%|]{/c}.\r\n{icon:bullet,1.2} Obrażenia od Trucizny umiejętności Wilkołaka zyskują premię równą {c_number}[Affix.\"Static Value 1\"*100|x%|]{/c} premii do szybkości ataku i do szans na trafienie krytyczne, maksymalnie {c_number}[Affix.\"Static Value 2\"*100|x%|]{/c}.\r\n\r\nAktualna premia do obrażeń bezpośrednich: {c_number}[min((Owner.DOT_DPS_Bonus_Percent+Owner.DOT_DPS_Bonus_Percent_Per_Damage_Type#Poison)*Affix.\"Static Value 0\"*100, Affix.\"Static Value 2\" * 100)|%x|]{/c}\r\nAktualna premia do obrażeń od Trucizny: {c_number}[min((Owner.Attack_Speed_Percent_Bonus_Total+Owner.Cast_Speed_Percent_Bonus+Owner.Crit_Percent_Base+Owner.Crit_Percent_Bonus)*Affix.\"Static Value 1\"*100, Affix.\"Static Value 2\" * 100)|x%|]{/c}",
+    "Localisation": "{icon:bullet,1.2} Zyskujesz {c_random}[Affix_Value_1*100|x%|]{/c} premii do obrażeń od zatrucia.\r\n{icon:bullet,1.2} Obrażenia bezpośrednie umiejętności {c_important}Wilkołaka{/c} zyskują premię równą {c_number}[Affix.\"Static Value 0\"*100|x%|]{/c} premii do obrażeń od zatrucia, maksymalnie {c_number}[Affix.\"Static Value 2\"*100|x%|]{/c}.\r\n{icon:bullet,1.2} Obrażenia od Trucizny umiejętności Wilkołaka zyskują premię równą {c_number}[Affix.\"Static Value 1\"*100|x%|]{/c} premii do szybkości ataku i do szans na trafienie krytyczne, maksymalnie {c_number}[Affix.\"Static Value 2\"*100|x%|]{/c}.\r\n\r\nAktualna premia do obrażeń bezpośrednich: {c_number}[min((Owner.DOT_DPS_Bonus_Percent+Owner.DOT_DPS_Bonus_Percent_Per_Damage_Type#Poison +Owner.Bucketed_Multiplicative_DoT_Damage)*Affix.\"Static Value 0\"*100, Affix.\"Static Value 2\" * 100)|%x|]{/c}\r\nAktualna premia do obrażeń od Trucizny: {c_number}[min((Owner.Attack_Speed_Percent_Bonus_Total+Owner.Cast_Speed_Percent_Bonus+Owner.Crit_Percent_Base+Owner.Crit_Percent_Bonus)*Affix.\"Static Value 1\"*100, Affix.\"Static Value 2\" * 100)|x%|]{/c}",
     "MagicType": 2,
     "AllowedForPlayerClass": [
       0,
