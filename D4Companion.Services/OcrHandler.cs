@@ -534,6 +534,7 @@ namespace D4Companion.Services
                     // PageSegMode.Auto: Fully automatic page segmentation, but no OSD.
                     // - Has issues with smaller tooltips. Caused by differences in layout of game background and tooltip. Processes only first line.
                     // - Note about "Processes only first line" does not seem correct. Finds more text than SparseText and SparseTextOsd.
+                    // - Not able to find "Ring" on second line of Ancestral Mythic Unique Ring
                     // - Around 10+ ms slower than PageSegMode.SparseTextOsd
 
                     // PageSegMode.SingleColumn: Assume a single column of text of variable sizes. 
@@ -541,6 +542,7 @@ namespace D4Companion.Services
 
                     // PageSegMode.SingleBlock: Assume a single uniform block of text. (Default.) 
                     // - Working. 130+ ms (1080p)
+                    // - Finds more text than Auto.
 
                     // PageSegMode.SparseText: Find as much text as possible in no particular order. 
                     // - Working. 100+ ms (1080p)
@@ -550,9 +552,10 @@ namespace D4Companion.Services
 
                     // Note: PageSegMode can be simplefied when the tooltip area can be detected more precisely.
                     // As long parts of the game background is visible above the tooltip a more general approach is needed.
-                    using (var page = engine.Process(img, PageSegMode.Auto))
+                    //using (var page = engine.Process(img, PageSegMode.Auto))
                     //using (var page = engine.Process(img, PageSegMode.SparseText))
-                    //using (var page = engine.Process(img, PageSegMode.SparseTextOsd))                                        
+                    //using (var page = engine.Process(img, PageSegMode.SparseTextOsd))
+                    using (var page = engine.Process(img, PageSegMode.SingleBlock))
                     {
                         return page.Text;
                     }
