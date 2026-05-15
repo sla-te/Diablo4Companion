@@ -4172,8 +4172,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "+#% de probabilidad de golpe crítico contra enemigos de élite de Física",
-    "DescriptionClean": "de probabilidad de golpe crítico contra enemigos de élite de Física"
+    "Description": "+#% de probabilidad de golpe crítico contra enemigos de élite de Físico",
+    "DescriptionClean": "de probabilidad de golpe crítico contra enemigos de élite de Físico"
   },
   {
     "IdSno": "1316335;1316337",
@@ -6717,8 +6717,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "+#% Física de daño",
-    "DescriptionClean": "Física de daño"
+    "Description": "+#% Físico de daño",
+    "DescriptionClean": "Físico de daño"
   },
   {
     "IdSno": "1862361;1938716;1939857;2064632;2333271;577075",
@@ -21689,8 +21689,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "Golpe de suerte: Hasta un 40% de probabilidad de infligir +# de daño de No física",
-    "DescriptionClean": "Golpe de suerte: Hasta un 40 de probabilidad de infligir de daño de No física"
+    "Description": "Golpe de suerte: Hasta un 40% de probabilidad de infligir +# de daño de Sagrado",
+    "DescriptionClean": "Golpe de suerte: Hasta un 40 de probabilidad de infligir de daño de Sagrado"
   },
   {
     "IdSno": "1936578;1938949;1940095;2619750;2619864",
@@ -21785,8 +21785,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "Golpe de suerte: Hasta un 40% de probabilidad de infligir +# de daño de Física",
-    "DescriptionClean": "Golpe de suerte: Hasta un 40 de probabilidad de infligir de daño de Física"
+    "Description": "Golpe de suerte: Hasta un 40% de probabilidad de infligir +# de daño de Físico",
+    "DescriptionClean": "Golpe de suerte: Hasta un 40 de probabilidad de infligir de daño de Físico"
   },
   {
     "IdSno": "1936580;1938955;1940099;2619754;2619868",
@@ -30823,8 +30823,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "+#% No física de daño",
-    "DescriptionClean": "No física de daño"
+    "Description": "+#% Sagrado de daño",
+    "DescriptionClean": "Sagrado de daño"
   },
   {
     "IdSno": "1862334;1938729;1939867",
@@ -40616,8 +40616,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "Multiplicador de daño de No física x#%",
-    "DescriptionClean": "Multiplicador de daño de No física x"
+    "Description": "Multiplicador de daño de Sagrado x#%",
+    "DescriptionClean": "Multiplicador de daño de Sagrado x"
   },
   {
     "IdSno": "2558717;2602180",
@@ -40700,8 +40700,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "Multiplicador de daño de Física x#%",
-    "DescriptionClean": "Multiplicador de daño de Física x"
+    "Description": "Multiplicador de daño de Físico x#%",
+    "DescriptionClean": "Multiplicador de daño de Físico x"
   },
   {
     "IdSno": "2558715;2602184",
@@ -41298,8 +41298,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "#% de daño de No física",
-    "DescriptionClean": "de daño de No física"
+    "Description": "#% de daño de Sagrado",
+    "DescriptionClean": "de daño de Sagrado"
   },
   {
     "IdSno": "2497326",
@@ -41382,8 +41382,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "#% de daño de Física",
-    "DescriptionClean": "de daño de Física"
+    "Description": "#% de daño de Físico",
+    "DescriptionClean": "de daño de Físico"
   },
   {
     "IdSno": "2497328",

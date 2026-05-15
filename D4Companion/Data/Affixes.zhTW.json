@@ -4506,8 +4506,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "閃電爆擊傷害 +#%",
-    "DescriptionClean": "閃電爆擊傷害"
+    "Description": "電擊爆擊傷害 +#%",
+    "DescriptionClean": "電擊爆擊傷害"
   },
   {
     "IdSno": "1290946;2178811",
@@ -6575,14 +6575,11 @@
     "DescriptionClean": "火焰傷害"
   },
   {
-    "IdSno": "1862357;1884864;1938624;1938712;1939808;1939853;2063529;2387523;2497326;577073",
-    "IdName": "Damage_Type_Bonus_Lightning;Tempered_Damage_Druid_Skill_LightningBolt_Tier1;Tempered_Damage_Druid_Skill_LightningBolt_Tier2;Tempered_Damage_Druid_Skill_LightningBolt_Tier3;Tempered_Damage_Generic_Type_Lightning_Tier1;Tempered_Damage_Generic_Type_Lightning_Tier2;Tempered_Damage_Generic_Type_Lightning_Tier3;UNIQUE_Damage_Type_Bonus_Lightning_Higher;UNIQUE_INHERENT_Damage_Type_Lightning;X2_Transfiguration_DamageTypePercent_Lightning",
+    "IdSno": "1862357;1938712;1939853;2063529;2387523;2497326;577073",
+    "IdName": "Damage_Type_Bonus_Lightning;Tempered_Damage_Generic_Type_Lightning_Tier1;Tempered_Damage_Generic_Type_Lightning_Tier2;Tempered_Damage_Generic_Type_Lightning_Tier3;UNIQUE_Damage_Type_Bonus_Lightning_Higher;UNIQUE_INHERENT_Damage_Type_Lightning;X2_Transfiguration_DamageTypePercent_Lightning",
     "IdSnoList": [
       "1862357",
-      "1884864",
-      "1938624",
       "1938712",
-      "1939808",
       "1939853",
       "2063529",
       "2387523",
@@ -6591,9 +6588,6 @@
     ],
     "IdNameList": [
       "Damage_Type_Bonus_Lightning",
-      "Tempered_Damage_Druid_Skill_LightningBolt_Tier1",
-      "Tempered_Damage_Druid_Skill_LightningBolt_Tier2",
-      "Tempered_Damage_Druid_Skill_LightningBolt_Tier3",
       "Tempered_Damage_Generic_Type_Lightning_Tier1",
       "Tempered_Damage_Generic_Type_Lightning_Tier2",
       "Tempered_Damage_Generic_Type_Lightning_Tier3",
@@ -6629,44 +6623,30 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "閃電傷害 +#%",
-    "DescriptionClean": "閃電傷害"
+    "Description": "電擊傷害 +#%",
+    "DescriptionClean": "電擊傷害"
   },
   {
-    "IdSno": "1290758;1439263;1661280;2052119;2066253;2497379;2502528;2502531;2502533;2634626;2634628;2634630",
-    "IdName": "Damage_Type_Bonus_NonPhysical;Damage_Type_Bonus_NonPhysical_Greater;Damage_Type_Bonus_NonPhysical_Quadruple_UNIQUE;Tempered_Damage_Generic_Type_Holy_Tier1;Tempered_Damage_Generic_Type_Holy_Tier2;Tempered_Damage_Generic_Type_Holy_Tier3;Tempered_Offensive_Damage_Tag_Holy_Paladin_Tier1;Tempered_Offensive_Damage_Tag_Holy_Paladin_Tier2;Tempered_Offensive_Damage_Tag_Holy_Paladin_Tier3;UNIQUE_Damage_Type_Bonus_NonPhysical_Higher;UNIQUE_INHERENT_Damage_Type_NonPhysical;X2_Transfiguration_DamageTypePercent_Holy",
+    "IdSno": "1290758;1439263;1661280;2052119;2066253",
+    "IdName": "Damage_Type_Bonus_NonPhysical;Damage_Type_Bonus_NonPhysical_Greater;Damage_Type_Bonus_NonPhysical_Quadruple_UNIQUE;UNIQUE_Damage_Type_Bonus_NonPhysical_Higher;UNIQUE_INHERENT_Damage_Type_NonPhysical",
     "IdSnoList": [
       "1290758",
       "1439263",
       "1661280",
       "2052119",
-      "2066253",
-      "2497379",
-      "2502528",
-      "2502531",
-      "2502533",
-      "2634626",
-      "2634628",
-      "2634630"
+      "2066253"
     ],
     "IdNameList": [
       "Damage_Type_Bonus_NonPhysical",
       "Damage_Type_Bonus_NonPhysical_Greater",
       "Damage_Type_Bonus_NonPhysical_Quadruple_UNIQUE",
-      "Tempered_Damage_Generic_Type_Holy_Tier1",
-      "Tempered_Damage_Generic_Type_Holy_Tier2",
-      "Tempered_Damage_Generic_Type_Holy_Tier3",
-      "Tempered_Offensive_Damage_Tag_Holy_Paladin_Tier1",
-      "Tempered_Offensive_Damage_Tag_Holy_Paladin_Tier2",
-      "Tempered_Offensive_Damage_Tag_Holy_Paladin_Tier3",
       "UNIQUE_Damage_Type_Bonus_NonPhysical_Higher",
-      "UNIQUE_INHERENT_Damage_Type_NonPhysical",
-      "X2_Transfiguration_DamageTypePercent_Holy"
+      "UNIQUE_INHERENT_Damage_Type_NonPhysical"
     ],
     "AffixType": 2,
     "Category": 0,
     "Flags": 1156,
-    "IsTemperingAvailable": true,
+    "IsTemperingAvailable": false,
     "MagicType": 0,
     "AllowedForPlayerClass": [
       1,
@@ -21721,8 +21701,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "幸運觸發：最高有 40% 機率造成 +# 點非物理傷害",
-    "DescriptionClean": "幸運觸發：最高有 40 機率造成 點非物理傷害"
+    "Description": "幸運觸發：最高有 40% 機率造成 +# 點神聖傷害",
+    "DescriptionClean": "幸運觸發：最高有 40 機率造成 點神聖傷害"
   },
   {
     "IdSno": "1936578;1938949;1940095;2619750;2619864",
@@ -21768,8 +21748,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "幸運觸發：最高有 40% 機率造成 +# 點閃電傷害",
-    "DescriptionClean": "幸運觸發：最高有 40 機率造成 點閃電傷害"
+    "Description": "幸運觸發：最高有 40% 機率造成 +# 點電擊傷害",
+    "DescriptionClean": "幸運觸發：最高有 40 機率造成 點電擊傷害"
   },
   {
     "IdSno": "1936572;1938952;1940097;2546466;2619752;2619866",
@@ -30443,6 +30423,47 @@
     "DescriptionClean": "割裂傷害"
   },
   {
+    "IdSno": "1884864;1938624;1939808",
+    "IdName": "Tempered_Damage_Druid_Skill_LightningBolt_Tier1;Tempered_Damage_Druid_Skill_LightningBolt_Tier2;Tempered_Damage_Druid_Skill_LightningBolt_Tier3",
+    "IdSnoList": [
+      "1884864",
+      "1938624",
+      "1939808"
+    ],
+    "IdNameList": [
+      "Tempered_Damage_Druid_Skill_LightningBolt_Tier1",
+      "Tempered_Damage_Druid_Skill_LightningBolt_Tier2",
+      "Tempered_Damage_Druid_Skill_LightningBolt_Tier3"
+    ],
+    "AffixType": 2,
+    "Category": 0,
+    "Flags": 1156,
+    "IsTemperingAvailable": true,
+    "MagicType": 0,
+    "AllowedForPlayerClass": [
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "AllowedItemLabels": [],
+    "AffixAttributes": [
+      {
+        "LocalisationId": "Power_Damage_Percent_Bonus",
+        "LocalisationParameter": 1064741,
+        "LocalisationAttributeFormulaValue": "0",
+        "Localisation": "{c_important}{VALUE1}{/c}傷害 +[{VALUE2}*100|1%|]"
+      }
+    ],
+    "ClassRestriction": "（只限德魯伊）",
+    "Description": "閃電傷害 +#%",
+    "DescriptionClean": "閃電傷害"
+  },
+  {
     "IdSno": "1884912;1938626;1939810",
     "IdName": "Tempered_Damage_Druid_Skill_PoisonCreeper_Tier1;Tempered_Damage_Druid_Skill_PoisonCreeper_Tier2;Tempered_Damage_Druid_Skill_PoisonCreeper_Tier3",
     "IdSnoList": [
@@ -30769,6 +30790,55 @@
     "ClassRestriction": "",
     "Description": "幸運觸發：最高有 +#% 的機率造成削弱，持續 2 秒",
     "DescriptionClean": "幸運觸發：最高有 的機率造成削弱，持續 2 秒"
+  },
+  {
+    "IdSno": "2497379;2502528;2502531;2502533;2634626;2634628;2634630",
+    "IdName": "Tempered_Damage_Generic_Type_Holy_Tier1;Tempered_Damage_Generic_Type_Holy_Tier2;Tempered_Damage_Generic_Type_Holy_Tier3;Tempered_Offensive_Damage_Tag_Holy_Paladin_Tier1;Tempered_Offensive_Damage_Tag_Holy_Paladin_Tier2;Tempered_Offensive_Damage_Tag_Holy_Paladin_Tier3;X2_Transfiguration_DamageTypePercent_Holy",
+    "IdSnoList": [
+      "2497379",
+      "2502528",
+      "2502531",
+      "2502533",
+      "2634626",
+      "2634628",
+      "2634630"
+    ],
+    "IdNameList": [
+      "Tempered_Damage_Generic_Type_Holy_Tier1",
+      "Tempered_Damage_Generic_Type_Holy_Tier2",
+      "Tempered_Damage_Generic_Type_Holy_Tier3",
+      "Tempered_Offensive_Damage_Tag_Holy_Paladin_Tier1",
+      "Tempered_Offensive_Damage_Tag_Holy_Paladin_Tier2",
+      "Tempered_Offensive_Damage_Tag_Holy_Paladin_Tier3",
+      "X2_Transfiguration_DamageTypePercent_Holy"
+    ],
+    "AffixType": 2,
+    "Category": -1,
+    "Flags": 1028,
+    "IsTemperingAvailable": true,
+    "MagicType": 0,
+    "AllowedForPlayerClass": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "AllowedItemLabels": [],
+    "AffixAttributes": [
+      {
+        "LocalisationId": "Damage_Type_Percent_Bonus",
+        "LocalisationParameter": 6,
+        "LocalisationAttributeFormulaValue": "0",
+        "Localisation": "{VALUE1}傷害 +[{VALUE2}*100|1%|]"
+      }
+    ],
+    "ClassRestriction": "",
+    "Description": "神聖傷害 +#%",
+    "DescriptionClean": "神聖傷害"
   },
   {
     "IdSno": "1862334;1938729;1939867",
@@ -40560,8 +40630,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "非物理傷害加成 x#%",
-    "DescriptionClean": "非物理傷害加成 x"
+    "Description": "神聖傷害加成 x#%",
+    "DescriptionClean": "神聖傷害加成 x"
   },
   {
     "IdSno": "2558717;2602180",
@@ -40602,8 +40672,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "閃電傷害加成 x#%",
-    "DescriptionClean": "閃電傷害加成 x"
+    "Description": "電擊傷害加成 x#%",
+    "DescriptionClean": "電擊傷害加成 x"
   },
   {
     "IdSno": "2558672;2602182",

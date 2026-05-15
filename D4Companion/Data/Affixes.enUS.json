@@ -21739,8 +21739,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "Lucky Hit: Up to a 40% Chance to Deal +# Non Physical Damage",
-    "DescriptionClean": "Lucky Hit: Up to a 40 Chance to Deal Non Physical Damage"
+    "Description": "Lucky Hit: Up to a 40% Chance to Deal +# Holy Damage",
+    "DescriptionClean": "Lucky Hit: Up to a 40 Chance to Deal Holy Damage"
   },
   {
     "IdSno": "1936578;1938949;1940095;2619750;2619864",
@@ -30875,8 +30875,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "+#% Non Physical Damage",
-    "DescriptionClean": "Non Physical Damage"
+    "Description": "+#% Holy Damage",
+    "DescriptionClean": "Holy Damage"
   },
   {
     "IdSno": "1862334;1938729;1939867",
@@ -40668,8 +40668,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "x#% Non Physical Damage Multiplier",
-    "DescriptionClean": "x Non Physical Damage Multiplier"
+    "Description": "x#% Holy Damage Multiplier",
+    "DescriptionClean": "x Holy Damage Multiplier"
   },
   {
     "IdSno": "2558717;2602180",

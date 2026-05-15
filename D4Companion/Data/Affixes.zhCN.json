@@ -6759,38 +6759,26 @@
     "DescriptionClean": "闪电伤害"
   },
   {
-    "IdSno": "1290758;1439263;1661280;2052119;2066253;2502528;2502531;2502533;2634626;2634628;2634630",
-    "IdName": "Damage_Type_Bonus_NonPhysical;Damage_Type_Bonus_NonPhysical_Greater;Damage_Type_Bonus_NonPhysical_Quadruple_UNIQUE;Tempered_Damage_Generic_Type_Holy_Tier1;Tempered_Damage_Generic_Type_Holy_Tier2;Tempered_Damage_Generic_Type_Holy_Tier3;Tempered_Offensive_Damage_Tag_Holy_Paladin_Tier1;Tempered_Offensive_Damage_Tag_Holy_Paladin_Tier2;Tempered_Offensive_Damage_Tag_Holy_Paladin_Tier3;UNIQUE_Damage_Type_Bonus_NonPhysical_Higher;UNIQUE_INHERENT_Damage_Type_NonPhysical",
+    "IdSno": "1290758;1439263;1661280;2052119;2066253",
+    "IdName": "Damage_Type_Bonus_NonPhysical;Damage_Type_Bonus_NonPhysical_Greater;Damage_Type_Bonus_NonPhysical_Quadruple_UNIQUE;UNIQUE_Damage_Type_Bonus_NonPhysical_Higher;UNIQUE_INHERENT_Damage_Type_NonPhysical",
     "IdSnoList": [
       "1290758",
       "1439263",
       "1661280",
       "2052119",
-      "2066253",
-      "2502528",
-      "2502531",
-      "2502533",
-      "2634626",
-      "2634628",
-      "2634630"
+      "2066253"
     ],
     "IdNameList": [
       "Damage_Type_Bonus_NonPhysical",
       "Damage_Type_Bonus_NonPhysical_Greater",
       "Damage_Type_Bonus_NonPhysical_Quadruple_UNIQUE",
-      "Tempered_Damage_Generic_Type_Holy_Tier1",
-      "Tempered_Damage_Generic_Type_Holy_Tier2",
-      "Tempered_Damage_Generic_Type_Holy_Tier3",
-      "Tempered_Offensive_Damage_Tag_Holy_Paladin_Tier1",
-      "Tempered_Offensive_Damage_Tag_Holy_Paladin_Tier2",
-      "Tempered_Offensive_Damage_Tag_Holy_Paladin_Tier3",
       "UNIQUE_Damage_Type_Bonus_NonPhysical_Higher",
       "UNIQUE_INHERENT_Damage_Type_NonPhysical"
     ],
     "AffixType": 2,
     "Category": 0,
     "Flags": 1156,
-    "IsTemperingAvailable": true,
+    "IsTemperingAvailable": false,
     "MagicType": 0,
     "AllowedForPlayerClass": [
       1,
@@ -21885,8 +21873,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "幸运一击：最多有 40% 几率造成 +# 点非物理伤害",
-    "DescriptionClean": "幸运一击：最多有 40 几率造成 点非物理伤害"
+    "Description": "幸运一击：最多有 40% 几率造成 +# 点神圣伤害",
+    "DescriptionClean": "幸运一击：最多有 40 几率造成 点神圣伤害"
   },
   {
     "IdSno": "1936578;1938949;1940095;2619750;2619864",
@@ -31058,6 +31046,53 @@
     "ClassRestriction": "",
     "Description": "幸运一击：最多有 +#% 几率虚弱，持续 2 秒",
     "DescriptionClean": "幸运一击：最多有 几率虚弱，持续 2 秒"
+  },
+  {
+    "IdSno": "2502528;2502531;2502533;2634626;2634628;2634630",
+    "IdName": "Tempered_Damage_Generic_Type_Holy_Tier1;Tempered_Damage_Generic_Type_Holy_Tier2;Tempered_Damage_Generic_Type_Holy_Tier3;Tempered_Offensive_Damage_Tag_Holy_Paladin_Tier1;Tempered_Offensive_Damage_Tag_Holy_Paladin_Tier2;Tempered_Offensive_Damage_Tag_Holy_Paladin_Tier3",
+    "IdSnoList": [
+      "2502528",
+      "2502531",
+      "2502533",
+      "2634626",
+      "2634628",
+      "2634630"
+    ],
+    "IdNameList": [
+      "Tempered_Damage_Generic_Type_Holy_Tier1",
+      "Tempered_Damage_Generic_Type_Holy_Tier2",
+      "Tempered_Damage_Generic_Type_Holy_Tier3",
+      "Tempered_Offensive_Damage_Tag_Holy_Paladin_Tier1",
+      "Tempered_Offensive_Damage_Tag_Holy_Paladin_Tier2",
+      "Tempered_Offensive_Damage_Tag_Holy_Paladin_Tier3"
+    ],
+    "AffixType": 2,
+    "Category": -1,
+    "Flags": 1028,
+    "IsTemperingAvailable": true,
+    "MagicType": 0,
+    "AllowedForPlayerClass": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "AllowedItemLabels": [],
+    "AffixAttributes": [
+      {
+        "LocalisationId": "Damage_Type_Percent_Bonus",
+        "LocalisationParameter": 6,
+        "LocalisationAttributeFormulaValue": "0",
+        "Localisation": "+[{VALUE2}*100|%|] {VALUE1}伤害"
+      }
+    ],
+    "ClassRestriction": "",
+    "Description": "+#% 神圣伤害",
+    "DescriptionClean": "神圣伤害"
   },
   {
     "IdSno": "1862334;1938729;1939867",
@@ -40808,8 +40843,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "x#% 非物理 伤害增倍",
-    "DescriptionClean": "x 非物理 伤害增倍"
+    "Description": "x#% 神圣 伤害增倍",
+    "DescriptionClean": "x 神圣 伤害增倍"
   },
   {
     "IdSno": "2558717;2602180",
@@ -41490,8 +41525,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "#%非物理 伤害",
-    "DescriptionClean": "非物理 伤害"
+    "Description": "#%神圣 伤害",
+    "DescriptionClean": "神圣 伤害"
   },
   {
     "IdSno": "2497326",

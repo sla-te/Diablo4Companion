@@ -6619,23 +6619,21 @@
     "DescriptionClean": "공격력 번개"
   },
   {
-    "IdSno": "1290758;1439263;1661280;2052119;2066253;2497379",
-    "IdName": "Damage_Type_Bonus_NonPhysical;Damage_Type_Bonus_NonPhysical_Greater;Damage_Type_Bonus_NonPhysical_Quadruple_UNIQUE;UNIQUE_Damage_Type_Bonus_NonPhysical_Higher;UNIQUE_INHERENT_Damage_Type_NonPhysical;X2_Transfiguration_DamageTypePercent_Holy",
+    "IdSno": "1290758;1439263;1661280;2052119;2066253",
+    "IdName": "Damage_Type_Bonus_NonPhysical;Damage_Type_Bonus_NonPhysical_Greater;Damage_Type_Bonus_NonPhysical_Quadruple_UNIQUE;UNIQUE_Damage_Type_Bonus_NonPhysical_Higher;UNIQUE_INHERENT_Damage_Type_NonPhysical",
     "IdSnoList": [
       "1290758",
       "1439263",
       "1661280",
       "2052119",
-      "2066253",
-      "2497379"
+      "2066253"
     ],
     "IdNameList": [
       "Damage_Type_Bonus_NonPhysical",
       "Damage_Type_Bonus_NonPhysical_Greater",
       "Damage_Type_Bonus_NonPhysical_Quadruple_UNIQUE",
       "UNIQUE_Damage_Type_Bonus_NonPhysical_Higher",
-      "UNIQUE_INHERENT_Damage_Type_NonPhysical",
-      "X2_Transfiguration_DamageTypePercent_Holy"
+      "UNIQUE_INHERENT_Damage_Type_NonPhysical"
     ],
     "AffixType": 2,
     "Category": 0,
@@ -21727,8 +21725,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "행운의 적중: 최대 40% 확률로 주는 비물리 피해 +#",
-    "DescriptionClean": "행운의 적중: 최대 40 확률로 주는 비물리 피해"
+    "Description": "행운의 적중: 최대 40% 확률로 주는 신성 피해 +#",
+    "DescriptionClean": "행운의 적중: 최대 40 확률로 주는 신성 피해"
   },
   {
     "IdSno": "1936578;1938949;1940095;2619750;2619864",
@@ -30900,8 +30898,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "공격력 +#% 비물리",
-    "DescriptionClean": "공격력 비물리"
+    "Description": "공격력 +#% 신성",
+    "DescriptionClean": "공격력 신성"
   },
   {
     "IdSno": "1862334;1938729;1939867",
@@ -40693,8 +40691,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "비물리 피해 계수 x#%",
-    "DescriptionClean": "비물리 피해 계수 x"
+    "Description": "신성 피해 계수 x#%",
+    "DescriptionClean": "신성 피해 계수 x"
   },
   {
     "IdSno": "2558717;2602180",
@@ -41335,6 +41333,48 @@
     "ClassRestriction": "",
     "Description": "화염 피해 #%",
     "DescriptionClean": "화염 피해"
+  },
+  {
+    "IdSno": "2497379",
+    "IdName": "X2_Transfiguration_DamageTypePercent_Holy",
+    "IdSnoList": [
+      "2497379"
+    ],
+    "IdNameList": [
+      "X2_Transfiguration_DamageTypePercent_Holy"
+    ],
+    "AffixType": 2,
+    "Category": -1,
+    "Flags": 4,
+    "IsTemperingAvailable": false,
+    "MagicType": 0,
+    "AllowedForPlayerClass": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0
+    ],
+    "AllowedItemLabels": [
+      14,
+      18,
+      0,
+      15
+    ],
+    "AffixAttributes": [
+      {
+        "LocalisationId": "Multiplicative_Damage_Type_Percent_Bonus",
+        "LocalisationParameter": 6,
+        "LocalisationAttributeFormulaValue": "0",
+        "Localisation": "{VALUE1} 피해 [{vALUE2}*100|1%x|]"
+      }
+    ],
+    "ClassRestriction": "",
+    "Description": "신성 피해 #%",
+    "DescriptionClean": "신성 피해"
   },
   {
     "IdSno": "2497326",

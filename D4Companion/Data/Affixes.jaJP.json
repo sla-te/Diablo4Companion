@@ -6629,38 +6629,26 @@
     "DescriptionClean": "電撃ダメージ"
   },
   {
-    "IdSno": "1290758;1439263;1661280;2052119;2066253;2502528;2502531;2502533;2634626;2634628;2634630",
-    "IdName": "Damage_Type_Bonus_NonPhysical;Damage_Type_Bonus_NonPhysical_Greater;Damage_Type_Bonus_NonPhysical_Quadruple_UNIQUE;Tempered_Damage_Generic_Type_Holy_Tier1;Tempered_Damage_Generic_Type_Holy_Tier2;Tempered_Damage_Generic_Type_Holy_Tier3;Tempered_Offensive_Damage_Tag_Holy_Paladin_Tier1;Tempered_Offensive_Damage_Tag_Holy_Paladin_Tier2;Tempered_Offensive_Damage_Tag_Holy_Paladin_Tier3;UNIQUE_Damage_Type_Bonus_NonPhysical_Higher;UNIQUE_INHERENT_Damage_Type_NonPhysical",
+    "IdSno": "1290758;1439263;1661280;2052119;2066253",
+    "IdName": "Damage_Type_Bonus_NonPhysical;Damage_Type_Bonus_NonPhysical_Greater;Damage_Type_Bonus_NonPhysical_Quadruple_UNIQUE;UNIQUE_Damage_Type_Bonus_NonPhysical_Higher;UNIQUE_INHERENT_Damage_Type_NonPhysical",
     "IdSnoList": [
       "1290758",
       "1439263",
       "1661280",
       "2052119",
-      "2066253",
-      "2502528",
-      "2502531",
-      "2502533",
-      "2634626",
-      "2634628",
-      "2634630"
+      "2066253"
     ],
     "IdNameList": [
       "Damage_Type_Bonus_NonPhysical",
       "Damage_Type_Bonus_NonPhysical_Greater",
       "Damage_Type_Bonus_NonPhysical_Quadruple_UNIQUE",
-      "Tempered_Damage_Generic_Type_Holy_Tier1",
-      "Tempered_Damage_Generic_Type_Holy_Tier2",
-      "Tempered_Damage_Generic_Type_Holy_Tier3",
-      "Tempered_Offensive_Damage_Tag_Holy_Paladin_Tier1",
-      "Tempered_Offensive_Damage_Tag_Holy_Paladin_Tier2",
-      "Tempered_Offensive_Damage_Tag_Holy_Paladin_Tier3",
       "UNIQUE_Damage_Type_Bonus_NonPhysical_Higher",
       "UNIQUE_INHERENT_Damage_Type_NonPhysical"
     ],
     "AffixType": 2,
     "Category": 0,
     "Flags": 1156,
-    "IsTemperingAvailable": true,
+    "IsTemperingAvailable": false,
     "MagicType": 0,
     "AllowedForPlayerClass": [
       1,
@@ -21733,8 +21721,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "幸運の一撃: 最大40%の確率で+#の非物理ダメージを与える",
-    "DescriptionClean": "幸運の一撃: 最大40の確率での非物理ダメージを与える"
+    "Description": "幸運の一撃: 最大40%の確率で+#の聖なるダメージを与える",
+    "DescriptionClean": "幸運の一撃: 最大40の確率での聖なるダメージを与える"
   },
   {
     "IdSno": "1936578;1938949;1940095;2619750;2619864",
@@ -30820,6 +30808,53 @@
     "ClassRestriction": "",
     "Description": "幸運の一撃: 2秒間、最大#%の確率で弱体化を付与する。",
     "DescriptionClean": "幸運の一撃: 2秒間、最大の確率で弱体化を付与する。"
+  },
+  {
+    "IdSno": "2502528;2502531;2502533;2634626;2634628;2634630",
+    "IdName": "Tempered_Damage_Generic_Type_Holy_Tier1;Tempered_Damage_Generic_Type_Holy_Tier2;Tempered_Damage_Generic_Type_Holy_Tier3;Tempered_Offensive_Damage_Tag_Holy_Paladin_Tier1;Tempered_Offensive_Damage_Tag_Holy_Paladin_Tier2;Tempered_Offensive_Damage_Tag_Holy_Paladin_Tier3",
+    "IdSnoList": [
+      "2502528",
+      "2502531",
+      "2502533",
+      "2634626",
+      "2634628",
+      "2634630"
+    ],
+    "IdNameList": [
+      "Tempered_Damage_Generic_Type_Holy_Tier1",
+      "Tempered_Damage_Generic_Type_Holy_Tier2",
+      "Tempered_Damage_Generic_Type_Holy_Tier3",
+      "Tempered_Offensive_Damage_Tag_Holy_Paladin_Tier1",
+      "Tempered_Offensive_Damage_Tag_Holy_Paladin_Tier2",
+      "Tempered_Offensive_Damage_Tag_Holy_Paladin_Tier3"
+    ],
+    "AffixType": 2,
+    "Category": -1,
+    "Flags": 1028,
+    "IsTemperingAvailable": true,
+    "MagicType": 0,
+    "AllowedForPlayerClass": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "AllowedItemLabels": [],
+    "AffixAttributes": [
+      {
+        "LocalisationId": "Damage_Type_Percent_Bonus",
+        "LocalisationParameter": 6,
+        "LocalisationAttributeFormulaValue": "0",
+        "Localisation": "{VALUE1}ダメージ+[{VALUE2}*100|%|]"
+      }
+    ],
+    "ClassRestriction": "",
+    "Description": "聖なるダメージ+#%",
+    "DescriptionClean": "聖なるダメージ"
   },
   {
     "IdSno": "1862334;1938729;1939867",
@@ -40576,8 +40611,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "非物理ダメージ増加倍数x#%",
-    "DescriptionClean": "非物理ダメージ増加倍数x"
+    "Description": "聖なるダメージ増加倍数x#%",
+    "DescriptionClean": "聖なるダメージ増加倍数x"
   },
   {
     "IdSno": "2558717;2602180",
@@ -41258,8 +41293,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "非物理のダメージ#%",
-    "DescriptionClean": "非物理のダメージ"
+    "Description": "聖なるのダメージ#%",
+    "DescriptionClean": "聖なるのダメージ"
   },
   {
     "IdSno": "2497326",

@@ -4172,8 +4172,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "+#% de chance de acerto crítico de Física contra elites",
-    "DescriptionClean": "de chance de acerto crítico de Física contra elites"
+    "Description": "+#% de chance de acerto crítico de Físico contra elites",
+    "DescriptionClean": "de chance de acerto crítico de Físico contra elites"
   },
   {
     "IdSno": "1316335;1316337",
@@ -6719,8 +6719,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "+#% Física de dano",
-    "DescriptionClean": "Física de dano"
+    "Description": "+#% Físico de dano",
+    "DescriptionClean": "Físico de dano"
   },
   {
     "IdSno": "1862361;1938716;1939857;2064632;2333271;577075",
@@ -6817,8 +6817,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "+#% Sombra de dano",
-    "DescriptionClean": "Sombra de dano"
+    "Description": "+#% Sombrio de dano",
+    "DescriptionClean": "Sombrio de dano"
   },
   {
     "IdSno": "1321856;1862109;1937177;1939757",
@@ -10299,8 +10299,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "+#% de chance de Golpe de Sorte de Sombra",
-    "DescriptionClean": "de chance de Golpe de Sorte de Sombra"
+    "Description": "+#% de chance de Golpe de Sorte de Sombrio",
+    "DescriptionClean": "de chance de Golpe de Sorte de Sombrio"
   },
   {
     "IdSno": "1290914;1316491;2063567;2123975",
@@ -21768,8 +21768,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "Golpe de Sorte: Até 40% de chance de causar +# de dano Não física",
-    "DescriptionClean": "Golpe de Sorte: Até 40 de chance de causar de dano Não física"
+    "Description": "Golpe de Sorte: Até 40% de chance de causar +# de dano Sagrado",
+    "DescriptionClean": "Golpe de Sorte: Até 40 de chance de causar de dano Sagrado"
   },
   {
     "IdSno": "1936578;1938949;1940095;2619750;2619864",
@@ -21864,8 +21864,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "Golpe de Sorte: Até 40% de chance de causar +# de dano Física",
-    "DescriptionClean": "Golpe de Sorte: Até 40 de chance de causar de dano Física"
+    "Description": "Golpe de Sorte: Até 40% de chance de causar +# de dano Físico",
+    "DescriptionClean": "Golpe de Sorte: Até 40 de chance de causar de dano Físico"
   },
   {
     "IdSno": "1936580;1938955;1940099;2619754;2619868",
@@ -21960,8 +21960,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "Golpe de Sorte: Até 40% de chance de causar +# de dano Sombra",
-    "DescriptionClean": "Golpe de Sorte: Até 40 de chance de causar de dano Sombra"
+    "Description": "Golpe de Sorte: Até 40% de chance de causar +# de dano Sombrio",
+    "DescriptionClean": "Golpe de Sorte: Até 40 de chance de causar de dano Sombrio"
   },
   {
     "IdSno": "1862312;1938959;1940104;2617981;2617985;2617987;2619832;2619872",
@@ -30902,8 +30902,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "+#% Não física de dano",
-    "DescriptionClean": "Não física de dano"
+    "Description": "+#% Sagrado de dano",
+    "DescriptionClean": "Sagrado de dano"
   },
   {
     "IdSno": "1862334;1938729;1939867",
@@ -40623,8 +40623,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "x#% Não física de multiplicador de dano",
-    "DescriptionClean": "x Não física de multiplicador de dano"
+    "Description": "x#% Sagrado de multiplicador de dano",
+    "DescriptionClean": "x Sagrado de multiplicador de dano"
   },
   {
     "IdSno": "2558717;2602180",
@@ -40707,8 +40707,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "x#% Física de multiplicador de dano",
-    "DescriptionClean": "x Física de multiplicador de dano"
+    "Description": "x#% Físico de multiplicador de dano",
+    "DescriptionClean": "x Físico de multiplicador de dano"
   },
   {
     "IdSno": "2558715;2602184",
@@ -40791,8 +40791,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "x#% Sombra de multiplicador de dano",
-    "DescriptionClean": "x Sombra de multiplicador de dano"
+    "Description": "x#% Sombrio de multiplicador de dano",
+    "DescriptionClean": "x Sombrio de multiplicador de dano"
   },
   {
     "IdSno": "2620563;2620565;2620567;2620569;2620571;2620573;2620575;2620577;2620579;2620581;2620583;2620585;2620587;2620589;2620591;2620593;2620595;2620597;2620599",
@@ -41305,8 +41305,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "#% de dano do tipo Não física",
-    "DescriptionClean": "de dano do tipo Não física"
+    "Description": "#% de dano do tipo Sagrado",
+    "DescriptionClean": "de dano do tipo Sagrado"
   },
   {
     "IdSno": "2497326",
@@ -41389,8 +41389,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "#% de dano do tipo Física",
-    "DescriptionClean": "de dano do tipo Física"
+    "Description": "#% de dano do tipo Físico",
+    "DescriptionClean": "de dano do tipo Físico"
   },
   {
     "IdSno": "2497328",
@@ -41473,8 +41473,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "#% de dano do tipo Sombra",
-    "DescriptionClean": "de dano do tipo Sombra"
+    "Description": "#% de dano do tipo Sombrio",
+    "DescriptionClean": "de dano do tipo Sombrio"
   },
   {
     "IdSno": "2573082",

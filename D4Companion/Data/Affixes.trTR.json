@@ -6619,40 +6619,26 @@
     "DescriptionClean": "Yıldırım Hasar"
   },
   {
-    "IdSno": "1290758;1439263;1661280;2052119;2066253;2497379;2502528;2502531;2502533;2634626;2634628;2634630",
-    "IdName": "Damage_Type_Bonus_NonPhysical;Damage_Type_Bonus_NonPhysical_Greater;Damage_Type_Bonus_NonPhysical_Quadruple_UNIQUE;Tempered_Damage_Generic_Type_Holy_Tier1;Tempered_Damage_Generic_Type_Holy_Tier2;Tempered_Damage_Generic_Type_Holy_Tier3;Tempered_Offensive_Damage_Tag_Holy_Paladin_Tier1;Tempered_Offensive_Damage_Tag_Holy_Paladin_Tier2;Tempered_Offensive_Damage_Tag_Holy_Paladin_Tier3;UNIQUE_Damage_Type_Bonus_NonPhysical_Higher;UNIQUE_INHERENT_Damage_Type_NonPhysical;X2_Transfiguration_DamageTypePercent_Holy",
+    "IdSno": "1290758;1439263;1661280;2052119;2066253",
+    "IdName": "Damage_Type_Bonus_NonPhysical;Damage_Type_Bonus_NonPhysical_Greater;Damage_Type_Bonus_NonPhysical_Quadruple_UNIQUE;UNIQUE_Damage_Type_Bonus_NonPhysical_Higher;UNIQUE_INHERENT_Damage_Type_NonPhysical",
     "IdSnoList": [
       "1290758",
       "1439263",
       "1661280",
       "2052119",
-      "2066253",
-      "2497379",
-      "2502528",
-      "2502531",
-      "2502533",
-      "2634626",
-      "2634628",
-      "2634630"
+      "2066253"
     ],
     "IdNameList": [
       "Damage_Type_Bonus_NonPhysical",
       "Damage_Type_Bonus_NonPhysical_Greater",
       "Damage_Type_Bonus_NonPhysical_Quadruple_UNIQUE",
-      "Tempered_Damage_Generic_Type_Holy_Tier1",
-      "Tempered_Damage_Generic_Type_Holy_Tier2",
-      "Tempered_Damage_Generic_Type_Holy_Tier3",
-      "Tempered_Offensive_Damage_Tag_Holy_Paladin_Tier1",
-      "Tempered_Offensive_Damage_Tag_Holy_Paladin_Tier2",
-      "Tempered_Offensive_Damage_Tag_Holy_Paladin_Tier3",
       "UNIQUE_Damage_Type_Bonus_NonPhysical_Higher",
-      "UNIQUE_INHERENT_Damage_Type_NonPhysical",
-      "X2_Transfiguration_DamageTypePercent_Holy"
+      "UNIQUE_INHERENT_Damage_Type_NonPhysical"
     ],
     "AffixType": 2,
     "Category": 0,
     "Flags": 1156,
-    "IsTemperingAvailable": true,
+    "IsTemperingAvailable": false,
     "MagicType": 0,
     "AllowedForPlayerClass": [
       1,
@@ -21782,8 +21768,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "Şanslı Vuruş: En fazla %40 İhtimalle +# Fiziksel Olmayan Hasar Verme",
-    "DescriptionClean": "Şanslı Vuruş: En fazla 40 İhtimalle Fiziksel Olmayan Hasar Verme"
+    "Description": "Şanslı Vuruş: En fazla %40 İhtimalle +# Kutsal Hasar Verme",
+    "DescriptionClean": "Şanslı Vuruş: En fazla 40 İhtimalle Kutsal Hasar Verme"
   },
   {
     "IdSno": "1936578;1938949;1940095;2619750;2619864",
@@ -30881,6 +30867,55 @@
     "ClassRestriction": "",
     "Description": "Şanslı Vuruş: 2 Saniyeliğine En Fazla +#% İhtimalle Zayıflatma",
     "DescriptionClean": "Şanslı Vuruş: 2 Saniyeliğine En Fazla İhtimalle Zayıflatma"
+  },
+  {
+    "IdSno": "2497379;2502528;2502531;2502533;2634626;2634628;2634630",
+    "IdName": "Tempered_Damage_Generic_Type_Holy_Tier1;Tempered_Damage_Generic_Type_Holy_Tier2;Tempered_Damage_Generic_Type_Holy_Tier3;Tempered_Offensive_Damage_Tag_Holy_Paladin_Tier1;Tempered_Offensive_Damage_Tag_Holy_Paladin_Tier2;Tempered_Offensive_Damage_Tag_Holy_Paladin_Tier3;X2_Transfiguration_DamageTypePercent_Holy",
+    "IdSnoList": [
+      "2497379",
+      "2502528",
+      "2502531",
+      "2502533",
+      "2634626",
+      "2634628",
+      "2634630"
+    ],
+    "IdNameList": [
+      "Tempered_Damage_Generic_Type_Holy_Tier1",
+      "Tempered_Damage_Generic_Type_Holy_Tier2",
+      "Tempered_Damage_Generic_Type_Holy_Tier3",
+      "Tempered_Offensive_Damage_Tag_Holy_Paladin_Tier1",
+      "Tempered_Offensive_Damage_Tag_Holy_Paladin_Tier2",
+      "Tempered_Offensive_Damage_Tag_Holy_Paladin_Tier3",
+      "X2_Transfiguration_DamageTypePercent_Holy"
+    ],
+    "AffixType": 2,
+    "Category": -1,
+    "Flags": 1028,
+    "IsTemperingAvailable": true,
+    "MagicType": 0,
+    "AllowedForPlayerClass": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "AllowedItemLabels": [],
+    "AffixAttributes": [
+      {
+        "LocalisationId": "Damage_Type_Percent_Bonus",
+        "LocalisationParameter": 6,
+        "LocalisationAttributeFormulaValue": "0",
+        "Localisation": "+[{VALUE2}*100|%|] {VALUE1} Hasar"
+      }
+    ],
+    "ClassRestriction": "",
+    "Description": "+#% Kutsal Hasar",
+    "DescriptionClean": "Kutsal Hasar"
   },
   {
     "IdSno": "1862334;1938729;1939867",
@@ -40637,8 +40672,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "x#% Fiziksel Olmayan Hasarı Çarpanı",
-    "DescriptionClean": "x Fiziksel Olmayan Hasarı Çarpanı"
+    "Description": "x#% Kutsal Hasarı Çarpanı",
+    "DescriptionClean": "x Kutsal Hasarı Çarpanı"
   },
   {
     "IdSno": "2558717;2602180",

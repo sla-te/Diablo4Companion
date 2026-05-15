@@ -6759,8 +6759,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "+#% obrażeń typu: Trucizna ",
-    "DescriptionClean": "obrażeń typu: Trucizna"
+    "Description": "+#% obrażeń typu: Trucizny ",
+    "DescriptionClean": "obrażeń typu: Trucizny"
   },
   {
     "IdSno": "1862363;1938718;1939859;2113216;577079",
@@ -21114,8 +21114,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "#% działania obrażeń z upływem czasu (Trucizna)",
-    "DescriptionClean": "działania obrażeń z upływem czasu (Trucizna)"
+    "Description": "#% działania obrażeń z upływem czasu (Trucizny)",
+    "DescriptionClean": "działania obrażeń z upływem czasu (Trucizny)"
   },
   {
     "IdSno": "1936576;1938945;1940091;2067282;2067725;2073134;2588267;2619744;2619858",
@@ -21793,8 +21793,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "Szczęśliwy traf: maksymalnie 40% szans na zadanie +# pkt. obrażeń typu: Niefizyczne",
-    "DescriptionClean": "Szczęśliwy traf: maksymalnie 40 szans na zadanie pkt. obrażeń typu: Niefizyczne"
+    "Description": "Szczęśliwy traf: maksymalnie 40% szans na zadanie +# pkt. obrażeń typu: Świętość",
+    "DescriptionClean": "Szczęśliwy traf: maksymalnie 40 szans na zadanie pkt. obrażeń typu: Świętość"
   },
   {
     "IdSno": "1936578;1938949;1940095;2619750;2619864",
@@ -21936,8 +21936,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "Szczęśliwy traf: maksymalnie 40% szans na zadanie +# pkt. obrażeń typu: Trucizna",
-    "DescriptionClean": "Szczęśliwy traf: maksymalnie 40 szans na zadanie pkt. obrażeń typu: Trucizna"
+    "Description": "Szczęśliwy traf: maksymalnie 40% szans na zadanie +# pkt. obrażeń typu: Trucizny",
+    "DescriptionClean": "Szczęśliwy traf: maksymalnie 40 szans na zadanie pkt. obrażeń typu: Trucizny"
   },
   {
     "IdSno": "1936582;1938957;1940102;2373218;2619756;2619870",
@@ -30972,8 +30972,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "+#% obrażeń typu: Niefizyczne ",
-    "DescriptionClean": "obrażeń typu: Niefizyczne"
+    "Description": "+#% obrażeń typu: Świętość ",
+    "DescriptionClean": "obrażeń typu: Świętość"
   },
   {
     "IdSno": "1862334;1938729;1939867",
@@ -40765,8 +40765,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "Mnożnik x#% obrażeń (Niefizyczne)",
-    "DescriptionClean": "Mnożnik x obrażeń (Niefizyczne)"
+    "Description": "Mnożnik x#% obrażeń (Świętość)",
+    "DescriptionClean": "Mnożnik x obrażeń (Świętość)"
   },
   {
     "IdSno": "2558717;2602180",
@@ -40891,8 +40891,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "Mnożnik x#% obrażeń (Trucizna)",
-    "DescriptionClean": "Mnożnik x obrażeń (Trucizna)"
+    "Description": "Mnożnik x#% obrażeń (Trucizny)",
+    "DescriptionClean": "Mnożnik x obrażeń (Trucizny)"
   },
   {
     "IdSno": "2558713;2602186",
@@ -41447,8 +41447,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "Niefizyczne: #% obrażeń",
-    "DescriptionClean": "Niefizyczne: obrażeń"
+    "Description": "Świętość: #% obrażeń",
+    "DescriptionClean": "Świętość: obrażeń"
   },
   {
     "IdSno": "2497326",
@@ -41573,8 +41573,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "Trucizna: #% obrażeń",
-    "DescriptionClean": "Trucizna: obrażeń"
+    "Description": "Trucizny: #% obrażeń",
+    "DescriptionClean": "Trucizny: obrażeń"
   },
   {
     "IdSno": "2497330",

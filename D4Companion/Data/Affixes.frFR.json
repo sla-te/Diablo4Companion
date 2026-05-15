@@ -4320,8 +4320,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "+#% de chances d’infliger un coup critique Dégâts physiques aux élites",
-    "DescriptionClean": "de chances d’infliger un coup critique Dégâts physiques aux élites"
+    "Description": "+#% de chances d’infliger un coup critique physiques aux élites",
+    "DescriptionClean": "de chances d’infliger un coup critique physiques aux élites"
   },
   {
     "IdSno": "1316335;1316337",
@@ -4650,8 +4650,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "+#% aux dégâts critiques Foudre",
-    "DescriptionClean": "aux dégâts critiques Foudre"
+    "Description": "+#% aux dégâts critiques de foudre",
+    "DescriptionClean": "aux dégâts critiques de foudre"
   },
   {
     "IdSno": "1290946;2178811",
@@ -6657,8 +6657,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "+#% aux dégâts Froid",
-    "DescriptionClean": "aux dégâts Froid"
+    "Description": "+#% aux dégâts de froid",
+    "DescriptionClean": "aux dégâts de froid"
   },
   {
     "IdSno": "1862355;1938710;1939851;2061718;2113002;2592107;577065",
@@ -6709,8 +6709,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "+#% aux dégâts Feu",
-    "DescriptionClean": "aux dégâts Feu"
+    "Description": "+#% aux dégâts de feu",
+    "DescriptionClean": "aux dégâts de feu"
   },
   {
     "IdSno": "1862357;1938712;1939853;2063529;2387523;577073",
@@ -6759,8 +6759,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "+#% aux dégâts Foudre",
-    "DescriptionClean": "aux dégâts Foudre"
+    "Description": "+#% aux dégâts de foudre",
+    "DescriptionClean": "aux dégâts de foudre"
   },
   {
     "IdSno": "1290758;1439263;1661280;2052119;2066253",
@@ -6859,8 +6859,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "+#% aux dégâts Dégâts physiques",
-    "DescriptionClean": "aux dégâts Dégâts physiques"
+    "Description": "+#% aux dégâts physiques",
+    "DescriptionClean": "aux dégâts physiques"
   },
   {
     "IdSno": "1862361;1938716;1939857;2064632;2333271;577075",
@@ -6909,8 +6909,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "+#% aux dégâts Poison",
-    "DescriptionClean": "aux dégâts Poison"
+    "Description": "+#% aux dégâts de poison",
+    "DescriptionClean": "aux dégâts de poison"
   },
   {
     "IdSno": "1862363;1938718;1939859;2113216;577079",
@@ -6957,8 +6957,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "+#% aux dégâts Ombre",
-    "DescriptionClean": "aux dégâts Ombre"
+    "Description": "+#% aux dégâts d’ombre",
+    "DescriptionClean": "aux dégâts d’ombre"
   },
   {
     "IdSno": "1321856;1862109;1937177;1939757",
@@ -10435,8 +10435,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "+#% de chances pour Feu d’obtenir un coup de chance",
-    "DescriptionClean": "de chances pour Feu d’obtenir un coup de chance"
+    "Description": "+#% de chances pour de feu d’obtenir un coup de chance",
+    "DescriptionClean": "de chances pour de feu d’obtenir un coup de chance"
   },
   {
     "IdSno": "1319669",
@@ -10472,8 +10472,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "+#% de chances pour Ombre d’obtenir un coup de chance",
-    "DescriptionClean": "de chances pour Ombre d’obtenir un coup de chance"
+    "Description": "+#% de chances pour d’ombre d’obtenir un coup de chance",
+    "DescriptionClean": "de chances pour d’ombre d’obtenir un coup de chance"
   },
   {
     "IdSno": "1290914;1316491;2063567;2123975",
@@ -21266,8 +21266,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "#% de durée des dégâts Poison sur la durée",
-    "DescriptionClean": "de durée des dégâts Poison sur la durée"
+    "Description": "#% de durée des dégâts de poison sur la durée",
+    "DescriptionClean": "de durée des dégâts de poison sur la durée"
   },
   {
     "IdSno": "1936576;1938945;1940091;2067282;2067725;2073134;2588267;2619744;2619858",
@@ -21321,8 +21321,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "Coup de chance\u00A0: vous avez jusqu’à 40\u00A0% de chances d’infliger #\u00A0points de dégâts Froid supplémentaires.",
-    "DescriptionClean": "Coup de chance\u00A0: vous avez jusqu’à 40\u00A0 de chances d’infliger \u00A0points de dégâts Froid supplémentaires."
+    "Description": "Coup de chance\u00A0: vous avez jusqu’à 40\u00A0% de chances d’infliger #\u00A0points de dégâts de froid supplémentaires.",
+    "DescriptionClean": "Coup de chance\u00A0: vous avez jusqu’à 40\u00A0 de chances d’infliger \u00A0points de dégâts de froid supplémentaires."
   },
   {
     "IdSno": "2592695",
@@ -21904,8 +21904,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "Coup de chance\u00A0: vous avez jusqu’à 40\u00A0% de chances d’infliger #\u00A0points de dégâts Feu supplémentaires.",
-    "DescriptionClean": "Coup de chance\u00A0: vous avez jusqu’à 40\u00A0 de chances d’infliger \u00A0points de dégâts Feu supplémentaires."
+    "Description": "Coup de chance\u00A0: vous avez jusqu’à 40\u00A0% de chances d’infliger #\u00A0points de dégâts de feu supplémentaires.",
+    "DescriptionClean": "Coup de chance\u00A0: vous avez jusqu’à 40\u00A0 de chances d’infliger \u00A0points de dégâts de feu supplémentaires."
   },
   {
     "IdSno": "2619748;2619862",
@@ -21945,8 +21945,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "Coup de chance\u00A0: vous avez jusqu’à 40\u00A0% de chances d’infliger #\u00A0points de dégâts Dégâts non physiques supplémentaires.",
-    "DescriptionClean": "Coup de chance\u00A0: vous avez jusqu’à 40\u00A0 de chances d’infliger \u00A0points de dégâts Dégâts non physiques supplémentaires."
+    "Description": "Coup de chance\u00A0: vous avez jusqu’à 40\u00A0% de chances d’infliger #\u00A0points de dégâts Sacrés supplémentaires.",
+    "DescriptionClean": "Coup de chance\u00A0: vous avez jusqu’à 40\u00A0 de chances d’infliger \u00A0points de dégâts Sacrés supplémentaires."
   },
   {
     "IdSno": "1936578;1938949;1940095;2619750;2619864",
@@ -21992,8 +21992,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "Coup de chance\u00A0: vous avez jusqu’à 40\u00A0% de chances d’infliger #\u00A0points de dégâts Foudre supplémentaires.",
-    "DescriptionClean": "Coup de chance\u00A0: vous avez jusqu’à 40\u00A0 de chances d’infliger \u00A0points de dégâts Foudre supplémentaires."
+    "Description": "Coup de chance\u00A0: vous avez jusqu’à 40\u00A0% de chances d’infliger #\u00A0points de dégâts de foudre supplémentaires.",
+    "DescriptionClean": "Coup de chance\u00A0: vous avez jusqu’à 40\u00A0 de chances d’infliger \u00A0points de dégâts de foudre supplémentaires."
   },
   {
     "IdSno": "1936572;1938952;1940097;2546466;2619752;2619866",
@@ -22041,8 +22041,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "Coup de chance\u00A0: vous avez jusqu’à 40\u00A0% de chances d’infliger #\u00A0points de dégâts Dégâts physiques supplémentaires.",
-    "DescriptionClean": "Coup de chance\u00A0: vous avez jusqu’à 40\u00A0 de chances d’infliger \u00A0points de dégâts Dégâts physiques supplémentaires."
+    "Description": "Coup de chance\u00A0: vous avez jusqu’à 40\u00A0% de chances d’infliger #\u00A0points de dégâts physiques supplémentaires.",
+    "DescriptionClean": "Coup de chance\u00A0: vous avez jusqu’à 40\u00A0 de chances d’infliger \u00A0points de dégâts physiques supplémentaires."
   },
   {
     "IdSno": "1936580;1938955;1940099;2619754;2619868",
@@ -22088,8 +22088,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "Coup de chance\u00A0: vous avez jusqu’à 40\u00A0% de chances d’infliger #\u00A0points de dégâts Poison supplémentaires.",
-    "DescriptionClean": "Coup de chance\u00A0: vous avez jusqu’à 40\u00A0 de chances d’infliger \u00A0points de dégâts Poison supplémentaires."
+    "Description": "Coup de chance\u00A0: vous avez jusqu’à 40\u00A0% de chances d’infliger #\u00A0points de dégâts de poison supplémentaires.",
+    "DescriptionClean": "Coup de chance\u00A0: vous avez jusqu’à 40\u00A0 de chances d’infliger \u00A0points de dégâts de poison supplémentaires."
   },
   {
     "IdSno": "1936582;1938957;1940102;2373218;2619756;2619870",
@@ -22137,8 +22137,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "Coup de chance\u00A0: vous avez jusqu’à 40\u00A0% de chances d’infliger #\u00A0points de dégâts Ombre supplémentaires.",
-    "DescriptionClean": "Coup de chance\u00A0: vous avez jusqu’à 40\u00A0 de chances d’infliger \u00A0points de dégâts Ombre supplémentaires."
+    "Description": "Coup de chance\u00A0: vous avez jusqu’à 40\u00A0% de chances d’infliger #\u00A0points de dégâts d’ombre supplémentaires.",
+    "DescriptionClean": "Coup de chance\u00A0: vous avez jusqu’à 40\u00A0 de chances d’infliger \u00A0points de dégâts d’ombre supplémentaires."
   },
   {
     "IdSno": "1862312;1938959;1940104;2617981;2617985;2617987;2619832;2619872",
@@ -31157,8 +31157,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "+#% aux dégâts Dégâts non physiques",
-    "DescriptionClean": "aux dégâts Dégâts non physiques"
+    "Description": "+#% aux dégâts Sacrés",
+    "DescriptionClean": "aux dégâts Sacrés"
   },
   {
     "IdSno": "1862334;1938729;1939867",
@@ -40866,8 +40866,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "Multiplicateur de dégâts Froid\u00A0: x#%",
-    "DescriptionClean": "Multiplicateur de dégâts Froid\u00A0: x"
+    "Description": "Multiplicateur de dégâts de froid\u00A0: x#%",
+    "DescriptionClean": "Multiplicateur de dégâts de froid\u00A0: x"
   },
   {
     "IdSno": "2558711;2602174",
@@ -40908,8 +40908,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "Multiplicateur de dégâts Feu\u00A0: x#%",
-    "DescriptionClean": "Multiplicateur de dégâts Feu\u00A0: x"
+    "Description": "Multiplicateur de dégâts de feu\u00A0: x#%",
+    "DescriptionClean": "Multiplicateur de dégâts de feu\u00A0: x"
   },
   {
     "IdSno": "2558719;2602177",
@@ -40950,8 +40950,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "Multiplicateur de dégâts Dégâts non physiques\u00A0: x#%",
-    "DescriptionClean": "Multiplicateur de dégâts Dégâts non physiques\u00A0: x"
+    "Description": "Multiplicateur de dégâts Sacrés\u00A0: x#%",
+    "DescriptionClean": "Multiplicateur de dégâts Sacrés\u00A0: x"
   },
   {
     "IdSno": "2558717;2602180",
@@ -40992,8 +40992,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "Multiplicateur de dégâts Foudre\u00A0: x#%",
-    "DescriptionClean": "Multiplicateur de dégâts Foudre\u00A0: x"
+    "Description": "Multiplicateur de dégâts de foudre\u00A0: x#%",
+    "DescriptionClean": "Multiplicateur de dégâts de foudre\u00A0: x"
   },
   {
     "IdSno": "2558672;2602182",
@@ -41034,8 +41034,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "Multiplicateur de dégâts Dégâts physiques\u00A0: x#%",
-    "DescriptionClean": "Multiplicateur de dégâts Dégâts physiques\u00A0: x"
+    "Description": "Multiplicateur de dégâts physiques\u00A0: x#%",
+    "DescriptionClean": "Multiplicateur de dégâts physiques\u00A0: x"
   },
   {
     "IdSno": "2558715;2602184",
@@ -41076,8 +41076,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "Multiplicateur de dégâts Poison\u00A0: x#%",
-    "DescriptionClean": "Multiplicateur de dégâts Poison\u00A0: x"
+    "Description": "Multiplicateur de dégâts de poison\u00A0: x#%",
+    "DescriptionClean": "Multiplicateur de dégâts de poison\u00A0: x"
   },
   {
     "IdSno": "2558713;2602186",
@@ -41118,8 +41118,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "Multiplicateur de dégâts Ombre\u00A0: x#%",
-    "DescriptionClean": "Multiplicateur de dégâts Ombre\u00A0: x"
+    "Description": "Multiplicateur de dégâts d’ombre\u00A0: x#%",
+    "DescriptionClean": "Multiplicateur de dégâts d’ombre\u00A0: x"
   },
   {
     "IdSno": "2620563;2620565;2620567;2620569;2620571;2620573;2620575;2620577;2620579;2620581;2620583;2620585;2620587;2620589;2620591;2620593;2620595;2620597;2620599",
@@ -41548,8 +41548,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "#% de dégâts de type\u00A0: Froid",
-    "DescriptionClean": "de dégâts de type\u00A0: Froid"
+    "Description": "#% de dégâts de type\u00A0: de froid",
+    "DescriptionClean": "de dégâts de type\u00A0: de froid"
   },
   {
     "IdSno": "2497312",
@@ -41590,8 +41590,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "#% de dégâts de type\u00A0: Feu",
-    "DescriptionClean": "de dégâts de type\u00A0: Feu"
+    "Description": "#% de dégâts de type\u00A0: de feu",
+    "DescriptionClean": "de dégâts de type\u00A0: de feu"
   },
   {
     "IdSno": "2497379",
@@ -41632,8 +41632,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "#% de dégâts de type\u00A0: Dégâts non physiques",
-    "DescriptionClean": "de dégâts de type\u00A0: Dégâts non physiques"
+    "Description": "#% de dégâts de type\u00A0: Sacrés",
+    "DescriptionClean": "de dégâts de type\u00A0: Sacrés"
   },
   {
     "IdSno": "2497326",
@@ -41674,8 +41674,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "#% de dégâts de type\u00A0: Foudre",
-    "DescriptionClean": "de dégâts de type\u00A0: Foudre"
+    "Description": "#% de dégâts de type\u00A0: de foudre",
+    "DescriptionClean": "de dégâts de type\u00A0: de foudre"
   },
   {
     "IdSno": "2497332",
@@ -41716,8 +41716,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "#% de dégâts de type\u00A0: Dégâts physiques",
-    "DescriptionClean": "de dégâts de type\u00A0: Dégâts physiques"
+    "Description": "#% de dégâts de type\u00A0: physiques",
+    "DescriptionClean": "de dégâts de type\u00A0: physiques"
   },
   {
     "IdSno": "2497328",
@@ -41758,8 +41758,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "#% de dégâts de type\u00A0: Poison",
-    "DescriptionClean": "de dégâts de type\u00A0: Poison"
+    "Description": "#% de dégâts de type\u00A0: de poison",
+    "DescriptionClean": "de dégâts de type\u00A0: de poison"
   },
   {
     "IdSno": "2497330",
@@ -41800,8 +41800,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "#% de dégâts de type\u00A0: Ombre",
-    "DescriptionClean": "de dégâts de type\u00A0: Ombre"
+    "Description": "#% de dégâts de type\u00A0: d’ombre",
+    "DescriptionClean": "de dégâts de type\u00A0: d’ombre"
   },
   {
     "IdSno": "2573082",

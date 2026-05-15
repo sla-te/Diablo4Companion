@@ -21697,8 +21697,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "Glückstreffer: Chance von bis zu 40\u00A0%, +# Nichtphysisch-Schaden\u00A0zu verursachen",
-    "DescriptionClean": "Glückstreffer: Chance von bis zu 40\u00A0, Nichtphysisch-Schaden\u00A0zu verursachen"
+    "Description": "Glückstreffer: Chance von bis zu 40\u00A0%, +# Heilig-Schaden\u00A0zu verursachen",
+    "DescriptionClean": "Glückstreffer: Chance von bis zu 40\u00A0, Heilig-Schaden\u00A0zu verursachen"
   },
   {
     "IdSno": "1936578;1938949;1940095;2619750;2619864",
@@ -30917,8 +30917,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "+#% Nichtphysisch Schaden",
-    "DescriptionClean": "Nichtphysisch Schaden"
+    "Description": "+#% Heilig Schaden",
+    "DescriptionClean": "Heilig Schaden"
   },
   {
     "IdSno": "1862334;1938729;1939867",
@@ -40763,8 +40763,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "x#% Schadenmultiplikator für Nichtphysisch",
-    "DescriptionClean": "x Schadenmultiplikator für Nichtphysisch"
+    "Description": "x#% Schadenmultiplikator für Heilig",
+    "DescriptionClean": "x Schadenmultiplikator für Heilig"
   },
   {
     "IdSno": "2558717;2602180",
@@ -41445,8 +41445,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "#% Schaden für Nichtphysisch",
-    "DescriptionClean": "Schaden für Nichtphysisch"
+    "Description": "#% Schaden für Heilig",
+    "DescriptionClean": "Schaden für Heilig"
   },
   {
     "IdSno": "2497326",

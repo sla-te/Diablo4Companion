@@ -21649,8 +21649,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "Colpo fortunato: fino al 40% di probabilità di infliggere +# danni da Non fisico",
-    "DescriptionClean": "Colpo fortunato: fino al 40 di probabilità di infliggere danni da Non fisico"
+    "Description": "Colpo fortunato: fino al 40% di probabilità di infliggere +# danni da Sacro",
+    "DescriptionClean": "Colpo fortunato: fino al 40 di probabilità di infliggere danni da Sacro"
   },
   {
     "IdSno": "1936578;1938949;1940095;2619750;2619864",
@@ -30787,8 +30787,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "Danni Non fisico: +#%",
-    "DescriptionClean": "Danni Non fisico:"
+    "Description": "Danni Sacro: +#%",
+    "DescriptionClean": "Danni Sacro:"
   },
   {
     "IdSno": "1862334;1938729;1939867",
@@ -40580,8 +40580,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "Moltiplicatore danni: Non fisico x#%",
-    "DescriptionClean": "Moltiplicatore danni: Non fisico x"
+    "Description": "Moltiplicatore danni: Sacro x#%",
+    "DescriptionClean": "Moltiplicatore danni: Sacro x"
   },
   {
     "IdSno": "2558717;2602180",
@@ -41262,8 +41262,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "Danni da Non fisico: #%",
-    "DescriptionClean": "Danni da Non fisico:"
+    "Description": "Danni da Sacro: #%",
+    "DescriptionClean": "Danni da Sacro:"
   },
   {
     "IdSno": "2497326",

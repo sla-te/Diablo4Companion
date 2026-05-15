@@ -21744,8 +21744,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "Golpe afortunado: Tienes hasta un 40% de probabilidad de infligir +# de daño de No físico",
-    "DescriptionClean": "Golpe afortunado: Tienes hasta un 40 de probabilidad de infligir de daño de No físico"
+    "Description": "Golpe afortunado: Tienes hasta un 40% de probabilidad de infligir +# de daño de Sagrado",
+    "DescriptionClean": "Golpe afortunado: Tienes hasta un 40 de probabilidad de infligir de daño de Sagrado"
   },
   {
     "IdSno": "1936578;1938949;1940095;2619750;2619864",
@@ -30796,8 +30796,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "+#% No físico de daño",
-    "DescriptionClean": "No físico de daño"
+    "Description": "+#% Sagrado de daño",
+    "DescriptionClean": "Sagrado de daño"
   },
   {
     "IdSno": "1862334;1938729;1939867",
@@ -40554,8 +40554,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "x#% de multiplicador de daño de No físico",
-    "DescriptionClean": "x de multiplicador de daño de No físico"
+    "Description": "x#% de multiplicador de daño de Sagrado",
+    "DescriptionClean": "x de multiplicador de daño de Sagrado"
   },
   {
     "IdSno": "2558717;2602180",
@@ -41236,8 +41236,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "#% de daño de No físico",
-    "DescriptionClean": "de daño de No físico"
+    "Description": "#% de daño de Sagrado",
+    "DescriptionClean": "de daño de Sagrado"
   },
   {
     "IdSno": "2497332",
