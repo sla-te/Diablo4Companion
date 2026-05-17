@@ -19,7 +19,7 @@ using TesseractOCR.Enums;
 
 namespace D4Companion.Services
 {
-    public class OcrHandler : IOcrHandler
+    public partial class OcrHandler : IOcrHandler
     {
         private readonly ILogger _logger;
         private readonly ISettingsManager _settingsManager;
@@ -46,6 +46,12 @@ namespace D4Companion.Services
 
         private ObjectPool<Engine> _engines;
         private Language _language = Language.English;
+
+        [GeneratedRegex(@"<span[^>]*class=['""]ocr_line['""][^>]*id=['""](?<id>[^'""]+)['""][^>]*title=['""]bbox (?<x1>\d+) (?<y1>\d+) (?<x2>\d+) (?<y2>\d+)[^'""]*['""][^>]*>(?<content>.*?)</span>", RegexOptions.Singleline)]
+        private static partial Regex LineRegex();
+
+        [GeneratedRegex(@"<span[^>]*class=['""]ocrx_word['""][^>]*id=['""](?<id>[^'""]+)['""][^>]*title=['""]bbox (?<x1>\d+) (?<y1>\d+) (?<x2>\d+) (?<y2>\d+); x_wconf (?<conf>\d+)['""][^>]*>(?<text>.*?)</span>", RegexOptions.Singleline)]
+        private static partial Regex WordRegex();
 
         // Start of Constructors region
 
@@ -334,16 +340,6 @@ namespace D4Companion.Services
                 return hasArtifacts;
             });
 
-            // Cleanup lines with artifacts separated by multiple spaces
-            // Example "先祖传奇手套          各"
-            for (int i = 0; i < lines.Count; i++)
-            {
-                if (lines[i].Contains("  "))
-                {
-                    lines[i] = Regex.Split(lines[i], @"\s{2,}")[0];
-                }
-            }
-
             // Check if there is an item power
             int powerIndex = -1;
             for (int i = lines.Count - 1; i >= 0; i--)
@@ -513,8 +509,9 @@ namespace D4Companion.Services
             memoryStream.Position = 0;
 
             var engine = _engines.Get();
-            engine.SetVariable("preserve_interword_spaces", "1");
-            //engine.SetVariable("tessedit_write_unlv", "1");
+            //engine.SetVariable("tessedit_do_invert", "0");
+            //engine.SetVariable("textord_heavy_nr", "0");
+            //engine.SetVariable("edges_max_children", "40");
             try
             {
                 using (var img = TesseractOCR.Pix.Image.LoadFromMemory(memoryStream))
@@ -532,44 +529,49 @@ namespace D4Companion.Services
                     // PageSegMode.AutoOsd: Automatic page segmentation with orientation and script detection. (OSD)
                     // PageSegMode.AutoOnly: Automatic page segmentation, but no OSD, or OCR.
                     // PageSegMode.Auto: Fully automatic page segmentation, but no OSD.
-                    // - Has issues with smaller tooltips. Caused by differences in layout of game background and tooltip. Processes only first line.
-                    // - Note about "Processes only first line" does not seem correct. Finds more text than SparseText and SparseTextOsd.
+                    // - Has issues with smaller tooltips. Caused by differences in layout of game background and tooltip. Processes not all lines.
                     // - Not able to find "Ring" on second line of Ancestral Mythic Unique Ring
+                    // - Text lines not in correct order.
                     // - Around 10+ ms slower than PageSegMode.SparseTextOsd
 
                     // PageSegMode.SingleColumn: Assume a single column of text of variable sizes. 
                     // - Has issues with smaller tooltips. Caused by differences in layout of game background and tooltip. Empty result.
+                    // - Text lines not in correct order.
 
                     // PageSegMode.SingleBlock: Assume a single uniform block of text. (Default.) 
                     // - Working. 130+ ms (1080p)
-                    // - Finds more text than Auto.
+                    // - Has issues with different font sizes. Skips complete line of smaller font.
 
                     // PageSegMode.SparseText: Find as much text as possible in no particular order. 
-                    // - Working. 100+ ms (1080p)
 
                     // PageSegMode.SparseTextOsd: Sparse text with orientation and script det.
-                    // - Working. 80+ ms (1080p)
 
                     // Note: PageSegMode can be simplefied when the tooltip area can be detected more precisely.
                     // As long parts of the game background is visible above the tooltip a more general approach is needed.
-                    //using (var page = engine.Process(img, PageSegMode.Auto))
-                    //using (var page = engine.Process(img, PageSegMode.SparseText))
-                    //using (var page = engine.Process(img, PageSegMode.SparseTextOsd))
-                    using (var page = engine.Process(img, PageSegMode.SingleBlock))
+
+                    //var watch = System.Diagnostics.Stopwatch.StartNew();
+                    string result = string.Empty;
+                    using (var page = engine.Process(img, PageSegMode.SparseText))
                     {
-                        return page.Text;
+                        result = ParseHOcrText(page.HOcrText());
                     }
+                    //watch.Stop();
+                    //var elapsedMs = watch.ElapsedMilliseconds;
+                    //_logger.LogDebug($"{MethodBase.GetCurrentMethod()?.Name}: {elapsedMs}");
+
+                    return result;
                 }
             }
             finally
             {
                 // Reset before returning to pool
-                engine.SetVariable("preserve_interword_spaces", "0");
-                //engine.SetVariable("tessedit_write_unlv", "0");
+                //engine.SetVariable("tessedit_do_invert", "1");
+                //engine.SetVariable("textord_heavy_nr", "1");
+                //engine.SetVariable("edges_max_children", "200");
 
                 _engines.Return(engine);
             }
-        }
+        }        
 
         private void InitAffixData()
         {
@@ -803,6 +805,100 @@ namespace D4Companion.Services
                     _sigilMapNameToId.Add(name, sigil.IdName);
                 }
             }
+        }
+
+        private string ParseHOcrText(string hocrText)
+        {
+            List<HOcrLine> lines = new List<HOcrLine>(25);
+            List<HOcrWord> words = new List<HOcrWord>(50);
+
+            var lineMatches = LineRegex().Matches(hocrText);
+            var wordMatches = WordRegex().Matches(hocrText);
+
+            // An offset is needed because the bounding boxes of words sometimes exceed the bounding box of the line.
+            int offsetBoundingBox = 10;
+
+            // Find all lines            
+            var matches = LineRegex().Matches(hocrText);
+            foreach (Match m in matches)
+            {
+                int x1 = int.Parse(m.Groups["x1"].ValueSpan);
+                int y1 = int.Parse(m.Groups["y1"].ValueSpan);
+                int x2 = int.Parse(m.Groups["x2"].ValueSpan);
+                int y2 = int.Parse(m.Groups["y2"].ValueSpan);                
+
+                lines.Add(new HOcrLine
+                {
+                    Id = m.Groups["id"].Value,
+                    X1 = x1,
+                    Y1 = y1,
+                    X2 = x2,
+                    Y2 = y2
+                });
+            }
+
+            // Find all words            
+            matches = WordRegex().Matches(hocrText);
+            foreach (Match m in matches)
+            {
+                int x1 = int.Parse(m.Groups["x1"].ValueSpan);
+                int y1 = int.Parse(m.Groups["y1"].ValueSpan);
+                int x2 = int.Parse(m.Groups["x2"].ValueSpan);
+                int y2 = int.Parse(m.Groups["y2"].ValueSpan);                
+
+                words.Add(new HOcrWord
+                {
+                    Id = m.Groups["id"].Value,
+                    IdLine = lines.FirstOrDefault(l => x1 + offsetBoundingBox >= l.X1 && x2 - offsetBoundingBox <= l.X2 && y1 + offsetBoundingBox >= l.Y1 && y2 - offsetBoundingBox <= l.Y2)?.Id ?? string.Empty,
+                    Text = m.Groups["text"].Value.Trim(),
+                    X1 = x1,
+                    Y1 = y1,
+                    X2 = x2,
+                    Y2 = y2
+                });
+            }
+
+            if (lines.Count == 0 || words.Count == 0) return string.Empty;
+
+            // Add words to their corresponding line
+            foreach (var line in lines)
+            {
+                line.Text = string.Join(" ", words.Where(w => w.IdLine == line.Id).Select(w => w.Text));
+            }
+            
+            // Find item power line.
+            int powerIndex = -1;
+            for (int i = lines.Count - 1; i >= 0; i--)
+            {
+                string resultString = Regex.Match(lines[i].Text, @"^\d+").Value;
+                // Item power 150 is the minimum value for Tier 1 items.
+                if (resultString.Length >= 3 && int.Parse(resultString) >= 150)
+                {
+                    powerIndex = i;
+                    break;
+                }
+            }
+
+            // Removed lines below item power.
+            if (powerIndex >= 0)
+            {
+                lines.RemoveRange(powerIndex + 1, lines.Count - powerIndex - 1);
+            }
+
+            // Find the x-coords start position to remove artifacts.
+            // - Item power line.
+            // - Longest string.
+            int xSmallest = powerIndex >= 0 ? lines[powerIndex].X1 : lines.MaxBy(l => l.Text.Length)!.X1;
+
+            // Remove artifacts.
+            // - Lines starting before or after the longest line.
+            // - Lines smaller than 3 characterts.
+            lines.RemoveAll(l => l.X1 < xSmallest - 10 || l.X1 > xSmallest + 10);
+            lines.RemoveAll(l => l.Text.Length < 3);
+
+            var finalText = string.Join("\n", lines.Select(l => l.Text));
+
+            return finalText;
         }
 
         private (int, string, string, string) TextToAffix(string text)

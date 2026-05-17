@@ -61,7 +61,7 @@ namespace D4Companion.Entities
         public bool IsUniqueDetectionEnabled { get; set; } = true;
         public int ItemPowerLimit { get; set; } = 800;
         public bool LaunchMinimized { get; set; } = false;
-        public int MinimalOcrMatchType { get; set; } = 80;
+        public int MinimalOcrMatchType { get; set; } = 75;
         public bool MinimizeToTray { get; set; } = false;
         public List<MultiBuild> MultiBuildList { get; set; } = new List<MultiBuild>();
         public int OverlayFontSize { get; set; } = 18;
