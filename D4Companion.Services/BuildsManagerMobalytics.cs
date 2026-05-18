@@ -1170,10 +1170,12 @@ namespace D4Companion.Services
                 paragonBoard.Name = paragonBoard.Name.Replace("spiritborn-starter-board", "spiritborn-starting-board");
                 paragonBoard.Name = paragonBoard.Name.Replace("warlock-starter-board", "warlock-starting-board");
                 paragonBoard.Glyph = board.Glyph?.Slug ?? string.Empty;
-                paragonBoard.Rotation = board.Rotation == 0 ? "0°" :
-                                        board.Rotation == 90 ? "90°" :
-                                        board.Rotation == 180 ? "180°" :
-                                        board.Rotation == 270 ? "270°" : "?°";
+
+                int rotation = board.Rotation % 360;
+                paragonBoard.Rotation = rotation == 0 ? "0°" :
+                                        rotation == 90 ? "90°" :
+                                        rotation == 180 ? "180°" :
+                                        rotation == 270 ? "270°" : "?°";
 
                 var boardNodes = buildVariant.Paragon.Nodes.Where(n => n.Slug.StartsWith(paragonBoard.Name))?.ToList() ?? 
                     Enumerable.Empty<MobalyticsBuildParagonNodeJson>().ToList();
@@ -1195,24 +1197,24 @@ namespace D4Companion.Services
                     int locationXT = locationX;
                     int locationYT = locationY;
 
-                    if (board.Rotation == 0 ||
-                        board.Rotation == 360)
+                    if (rotation == 0 ||
+                        rotation == 360)
                     {
                         locationXT = locationXT - 1;
                         locationYT = locationYT - 1;
                     }
-                    else if (board.Rotation == 90)
+                    else if (rotation == 90)
                     {
                         locationXT = 21 - locationY;
                         locationYT = locationX;
                         locationYT = locationYT - 1;
                     }
-                    else if (board.Rotation == 180)
+                    else if (rotation == 180)
                     {
                         locationXT = 21 - locationX;
                         locationYT = 21 - locationY;
                     }
-                    else if (board.Rotation == 270)
+                    else if (rotation == 270)
                     {
                         locationXT = locationY;
                         locationYT = 21 - locationX;
