@@ -34,7 +34,10 @@ namespace D4Companion.Helpers
 
             bool status = PInvoke.BitBlt(memoryDCHandle, 0, 0,
                 region.right - region.left, region.bottom - region.top,
-                windowDCHandle, region.left, region.top, ROP_CODE.SRCCOPY | ROP_CODE.CAPTUREBLT);
+                windowDCHandle, region.left, region.top, ROP_CODE.SRCCOPY);
+
+            // ROP_CODE.SRCCOPY: Set BitBlt to copy pixels normally  
+            // ROP_CODE.CAPTUREBLT: Tells BitBlt to include layered/transparent windows in the capture. Causes mouse flickering.
 
             try
             {
