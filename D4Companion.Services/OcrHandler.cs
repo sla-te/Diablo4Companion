@@ -506,6 +506,8 @@ namespace D4Companion.Services
         {
             MemoryStream memoryStream = new MemoryStream();
             image.Save(memoryStream, System.Drawing.Imaging.ImageFormat.Png);
+            // TODO: Performance improvements.
+            //image.Save(memoryStream, System.Drawing.Imaging.ImageFormat.Bmp);
             memoryStream.Position = 0;
 
             var engine = _engines.Get();

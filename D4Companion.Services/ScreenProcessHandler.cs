@@ -690,15 +690,29 @@ namespace D4Companion.Services
             var area = _currentTooltip.ItemSplitterLocations.Count > 0 ?
                 _currentScreenTooltipFilter!.Copy(new Rectangle(0 + offset, startY, _currentScreenTooltip!.Width - offset, height)) :
                 _currentScreenTooltipFilter!;
+            
+            // TODO: Performance improvements.
+            //Image<Gray, byte> area;
+            //if (_currentTooltip.ItemSplitterLocations.Count > 0)
+            //{
+            //    var rect = new Rectangle(offset, startY, _currentScreenTooltip!.Width - offset, height);
+            //    area = _currentScreenTooltipFilter!.GetSubRect(rect);
+            //}
+            //else
+            //{
+            //    area = _currentScreenTooltipFilter!;
+            //}
 
             FindItemTypePower(area);
-
-            // OCR results
-            WeakReferenceMessenger.Default.Send(new ScreenProcessItemTypePowerOcrReadyMessage(new ScreenProcessItemTypePowerOcrReadyMessageParams
+            
+            if (IsDebugInfoEnabled)
             {
-                OcrResultPower = _currentTooltip.OcrResultPower,
-                OcrResultItemType = _currentTooltip.OcrResultItemType
-            }));
+                WeakReferenceMessenger.Default.Send(new ScreenProcessItemTypePowerOcrReadyMessage(new ScreenProcessItemTypePowerOcrReadyMessageParams
+                {
+                    OcrResultPower = _currentTooltip.OcrResultPower,
+                    OcrResultItemType = _currentTooltip.OcrResultItemType
+                }));
+            }
 
             _currentTooltip.ItemPower = string.IsNullOrWhiteSpace(_currentTooltip.OcrResultPower.TextClean) ? 0 : int.Parse(_currentTooltip.OcrResultPower.TextClean);
             _currentTooltip.ItemType = string.IsNullOrWhiteSpace(_currentTooltip.OcrResultItemType.TypeId) ? _previousItemType : _currentTooltip.OcrResultItemType.TypeId;
@@ -719,7 +733,7 @@ namespace D4Companion.Services
             _logger.LogDebug($"{MethodBase.GetCurrentMethod()?.Name}: Elapsed time: {elapsedMs}");
 
             return result;
-        }
+        }        
 
         private void FindItemTypePower(Image<Gray, byte> areaImageSource)
         {
