@@ -96,7 +96,7 @@ namespace D4Companion.Services
                         case 6: // 1HTotem
                             itemType = Constants.ItemTypeConstants.Offhand;
                             break;
-                        case 7: // 1HAxe
+                        case 7: // 1HAxe, 1HFlail
                         case 8: // 2HMace
                         case 9: // 2HAxe
                         case 11: // 1HMace, 1HSword
@@ -122,6 +122,17 @@ namespace D4Companion.Services
                         case 18: // Amulet
                             itemType = Constants.ItemTypeConstants.Amulet;
                             break;
+                        case 20: // Talisman Seal
+                            itemType = Constants.ItemTypeConstants.HoradricSeal;
+                            break;
+                        case 21: // Talisman Charm
+                        case 22: // Talisman Charm
+                        case 23: // Talisman Charm
+                        case 24: // Talisman Charm
+                        case 25: // Talisman Charm
+                        case 26: // Talisman Charm
+                            itemType = Constants.ItemTypeConstants.Charm;
+                            break;
                         default:
                             _logger.LogWarning($"{MethodBase.GetCurrentMethod()?.Name}: Unknown itemtype id: {item.Key}");
                             WeakReferenceMessenger.Default.Send(new WarningOccurredMessage(new WarningOccurredMessageParams
@@ -129,6 +140,12 @@ namespace D4Companion.Services
                                 Message = $"Imported Maxroll build contains unknown itemtype id: {item.Key}."
                             }));
                             continue;
+                    }
+
+                    // Skip Charm and HoradricSeal. Not implemented yet.
+                    if (itemType.Equals(Constants.ItemTypeConstants.Charm) || itemType.Equals(Constants.ItemTypeConstants.HoradricSeal))
+                    {
+                        continue;
                     }
 
                     // Process runes

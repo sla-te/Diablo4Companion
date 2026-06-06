@@ -415,8 +415,14 @@ namespace D4Companion.Services
                     }
                 }
 
-                // Skip disabled item types
+                // Skip disabled item types - Config
                 if (_currentTooltip.ItemType.Equals(ItemTypeConstants.Rune) && !_settingsManager.Settings.IsRuneDetectionEnabled)
+                {
+                    _currentTooltip.ItemAffixLocations.Clear();
+                }
+
+                // Skip disabled item types - Not implemented
+                if (_currentTooltip.ItemType.Equals(ItemTypeConstants.Charm) || _currentTooltip.ItemType.Equals(ItemTypeConstants.HoradricSeal))
                 {
                     _currentTooltip.ItemAffixLocations.Clear();
                 }
@@ -690,7 +696,7 @@ namespace D4Companion.Services
             var area = _currentTooltip.ItemSplitterLocations.Count > 0 ?
                 _currentScreenTooltipFilter!.Copy(new Rectangle(0 + offset, startY, _currentScreenTooltip!.Width - offset, height)) :
                 _currentScreenTooltipFilter!;
-            
+
             // TODO: Performance improvements.
             //Image<Gray, byte> area;
             //if (_currentTooltip.ItemSplitterLocations.Count > 0)
