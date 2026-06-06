@@ -693,21 +693,20 @@ namespace D4Companion.Services
             int offset = _settingsManager.Settings.TypeAreaOffsetLeft;
             int startY = Math.Max(0, _currentTooltip.ItemSplitterLocations[0].Location.Y - _settingsManager.Settings.TooltipMaxHeight);
             int height = Math.Min(_currentTooltip.ItemSplitterLocations[0].Location.Y, _settingsManager.Settings.TooltipMaxHeight);
-            var area = _currentTooltip.ItemSplitterLocations.Count > 0 ?
-                _currentScreenTooltipFilter!.Copy(new Rectangle(0 + offset, startY, _currentScreenTooltip!.Width - offset, height)) :
-                _currentScreenTooltipFilter!;
+            //var area = _currentTooltip.ItemSplitterLocations.Count > 0 ?
+            //    _currentScreenTooltipFilter!.Copy(new Rectangle(0 + offset, startY, _currentScreenTooltip!.Width - offset, height)) :
+            //    _currentScreenTooltipFilter!;
 
-            // TODO: Performance improvements.
-            //Image<Gray, byte> area;
-            //if (_currentTooltip.ItemSplitterLocations.Count > 0)
-            //{
-            //    var rect = new Rectangle(offset, startY, _currentScreenTooltip!.Width - offset, height);
-            //    area = _currentScreenTooltipFilter!.GetSubRect(rect);
-            //}
-            //else
-            //{
-            //    area = _currentScreenTooltipFilter!;
-            //}
+            Image<Gray, byte> area;
+            if (_currentTooltip.ItemSplitterLocations.Count > 0)
+            {
+                var rect = new Rectangle(offset, startY, _currentScreenTooltip!.Width - offset, height);
+                area = _currentScreenTooltipFilter!.GetSubRect(rect);
+            }
+            else
+            {
+                area = _currentScreenTooltipFilter!;
+            }
 
             FindItemTypePower(area);
             
