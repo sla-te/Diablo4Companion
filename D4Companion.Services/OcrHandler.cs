@@ -818,7 +818,7 @@ namespace D4Companion.Services
             var wordMatches = WordRegex().Matches(hocrText);
 
             // An offset is needed because the bounding boxes of words sometimes exceed the bounding box of the line.
-            int offsetBoundingBox = 10;
+            int offsetBoundingBox = 20;
 
             // Find all lines            
             var matches = LineRegex().Matches(hocrText);
@@ -875,6 +875,8 @@ namespace D4Companion.Services
             int powerIndex = -1;
             for (int i = lines.Count - 1; i >= 0; i--)
             {
+                if (lines[i].X1 > 100) continue;
+
                 string resultString = Regex.Match(lines[i].Text, @"^\d+").Value;
                 // Item power 150 is the minimum value for Tier 1 items.
                 if (resultString.Length >= 3 && int.Parse(resultString) >= 150)
