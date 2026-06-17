@@ -6055,9 +6055,9 @@
       "legendary_lightningUser_003_x2"
     ],
     "Name": "방랑의",
-    "Description": "행운의 적중: 암흑 피해가 최대 #% 확률로 적을 #초 동안 기절시킵니다.",
-    "DescriptionClean": "행운의 적중: 암흑 피해가 최대 확률로 적을 초 동안 기절시킵니다.",
-    "Localisation": "{c_label}행운의 적중:{/c} 암흑 피해가 최대 {c_random}[Affix_Value_1|%|]{/c} 확률로 적을 {c_number}[Affix.\"Static Value 0\"|1|]{/c}초 동안 기절시킵니다.",
+    "Description": "행운의 적중: 번개 피해가 최대 #% 확률로 적을 #초 동안 기절시킵니다.",
+    "DescriptionClean": "행운의 적중: 번개 피해가 최대 확률로 적을 초 동안 기절시킵니다.",
+    "Localisation": "{c_label}행운의 적중:{/c} 번개 피해가 최대 {c_random}[Affix_Value_1|%|]{/c} 확률로 적을 {c_number}[Affix.\"Static Value 0\"|1|]{/c}초 동안 기절시킵니다.",
     "IsSeasonal": false,
     "IsCodex": true,
     "Dungeon": "",

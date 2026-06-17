@@ -25,7 +25,7 @@
     "Type": "amulet"
   },
   {
-    "Name": "Amulette hique unique",
+    "Name": "Amulette Mythique unique",
     "Rarerity": "Mythic",
     "Type": "amulet"
   },
@@ -55,7 +55,7 @@
     "Type": "amulet"
   },
   {
-    "Name": "Amulette ancestrale hique unique",
+    "Name": "Amulette ancestrale Mythique unique",
     "Rarerity": "Mythic",
     "Type": "amulet"
   },
@@ -85,7 +85,7 @@
     "Type": "weapon"
   },
   {
-    "Name": "Hache hique unique",
+    "Name": "Hache Mythique unique",
     "Rarerity": "Mythic",
     "Type": "weapon"
   },
@@ -115,7 +115,7 @@
     "Type": "weapon"
   },
   {
-    "Name": "Hache ancestrale hique unique",
+    "Name": "Hache ancestrale Mythique unique",
     "Rarerity": "Mythic",
     "Type": "weapon"
   },
@@ -145,7 +145,7 @@
     "Type": "weapon"
   },
   {
-    "Name": "Hache (tranchante) hique unique",
+    "Name": "Hache (tranchante) Mythique unique",
     "Rarerity": "Mythic",
     "Type": "weapon"
   },
@@ -175,7 +175,7 @@
     "Type": "weapon"
   },
   {
-    "Name": "Hache (tranchante) ancestrale hique unique",
+    "Name": "Hache (tranchante) ancestrale Mythique unique",
     "Rarerity": "Mythic",
     "Type": "weapon"
   },
@@ -205,7 +205,7 @@
     "Type": "weapon"
   },
   {
-    "Name": "Hache à deux mains hique unique",
+    "Name": "Hache à deux mains Mythique unique",
     "Rarerity": "Mythic",
     "Type": "weapon"
   },
@@ -235,7 +235,7 @@
     "Type": "weapon"
   },
   {
-    "Name": "Hache à deux mains ancestrale hique unique",
+    "Name": "Hache à deux mains ancestrale Mythique unique",
     "Rarerity": "Mythic",
     "Type": "weapon"
   },
@@ -265,7 +265,7 @@
     "Type": "weapon"
   },
   {
-    "Name": "Hache à deux mains (tranchante) hique unique",
+    "Name": "Hache à deux mains (tranchante) Mythique unique",
     "Rarerity": "Mythic",
     "Type": "weapon"
   },
@@ -295,7 +295,7 @@
     "Type": "weapon"
   },
   {
-    "Name": "Hache à deux mains (tranchante) ancestrale hique unique",
+    "Name": "Hache à deux mains (tranchante) ancestrale Mythique unique",
     "Rarerity": "Mythic",
     "Type": "weapon"
   },
@@ -325,7 +325,7 @@
     "Type": "boots"
   },
   {
-    "Name": "Bottes hique unique",
+    "Name": "Bottes Mythique unique",
     "Rarerity": "Mythic",
     "Type": "boots"
   },
@@ -355,7 +355,7 @@
     "Type": "boots"
   },
   {
-    "Name": "Bottes ancestrales hique unique",
+    "Name": "Bottes ancestrales Mythique unique",
     "Rarerity": "Mythic",
     "Type": "boots"
   },
@@ -385,7 +385,7 @@
     "Type": "ranged"
   },
   {
-    "Name": "Arc hique unique",
+    "Name": "Arc Mythique unique",
     "Rarerity": "Mythic",
     "Type": "ranged"
   },
@@ -415,7 +415,7 @@
     "Type": "ranged"
   },
   {
-    "Name": "Arc ancestral hique unique",
+    "Name": "Arc ancestral Mythique unique",
     "Rarerity": "Mythic",
     "Type": "ranged"
   },
@@ -445,7 +445,7 @@
     "Type": "chest"
   },
   {
-    "Name": "Cuirasse hique unique",
+    "Name": "Cuirasse Mythique unique",
     "Rarerity": "Mythic",
     "Type": "chest"
   },
@@ -475,7 +475,7 @@
     "Type": "chest"
   },
   {
-    "Name": "Cuirasse ancestrale hique unique",
+    "Name": "Cuirasse ancestrale Mythique unique",
     "Rarerity": "Mythic",
     "Type": "chest"
   },
@@ -505,7 +505,7 @@
     "Type": "ranged"
   },
   {
-    "Name": "Arbalète hique unique",
+    "Name": "Arbalète Mythique unique",
     "Rarerity": "Mythic",
     "Type": "ranged"
   },
@@ -535,7 +535,7 @@
     "Type": "ranged"
   },
   {
-    "Name": "Arbalète ancestrale hique unique",
+    "Name": "Arbalète ancestrale Mythique unique",
     "Rarerity": "Mythic",
     "Type": "ranged"
   },
@@ -565,7 +565,7 @@
     "Type": "weapon"
   },
   {
-    "Name": "Dague hique unique",
+    "Name": "Dague Mythique unique",
     "Rarerity": "Mythic",
     "Type": "weapon"
   },
@@ -595,7 +595,7 @@
     "Type": "weapon"
   },
   {
-    "Name": "Dague ancestrale hique unique",
+    "Name": "Dague ancestrale Mythique unique",
     "Rarerity": "Mythic",
     "Type": "weapon"
   },
@@ -625,7 +625,7 @@
     "Type": "weapon"
   },
   {
-    "Name": "Fléau hique unique",
+    "Name": "Fléau Mythique unique",
     "Rarerity": "Mythic",
     "Type": "weapon"
   },
@@ -655,7 +655,7 @@
     "Type": "weapon"
   },
   {
-    "Name": "Fléau ancestral hique unique",
+    "Name": "Fléau ancestral Mythique unique",
     "Rarerity": "Mythic",
     "Type": "weapon"
   },
@@ -685,7 +685,7 @@
     "Type": "offhand"
   },
   {
-    "Name": "Catalyseur hique unique",
+    "Name": "Catalyseur Mythique unique",
     "Rarerity": "Mythic",
     "Type": "offhand"
   },
@@ -715,7 +715,7 @@
     "Type": "offhand"
   },
   {
-    "Name": "Catalyseur ancestral hique unique",
+    "Name": "Catalyseur ancestral Mythique unique",
     "Rarerity": "Mythic",
     "Type": "offhand"
   },
@@ -745,7 +745,7 @@
     "Type": "weapon"
   },
   {
-    "Name": "Couteau de brèche hique unique",
+    "Name": "Couteau de brèche Mythique unique",
     "Rarerity": "Mythic",
     "Type": "weapon"
   },
@@ -775,7 +775,7 @@
     "Type": "weapon"
   },
   {
-    "Name": "Couteau de brèche ancestral hique unique",
+    "Name": "Couteau de brèche ancestral Mythique unique",
     "Rarerity": "Mythic",
     "Type": "weapon"
   },
@@ -805,7 +805,7 @@
     "Type": "gloves"
   },
   {
-    "Name": "Gants hique unique",
+    "Name": "Gants Mythique unique",
     "Rarerity": "Mythic",
     "Type": "gloves"
   },
@@ -835,7 +835,7 @@
     "Type": "gloves"
   },
   {
-    "Name": "Gants ancestraux hique unique",
+    "Name": "Gants ancestraux Mythique unique",
     "Rarerity": "Mythic",
     "Type": "gloves"
   },
@@ -865,7 +865,7 @@
     "Type": "helm"
   },
   {
-    "Name": "Heaume hique unique",
+    "Name": "Heaume Mythique unique",
     "Rarerity": "Mythic",
     "Type": "helm"
   },
@@ -895,7 +895,7 @@
     "Type": "helm"
   },
   {
-    "Name": "Heaume ancestral hique unique",
+    "Name": "Heaume ancestral Mythique unique",
     "Rarerity": "Mythic",
     "Type": "helm"
   },
@@ -925,7 +925,7 @@
     "Type": "pants"
   },
   {
-    "Name": "Jambières hique unique",
+    "Name": "Jambières Mythique unique",
     "Rarerity": "Mythic",
     "Type": "pants"
   },
@@ -955,7 +955,7 @@
     "Type": "pants"
   },
   {
-    "Name": "Jambières ancestrales hique unique",
+    "Name": "Jambières ancestrales Mythique unique",
     "Rarerity": "Mythic",
     "Type": "pants"
   },
@@ -985,7 +985,7 @@
     "Type": "weapon"
   },
   {
-    "Name": "Masse hique unique",
+    "Name": "Masse Mythique unique",
     "Rarerity": "Mythic",
     "Type": "weapon"
   },
@@ -1015,7 +1015,7 @@
     "Type": "weapon"
   },
   {
-    "Name": "Masse ancestrale hique unique",
+    "Name": "Masse ancestrale Mythique unique",
     "Rarerity": "Mythic",
     "Type": "weapon"
   },
@@ -1045,7 +1045,7 @@
     "Type": "weapon"
   },
   {
-    "Name": "Masse (contondante) hique unique",
+    "Name": "Masse (contondante) Mythique unique",
     "Rarerity": "Mythic",
     "Type": "weapon"
   },
@@ -1075,7 +1075,7 @@
     "Type": "weapon"
   },
   {
-    "Name": "Masse (contondante) ancestrale hique unique",
+    "Name": "Masse (contondante) ancestrale Mythique unique",
     "Rarerity": "Mythic",
     "Type": "weapon"
   },
@@ -1105,7 +1105,7 @@
     "Type": "weapon"
   },
   {
-    "Name": "Masse à deux mains hique unique",
+    "Name": "Masse à deux mains Mythique unique",
     "Rarerity": "Mythic",
     "Type": "weapon"
   },
@@ -1135,7 +1135,7 @@
     "Type": "weapon"
   },
   {
-    "Name": "Masse à deux mains ancestrale hique unique",
+    "Name": "Masse à deux mains ancestrale Mythique unique",
     "Rarerity": "Mythic",
     "Type": "weapon"
   },
@@ -1165,7 +1165,7 @@
     "Type": "weapon"
   },
   {
-    "Name": "Masse à deux mains (contondante) hique unique",
+    "Name": "Masse à deux mains (contondante) Mythique unique",
     "Rarerity": "Mythic",
     "Type": "weapon"
   },
@@ -1195,7 +1195,7 @@
     "Type": "weapon"
   },
   {
-    "Name": "Masse à deux mains (contondante) ancestrale hique unique",
+    "Name": "Masse à deux mains (contondante) ancestrale Mythique unique",
     "Rarerity": "Mythic",
     "Type": "weapon"
   },
@@ -1225,7 +1225,7 @@
     "Type": "offhand"
   },
   {
-    "Name": "Totem hique unique",
+    "Name": "Totem Mythique unique",
     "Rarerity": "Mythic",
     "Type": "offhand"
   },
@@ -1255,7 +1255,7 @@
     "Type": "offhand"
   },
   {
-    "Name": "Totem ancestral hique unique",
+    "Name": "Totem ancestral Mythique unique",
     "Rarerity": "Mythic",
     "Type": "offhand"
   },
@@ -1285,7 +1285,7 @@
     "Type": "weapon"
   },
   {
-    "Name": "Arme d’hast hique unique",
+    "Name": "Arme d’hast Mythique unique",
     "Rarerity": "Mythic",
     "Type": "weapon"
   },
@@ -1315,7 +1315,7 @@
     "Type": "weapon"
   },
   {
-    "Name": "Arme d’hast ancestrale hique unique",
+    "Name": "Arme d’hast ancestrale Mythique unique",
     "Rarerity": "Mythic",
     "Type": "weapon"
   },
@@ -1345,7 +1345,7 @@
     "Type": "weapon"
   },
   {
-    "Name": "Arme d’hast (tranchante) hique unique",
+    "Name": "Arme d’hast (tranchante) Mythique unique",
     "Rarerity": "Mythic",
     "Type": "weapon"
   },
@@ -1375,7 +1375,7 @@
     "Type": "weapon"
   },
   {
-    "Name": "Arme d’hast (tranchante) ancestrale hique unique",
+    "Name": "Arme d’hast (tranchante) ancestrale Mythique unique",
     "Rarerity": "Mythic",
     "Type": "weapon"
   },
@@ -1405,7 +1405,7 @@
     "Type": "weapon"
   },
   {
-    "Name": "Bâton hique unique",
+    "Name": "Bâton Mythique unique",
     "Rarerity": "Mythic",
     "Type": "weapon"
   },
@@ -1435,7 +1435,7 @@
     "Type": "weapon"
   },
   {
-    "Name": "Bâton ancestral hique unique",
+    "Name": "Bâton ancestral Mythique unique",
     "Rarerity": "Mythic",
     "Type": "weapon"
   },
@@ -1465,7 +1465,7 @@
     "Type": "ring"
   },
   {
-    "Name": "Bague hique unique",
+    "Name": "Bague Mythique unique",
     "Rarerity": "Mythic",
     "Type": "ring"
   },
@@ -1495,7 +1495,7 @@
     "Type": "ring"
   },
   {
-    "Name": "Bague ancestrale hique unique",
+    "Name": "Bague ancestrale Mythique unique",
     "Rarerity": "Mythic",
     "Type": "ring"
   },
@@ -1525,7 +1525,7 @@
     "Type": "weapon"
   },
   {
-    "Name": "Faux hique unique",
+    "Name": "Faux Mythique unique",
     "Rarerity": "Mythic",
     "Type": "weapon"
   },
@@ -1555,7 +1555,7 @@
     "Type": "weapon"
   },
   {
-    "Name": "Faux ancestrale hique unique",
+    "Name": "Faux ancestrale Mythique unique",
     "Rarerity": "Mythic",
     "Type": "weapon"
   },
@@ -1585,7 +1585,7 @@
     "Type": "weapon"
   },
   {
-    "Name": "Faux à deux mains hique unique",
+    "Name": "Faux à deux mains Mythique unique",
     "Rarerity": "Mythic",
     "Type": "weapon"
   },
@@ -1615,7 +1615,7 @@
     "Type": "weapon"
   },
   {
-    "Name": "Faux à deux mains ancestrale hique unique",
+    "Name": "Faux à deux mains ancestrale Mythique unique",
     "Rarerity": "Mythic",
     "Type": "weapon"
   },
@@ -1645,7 +1645,7 @@
     "Type": "offhand"
   },
   {
-    "Name": "Bouclier hique unique",
+    "Name": "Bouclier Mythique unique",
     "Rarerity": "Mythic",
     "Type": "offhand"
   },
@@ -1675,7 +1675,7 @@
     "Type": "offhand"
   },
   {
-    "Name": "Bouclier ancestral hique unique",
+    "Name": "Bouclier ancestral Mythique unique",
     "Rarerity": "Mythic",
     "Type": "offhand"
   },
@@ -1705,7 +1705,7 @@
     "Type": "weapon"
   },
   {
-    "Name": "Épée hique unique",
+    "Name": "Épée Mythique unique",
     "Rarerity": "Mythic",
     "Type": "weapon"
   },
@@ -1735,7 +1735,7 @@
     "Type": "weapon"
   },
   {
-    "Name": "Épée ancestrale hique unique",
+    "Name": "Épée ancestrale Mythique unique",
     "Rarerity": "Mythic",
     "Type": "weapon"
   },
@@ -1765,7 +1765,7 @@
     "Type": "weapon"
   },
   {
-    "Name": "Épée (tranchante) hique unique",
+    "Name": "Épée (tranchante) Mythique unique",
     "Rarerity": "Mythic",
     "Type": "weapon"
   },
@@ -1795,7 +1795,7 @@
     "Type": "weapon"
   },
   {
-    "Name": "Épée (tranchante) ancestrale hique unique",
+    "Name": "Épée (tranchante) ancestrale Mythique unique",
     "Rarerity": "Mythic",
     "Type": "weapon"
   },
@@ -1825,7 +1825,7 @@
     "Type": "weapon"
   },
   {
-    "Name": "Épée à deux mains hique unique",
+    "Name": "Épée à deux mains Mythique unique",
     "Rarerity": "Mythic",
     "Type": "weapon"
   },
@@ -1855,7 +1855,7 @@
     "Type": "weapon"
   },
   {
-    "Name": "Épée à deux mains ancestrale hique unique",
+    "Name": "Épée à deux mains ancestrale Mythique unique",
     "Rarerity": "Mythic",
     "Type": "weapon"
   },
@@ -1885,7 +1885,7 @@
     "Type": "weapon"
   },
   {
-    "Name": "Épée à deux mains (tranchante) hique unique",
+    "Name": "Épée à deux mains (tranchante) Mythique unique",
     "Rarerity": "Mythic",
     "Type": "weapon"
   },
@@ -1915,7 +1915,7 @@
     "Type": "weapon"
   },
   {
-    "Name": "Épée à deux mains (tranchante) ancestrale hique unique",
+    "Name": "Épée à deux mains (tranchante) ancestrale Mythique unique",
     "Rarerity": "Mythic",
     "Type": "weapon"
   },
@@ -1945,7 +1945,7 @@
     "Type": "weapon"
   },
   {
-    "Name": "Baguette hique unique",
+    "Name": "Baguette Mythique unique",
     "Rarerity": "Mythic",
     "Type": "weapon"
   },
@@ -1975,7 +1975,7 @@
     "Type": "weapon"
   },
   {
-    "Name": "Baguette ancestrale hique unique",
+    "Name": "Baguette ancestrale Mythique unique",
     "Rarerity": "Mythic",
     "Type": "weapon"
   },

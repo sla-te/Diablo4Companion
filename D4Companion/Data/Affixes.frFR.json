@@ -5859,8 +5859,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "+#% de dégâts pour Combat",
-    "DescriptionClean": "de dégâts pour Combat"
+    "Description": "+#% de dégâts pour Bagarre",
+    "DescriptionClean": "de dégâts pour Bagarre"
   },
   {
     "IdSno": "1093765;1884916;1938637;1939820",
@@ -13970,26 +13970,22 @@
     "DescriptionClean": "à Fente"
   },
   {
-    "IdSno": "1928741;2478858;2483368;2545597;2592934;2619772;2624387;761341",
-    "IdName": "S04_SkillRankBonus_Barb_Category_Brawling;SkillRankBonus_Barb_Category_Brawling;Talisman_Charm_Affix_UNIQUE_SkillRankBonus_Barb_Category_Brawling;Talisman_Charm_SkillRankBonus_Barb_Category_Bludgeoning;Talisman_Charm_SkillRankBonus_Barb_Category_Brawling;UNIQUE_SkillRankBonus_Barb_Category_Brawling;X2_SkillRankBonus_Barb_Category_Bludgeoning;X2_Transfiguration_SkillRankBonus_Barb_Category_Brawling",
+    "IdSno": "1928741;2478858;2483368;2545597;2592934;761341",
+    "IdName": "S04_SkillRankBonus_Barb_Category_Brawling;SkillRankBonus_Barb_Category_Brawling;Talisman_Charm_Affix_UNIQUE_SkillRankBonus_Barb_Category_Brawling;Talisman_Charm_SkillRankBonus_Barb_Category_Brawling;UNIQUE_SkillRankBonus_Barb_Category_Brawling;X2_Transfiguration_SkillRankBonus_Barb_Category_Brawling",
     "IdSnoList": [
       "1928741",
       "2478858",
       "2483368",
       "2545597",
       "2592934",
-      "2619772",
-      "2624387",
       "761341"
     ],
     "IdNameList": [
       "S04_SkillRankBonus_Barb_Category_Brawling",
       "SkillRankBonus_Barb_Category_Brawling",
       "Talisman_Charm_Affix_UNIQUE_SkillRankBonus_Barb_Category_Brawling",
-      "Talisman_Charm_SkillRankBonus_Barb_Category_Bludgeoning",
       "Talisman_Charm_SkillRankBonus_Barb_Category_Brawling",
       "UNIQUE_SkillRankBonus_Barb_Category_Brawling",
-      "X2_SkillRankBonus_Barb_Category_Bludgeoning",
       "X2_Transfiguration_SkillRankBonus_Barb_Category_Brawling"
     ],
     "AffixType": 2,
@@ -14020,8 +14016,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "+# aux compétences de type Combat",
-    "DescriptionClean": "aux compétences de type Combat"
+    "Description": "+# aux compétences de type Bagarre",
+    "DescriptionClean": "aux compétences de type Bagarre"
   },
   {
     "IdSno": "1928743;2483370;2545599;761342",
@@ -22313,6 +22309,47 @@
     "DescriptionClean": "de soins de la potion"
   },
   {
+    "IdSno": "2619772;2624387",
+    "IdName": "Talisman_Charm_SkillRankBonus_Barb_Category_Bludgeoning;X2_SkillRankBonus_Barb_Category_Bludgeoning",
+    "IdSnoList": [
+      "2619772",
+      "2624387"
+    ],
+    "IdNameList": [
+      "Talisman_Charm_SkillRankBonus_Barb_Category_Bludgeoning",
+      "X2_SkillRankBonus_Barb_Category_Bludgeoning"
+    ],
+    "AffixType": 0,
+    "Category": 0,
+    "Flags": 1796,
+    "IsTemperingAvailable": false,
+    "MagicType": 0,
+    "AllowedForPlayerClass": [
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "AllowedItemLabels": [
+      71
+    ],
+    "AffixAttributes": [
+      {
+        "LocalisationId": "Skill_Rank_Skill_Tag_Bonus",
+        "LocalisationParameter": 3012496276,
+        "LocalisationAttributeFormulaValue": "0",
+        "Localisation": "+[{VALUE2}|0|] aux compétences de type {c_important}{VALUE1}{/c}"
+      }
+    ],
+    "ClassRestriction": "",
+    "Description": "+# aux compétences de type Combat",
+    "DescriptionClean": "aux compétences de type Combat"
+  },
+  {
     "IdSno": "2619776;2624389",
     "IdName": "Talisman_Charm_SkillRankBonus_Barb_Category_DualWield;X2_SkillRankBonus_Barb_Category_DualWield",
     "IdSnoList": [
@@ -28839,8 +28876,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "#% de réduction du temps de recharge (Combat)",
-    "DescriptionClean": "de réduction du temps de recharge (Combat)"
+    "Description": "#% de réduction du temps de recharge (Bagarre)",
+    "DescriptionClean": "de réduction du temps de recharge (Bagarre)"
   },
   {
     "IdSno": "1859748;1937127;1939702;2054081",

@@ -5501,9 +5501,9 @@
     ],
     "IdNameItemActor": "Generic_Charm_Flippy",
     "Name": "Malla del Azote Encadenado",
-    "Description": "Lanzar una habilidad de Pelea que inflija daño la desactiva. Cuando todas las habilidades que están en la barra de acciones se desactivan, se reactivan con las recuperaciones en cero. Las habilidades de Combate que lanzas infligen un #% más de daño por cada habilidad desactivada.",
-    "DescriptionClean": "Lanzar una habilidad de Pelea que inflija daño la desactiva. Cuando todas las habilidades que están en la barra de acciones se desactivan, se reactivan con las recuperaciones en cero. Las habilidades de Combate que lanzas infligen un más de daño por cada habilidad desactivada.",
-    "Localisation": "Lanzar una habilidad de {c_important}Pelea{/c} que inflija daño la desactiva. Cuando todas las habilidades que están en la barra de acciones se desactivan, se reactivan con las recuperaciones en cero. Las habilidades de {c_important}Combate{/c} que lanzas infligen un {c_random}[Affix_Value_1 * 100|1%x|]{/c} más de daño por cada habilidad desactivada.",
+    "Description": "Lanzar una habilidad de Pelea que inflija daño la desactiva. Cuando todas las habilidades que están en la barra de acciones se desactivan, se reactivan con las recuperaciones en cero. Las habilidades de Pelea que lanzas infligen un #% más de daño por cada habilidad desactivada.",
+    "DescriptionClean": "Lanzar una habilidad de Pelea que inflija daño la desactiva. Cuando todas las habilidades que están en la barra de acciones se desactivan, se reactivan con las recuperaciones en cero. Las habilidades de Pelea que lanzas infligen un más de daño por cada habilidad desactivada.",
+    "Localisation": "Lanzar una habilidad de {c_important}Pelea{/c} que inflija daño la desactiva. Cuando todas las habilidades que están en la barra de acciones se desactivan, se reactivan con las recuperaciones en cero. Las habilidades de {c_important}Pelea{/c} que lanzas infligen un {c_random}[Affix_Value_1 * 100|1%x|]{/c} más de daño por cada habilidad desactivada.",
     "MagicType": 2,
     "AllowedForPlayerClass": [
       0,
