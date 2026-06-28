@@ -44,7 +44,7 @@ namespace D4Companion.Entities
     public class MobalyticsAffix
     {
         public string AffixText { get; set; } = string.Empty;
-        public string AffixTextClean { get; set; } = string.Empty;
+        public List<string> AffixTextList { get; set; } = new();
         public bool IsGreater { get; set; } = false;
         public bool IsImplicit { get; set; } = false;
         public bool IsTempered { get; set; } = false;
