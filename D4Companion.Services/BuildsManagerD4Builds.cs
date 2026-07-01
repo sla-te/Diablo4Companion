@@ -253,6 +253,7 @@ namespace D4Companion.Services
             options.AddArgument("--disable-dev-shm-usage"); // Overcome limited resource problems
             options.AddArgument("--no-sandbox"); // Bypass OS security model
             options.AddArgument("--window-size=1600,900");
+            options.AddArgument("--window-position=-32000,-32000");
 
             // Service
             ChromeDriverService service = ChromeDriverService.CreateDefaultService();
