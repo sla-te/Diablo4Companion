@@ -261,8 +261,8 @@
     "Type": "Major"
   },
   {
-    "IdSno": 2511994,
-    "IdName": "DungeonAffix_Positive_AncestralElites",
+    "IdSno": 2516764,
+    "IdName": "DungeonAffix_Positive_LegendaryElites",
     "Name": "Arsenal oculto",
     "Description": "Aquí se guardan objetos excepcionales que otorgan a los enemigos de élite un afijo de botín poderoso.",
     "DungeonZoneInfo": "",
@@ -270,8 +270,8 @@
     "Type": "Positive"
   },
   {
-    "IdSno": 2516764,
-    "IdName": "DungeonAffix_Positive_LegendaryElites",
+    "IdSno": 2511994,
+    "IdName": "DungeonAffix_Positive_AncestralElites",
     "Name": "Arsenal oculto",
     "Description": "Aquí se guardan objetos excepcionales que otorgan a los enemigos de élite un afijo de botín poderoso.",
     "DungeonZoneInfo": "",
@@ -432,6 +432,15 @@
     "Type": "Dungeon"
   },
   {
+    "IdSno": 2579458,
+    "IdName": "World_DGN_QST_Skov_Skar_Sphinx_01_A",
+    "Name": "Camino Escoriáceo",
+    "Description": "Para los más fuertes, estas cuevas esculpidas por la lava conducen a riquezas inimaginables.",
+    "DungeonZoneInfo": "en Skovos",
+    "IsSeasonal": false,
+    "Type": "Dungeon"
+  },
+  {
     "IdSno": 2579464,
     "IdName": "World_DGN_QST_Skov_Skar_Sphinx_01_B",
     "Name": "Camino Escoriáceo",
@@ -443,15 +452,6 @@
   {
     "IdSno": 2579466,
     "IdName": "World_DGN_QST_Skov_Skar_Sphinx_01_C",
-    "Name": "Camino Escoriáceo",
-    "Description": "Para los más fuertes, estas cuevas esculpidas por la lava conducen a riquezas inimaginables.",
-    "DungeonZoneInfo": "en Skovos",
-    "IsSeasonal": false,
-    "Type": "Dungeon"
-  },
-  {
-    "IdSno": 2579458,
-    "IdName": "World_DGN_QST_Skov_Skar_Sphinx_01_A",
     "Name": "Camino Escoriáceo",
     "Description": "Para los más fuertes, estas cuevas esculpidas por la lava conducen a riquezas inimaginables.",
     "DungeonZoneInfo": "en Skovos",
@@ -698,7 +698,7 @@
     "Name": "Costa de Nadie",
     "Description": "Pocos han caminado por esta costa, a pesar del rumor sobre sus tesoros.",
     "DungeonZoneInfo": "en Skovos",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -1215,8 +1215,35 @@
     "Type": "Minor"
   },
   {
+    "IdSno": 2646845,
+    "IdName": "DungeonAffix_Positive_Torment_AncestralElites",
+    "Name": "Exploración de mazmorras",
+    "Description": "Completar la mazmorra otorga experiencia y recompensas adicionales.",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
+    "IdSno": 2646843,
+    "IdName": "DungeonAffix_Positive_Torment_TreasureGoblins",
+    "Name": "Exploración de mazmorras",
+    "Description": "Completar la mazmorra otorga experiencia y recompensas adicionales.",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
     "IdSno": 2613077,
     "IdName": "DungeonAffix_Positive_IncreasedRewards",
+    "Name": "Exploración de mazmorras",
+    "Description": "Completar la mazmorra otorga experiencia y recompensas adicionales.",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
+    "IdSno": 2646836,
+    "IdName": "DungeonAffix_Positive_Torment_MythicElites",
     "Name": "Exploración de mazmorras",
     "Description": "Completar la mazmorra otorga experiencia y recompensas adicionales.",
     "DungeonZoneInfo": "",
@@ -1872,15 +1899,6 @@
     "Type": "Positive"
   },
   {
-    "IdSno": 2321556,
-    "IdName": "DungeonAffix_Positive_Astaroth_BelialBossMats",
-    "Name": "Ofrenda de Belial",
-    "Description": "Las recompensas de Astaroth incluyen restos del traidor, necesarios para abrir la reserva de Belial.",
-    "DungeonZoneInfo": "",
-    "IsSeasonal": false,
-    "Type": "Positive"
-  },
-  {
     "IdSno": 2321538,
     "IdName": "DungeonAffix_Positive_Astaroth_DurielBossMats",
     "Name": "Ofrenda de Duriel",
@@ -1930,6 +1948,15 @@
     "IdName": "DungeonAffix_Positive_Astaroth_MephistoBossMats",
     "Name": "Ofrenda del Heraldo del Odio",
     "Description": "Las recompensas de Astaroth incluyen corazones abominables, necesarios para abrir la reserva del Heraldo del Odio.",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
+    "IdSno": 2321556,
+    "IdName": "DungeonAffix_Positive_Astaroth_BelialBossMats",
+    "Name": "Ofrenda suprema",
+    "Description": "Las recompensas de Astaroth incluyen llaves de guarida supremas.",
     "DungeonZoneInfo": "",
     "IsSeasonal": false,
     "Type": "Positive"

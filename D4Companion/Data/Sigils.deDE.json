@@ -243,15 +243,6 @@
     "Type": "Positive"
   },
   {
-    "IdSno": 2321556,
-    "IdName": "DungeonAffix_Positive_Astaroth_BelialBossMats",
-    "Name": "Belials Opfergabe",
-    "Description": "Astaroths Belohnungen umfassen Hüllen des Verräters, die zum Öffnen von Belials Hort benötigt werden.",
-    "DungeonZoneInfo": "",
-    "IsSeasonal": false,
-    "Type": "Positive"
-  },
-  {
     "IdSno": 2511951,
     "IdName": "DungeonAffix_Major_Empowered Elites (Berserker)",
     "Name": "Berserker-Elitegegner",
@@ -464,7 +455,7 @@
     "Name": "Das Hinterland",
     "Description": "Trotz der angeblichen Schätze haben nur wenige diese Küste überquert.",
     "DungeonZoneInfo": "in Skovos",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -542,6 +533,33 @@
   {
     "IdSno": 2613077,
     "IdName": "DungeonAffix_Positive_IncreasedRewards",
+    "Name": "Dungeon-Streifzug",
+    "Description": "Das Abschließen des Dungeons gewährt zusätzliche Erfahrung und Belohnungen.",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
+    "IdSno": 2646836,
+    "IdName": "DungeonAffix_Positive_Torment_MythicElites",
+    "Name": "Dungeon-Streifzug",
+    "Description": "Das Abschließen des Dungeons gewährt zusätzliche Erfahrung und Belohnungen.",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
+    "IdSno": 2646845,
+    "IdName": "DungeonAffix_Positive_Torment_AncestralElites",
+    "Name": "Dungeon-Streifzug",
+    "Description": "Das Abschließen des Dungeons gewährt zusätzliche Erfahrung und Belohnungen.",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
+    "IdSno": 2646843,
+    "IdName": "DungeonAffix_Positive_Torment_TreasureGoblins",
     "Name": "Dungeon-Streifzug",
     "Description": "Das Abschließen des Dungeons gewährt zusätzliche Erfahrung und Belohnungen.",
     "DungeonZoneInfo": "",
@@ -2475,15 +2493,6 @@
     "Type": "Dungeon"
   },
   {
-    "IdSno": 1314333,
-    "IdName": "DungeonAffix_Major_Empowered Elites (Suppressor)",
-    "Name": "Unterdrücker-Elitegegner",
-    "Description": "Elitemonster besitzen das Affix \"Unterdrücker\" und verursachen 20\u00A0% mehr Schaden.",
-    "DungeonZoneInfo": "",
-    "IsSeasonal": false,
-    "Type": "Major"
-  },
-  {
     "IdSno": 2355995,
     "IdName": "DungeonAffix_Minor_S9_Suppressor",
     "Name": "Unterdrücker-Elitegegner",
@@ -2491,6 +2500,15 @@
     "DungeonZoneInfo": "",
     "IsSeasonal": false,
     "Type": "Minor"
+  },
+  {
+    "IdSno": 1314333,
+    "IdName": "DungeonAffix_Major_Empowered Elites (Suppressor)",
+    "Name": "Unterdrücker-Elitegegner",
+    "Description": "Elitemonster besitzen das Affix \"Unterdrücker\" und verursachen 20\u00A0% mehr Schaden.",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Major"
   },
   {
     "IdSno": 1113931,
@@ -2772,8 +2790,8 @@
     "Type": "Dungeon"
   },
   {
-    "IdSno": 2579466,
-    "IdName": "World_DGN_QST_Skov_Skar_Sphinx_01_C",
+    "IdSno": 2579458,
+    "IdName": "World_DGN_QST_Skov_Skar_Sphinx_01_A",
     "Name": "Verschlackter Pfad",
     "Description": "Für die Unerschütterlichen führen die aus Lava geformten Höhlen zu unermesslichen Reichtümern.",
     "DungeonZoneInfo": "in Skovos",
@@ -2790,8 +2808,8 @@
     "Type": "Dungeon"
   },
   {
-    "IdSno": 2579458,
-    "IdName": "World_DGN_QST_Skov_Skar_Sphinx_01_A",
+    "IdSno": 2579466,
+    "IdName": "World_DGN_QST_Skov_Skar_Sphinx_01_C",
     "Name": "Verschlackter Pfad",
     "Description": "Für die Unerschütterlichen führen die aus Lava geformten Höhlen zu unermesslichen Reichtümern.",
     "DungeonZoneInfo": "in Skovos",
@@ -3031,5 +3049,14 @@
     "DungeonZoneInfo": "in Scosglen",
     "IsSeasonal": false,
     "Type": "Dungeon"
+  },
+  {
+    "IdSno": 2321556,
+    "IdName": "DungeonAffix_Positive_Astaroth_BelialBossMats",
+    "Name": "Überragende Opfergabe",
+    "Description": "Astaroths Belohnungen umfassen überragende Unterschlupfschlüssel.",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
   }
 ]

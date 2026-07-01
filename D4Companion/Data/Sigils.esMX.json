@@ -489,7 +489,7 @@
     "IdSno": 1314354,
     "IdName": "DungeonAffix_Minor_Monster_AttackFaster",
     "Name": "Cazadores",
-    "Description": "Los monstruos tienen una velocidad antinatural aquí, y se mueven y atacan un 15% más rápido.",
+    "Description": "Los monstruos tienen una velocidad antinatural aquí y se mueven y atacan un 15% más rápido.",
     "DungeonZoneInfo": "",
     "IsSeasonal": false,
     "Type": "Minor"
@@ -923,7 +923,7 @@
     "Name": "El Interior",
     "Description": "Pocos han recorrido esta costa pese a que se dice que oculta tesoros.",
     "DungeonZoneInfo": "en Skovos",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -1019,6 +1019,33 @@
   {
     "IdSno": 2613077,
     "IdName": "DungeonAffix_Positive_IncreasedRewards",
+    "Name": "Expedición de calabozo",
+    "Description": "Completar el calabozo otorga experiencia y recompensas adicionales.",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
+    "IdSno": 2646845,
+    "IdName": "DungeonAffix_Positive_Torment_AncestralElites",
+    "Name": "Expedición de calabozo",
+    "Description": "Completar el calabozo otorga experiencia y recompensas adicionales.",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
+    "IdSno": 2646843,
+    "IdName": "DungeonAffix_Positive_Torment_TreasureGoblins",
+    "Name": "Expedición de calabozo",
+    "Description": "Completar el calabozo otorga experiencia y recompensas adicionales.",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
+    "IdSno": 2646836,
+    "IdName": "DungeonAffix_Positive_Torment_MythicElites",
     "Name": "Expedición de calabozo",
     "Description": "Completar el calabozo otorga experiencia y recompensas adicionales.",
     "DungeonZoneInfo": "",
@@ -1575,19 +1602,19 @@
     "Type": "Dungeon"
   },
   {
-    "IdSno": 2321540,
-    "IdName": "DungeonAffix_Positive_Astaroth_AndarielBossMats",
-    "Name": "Ofrenda de Andariel",
-    "Description": "Las recompensas de Astaroth incluyen Muñecos con Alfileres, que se requieren para abrir la Reserva de Andariel.",
+    "IdSno": 2321556,
+    "IdName": "DungeonAffix_Positive_Astaroth_BelialBossMats",
+    "Name": "Ofrenda Superior",
+    "Description": "Las recompensas de Astaroth incluyen Llaves de Guarida Supremas.",
     "DungeonZoneInfo": "",
     "IsSeasonal": false,
     "Type": "Positive"
   },
   {
-    "IdSno": 2321556,
-    "IdName": "DungeonAffix_Positive_Astaroth_BelialBossMats",
-    "Name": "Ofrenda de Belial",
-    "Description": "Las recompensas de Astaroth incluyen Cadáveres del Traidor, que se requieren para abrir la Reserva de Belial.",
+    "IdSno": 2321540,
+    "IdName": "DungeonAffix_Positive_Astaroth_AndarielBossMats",
+    "Name": "Ofrenda de Andariel",
+    "Description": "Las recompensas de Astaroth incluyen Muñecos con Alfileres, que se requieren para abrir la Reserva de Andariel.",
     "DungeonZoneInfo": "",
     "IsSeasonal": false,
     "Type": "Positive"
@@ -2475,8 +2502,8 @@
     "Type": "Dungeon"
   },
   {
-    "IdSno": 2579464,
-    "IdName": "World_DGN_QST_Skov_Skar_Sphinx_01_B",
+    "IdSno": 2579458,
+    "IdName": "World_DGN_QST_Skov_Skar_Sphinx_01_A",
     "Name": "Senda Escoriácea",
     "Description": "Para las almas recias, las cuevas talladas en la lava conducen a riquezas impensables.",
     "DungeonZoneInfo": "en Skovos",
@@ -2484,8 +2511,8 @@
     "Type": "Dungeon"
   },
   {
-    "IdSno": 2579458,
-    "IdName": "World_DGN_QST_Skov_Skar_Sphinx_01_A",
+    "IdSno": 2579464,
+    "IdName": "World_DGN_QST_Skov_Skar_Sphinx_01_B",
     "Name": "Senda Escoriácea",
     "Description": "Para las almas recias, las cuevas talladas en la lava conducen a riquezas impensables.",
     "DungeonZoneInfo": "en Skovos",

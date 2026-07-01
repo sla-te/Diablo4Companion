@@ -454,9 +454,9 @@
     "IdName": "Item_Rune_Effect_Druid_Petrify",
     "RuneType": "effect",
     "Name": "ヨム",
-    "Description": "ドルイドのスキル〈石化〉を引き起こし、敵をスタンして、プライマリリソースを回復する。",
-    "DescriptionClean": "ドルイドのスキル〈石化〉を引き起こし、敵をスタンして、プライマリリソースを回復する。",
-    "RuneDescription": "{c_RuneEffect}ドルイドのスキル{c_important}〈石化〉{/c}を引き起こし、敵をスタンして、プライマリリソースを回復する。{/c}",
+    "Description": "ドルイドの〈石化〉スキルを発現させ、敵をスタンさせると同時にその敵に対する自身のクリティカルヒットダメージを増加させる。",
+    "DescriptionClean": "ドルイドの〈石化〉スキルを発現させ、敵をスタンさせると同時にその敵に対する自身のクリティカルヒットダメージを増加させる。",
+    "RuneDescription": "{c_RuneEffect}ドルイドの{c_important}〈石化〉{/c}スキルを発現させ、敵をスタンさせると同時にその敵に対する自身のクリティカルヒットダメージを増加させる。{/c}",
     "RuneOverflowBehavior": "スタン持続時間延長"
   },
   {

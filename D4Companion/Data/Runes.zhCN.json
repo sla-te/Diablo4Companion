@@ -404,9 +404,9 @@
     "IdName": "Item_Rune_Effect_Druid_Petrify",
     "RuneType": "effect",
     "Name": "约姆",
-    "Description": "施放德鲁伊的石化技能，击昏敌人并恢复主要资源。",
-    "DescriptionClean": "施放德鲁伊的石化技能，击昏敌人并恢复主要资源。",
-    "RuneDescription": "{c_RuneEffect}施放德鲁伊的{c_important}石化{/c}技能，击昏敌人并恢复主要资源。{/c}",
+    "Description": "施放德鲁伊的石化技能，击昏敌人并提高你对其造成的暴击伤害。",
+    "DescriptionClean": "施放德鲁伊的石化技能，击昏敌人并提高你对其造成的暴击伤害。",
+    "RuneDescription": "{c_RuneEffect}施放德鲁伊的{c_important}石化{/c}技能，击昏敌人并提高你对其造成的暴击伤害。{/c}",
     "RuneOverflowBehavior": "延长击昏的持续时间"
   },
   {

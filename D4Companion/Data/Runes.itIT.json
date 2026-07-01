@@ -474,9 +474,9 @@
     "IdName": "Item_Rune_Effect_Druid_Petrify",
     "RuneType": "effect",
     "Name": "Yom",
-    "Description": "Invochi l'abilità Pietrificazione del Druido, stordendo i nemici e ripristinando la risorsa principale.",
-    "DescriptionClean": "Invochi l'abilità Pietrificazione del Druido, stordendo i nemici e ripristinando la risorsa principale.",
-    "RuneDescription": "{c_RuneEffect}Invochi l'abilità {c_important}Pietrificazione{/c} del Druido, stordendo i nemici e ripristinando la risorsa principale.{/c}",
+    "Description": "Invochi l'abilità Pietrificazione del Druido, stordendo i nemici e aumentando danni critici inflitti contro di loro.",
+    "DescriptionClean": "Invochi l'abilità Pietrificazione del Druido, stordendo i nemici e aumentando danni critici inflitti contro di loro.",
+    "RuneDescription": "{c_RuneEffect}Invochi l'abilità {c_important}Pietrificazione{/c} del Druido, stordendo i nemici e aumentando danni critici inflitti contro di loro.{/c}",
     "RuneOverflowBehavior": "Durata stordimento aumentata"
   },
   {

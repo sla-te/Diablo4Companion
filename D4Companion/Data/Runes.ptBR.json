@@ -474,9 +474,9 @@
     "IdName": "Item_Rune_Effect_Druid_Petrify",
     "RuneType": "effect",
     "Name": "Yom",
-    "Description": "Invoque a habilidade Petrificar do Druida, atordoando inimigos e restaurando recurso primário.",
-    "DescriptionClean": "Invoque a habilidade Petrificar do Druida, atordoando inimigos e restaurando recurso primário.",
-    "RuneDescription": "{c_RuneEffect}Invoque a habilidade {c_important}Petrificar{/c} do Druida, atordoando inimigos e restaurando recurso primário.{/c}",
+    "Description": "Invoque a habilidade de Petrificar do Druida, atordoando inimigos e aumentando seu dano de acerto crítico contra eles.",
+    "DescriptionClean": "Invoque a habilidade de Petrificar do Druida, atordoando inimigos e aumentando seu dano de acerto crítico contra eles.",
+    "RuneDescription": "{c_RuneEffect}Invoque a habilidade de {c_important}Petrificar{/c} do Druida, atordoando inimigos e aumentando seu dano de acerto crítico contra eles.{/c}",
     "RuneOverflowBehavior": "Aumenta a duração de atordoamento"
   },
   {

@@ -13332,12 +13332,12 @@
         "LocalisationId": "Resource_Regen_Per_Second",
         "LocalisationParameter": 3,
         "LocalisationAttributeFormulaValue": "1",
-        "Localisation": "[{VALUE2}|~|] {VALUE1} regeneracji"
+        "Localisation": "[{VALUE2}|~|] regeneracji: {VALUE1} "
       }
     ],
     "ClassRestriction": "",
-    "Description": "# Energia regeneracji",
-    "DescriptionClean": "Energia regeneracji"
+    "Description": "# regeneracji: Energia ",
+    "DescriptionClean": "regeneracji: Energia"
   },
   {
     "IdSno": "1924666",
@@ -13374,12 +13374,12 @@
         "LocalisationId": "Resource_Regen_Per_Second",
         "LocalisationParameter": 6,
         "LocalisationAttributeFormulaValue": "1",
-        "Localisation": "[{VALUE2}|~|] {VALUE1} regeneracji"
+        "Localisation": "[{VALUE2}|~|] regeneracji: {VALUE1} "
       }
     ],
     "ClassRestriction": "",
-    "Description": "# Esencja regeneracji",
-    "DescriptionClean": "Esencja regeneracji"
+    "Description": "# regeneracji: Esencja ",
+    "DescriptionClean": "regeneracji: Esencja"
   },
   {
     "IdSno": "2520249",
@@ -13416,12 +13416,12 @@
         "LocalisationId": "Resource_Regen_Per_Second",
         "LocalisationParameter": 9,
         "LocalisationAttributeFormulaValue": "1",
-        "Localisation": "[{VALUE2}|~|] {VALUE1} regeneracji"
+        "Localisation": "[{VALUE2}|~|] regeneracji: {VALUE1} "
       }
     ],
     "ClassRestriction": "",
-    "Description": "# Wiara regeneracji",
-    "DescriptionClean": "Wiara regeneracji"
+    "Description": "# regeneracji: Wiara ",
+    "DescriptionClean": "regeneracji: Wiara"
   },
   {
     "IdSno": "1924664;2211386;2592919",
@@ -13462,12 +13462,12 @@
         "LocalisationId": "Resource_Regen_Per_Second",
         "LocalisationParameter": 1,
         "LocalisationAttributeFormulaValue": "1",
-        "Localisation": "[{VALUE2}|~|] {VALUE1} regeneracji"
+        "Localisation": "[{VALUE2}|~|] regeneracji: {VALUE1} "
       }
     ],
     "ClassRestriction": "",
-    "Description": "# Furia regeneracji",
-    "DescriptionClean": "Furia regeneracji"
+    "Description": "# regeneracji: Furia ",
+    "DescriptionClean": "regeneracji: Furia"
   },
   {
     "IdSno": "1924662",
@@ -13504,12 +13504,12 @@
         "LocalisationId": "Resource_Regen_Per_Second",
         "LocalisationParameter": 0,
         "LocalisationAttributeFormulaValue": "1",
-        "Localisation": "[{VALUE2}|~|] {VALUE1} regeneracji"
+        "Localisation": "[{VALUE2}|~|] regeneracji: {VALUE1} "
       }
     ],
     "ClassRestriction": "",
-    "Description": "# Mana regeneracji",
-    "DescriptionClean": "Mana regeneracji"
+    "Description": "# regeneracji: Mana ",
+    "DescriptionClean": "regeneracji: Mana"
   },
   {
     "IdSno": "1924659",
@@ -13546,12 +13546,12 @@
         "LocalisationId": "Resource_Regen_Per_Second",
         "LocalisationParameter": 5,
         "LocalisationAttributeFormulaValue": "1",
-        "Localisation": "[{VALUE2}|~|] {VALUE1} regeneracji"
+        "Localisation": "[{VALUE2}|~|] regeneracji: {VALUE1} "
       }
     ],
     "ClassRestriction": "",
-    "Description": "# Siła Duchowa regeneracji",
-    "DescriptionClean": "Siła Duchowa regeneracji"
+    "Description": "# regeneracji: Siła Duchowa ",
+    "DescriptionClean": "regeneracji: Siła Duchowa"
   },
   {
     "IdSno": "2012489",
@@ -13588,12 +13588,12 @@
         "LocalisationId": "Resource_Regen_Per_Second",
         "LocalisationParameter": 7,
         "LocalisationAttributeFormulaValue": "1",
-        "Localisation": "[{VALUE2}|~|] {VALUE1} regeneracji"
+        "Localisation": "[{VALUE2}|~|] regeneracji: {VALUE1} "
       }
     ],
     "ClassRestriction": "",
-    "Description": "# Wigor regeneracji",
-    "DescriptionClean": "Wigor regeneracji"
+    "Description": "# regeneracji: Wigor ",
+    "DescriptionClean": "regeneracji: Wigor"
   },
   {
     "IdSno": "2532220",
@@ -13630,12 +13630,12 @@
         "LocalisationId": "Resource_Regen_Per_Second",
         "LocalisationParameter": 10,
         "LocalisationAttributeFormulaValue": "1",
-        "Localisation": "[{VALUE2}|~|] {VALUE1} regeneracji"
+        "Localisation": "[{VALUE2}|~|] regeneracji: {VALUE1} "
       }
     ],
     "ClassRestriction": "",
-    "Description": "# Gniew regeneracji",
-    "DescriptionClean": "Gniew regeneracji"
+    "Description": "# regeneracji: Gniew ",
+    "DescriptionClean": "regeneracji: Gniew"
   },
   {
     "IdSno": "1859772;2545589;2593603;760582",
@@ -15802,7 +15802,7 @@
       0,
       1,
       0,
-      0
+      1
     ],
     "AllowedItemLabels": [
       17,
@@ -30990,6 +30990,53 @@
     "DescriptionClean": "Szczęśliwy traf: Maksymalnie szans na Osłabienie przez 2 sek."
   },
   {
+    "IdSno": "2614081;2614083;2614085",
+    "IdName": "Tempered_Damage_Generic_LuckHit_Weakened_Tier1;Tempered_Damage_Generic_LuckHit_Weakened_Tier2;Tempered_Damage_Generic_LuckHit_Weakened_Tier3",
+    "IdSnoList": [
+      "2614081",
+      "2614083",
+      "2614085"
+    ],
+    "IdNameList": [
+      "Tempered_Damage_Generic_LuckHit_Weakened_Tier1",
+      "Tempered_Damage_Generic_LuckHit_Weakened_Tier2",
+      "Tempered_Damage_Generic_LuckHit_Weakened_Tier3"
+    ],
+    "AffixType": -1,
+    "Category": -1,
+    "Flags": 4,
+    "IsTemperingAvailable": true,
+    "MagicType": 0,
+    "AllowedForPlayerClass": [
+      1,
+      1,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1
+    ],
+    "AllowedItemLabels": [],
+    "AffixAttributes": [
+      {
+        "LocalisationId": "On_Hit_Weakened_Proc",
+        "LocalisationParameter": 4294967295,
+        "LocalisationAttributeFormulaValue": "0",
+        "Localisation": "{c_label}Szczęśliwy traf:{/c} maksymalnie +[{VALUE}*100|1%|] szans na osłabienie wrogów na {VALUE2} sek."
+      },
+      {
+        "LocalisationId": "On_Hit_Weakened_Proc",
+        "LocalisationParameter": 4294967295,
+        "LocalisationAttributeFormulaValue": "2",
+        "Localisation": "{c_label}Szczęśliwy traf:{/c} maksymalnie +[{VALUE}*100|1%|] szans na osłabienie wrogów na {VALUE2} sek."
+      }
+    ],
+    "ClassRestriction": "",
+    "Description": "Szczęśliwy traf: maksymalnie +#% szans na osłabienie wrogów na # sek.",
+    "DescriptionClean": "Szczęśliwy traf: maksymalnie szans na osłabienie wrogów na sek."
+  },
+  {
     "IdSno": "2502528;2502531;2502533;2634626;2634628;2634630",
     "IdName": "Tempered_Damage_Generic_Type_Holy_Tier1;Tempered_Damage_Generic_Type_Holy_Tier2;Tempered_Damage_Generic_Type_Holy_Tier3;Tempered_Offensive_Damage_Tag_Holy_Paladin_Tier1;Tempered_Offensive_Damage_Tag_Holy_Paladin_Tier2;Tempered_Offensive_Damage_Tag_Holy_Paladin_Tier3",
     "IdSnoList": [
@@ -37128,7 +37175,7 @@
     ],
     "AffixType": 2,
     "Category": 0,
-    "Flags": 260,
+    "Flags": 1028,
     "IsTemperingAvailable": false,
     "MagicType": 0,
     "AllowedForPlayerClass": [
@@ -40675,7 +40722,7 @@
     ],
     "AffixType": 2,
     "Category": -1,
-    "Flags": 4,
+    "Flags": 2052,
     "IsTemperingAvailable": false,
     "MagicType": 0,
     "AllowedForPlayerClass": [
@@ -41148,8 +41195,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "+# do umiejętności: {VALUE1}",
-    "DescriptionClean": "do umiejętności: {VALUE1}"
+    "Description": "+# do umiejętności: Zawierucha",
+    "DescriptionClean": "do umiejętności: Zawierucha"
   },
   {
     "IdSno": "2589355",
@@ -41404,7 +41451,7 @@
       0,
       0,
       1,
-      0,
+      1,
       0,
       0,
       0

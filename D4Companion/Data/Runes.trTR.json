@@ -474,9 +474,9 @@
     "IdName": "Item_Rune_Effect_Druid_Petrify",
     "RuneType": "effect",
     "Name": "Yom",
-    "Description": "Düşmanları sersemleten ve Birincil Kaynak yenileyen Taşlaştır Druid Yeteneğini etkinleştir.",
-    "DescriptionClean": "Düşmanları sersemleten ve Birincil Kaynak yenileyen Taşlaştır Druid Yeteneğini etkinleştir.",
-    "RuneDescription": "{c_RuneEffect}Düşmanları sersemleten ve Birincil Kaynak yenileyen {c_important}Taşlaştır{/c} Druid Yeteneğini etkinleştir.{/c}",
+    "Description": "Düşmanları Sersemleten ve onlara verdiğin Kritik Vuruş Hasarını artıran Taşlaştır Druid Yeteneğini etkinleştir.",
+    "DescriptionClean": "Düşmanları Sersemleten ve onlara verdiğin Kritik Vuruş Hasarını artıran Taşlaştır Druid Yeteneğini etkinleştir.",
+    "RuneDescription": "{c_RuneEffect}Düşmanları Sersemleten ve onlara verdiğin Kritik Vuruş Hasarını artıran {c_important}Taşlaştır{/c} Druid Yeteneğini etkinleştir.{/c}",
     "RuneOverflowBehavior": "Sersemletme Süresini artır"
   },
   {

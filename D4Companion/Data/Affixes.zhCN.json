@@ -15870,7 +15870,7 @@
       0,
       1,
       0,
-      0
+      1
     ],
     "AllowedItemLabels": [
       17,
@@ -31109,6 +31109,53 @@
     "DescriptionClean": "幸运一击：最多有 几率虚弱，持续 2 秒"
   },
   {
+    "IdSno": "2614081;2614083;2614085",
+    "IdName": "Tempered_Damage_Generic_LuckHit_Weakened_Tier1;Tempered_Damage_Generic_LuckHit_Weakened_Tier2;Tempered_Damage_Generic_LuckHit_Weakened_Tier3",
+    "IdSnoList": [
+      "2614081",
+      "2614083",
+      "2614085"
+    ],
+    "IdNameList": [
+      "Tempered_Damage_Generic_LuckHit_Weakened_Tier1",
+      "Tempered_Damage_Generic_LuckHit_Weakened_Tier2",
+      "Tempered_Damage_Generic_LuckHit_Weakened_Tier3"
+    ],
+    "AffixType": -1,
+    "Category": -1,
+    "Flags": 4,
+    "IsTemperingAvailable": true,
+    "MagicType": 0,
+    "AllowedForPlayerClass": [
+      1,
+      1,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1
+    ],
+    "AllowedItemLabels": [],
+    "AffixAttributes": [
+      {
+        "LocalisationId": "On_Hit_Weakened_Proc",
+        "LocalisationParameter": 4294967295,
+        "LocalisationAttributeFormulaValue": "0",
+        "Localisation": "{c_label}幸运一击:{/c} 最多有 +[{VALUE}*100|1%|] 几率使敌人虚弱，持续 {VALUE2} 秒"
+      },
+      {
+        "LocalisationId": "On_Hit_Weakened_Proc",
+        "LocalisationParameter": 4294967295,
+        "LocalisationAttributeFormulaValue": "2",
+        "Localisation": "{c_label}幸运一击:{/c} 最多有 +[{VALUE}*100|1%|] 几率使敌人虚弱，持续 {VALUE2} 秒"
+      }
+    ],
+    "ClassRestriction": "",
+    "Description": "幸运一击: 最多有 +#% 几率使敌人虚弱，持续 # 秒",
+    "DescriptionClean": "幸运一击: 最多有 几率使敌人虚弱，持续 秒"
+  },
+  {
     "IdSno": "2502528;2502531;2502533;2634626;2634628;2634630",
     "IdName": "Tempered_Damage_Generic_Type_Holy_Tier1;Tempered_Damage_Generic_Type_Holy_Tier2;Tempered_Damage_Generic_Type_Holy_Tier3;Tempered_Offensive_Damage_Tag_Holy_Paladin_Tier1;Tempered_Offensive_Damage_Tag_Holy_Paladin_Tier2;Tempered_Offensive_Damage_Tag_Holy_Paladin_Tier3",
     "IdSnoList": [
@@ -37206,7 +37253,7 @@
     ],
     "AffixType": 2,
     "Category": 0,
-    "Flags": 260,
+    "Flags": 1028,
     "IsTemperingAvailable": false,
     "MagicType": 0,
     "AllowedForPlayerClass": [
@@ -40753,7 +40800,7 @@
     ],
     "AffixType": 2,
     "Category": -1,
-    "Flags": 4,
+    "Flags": 2052,
     "IsTemperingAvailable": false,
     "MagicType": 0,
     "AllowedForPlayerClass": [
@@ -41226,8 +41273,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "+# 至{VALUE1}技能",
-    "DescriptionClean": "至{VALUE1}技能"
+    "Description": "+# 至尘魔技能",
+    "DescriptionClean": "至尘魔技能"
   },
   {
     "IdSno": "2589355",
@@ -41482,7 +41529,7 @@
       0,
       0,
       1,
-      0,
+      1,
       0,
       0,
       0

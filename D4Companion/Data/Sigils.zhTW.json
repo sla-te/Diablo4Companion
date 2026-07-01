@@ -1,5 +1,14 @@
 [
   {
+    "IdSno": 2321556,
+    "IdName": "DungeonAffix_Positive_Astaroth_BelialBossMats",
+    "Name": "上等祭品",
+    "Description": "阿斯塔洛的獎勵包含上等巢穴鑰匙",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
     "IdSno": 1113291,
     "IdName": "World_DGN_Frac_ImmortalEmanation",
     "Name": "不朽放射",
@@ -405,8 +414,35 @@
     "Type": "Dungeon"
   },
   {
+    "IdSno": 2646843,
+    "IdName": "DungeonAffix_Positive_Torment_TreasureGoblins",
+    "Name": "地城探荒",
+    "Description": "完成地城可獲得額外經驗值和獎勵。",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
+    "IdSno": 2646836,
+    "IdName": "DungeonAffix_Positive_Torment_MythicElites",
+    "Name": "地城探荒",
+    "Description": "完成地城可獲得額外經驗值和獎勵。",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
     "IdSno": 2613077,
     "IdName": "DungeonAffix_Positive_IncreasedRewards",
+    "Name": "地城探荒",
+    "Description": "完成地城可獲得額外經驗值和獎勵。",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
+    "IdSno": 2646845,
+    "IdName": "DungeonAffix_Positive_Torment_AncestralElites",
     "Name": "地城探荒",
     "Description": "完成地城可獲得額外經驗值和獎勵。",
     "DungeonZoneInfo": "",
@@ -823,15 +859,6 @@
     "IdName": "DungeonAffix_Positive_S08_Apparition",
     "Name": "彼列的幻影",
     "Description": "精英幻影已經入侵此地城了。",
-    "DungeonZoneInfo": "",
-    "IsSeasonal": false,
-    "Type": "Positive"
-  },
-  {
-    "IdSno": 2321556,
-    "IdName": "DungeonAffix_Positive_Astaroth_BelialBossMats",
-    "Name": "彼列祭品",
-    "Description": "阿斯塔洛的獎勵包含背叛者的軀殼，能用來開啟彼列的財寶。",
     "DungeonZoneInfo": "",
     "IsSeasonal": false,
     "Type": "Positive"
@@ -1472,7 +1499,7 @@
     "Name": "海岸腹地",
     "Description": "雖然有財寶的傳說，仍很少有人到過這個海岸。",
     "DungeonZoneInfo": "在 斯寇伐斯",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -2520,20 +2547,20 @@
     "Type": "Dungeon"
   },
   {
-    "IdSno": 1585586,
-    "IdName": "World_DGN_Naha_ForgottenRemains",
-    "Name": "遺忘廢墟",
-    "Description": "多位村民在這個地帶神秘失蹤。",
-    "DungeonZoneInfo": "在 納漢圖",
-    "IsSeasonal": true,
-    "Type": "Dungeon"
-  },
-  {
     "IdSno": 1113710,
     "IdName": "World_DGN_Kehj_ForgottenRuins",
     "Name": "遺忘廢墟",
     "Description": "禁忌的法師大廳廢墟成為了毒蛇的巢穴。",
     "DungeonZoneInfo": "在 卡基斯坦",
+    "IsSeasonal": true,
+    "Type": "Dungeon"
+  },
+  {
+    "IdSno": 1585586,
+    "IdName": "World_DGN_Naha_ForgottenRemains",
+    "Name": "遺忘廢墟",
+    "Description": "多位村民在這個地帶神秘失蹤。",
+    "DungeonZoneInfo": "在 納漢圖",
     "IsSeasonal": true,
     "Type": "Dungeon"
   },

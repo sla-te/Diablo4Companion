@@ -306,15 +306,6 @@
     "Type": "Major"
   },
   {
-    "IdSno": 2321556,
-    "IdName": "DungeonAffix_Positive_Astaroth_BelialBossMats",
-    "Name": "Belial'ın Adağı",
-    "Description": "Astaroth'un ödülleri, Belial'ın İstifini açmak için gereken Hain Kabukları içerir.",
-    "DungeonZoneInfo": "",
-    "IsSeasonal": false,
-    "Type": "Positive"
-  },
-  {
     "IdSno": 2347209,
     "IdName": "DungeonAffix_Positive_S08_Apparition",
     "Name": "Belial'ın Tezahürleri",
@@ -1044,8 +1035,8 @@
     "Type": "Positive"
   },
   {
-    "IdSno": 2511994,
-    "IdName": "DungeonAffix_Positive_AncestralElites",
+    "IdSno": 2516764,
+    "IdName": "DungeonAffix_Positive_LegendaryElites",
     "Name": "Gizli Silah Deposu",
     "Description": "Olağanüstü öğeler burada tutulur, seçkin canavarlara güçlü bir ganimet eki verirler.",
     "DungeonZoneInfo": "",
@@ -1053,8 +1044,8 @@
     "Type": "Positive"
   },
   {
-    "IdSno": 2516764,
-    "IdName": "DungeonAffix_Positive_LegendaryElites",
+    "IdSno": 2511994,
+    "IdName": "DungeonAffix_Positive_AncestralElites",
     "Name": "Gizli Silah Deposu",
     "Description": "Olağanüstü öğeler burada tutulur, seçkin canavarlara güçlü bir ganimet eki verirler.",
     "DungeonZoneInfo": "",
@@ -1274,7 +1265,7 @@
     "Name": "Hudut",
     "Description": "Hazine söylentilerine rağmen bu kıyıya pek gelen giden yok.",
     "DungeonZoneInfo": ":  içinde Skovos",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -2754,6 +2745,33 @@
     "Type": "Positive"
   },
   {
+    "IdSno": 2646843,
+    "IdName": "DungeonAffix_Positive_Torment_TreasureGoblins",
+    "Name": "Zindan Oyuğu",
+    "Description": "Zindanı tamamlamak fazladan Tecrübe ve Ödüller kazandırır.",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
+    "IdSno": 2646836,
+    "IdName": "DungeonAffix_Positive_Torment_MythicElites",
+    "Name": "Zindan Oyuğu",
+    "Description": "Zindanı tamamlamak fazladan Tecrübe ve Ödüller kazandırır.",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
+    "IdSno": 2646845,
+    "IdName": "DungeonAffix_Positive_Torment_AncestralElites",
+    "Name": "Zindan Oyuğu",
+    "Description": "Zindanı tamamlamak fazladan Tecrübe ve Ödüller kazandırır.",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
     "IdSno": 2360150,
     "IdName": "DungeonAffix_Positive_Chests_Gems_Emerald",
     "Name": "Zümrüt Rezervi",
@@ -2896,6 +2914,15 @@
     "DungeonZoneInfo": ":  içinde Kehjistan",
     "IsSeasonal": false,
     "Type": "Dungeon"
+  },
+  {
+    "IdSno": 2321556,
+    "IdName": "DungeonAffix_Positive_Astaroth_BelialBossMats",
+    "Name": "Üstün Adak",
+    "Description": "Astaroth'un ödülleri, Üstün İn Anahtarları içerir",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
   },
   {
     "IdSno": 2381224,

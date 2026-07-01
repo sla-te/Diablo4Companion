@@ -333,6 +333,33 @@
     "Type": "Dungeon"
   },
   {
+    "IdSno": 2646845,
+    "IdName": "DungeonAffix_Positive_Torment_AncestralElites",
+    "Name": "Вылазка в подземелье",
+    "Description": "За прохождение подземелья дается больше опыта и наград.",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
+    "IdSno": 2646836,
+    "IdName": "DungeonAffix_Positive_Torment_MythicElites",
+    "Name": "Вылазка в подземелье",
+    "Description": "За прохождение подземелья дается больше опыта и наград.",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
+    "IdSno": 2646843,
+    "IdName": "DungeonAffix_Positive_Torment_TreasureGoblins",
+    "Name": "Вылазка в подземелье",
+    "Description": "За прохождение подземелья дается больше опыта и наград.",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
     "IdSno": 2613077,
     "IdName": "DungeonAffix_Positive_IncreasedRewards",
     "Name": "Вылазка в подземелье",
@@ -346,6 +373,15 @@
     "IdName": "DungeonAffix_Positive_TreasureHunt",
     "Name": "Вылазка за снаряжением",
     "Description": "Находите хорадримские артефакты, чтобы увеличивать ценность снаряжения в награде.",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
+    "IdSno": 2321556,
+    "IdName": "DungeonAffix_Positive_Astaroth_BelialBossMats",
+    "Name": "Высшее подношение",
+    "Description": "Награда за победу над Астаротом включает ключи от высшего логова",
     "DungeonZoneInfo": "",
     "IsSeasonal": false,
     "Type": "Positive"
@@ -392,7 +428,7 @@
     "Name": "Глушь",
     "Description": "Мало кто осмеливается пройти по этому берегу – даже несмотря на слухи о сокровищах.",
     "DungeonZoneInfo": "в области Сковос",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -1647,15 +1683,6 @@
     "Type": "Major"
   },
   {
-    "IdSno": 1314333,
-    "IdName": "DungeonAffix_Major_Empowered Elites (Suppressor)",
-    "Name": "Особые монстры-душители",
-    "Description": "Особые монстры получают свойство \"Душитель\" и наносят на 20% больше урона.",
-    "DungeonZoneInfo": "",
-    "IsSeasonal": false,
-    "Type": "Major"
-  },
-  {
     "IdSno": 2355995,
     "IdName": "DungeonAffix_Minor_S9_Suppressor",
     "Name": "Особые монстры-душители",
@@ -1663,6 +1690,15 @@
     "DungeonZoneInfo": "",
     "IsSeasonal": false,
     "Type": "Minor"
+  },
+  {
+    "IdSno": 1314333,
+    "IdName": "DungeonAffix_Major_Empowered Elites (Suppressor)",
+    "Name": "Особые монстры-душители",
+    "Description": "Особые монстры получают свойство \"Душитель\" и наносят на 20% больше урона.",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Major"
   },
   {
     "IdSno": 2355993,
@@ -1876,15 +1912,6 @@
     "IdName": "DungeonAffix_Positive_Astaroth_AndarielBossMats",
     "Name": "Подношение Андариэль",
     "Description": "Награда за победу над Астаротом включает утыканных булавками кукол, открывающих сокровищницу Андариэль.",
-    "DungeonZoneInfo": "",
-    "IsSeasonal": false,
-    "Type": "Positive"
-  },
-  {
-    "IdSno": 2321556,
-    "IdName": "DungeonAffix_Positive_Astaroth_BelialBossMats",
-    "Name": "Подношение Белиалу",
-    "Description": "Награда за победу над Астаротом включает оболочки предателя, открывающие сокровищницу Белиала.",
     "DungeonZoneInfo": "",
     "IsSeasonal": false,
     "Type": "Positive"
@@ -2313,8 +2340,8 @@
     "Type": "Dungeon"
   },
   {
-    "IdSno": 2516764,
-    "IdName": "DungeonAffix_Positive_LegendaryElites",
+    "IdSno": 2511994,
+    "IdName": "DungeonAffix_Positive_AncestralElites",
     "Name": "Скрытая оружейная",
     "Description": "Здесь скрыты невероятные предметы, а сторожат их особые монстры, за победу над которыми вы получите добычу с мощными свойствами.",
     "DungeonZoneInfo": "",
@@ -2322,8 +2349,8 @@
     "Type": "Positive"
   },
   {
-    "IdSno": 2511994,
-    "IdName": "DungeonAffix_Positive_AncestralElites",
+    "IdSno": 2516764,
+    "IdName": "DungeonAffix_Positive_LegendaryElites",
     "Name": "Скрытая оружейная",
     "Description": "Здесь скрыты невероятные предметы, а сторожат их особые монстры, за победу над которыми вы получите добычу с мощными свойствами.",
     "DungeonZoneInfo": "",
@@ -2970,8 +2997,8 @@
     "Type": "Dungeon"
   },
   {
-    "IdSno": 2579458,
-    "IdName": "World_DGN_QST_Skov_Skar_Sphinx_01_A",
+    "IdSno": 2579464,
+    "IdName": "World_DGN_QST_Skov_Skar_Sphinx_01_B",
     "Name": "Шлаковый путь",
     "Description": "Высеченные лавой пещеры обещают невероятные богатства тем, кто силен духом.",
     "DungeonZoneInfo": "в области Сковос",
@@ -2979,8 +3006,8 @@
     "Type": "Dungeon"
   },
   {
-    "IdSno": 2579464,
-    "IdName": "World_DGN_QST_Skov_Skar_Sphinx_01_B",
+    "IdSno": 2579458,
+    "IdName": "World_DGN_QST_Skov_Skar_Sphinx_01_A",
     "Name": "Шлаковый путь",
     "Description": "Высеченные лавой пещеры обещают невероятные богатства тем, кто силен духом.",
     "DungeonZoneInfo": "в области Сковос",

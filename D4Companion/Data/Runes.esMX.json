@@ -474,9 +474,9 @@
     "IdName": "Item_Rune_Effect_Druid_Petrify",
     "RuneType": "effect",
     "Name": "Yom",
-    "Description": "Invocas la habilidad Petrificación del Druida, aturdes a los enemigos y restauras recurso primario.",
-    "DescriptionClean": "Invocas la habilidad Petrificación del Druida, aturdes a los enemigos y restauras recurso primario.",
-    "RuneDescription": "{c_RuneEffect}Invocas la habilidad {c_important}Petrificación{/c} del Druida, aturdes a los enemigos y restauras recurso primario.{/c}",
+    "Description": "Invoca la habilidad Petrificación del Druida, la cual aturde a los enemigos y te otorga daño de golpe crítico contra ellos.",
+    "DescriptionClean": "Invoca la habilidad Petrificación del Druida, la cual aturde a los enemigos y te otorga daño de golpe crítico contra ellos.",
+    "RuneDescription": "{c_RuneEffect}Invoca la habilidad {c_important}Petrificación{/c} del Druida, la cual aturde a los enemigos y te otorga daño de golpe crítico contra ellos.{/c}",
     "RuneOverflowBehavior": "Aumenta la duración del aturdimiento"
   },
   {

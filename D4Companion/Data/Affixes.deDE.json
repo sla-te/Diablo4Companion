@@ -15708,7 +15708,7 @@
       0,
       1,
       0,
-      0
+      1
     ],
     "AllowedItemLabels": [
       17,
@@ -30935,6 +30935,53 @@
     "DescriptionClean": "Glückstreffer: Chance von bis zu auf Schwächen für 2 Sek."
   },
   {
+    "IdSno": "2614081;2614083;2614085",
+    "IdName": "Tempered_Damage_Generic_LuckHit_Weakened_Tier1;Tempered_Damage_Generic_LuckHit_Weakened_Tier2;Tempered_Damage_Generic_LuckHit_Weakened_Tier3",
+    "IdSnoList": [
+      "2614081",
+      "2614083",
+      "2614085"
+    ],
+    "IdNameList": [
+      "Tempered_Damage_Generic_LuckHit_Weakened_Tier1",
+      "Tempered_Damage_Generic_LuckHit_Weakened_Tier2",
+      "Tempered_Damage_Generic_LuckHit_Weakened_Tier3"
+    ],
+    "AffixType": -1,
+    "Category": -1,
+    "Flags": 4,
+    "IsTemperingAvailable": true,
+    "MagicType": 0,
+    "AllowedForPlayerClass": [
+      1,
+      1,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1
+    ],
+    "AllowedItemLabels": [],
+    "AffixAttributes": [
+      {
+        "LocalisationId": "On_Hit_Weakened_Proc",
+        "LocalisationParameter": 4294967295,
+        "LocalisationAttributeFormulaValue": "0",
+        "Localisation": "{c_label}Glückstreffer:{/c} Es besteht eine Chance von bis zu +[{VALUE}*100|1%|], Gegner {VALUE2}\u00A0Sek. lang zu schwächen."
+      },
+      {
+        "LocalisationId": "On_Hit_Weakened_Proc",
+        "LocalisationParameter": 4294967295,
+        "LocalisationAttributeFormulaValue": "2",
+        "Localisation": "{c_label}Glückstreffer:{/c} Es besteht eine Chance von bis zu +[{VALUE}*100|1%|], Gegner {VALUE2}\u00A0Sek. lang zu schwächen."
+      }
+    ],
+    "ClassRestriction": "",
+    "Description": "Glückstreffer: Es besteht eine Chance von bis zu +#%, Gegner #\u00A0Sek. lang zu schwächen.",
+    "DescriptionClean": "Glückstreffer: Es besteht eine Chance von bis zu , Gegner \u00A0Sek. lang zu schwächen."
+  },
+  {
     "IdSno": "2502528;2502531;2502533;2634626;2634628;2634630",
     "IdName": "Tempered_Damage_Generic_Type_Holy_Tier1;Tempered_Damage_Generic_Type_Holy_Tier2;Tempered_Damage_Generic_Type_Holy_Tier3;Tempered_Offensive_Damage_Tag_Holy_Paladin_Tier1;Tempered_Offensive_Damage_Tag_Holy_Paladin_Tier2;Tempered_Offensive_Damage_Tag_Holy_Paladin_Tier3",
     "IdSnoList": [
@@ -37126,7 +37173,7 @@
     ],
     "AffixType": 2,
     "Category": 0,
-    "Flags": 260,
+    "Flags": 1028,
     "IsTemperingAvailable": false,
     "MagicType": 0,
     "AllowedForPlayerClass": [
@@ -40673,7 +40720,7 @@
     ],
     "AffixType": 2,
     "Category": -1,
-    "Flags": 4,
+    "Flags": 2052,
     "IsTemperingAvailable": false,
     "MagicType": 0,
     "AllowedForPlayerClass": [
@@ -41146,8 +41193,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "+# auf Fertigkeiten des Typs {VALUE1}",
-    "DescriptionClean": "auf Fertigkeiten des Typs {VALUE1}"
+    "Description": "+# auf Fertigkeiten des Typs Staubteufel",
+    "DescriptionClean": "auf Fertigkeiten des Typs Staubteufel"
   },
   {
     "IdSno": "2589355",
@@ -41402,7 +41449,7 @@
       0,
       0,
       1,
-      0,
+      1,
       0,
       0,
       0

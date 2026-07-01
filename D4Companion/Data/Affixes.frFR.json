@@ -5859,8 +5859,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "+#% de dégâts pour Combat",
-    "DescriptionClean": "de dégâts pour Combat"
+    "Description": "+#% de dégâts pour Bagarre",
+    "DescriptionClean": "de dégâts pour Bagarre"
   },
   {
     "IdSno": "1093765;1884916;1938637;1939820",
@@ -11038,12 +11038,12 @@
         "LocalisationId": "Proc_Resource_On_Hit_Percent_All_Primary",
         "LocalisationParameter": 4294967295,
         "LocalisationAttributeFormulaValue": "0",
-        "Localisation": "{c_label}Coup de chance\u00A0:{/c} vous avez jusqu’à 15\u00A0% de chances de récupérer [{VALUE}*100|1%|] de votre ressource principale"
+        "Localisation": "{c_label}Coup de chance\u00A0:{/c} jusqu’à 15\u00A0% de chances de récupérer [{VALUE}*100|1%|] de la ressource principale"
       }
     ],
     "ClassRestriction": "",
-    "Description": "Coup de chance\u00A0: vous avez jusqu’à 15\u00A0% de chances de récupérer #% de votre ressource principale",
-    "DescriptionClean": "Coup de chance\u00A0: vous avez jusqu’à 15\u00A0 de chances de récupérer de votre ressource principale"
+    "Description": "Coup de chance\u00A0: jusqu’à 15\u00A0% de chances de récupérer #% de la ressource principale",
+    "DescriptionClean": "Coup de chance\u00A0: jusqu’à 15\u00A0 de chances de récupérer de la ressource principale"
   },
   {
     "IdSno": "1862303;1938969;1940115;2617994;2618002;2618010;2619768;2619880;577131",
@@ -13972,26 +13972,22 @@
     "DescriptionClean": "à Fente"
   },
   {
-    "IdSno": "1928741;2478858;2483368;2545597;2592934;2619772;2624387;761341",
-    "IdName": "S04_SkillRankBonus_Barb_Category_Brawling;SkillRankBonus_Barb_Category_Brawling;Talisman_Charm_Affix_UNIQUE_SkillRankBonus_Barb_Category_Brawling;Talisman_Charm_SkillRankBonus_Barb_Category_Bludgeoning;Talisman_Charm_SkillRankBonus_Barb_Category_Brawling;UNIQUE_SkillRankBonus_Barb_Category_Brawling;X2_SkillRankBonus_Barb_Category_Bludgeoning;X2_Transfiguration_SkillRankBonus_Barb_Category_Brawling",
+    "IdSno": "1928741;2478858;2483368;2545597;2592934;761341",
+    "IdName": "S04_SkillRankBonus_Barb_Category_Brawling;SkillRankBonus_Barb_Category_Brawling;Talisman_Charm_Affix_UNIQUE_SkillRankBonus_Barb_Category_Brawling;Talisman_Charm_SkillRankBonus_Barb_Category_Brawling;UNIQUE_SkillRankBonus_Barb_Category_Brawling;X2_Transfiguration_SkillRankBonus_Barb_Category_Brawling",
     "IdSnoList": [
       "1928741",
       "2478858",
       "2483368",
       "2545597",
       "2592934",
-      "2619772",
-      "2624387",
       "761341"
     ],
     "IdNameList": [
       "S04_SkillRankBonus_Barb_Category_Brawling",
       "SkillRankBonus_Barb_Category_Brawling",
       "Talisman_Charm_Affix_UNIQUE_SkillRankBonus_Barb_Category_Brawling",
-      "Talisman_Charm_SkillRankBonus_Barb_Category_Bludgeoning",
       "Talisman_Charm_SkillRankBonus_Barb_Category_Brawling",
       "UNIQUE_SkillRankBonus_Barb_Category_Brawling",
-      "X2_SkillRankBonus_Barb_Category_Bludgeoning",
       "X2_Transfiguration_SkillRankBonus_Barb_Category_Brawling"
     ],
     "AffixType": 2,
@@ -14022,8 +14018,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "+# aux compétences de type Combat",
-    "DescriptionClean": "aux compétences de type Combat"
+    "Description": "+# aux compétences de type Bagarre",
+    "DescriptionClean": "aux compétences de type Bagarre"
   },
   {
     "IdSno": "1928743;2483370;2545599;761342",
@@ -15956,7 +15952,7 @@
       0,
       1,
       0,
-      0
+      1
     ],
     "AllowedItemLabels": [
       17,
@@ -21378,12 +21374,12 @@
         "LocalisationId": "Proc_Flat_Element_Damage_On_Hit",
         "LocalisationParameter": 3,
         "LocalisationAttributeFormulaValue": "",
-        "Localisation": "{c_label}Coup de chance\u00A0:{/c} vous avez jusqu’à 40\u00A0% de chances d’infliger [{VALUE2}|0|]\u00A0|4point:points; de dégâts {VALUE1} supplémentaires."
+        "Localisation": "{c_label}Coup de chance\u00A0:{/c} jusqu’à 40\u00A0% de chances d’infliger [{VALUE2}|0|]\u00A0|4point:points; de dégâts {VALUE1} en plus."
       }
     ],
     "ClassRestriction": "",
-    "Description": "Coup de chance\u00A0: vous avez jusqu’à 40\u00A0% de chances d’infliger #\u00A0points de dégâts de froid supplémentaires.",
-    "DescriptionClean": "Coup de chance\u00A0: vous avez jusqu’à 40\u00A0 de chances d’infliger \u00A0points de dégâts de froid supplémentaires."
+    "Description": "Coup de chance\u00A0: jusqu’à 40\u00A0% de chances d’infliger #\u00A0points de dégâts de froid en plus.",
+    "DescriptionClean": "Coup de chance\u00A0: jusqu’à 40\u00A0 de chances d’infliger \u00A0points de dégâts de froid en plus."
   },
   {
     "IdSno": "2592695",
@@ -21961,12 +21957,12 @@
         "LocalisationId": "Proc_Flat_Element_Damage_On_Hit",
         "LocalisationParameter": 1,
         "LocalisationAttributeFormulaValue": "",
-        "Localisation": "{c_label}Coup de chance\u00A0:{/c} vous avez jusqu’à 40\u00A0% de chances d’infliger [{VALUE2}|0|]\u00A0|4point:points; de dégâts {VALUE1} supplémentaires."
+        "Localisation": "{c_label}Coup de chance\u00A0:{/c} jusqu’à 40\u00A0% de chances d’infliger [{VALUE2}|0|]\u00A0|4point:points; de dégâts {VALUE1} en plus."
       }
     ],
     "ClassRestriction": "",
-    "Description": "Coup de chance\u00A0: vous avez jusqu’à 40\u00A0% de chances d’infliger #\u00A0points de dégâts de feu supplémentaires.",
-    "DescriptionClean": "Coup de chance\u00A0: vous avez jusqu’à 40\u00A0 de chances d’infliger \u00A0points de dégâts de feu supplémentaires."
+    "Description": "Coup de chance\u00A0: jusqu’à 40\u00A0% de chances d’infliger #\u00A0points de dégâts de feu en plus.",
+    "DescriptionClean": "Coup de chance\u00A0: jusqu’à 40\u00A0 de chances d’infliger \u00A0points de dégâts de feu en plus."
   },
   {
     "IdSno": "2619748;2619862",
@@ -22002,12 +21998,12 @@
         "LocalisationId": "Proc_Flat_Element_Damage_On_Hit",
         "LocalisationParameter": 6,
         "LocalisationAttributeFormulaValue": "",
-        "Localisation": "{c_label}Coup de chance\u00A0:{/c} vous avez jusqu’à 40\u00A0% de chances d’infliger [{VALUE2}|0|]\u00A0|4point:points; de dégâts {VALUE1} supplémentaires."
+        "Localisation": "{c_label}Coup de chance\u00A0:{/c} jusqu’à 40\u00A0% de chances d’infliger [{VALUE2}|0|]\u00A0|4point:points; de dégâts {VALUE1} en plus."
       }
     ],
     "ClassRestriction": "",
-    "Description": "Coup de chance\u00A0: vous avez jusqu’à 40\u00A0% de chances d’infliger #\u00A0points de dégâts Sacrés supplémentaires.",
-    "DescriptionClean": "Coup de chance\u00A0: vous avez jusqu’à 40\u00A0 de chances d’infliger \u00A0points de dégâts Sacrés supplémentaires."
+    "Description": "Coup de chance\u00A0: jusqu’à 40\u00A0% de chances d’infliger #\u00A0points de dégâts Sacrés en plus.",
+    "DescriptionClean": "Coup de chance\u00A0: jusqu’à 40\u00A0 de chances d’infliger \u00A0points de dégâts Sacrés en plus."
   },
   {
     "IdSno": "1936578;1938949;1940095;2619750;2619864",
@@ -22049,12 +22045,12 @@
         "LocalisationId": "Proc_Flat_Element_Damage_On_Hit",
         "LocalisationParameter": 2,
         "LocalisationAttributeFormulaValue": "",
-        "Localisation": "{c_label}Coup de chance\u00A0:{/c} vous avez jusqu’à 40\u00A0% de chances d’infliger [{VALUE2}|0|]\u00A0|4point:points; de dégâts {VALUE1} supplémentaires."
+        "Localisation": "{c_label}Coup de chance\u00A0:{/c} jusqu’à 40\u00A0% de chances d’infliger [{VALUE2}|0|]\u00A0|4point:points; de dégâts {VALUE1} en plus."
       }
     ],
     "ClassRestriction": "",
-    "Description": "Coup de chance\u00A0: vous avez jusqu’à 40\u00A0% de chances d’infliger #\u00A0points de dégâts de foudre supplémentaires.",
-    "DescriptionClean": "Coup de chance\u00A0: vous avez jusqu’à 40\u00A0 de chances d’infliger \u00A0points de dégâts de foudre supplémentaires."
+    "Description": "Coup de chance\u00A0: jusqu’à 40\u00A0% de chances d’infliger #\u00A0points de dégâts de foudre en plus.",
+    "DescriptionClean": "Coup de chance\u00A0: jusqu’à 40\u00A0 de chances d’infliger \u00A0points de dégâts de foudre en plus."
   },
   {
     "IdSno": "1936572;1938952;1940097;2546466;2619752;2619866",
@@ -22098,12 +22094,12 @@
         "LocalisationId": "Proc_Flat_Element_Damage_On_Hit",
         "LocalisationParameter": 0,
         "LocalisationAttributeFormulaValue": "",
-        "Localisation": "{c_label}Coup de chance\u00A0:{/c} vous avez jusqu’à 40\u00A0% de chances d’infliger [{VALUE2}|0|]\u00A0|4point:points; de dégâts {VALUE1} supplémentaires."
+        "Localisation": "{c_label}Coup de chance\u00A0:{/c} jusqu’à 40\u00A0% de chances d’infliger [{VALUE2}|0|]\u00A0|4point:points; de dégâts {VALUE1} en plus."
       }
     ],
     "ClassRestriction": "",
-    "Description": "Coup de chance\u00A0: vous avez jusqu’à 40\u00A0% de chances d’infliger #\u00A0points de dégâts physiques supplémentaires.",
-    "DescriptionClean": "Coup de chance\u00A0: vous avez jusqu’à 40\u00A0 de chances d’infliger \u00A0points de dégâts physiques supplémentaires."
+    "Description": "Coup de chance\u00A0: jusqu’à 40\u00A0% de chances d’infliger #\u00A0points de dégâts physiques en plus.",
+    "DescriptionClean": "Coup de chance\u00A0: jusqu’à 40\u00A0 de chances d’infliger \u00A0points de dégâts physiques en plus."
   },
   {
     "IdSno": "1936580;1938955;1940099;2619754;2619868",
@@ -22145,12 +22141,12 @@
         "LocalisationId": "Proc_Flat_Element_Damage_On_Hit",
         "LocalisationParameter": 4,
         "LocalisationAttributeFormulaValue": "",
-        "Localisation": "{c_label}Coup de chance\u00A0:{/c} vous avez jusqu’à 40\u00A0% de chances d’infliger [{VALUE2}|0|]\u00A0|4point:points; de dégâts {VALUE1} supplémentaires."
+        "Localisation": "{c_label}Coup de chance\u00A0:{/c} jusqu’à 40\u00A0% de chances d’infliger [{VALUE2}|0|]\u00A0|4point:points; de dégâts {VALUE1} en plus."
       }
     ],
     "ClassRestriction": "",
-    "Description": "Coup de chance\u00A0: vous avez jusqu’à 40\u00A0% de chances d’infliger #\u00A0points de dégâts de poison supplémentaires.",
-    "DescriptionClean": "Coup de chance\u00A0: vous avez jusqu’à 40\u00A0 de chances d’infliger \u00A0points de dégâts de poison supplémentaires."
+    "Description": "Coup de chance\u00A0: jusqu’à 40\u00A0% de chances d’infliger #\u00A0points de dégâts de poison en plus.",
+    "DescriptionClean": "Coup de chance\u00A0: jusqu’à 40\u00A0 de chances d’infliger \u00A0points de dégâts de poison en plus."
   },
   {
     "IdSno": "1936582;1938957;1940102;2373218;2619756;2619870",
@@ -22194,12 +22190,12 @@
         "LocalisationId": "Proc_Flat_Element_Damage_On_Hit",
         "LocalisationParameter": 5,
         "LocalisationAttributeFormulaValue": "",
-        "Localisation": "{c_label}Coup de chance\u00A0:{/c} vous avez jusqu’à 40\u00A0% de chances d’infliger [{VALUE2}|0|]\u00A0|4point:points; de dégâts {VALUE1} supplémentaires."
+        "Localisation": "{c_label}Coup de chance\u00A0:{/c} jusqu’à 40\u00A0% de chances d’infliger [{VALUE2}|0|]\u00A0|4point:points; de dégâts {VALUE1} en plus."
       }
     ],
     "ClassRestriction": "",
-    "Description": "Coup de chance\u00A0: vous avez jusqu’à 40\u00A0% de chances d’infliger #\u00A0points de dégâts d’ombre supplémentaires.",
-    "DescriptionClean": "Coup de chance\u00A0: vous avez jusqu’à 40\u00A0 de chances d’infliger \u00A0points de dégâts d’ombre supplémentaires."
+    "Description": "Coup de chance\u00A0: jusqu’à 40\u00A0% de chances d’infliger #\u00A0points de dégâts d’ombre en plus.",
+    "DescriptionClean": "Coup de chance\u00A0: jusqu’à 40\u00A0 de chances d’infliger \u00A0points de dégâts d’ombre en plus."
   },
   {
     "IdSno": "1862312;1938959;1940104;2617981;2617985;2617987;2619832;2619872",
@@ -22372,6 +22368,47 @@
     "ClassRestriction": "",
     "Description": "+#% de soins de la potion",
     "DescriptionClean": "de soins de la potion"
+  },
+  {
+    "IdSno": "2619772;2624387",
+    "IdName": "Talisman_Charm_SkillRankBonus_Barb_Category_Bludgeoning;X2_SkillRankBonus_Barb_Category_Bludgeoning",
+    "IdSnoList": [
+      "2619772",
+      "2624387"
+    ],
+    "IdNameList": [
+      "Talisman_Charm_SkillRankBonus_Barb_Category_Bludgeoning",
+      "X2_SkillRankBonus_Barb_Category_Bludgeoning"
+    ],
+    "AffixType": 0,
+    "Category": 0,
+    "Flags": 1796,
+    "IsTemperingAvailable": false,
+    "MagicType": 0,
+    "AllowedForPlayerClass": [
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "AllowedItemLabels": [
+      71
+    ],
+    "AffixAttributes": [
+      {
+        "LocalisationId": "Skill_Rank_Skill_Tag_Bonus",
+        "LocalisationParameter": 3012496276,
+        "LocalisationAttributeFormulaValue": "0",
+        "Localisation": "+[{VALUE2}|0|] aux compétences de type {c_important}{VALUE1}{/c}"
+      }
+    ],
+    "ClassRestriction": "",
+    "Description": "+# aux compétences de type Combat",
+    "DescriptionClean": "aux compétences de type Combat"
   },
   {
     "IdSno": "2619776;2624389",
@@ -28900,8 +28937,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "#% de réduction du temps de recharge (Combat)",
-    "DescriptionClean": "de réduction du temps de recharge (Combat)"
+    "Description": "#% de réduction du temps de recharge (Bagarre)",
+    "DescriptionClean": "de réduction du temps de recharge (Bagarre)"
   },
   {
     "IdSno": "1859748;1937127;1939702;2054081",
@@ -31173,6 +31210,53 @@
     "ClassRestriction": "",
     "Description": "Coup de chance\u00A0: vous avez jusqu’à +#% de chances d’appliquer l’effet «\u00A0Affaiblissement\u00A0» pendant 2\u00A0s.",
     "DescriptionClean": "Coup de chance\u00A0: vous avez jusqu’à de chances d’appliquer l’effet «\u00A0Affaiblissement\u00A0» pendant 2\u00A0s."
+  },
+  {
+    "IdSno": "2614081;2614083;2614085",
+    "IdName": "Tempered_Damage_Generic_LuckHit_Weakened_Tier1;Tempered_Damage_Generic_LuckHit_Weakened_Tier2;Tempered_Damage_Generic_LuckHit_Weakened_Tier3",
+    "IdSnoList": [
+      "2614081",
+      "2614083",
+      "2614085"
+    ],
+    "IdNameList": [
+      "Tempered_Damage_Generic_LuckHit_Weakened_Tier1",
+      "Tempered_Damage_Generic_LuckHit_Weakened_Tier2",
+      "Tempered_Damage_Generic_LuckHit_Weakened_Tier3"
+    ],
+    "AffixType": -1,
+    "Category": -1,
+    "Flags": 4,
+    "IsTemperingAvailable": true,
+    "MagicType": 0,
+    "AllowedForPlayerClass": [
+      1,
+      1,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1
+    ],
+    "AllowedItemLabels": [],
+    "AffixAttributes": [
+      {
+        "LocalisationId": "On_Hit_Weakened_Proc",
+        "LocalisationParameter": 4294967295,
+        "LocalisationAttributeFormulaValue": "0",
+        "Localisation": "{c_label}Coup de chance\u00A0:{/c} vous avez jusqu’à +[{VALUE}*100|1%|] de chances d’affaiblir les adversaires pendant {VALUE2}\u00A0s."
+      },
+      {
+        "LocalisationId": "On_Hit_Weakened_Proc",
+        "LocalisationParameter": 4294967295,
+        "LocalisationAttributeFormulaValue": "2",
+        "Localisation": "{c_label}Coup de chance\u00A0:{/c} vous avez jusqu’à +[{VALUE}*100|1%|] de chances d’affaiblir les adversaires pendant {VALUE2}\u00A0s."
+      }
+    ],
+    "ClassRestriction": "",
+    "Description": "Coup de chance\u00A0: vous avez jusqu’à +#% de chances d’affaiblir les adversaires pendant #\u00A0s.",
+    "DescriptionClean": "Coup de chance\u00A0: vous avez jusqu’à de chances d’affaiblir les adversaires pendant \u00A0s."
   },
   {
     "IdSno": "2502528;2502531;2502533;2634626;2634628;2634630",
@@ -37313,7 +37397,7 @@
     ],
     "AffixType": 2,
     "Category": 0,
-    "Flags": 260,
+    "Flags": 1028,
     "IsTemperingAvailable": false,
     "MagicType": 0,
     "AllowedForPlayerClass": [
@@ -40860,7 +40944,7 @@
     ],
     "AffixType": 2,
     "Category": -1,
-    "Flags": 4,
+    "Flags": 2052,
     "IsTemperingAvailable": false,
     "MagicType": 0,
     "AllowedForPlayerClass": [
@@ -41333,8 +41417,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "+# aux compétences de type {VALUE1}",
-    "DescriptionClean": "aux compétences de type {VALUE1}"
+    "Description": "+# aux compétences de type Tourbillon de poussière",
+    "DescriptionClean": "aux compétences de type Tourbillon de poussière"
   },
   {
     "IdSno": "2589355",
@@ -41589,7 +41673,7 @@
       0,
       0,
       1,
-      0,
+      1,
       0,
       0,
       0

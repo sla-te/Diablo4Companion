@@ -149,7 +149,7 @@
     "Name": "内陆腹地",
     "Description": "尽管传闻有财宝，但极少有人踏足这片海岸。",
     "DungeonZoneInfo": "在当中 斯科沃斯",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -504,8 +504,35 @@
     "Type": "Dungeon"
   },
   {
+    "IdSno": 2646843,
+    "IdName": "DungeonAffix_Positive_Torment_TreasureGoblins",
+    "Name": "地下城探险",
+    "Description": "完成地下城可获得额外经验值和奖励。",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
+    "IdSno": 2646845,
+    "IdName": "DungeonAffix_Positive_Torment_AncestralElites",
+    "Name": "地下城探险",
+    "Description": "完成地下城可获得额外经验值和奖励。",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
     "IdSno": 2613077,
     "IdName": "DungeonAffix_Positive_IncreasedRewards",
+    "Name": "地下城探险",
+    "Description": "完成地下城可获得额外经验值和奖励。",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
+    "IdSno": 2646836,
+    "IdName": "DungeonAffix_Positive_Torment_MythicElites",
     "Name": "地下城探险",
     "Description": "完成地下城可获得额外经验值和奖励。",
     "DungeonZoneInfo": "",
@@ -1024,15 +1051,6 @@
     "DungeonZoneInfo": "",
     "IsSeasonal": false,
     "Type": "Major"
-  },
-  {
-    "IdSno": 2321556,
-    "IdName": "DungeonAffix_Positive_Astaroth_BelialBossMats",
-    "Name": "彼列的供品",
-    "Description": "阿斯塔洛斯的奖励包含背叛者的躯壳，这是打开彼列的秘宝所需的材料。",
-    "DungeonZoneInfo": "",
-    "IsSeasonal": false,
-    "Type": "Positive"
   },
   {
     "IdSno": 2347209,
@@ -1827,8 +1845,8 @@
     "Type": "Dungeon"
   },
   {
-    "IdSno": 2579458,
-    "IdName": "World_DGN_QST_Skov_Skar_Sphinx_01_A",
+    "IdSno": 2579466,
+    "IdName": "World_DGN_QST_Skov_Skar_Sphinx_01_C",
     "Name": "焦砾之途",
     "Description": "对于坚定之人来说，岩浆雕琢出的洞窟通向数不尽的财富。",
     "DungeonZoneInfo": "在当中 斯科沃斯",
@@ -1845,8 +1863,8 @@
     "Type": "Dungeon"
   },
   {
-    "IdSno": 2579466,
-    "IdName": "World_DGN_QST_Skov_Skar_Sphinx_01_C",
+    "IdSno": 2579458,
+    "IdName": "World_DGN_QST_Skov_Skar_Sphinx_01_A",
     "Name": "焦砾之途",
     "Description": "对于坚定之人来说，岩浆雕琢出的洞窟通向数不尽的财富。",
     "DungeonZoneInfo": "在当中 斯科沃斯",
@@ -2149,6 +2167,15 @@
     "DungeonZoneInfo": "",
     "IsSeasonal": false,
     "Type": "Major"
+  },
+  {
+    "IdSno": 2321556,
+    "IdName": "DungeonAffix_Positive_Astaroth_BelialBossMats",
+    "Name": "精良供品",
+    "Description": "阿斯塔洛斯的奖励包括精良巢穴钥匙。",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
   },
   {
     "IdSno": 2360109,
@@ -2835,8 +2862,8 @@
     "Type": "Major"
   },
   {
-    "IdSno": 2516764,
-    "IdName": "DungeonAffix_Positive_LegendaryElites",
+    "IdSno": 2511994,
+    "IdName": "DungeonAffix_Positive_AncestralElites",
     "Name": "隐秘军械库",
     "Description": "此处存放着珍品，使精英怪物获得一个强力的战利品词缀。",
     "DungeonZoneInfo": "",
@@ -2844,8 +2871,8 @@
     "Type": "Positive"
   },
   {
-    "IdSno": 2511994,
-    "IdName": "DungeonAffix_Positive_AncestralElites",
+    "IdSno": 2516764,
+    "IdName": "DungeonAffix_Positive_LegendaryElites",
     "Name": "隐秘军械库",
     "Description": "此处存放着珍品，使精英怪物获得一个强力的战利品词缀。",
     "DungeonZoneInfo": "",

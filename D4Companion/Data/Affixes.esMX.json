@@ -5717,8 +5717,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "+#% de daño de Combate",
-    "DescriptionClean": "de daño de Combate"
+    "Description": "+#% de daño de Pelea",
+    "DescriptionClean": "de daño de Pelea"
   },
   {
     "IdSno": "1093765;1884916;1938637;1939820",
@@ -13767,26 +13767,22 @@
     "DescriptionClean": "a Golpe Arremetedor"
   },
   {
-    "IdSno": "1928741;2478858;2483368;2545597;2592934;2619772;2624387;761341",
-    "IdName": "S04_SkillRankBonus_Barb_Category_Brawling;SkillRankBonus_Barb_Category_Brawling;Talisman_Charm_Affix_UNIQUE_SkillRankBonus_Barb_Category_Brawling;Talisman_Charm_SkillRankBonus_Barb_Category_Bludgeoning;Talisman_Charm_SkillRankBonus_Barb_Category_Brawling;UNIQUE_SkillRankBonus_Barb_Category_Brawling;X2_SkillRankBonus_Barb_Category_Bludgeoning;X2_Transfiguration_SkillRankBonus_Barb_Category_Brawling",
+    "IdSno": "1928741;2478858;2483368;2545597;2592934;761341",
+    "IdName": "S04_SkillRankBonus_Barb_Category_Brawling;SkillRankBonus_Barb_Category_Brawling;Talisman_Charm_Affix_UNIQUE_SkillRankBonus_Barb_Category_Brawling;Talisman_Charm_SkillRankBonus_Barb_Category_Brawling;UNIQUE_SkillRankBonus_Barb_Category_Brawling;X2_Transfiguration_SkillRankBonus_Barb_Category_Brawling",
     "IdSnoList": [
       "1928741",
       "2478858",
       "2483368",
       "2545597",
       "2592934",
-      "2619772",
-      "2624387",
       "761341"
     ],
     "IdNameList": [
       "S04_SkillRankBonus_Barb_Category_Brawling",
       "SkillRankBonus_Barb_Category_Brawling",
       "Talisman_Charm_Affix_UNIQUE_SkillRankBonus_Barb_Category_Brawling",
-      "Talisman_Charm_SkillRankBonus_Barb_Category_Bludgeoning",
       "Talisman_Charm_SkillRankBonus_Barb_Category_Brawling",
       "UNIQUE_SkillRankBonus_Barb_Category_Brawling",
-      "X2_SkillRankBonus_Barb_Category_Bludgeoning",
       "X2_Transfiguration_SkillRankBonus_Barb_Category_Brawling"
     ],
     "AffixType": 2,
@@ -13817,8 +13813,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "+# a las habilidades de Combate",
-    "DescriptionClean": "a las habilidades de Combate"
+    "Description": "+# a las habilidades de Pelea",
+    "DescriptionClean": "a las habilidades de Pelea"
   },
   {
     "IdSno": "1928743;2483370;2545599;761342",
@@ -15751,7 +15747,7 @@
       0,
       1,
       0,
-      0
+      1
     ],
     "AllowedItemLabels": [
       17,
@@ -22173,6 +22169,47 @@
     "DescriptionClean": "de sanación de pociones"
   },
   {
+    "IdSno": "2619772;2624387",
+    "IdName": "Talisman_Charm_SkillRankBonus_Barb_Category_Bludgeoning;X2_SkillRankBonus_Barb_Category_Bludgeoning",
+    "IdSnoList": [
+      "2619772",
+      "2624387"
+    ],
+    "IdNameList": [
+      "Talisman_Charm_SkillRankBonus_Barb_Category_Bludgeoning",
+      "X2_SkillRankBonus_Barb_Category_Bludgeoning"
+    ],
+    "AffixType": 0,
+    "Category": 0,
+    "Flags": 1796,
+    "IsTemperingAvailable": false,
+    "MagicType": 0,
+    "AllowedForPlayerClass": [
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "AllowedItemLabels": [
+      71
+    ],
+    "AffixAttributes": [
+      {
+        "LocalisationId": "Skill_Rank_Skill_Tag_Bonus",
+        "LocalisationParameter": 3012496276,
+        "LocalisationAttributeFormulaValue": "0",
+        "Localisation": "+[{VALUE2}|0|] a las habilidades de {c_important}{VALUE1}{/c}"
+      }
+    ],
+    "ClassRestriction": "",
+    "Description": "+# a las habilidades de Combate",
+    "DescriptionClean": "a las habilidades de Combate"
+  },
+  {
     "IdSno": "2619776;2624389",
     "IdName": "Talisman_Charm_SkillRankBonus_Barb_Category_DualWield;X2_SkillRankBonus_Barb_Category_DualWield",
     "IdSnoList": [
@@ -28580,8 +28617,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "#% de reducción de recuperación de Combate",
-    "DescriptionClean": "de reducción de recuperación de Combate"
+    "Description": "#% de reducción de recuperación de Pelea",
+    "DescriptionClean": "de reducción de recuperación de Pelea"
   },
   {
     "IdSno": "1859748;1937127;1939702;2054081",
@@ -30812,6 +30849,53 @@
     "ClassRestriction": "",
     "Description": "Golpe afortunado: Tienes hasta un +#% de probabilidad de Debilitar durante 2 segundos",
     "DescriptionClean": "Golpe afortunado: Tienes hasta un de probabilidad de Debilitar durante 2 segundos"
+  },
+  {
+    "IdSno": "2614081;2614083;2614085",
+    "IdName": "Tempered_Damage_Generic_LuckHit_Weakened_Tier1;Tempered_Damage_Generic_LuckHit_Weakened_Tier2;Tempered_Damage_Generic_LuckHit_Weakened_Tier3",
+    "IdSnoList": [
+      "2614081",
+      "2614083",
+      "2614085"
+    ],
+    "IdNameList": [
+      "Tempered_Damage_Generic_LuckHit_Weakened_Tier1",
+      "Tempered_Damage_Generic_LuckHit_Weakened_Tier2",
+      "Tempered_Damage_Generic_LuckHit_Weakened_Tier3"
+    ],
+    "AffixType": -1,
+    "Category": -1,
+    "Flags": 4,
+    "IsTemperingAvailable": true,
+    "MagicType": 0,
+    "AllowedForPlayerClass": [
+      1,
+      1,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1
+    ],
+    "AllowedItemLabels": [],
+    "AffixAttributes": [
+      {
+        "LocalisationId": "On_Hit_Weakened_Proc",
+        "LocalisationParameter": 4294967295,
+        "LocalisationAttributeFormulaValue": "0",
+        "Localisation": "{c_label}Golpe afortunado:{/c} Tienes hasta un +[{VALUE}*100|1%|] de probabilidad de debilitar a los enemigos durante {VALUE2} segundos"
+      },
+      {
+        "LocalisationId": "On_Hit_Weakened_Proc",
+        "LocalisationParameter": 4294967295,
+        "LocalisationAttributeFormulaValue": "2",
+        "Localisation": "{c_label}Golpe afortunado:{/c} Tienes hasta un +[{VALUE}*100|1%|] de probabilidad de debilitar a los enemigos durante {VALUE2} segundos"
+      }
+    ],
+    "ClassRestriction": "",
+    "Description": "Golpe afortunado: Tienes hasta un +#% de probabilidad de debilitar a los enemigos durante # segundos",
+    "DescriptionClean": "Golpe afortunado: Tienes hasta un de probabilidad de debilitar a los enemigos durante segundos"
   },
   {
     "IdSno": "2502528;2502531;2502533;2634626;2634628;2634630",
@@ -36917,7 +37001,7 @@
     ],
     "AffixType": 2,
     "Category": 0,
-    "Flags": 260,
+    "Flags": 1028,
     "IsTemperingAvailable": false,
     "MagicType": 0,
     "AllowedForPlayerClass": [
@@ -40464,7 +40548,7 @@
     ],
     "AffixType": 2,
     "Category": -1,
-    "Flags": 4,
+    "Flags": 2052,
     "IsTemperingAvailable": false,
     "MagicType": 0,
     "AllowedForPlayerClass": [
@@ -40937,8 +41021,8 @@
       }
     ],
     "ClassRestriction": "",
-    "Description": "+# a las habilidades de {VALUE1}",
-    "DescriptionClean": "a las habilidades de {VALUE1}"
+    "Description": "+# a las habilidades de Remolino de Polvo",
+    "DescriptionClean": "a las habilidades de Remolino de Polvo"
   },
   {
     "IdSno": "2589355",
@@ -41193,7 +41277,7 @@
       0,
       0,
       1,
-      0,
+      1,
       0,
       0,
       0

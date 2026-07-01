@@ -474,9 +474,9 @@
     "IdName": "Item_Rune_Effect_Druid_Petrify",
     "RuneType": "effect",
     "Name": "Yom",
-    "Description": "Vous invoquez la compétence Pétrification des druides, qui étourdit les adversaires et restaure votre ressource principale.",
-    "DescriptionClean": "Vous invoquez la compétence Pétrification des druides, qui étourdit les adversaires et restaure votre ressource principale.",
-    "RuneDescription": "{c_RuneEffect}Vous invoquez la compétence {c_important}Pétrification{/c} des druides, qui étourdit les adversaires et restaure votre ressource principale.{/c}",
+    "Description": "Vous invoquez la compétence Pétrification des druides, qui étourdit les adversaires et augmente les dégâts critiques que vous leur infligez.",
+    "DescriptionClean": "Vous invoquez la compétence Pétrification des druides, qui étourdit les adversaires et augmente les dégâts critiques que vous leur infligez.",
+    "RuneDescription": "{c_RuneEffect}Vous invoquez la compétence {c_important}Pétrification{/c} des druides, qui étourdit les adversaires et augmente les dégâts critiques que vous leur infligez.{/c}",
     "RuneOverflowBehavior": "Augmente la durée d’étourdissement"
   },
   {

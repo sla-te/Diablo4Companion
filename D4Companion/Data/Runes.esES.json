@@ -474,9 +474,9 @@
     "IdName": "Item_Rune_Effect_Druid_Petrify",
     "RuneType": "effect",
     "Name": "Yom",
-    "Description": "Evoca la habilidad Petrificar del druida, que aturde a los enemigos y restaura recurso primario.",
-    "DescriptionClean": "Evoca la habilidad Petrificar del druida, que aturde a los enemigos y restaura recurso primario.",
-    "RuneDescription": "{c_RuneEffect}Evoca la habilidad {c_important}Petrificar{/c} del druida, que aturde a los enemigos y restaura recurso primario.{/c}",
+    "Description": "Evoca la habilidad Petrificar del druida, que aturde a los enemigos y aumenta tu daño de golpe crítico contra ellos.",
+    "DescriptionClean": "Evoca la habilidad Petrificar del druida, que aturde a los enemigos y aumenta tu daño de golpe crítico contra ellos.",
+    "RuneDescription": "{c_RuneEffect}Evoca la habilidad {c_important}Petrificar{/c} del druida, que aturde a los enemigos y aumenta tu daño de golpe crítico contra ellos.{/c}",
     "RuneOverflowBehavior": "Aumenta la duración del aturdimiento"
   },
   {

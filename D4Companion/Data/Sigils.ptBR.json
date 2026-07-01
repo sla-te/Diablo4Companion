@@ -1629,6 +1629,33 @@
     "Type": "Major"
   },
   {
+    "IdSno": 2646845,
+    "IdName": "DungeonAffix_Positive_Torment_AncestralElites",
+    "Name": "Imersão na Masmorra",
+    "Description": "Ao concluir a masmorra, você ganha experiência e recompensas extras.",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
+    "IdSno": 2646843,
+    "IdName": "DungeonAffix_Positive_Torment_TreasureGoblins",
+    "Name": "Imersão na Masmorra",
+    "Description": "Ao concluir a masmorra, você ganha experiência e recompensas extras.",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
+    "IdSno": 2646836,
+    "IdName": "DungeonAffix_Positive_Torment_MythicElites",
+    "Name": "Imersão na Masmorra",
+    "Description": "Ao concluir a masmorra, você ganha experiência e recompensas extras.",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
     "IdSno": 2613077,
     "IdName": "DungeonAffix_Positive_IncreasedRewards",
     "Name": "Imersão na Masmorra",
@@ -1832,7 +1859,7 @@
     "Name": "O Sertão",
     "Description": "Poucos atravessaram esta costa, apesar dos rumores sobre o tesouro.",
     "DungeonZoneInfo": "em Skovos",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -1854,19 +1881,19 @@
     "Type": "Dungeon"
   },
   {
-    "IdSno": 2321540,
-    "IdName": "DungeonAffix_Positive_Astaroth_AndarielBossMats",
-    "Name": "Oferenda de Andariel",
-    "Description": "As recompensas de Astaroth incluem unidades de Boneca Alfinetada, item necessário para abrir o Butim de Andariel.",
+    "IdSno": 2321556,
+    "IdName": "DungeonAffix_Positive_Astaroth_BelialBossMats",
+    "Name": "Oferenda Superior",
+    "Description": "Recompensas de Astaroth incluem Chaves de Covil Superiores",
     "DungeonZoneInfo": "",
     "IsSeasonal": false,
     "Type": "Positive"
   },
   {
-    "IdSno": 2321556,
-    "IdName": "DungeonAffix_Positive_Astaroth_BelialBossMats",
-    "Name": "Oferenda de Belial",
-    "Description": "As recompensas de Astaroth incluem unidades de Casca do Traidor, item necessário para abrir o Butim de Belial.",
+    "IdSno": 2321540,
+    "IdName": "DungeonAffix_Positive_Astaroth_AndarielBossMats",
+    "Name": "Oferenda de Andariel",
+    "Description": "As recompensas de Astaroth incluem unidades de Boneca Alfinetada, item necessário para abrir o Butim de Andariel.",
     "DungeonZoneInfo": "",
     "IsSeasonal": false,
     "Type": "Positive"

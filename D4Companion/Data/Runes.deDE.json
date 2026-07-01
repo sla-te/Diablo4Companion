@@ -474,9 +474,9 @@
     "IdName": "Item_Rune_Effect_Druid_Petrify",
     "RuneType": "effect",
     "Name": "Yom",
-    "Description": "Ruft die Fertigkeit Versteinern des Druiden, um Gegner zu betäuben und Primärressource wiederherzustellen.",
-    "DescriptionClean": "Ruft die Fertigkeit Versteinern des Druiden, um Gegner zu betäuben und Primärressource wiederherzustellen.",
-    "RuneDescription": "{c_RuneEffect}Ruft die Fertigkeit {c_important}Versteinern{/c} des Druiden, um Gegner zu betäuben und Primärressource wiederherzustellen.{/c}",
+    "Description": "Ruft die Fertigkeit Versteinern des Druiden, um Gegner zu betäuben und Euren kritischer Trefferschaden gegen sie zu erhöhen.",
+    "DescriptionClean": "Ruft die Fertigkeit Versteinern des Druiden, um Gegner zu betäuben und Euren kritischer Trefferschaden gegen sie zu erhöhen.",
+    "RuneDescription": "{c_RuneEffect}Ruft die Fertigkeit {c_important}Versteinern{/c} des Druiden, um Gegner zu betäuben und Euren kritischer Trefferschaden gegen sie zu erhöhen.{/c}",
     "RuneOverflowBehavior": "Erhöht Betäubungsdauer"
   },
   {

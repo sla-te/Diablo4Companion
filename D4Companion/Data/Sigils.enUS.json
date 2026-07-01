@@ -252,15 +252,6 @@
     "Type": "Positive"
   },
   {
-    "IdSno": 2321556,
-    "IdName": "DungeonAffix_Positive_Astaroth_BelialBossMats",
-    "Name": "Belial's Offering",
-    "Description": "Astaroth's rewards include Betrayer's Husks, required to open Belial's Hoard.",
-    "DungeonZoneInfo": "",
-    "IsSeasonal": false,
-    "Type": "Positive"
-  },
-  {
     "IdSno": 2511951,
     "IdName": "DungeonAffix_Major_Empowered Elites (Berserker)",
     "Name": "Berserker Elites",
@@ -774,24 +765,6 @@
     "Type": "Major"
   },
   {
-    "IdSno": 2646845,
-    "IdName": "DungeonAffix_Positive_Torment_AncestralElites",
-    "Name": "Dungeon Delve",
-    "Description": "Completing the dungeon grants extra Experience and Rewards.",
-    "DungeonZoneInfo": "",
-    "IsSeasonal": false,
-    "Type": "Positive"
-  },
-  {
-    "IdSno": 2646836,
-    "IdName": "DungeonAffix_Positive_Torment_MythicElites",
-    "Name": "Dungeon Delve",
-    "Description": "Completing the dungeon grants extra Experience and Rewards.",
-    "DungeonZoneInfo": "",
-    "IsSeasonal": false,
-    "Type": "Positive"
-  },
-  {
     "IdSno": 2613077,
     "IdName": "DungeonAffix_Positive_IncreasedRewards",
     "Name": "Dungeon Delve",
@@ -803,6 +776,24 @@
   {
     "IdSno": 2646843,
     "IdName": "DungeonAffix_Positive_Torment_TreasureGoblins",
+    "Name": "Dungeon Delve",
+    "Description": "Completing the dungeon grants extra Experience and Rewards.",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
+    "IdSno": 2646845,
+    "IdName": "DungeonAffix_Positive_Torment_AncestralElites",
+    "Name": "Dungeon Delve",
+    "Description": "Completing the dungeon grants extra Experience and Rewards.",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
+    "IdSno": 2646836,
+    "IdName": "DungeonAffix_Positive_Torment_MythicElites",
     "Name": "Dungeon Delve",
     "Description": "Completing the dungeon grants extra Experience and Rewards.",
     "DungeonZoneInfo": "",
@@ -2448,6 +2439,15 @@
     "Type": "Dungeon"
   },
   {
+    "IdSno": 2579458,
+    "IdName": "World_DGN_QST_Skov_Skar_Sphinx_01_A",
+    "Name": "Scoriaceous Path",
+    "Description": "For the stalwart, lava-sculpted caves lead to untold riches.",
+    "DungeonZoneInfo": "in Skovos",
+    "IsSeasonal": false,
+    "Type": "Dungeon"
+  },
+  {
     "IdSno": 2579466,
     "IdName": "World_DGN_QST_Skov_Skar_Sphinx_01_C",
     "Name": "Scoriaceous Path",
@@ -2459,15 +2459,6 @@
   {
     "IdSno": 2579464,
     "IdName": "World_DGN_QST_Skov_Skar_Sphinx_01_B",
-    "Name": "Scoriaceous Path",
-    "Description": "For the stalwart, lava-sculpted caves lead to untold riches.",
-    "DungeonZoneInfo": "in Skovos",
-    "IsSeasonal": false,
-    "Type": "Dungeon"
-  },
-  {
-    "IdSno": 2579458,
-    "IdName": "World_DGN_QST_Skov_Skar_Sphinx_01_A",
     "Name": "Scoriaceous Path",
     "Description": "For the stalwart, lava-sculpted caves lead to untold riches.",
     "DungeonZoneInfo": "in Skovos",
@@ -2727,6 +2718,15 @@
     "Type": "Dungeon"
   },
   {
+    "IdSno": 2321556,
+    "IdName": "DungeonAffix_Positive_Astaroth_BelialBossMats",
+    "Name": "Superior Offering",
+    "Description": "Astaroth's rewards include Superior Lair Keys",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
     "IdSno": 1314333,
     "IdName": "DungeonAffix_Major_Empowered Elites (Suppressor)",
     "Name": "Suppressor Elites",
@@ -2777,7 +2777,7 @@
     "Name": "The Hinterland",
     "Description": "Few have traversed this shore, despite the rumored treasure.",
     "DungeonZoneInfo": "in Skovos",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {

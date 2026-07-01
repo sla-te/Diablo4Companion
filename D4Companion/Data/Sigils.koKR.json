@@ -126,6 +126,15 @@
     "Type": "Positive"
   },
   {
+    "IdSno": 2321556,
+    "IdName": "DungeonAffix_Positive_Astaroth_BelialBossMats",
+    "Name": "고급 공물",
+    "Description": "아스타로트의 보상에 고급 소굴 열쇠가 포함됩니다.",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
     "IdSno": 1113090,
     "IdName": "World_DGN_Scos_Oldstones",
     "Name": "고대 열석",
@@ -509,7 +518,7 @@
     "Name": "내륙지역",
     "Description": "보물이 있다는 소문에도, 이 해안을 지나간 이는 많지 않습니다.",
     "DungeonZoneInfo": "의 스코보스",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -605,6 +614,33 @@
   {
     "IdSno": 2613077,
     "IdName": "DungeonAffix_Positive_IncreasedRewards",
+    "Name": "던전 탐구",
+    "Description": "던전을 완료하면 추가 경험치와 보상이 지급됩니다.",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
+    "IdSno": 2646845,
+    "IdName": "DungeonAffix_Positive_Torment_AncestralElites",
+    "Name": "던전 탐구",
+    "Description": "던전을 완료하면 추가 경험치와 보상이 지급됩니다.",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
+    "IdSno": 2646836,
+    "IdName": "DungeonAffix_Positive_Torment_MythicElites",
+    "Name": "던전 탐구",
+    "Description": "던전을 완료하면 추가 경험치와 보상이 지급됩니다.",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
+    "IdSno": 2646843,
+    "IdName": "DungeonAffix_Positive_Torment_TreasureGoblins",
     "Name": "던전 탐구",
     "Description": "던전을 완료하면 추가 경험치와 보상이 지급됩니다.",
     "DungeonZoneInfo": "",
@@ -1033,15 +1069,6 @@
     "DungeonZoneInfo": "",
     "IsSeasonal": false,
     "Type": "Major"
-  },
-  {
-    "IdSno": 2321556,
-    "IdName": "DungeonAffix_Positive_Astaroth_BelialBossMats",
-    "Name": "벨리알의 공물",
-    "Description": "아스타로트의 보상에 벨리알의 비축고를 여는 데 필요한 배신자의 껍데기가 포함됩니다.",
-    "DungeonZoneInfo": "",
-    "IsSeasonal": false,
-    "Type": "Positive"
   },
   {
     "IdSno": 2347209,
@@ -1818,15 +1845,6 @@
     "Type": "Dungeon"
   },
   {
-    "IdSno": 1314333,
-    "IdName": "DungeonAffix_Major_Empowered Elites (Suppressor)",
-    "Name": "억압자 정예",
-    "Description": "정예 괴물이 \"억압자\" 속성을 가지며, 20% 증가한 피해를 줍니다.",
-    "DungeonZoneInfo": "",
-    "IsSeasonal": false,
-    "Type": "Major"
-  },
-  {
     "IdSno": 2355995,
     "IdName": "DungeonAffix_Minor_S9_Suppressor",
     "Name": "억압자 정예",
@@ -1834,6 +1852,15 @@
     "DungeonZoneInfo": "",
     "IsSeasonal": false,
     "Type": "Minor"
+  },
+  {
+    "IdSno": 1314333,
+    "IdName": "DungeonAffix_Major_Empowered Elites (Suppressor)",
+    "Name": "억압자 정예",
+    "Description": "정예 괴물이 \"억압자\" 속성을 가지며, 20% 증가한 피해를 줍니다.",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Major"
   },
   {
     "IdSno": 2381230,
@@ -2880,8 +2907,8 @@
     "Type": "Major"
   },
   {
-    "IdSno": 2579466,
-    "IdName": "World_DGN_QST_Skov_Skar_Sphinx_01_C",
+    "IdSno": 2579464,
+    "IdName": "World_DGN_QST_Skov_Skar_Sphinx_01_B",
     "Name": "화산암재 길",
     "Description": "강인한 자라면 용암에 깎여 나간 동굴을 따라가 이루 말할 수 없는 보물을 차지할 수 있습니다.",
     "DungeonZoneInfo": "의 스코보스",
@@ -2898,8 +2925,8 @@
     "Type": "Dungeon"
   },
   {
-    "IdSno": 2579464,
-    "IdName": "World_DGN_QST_Skov_Skar_Sphinx_01_B",
+    "IdSno": 2579466,
+    "IdName": "World_DGN_QST_Skov_Skar_Sphinx_01_C",
     "Name": "화산암재 길",
     "Description": "강인한 자라면 용암에 깎여 나간 동굴을 따라가 이루 말할 수 없는 보물을 차지할 수 있습니다.",
     "DungeonZoneInfo": "의 스코보스",

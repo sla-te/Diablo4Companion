@@ -189,7 +189,7 @@
     "Name": "Archdruid's",
     "Description": "Gain an additional passive bonus for each Druid form:\r\n\r\n Human: #% increased damage to Distant enemies.\r\n Werewolf: #% increased Critical Strike Damage to Close enemies.\r\n Werebear: #% increased damage while you have Resolve.",
     "DescriptionClean": "Gain an additional passive bonus for each Druid form:  Human: increased damage to Distant enemies. Werewolf: increased Critical Strike Damage to Close enemies. Werebear: increased damage while you have Resolve.",
-    "Localisation": "Gain an additional passive bonus for each Druid form:\r\n\r\n{icon:bullet,1.2} {c_gold}Human{/c}: {c_random}[(Affix.\"Static Value 0\"+Affix_Value_1)*100|x%|]{/c} increased damage to Distant enemies.\r\n{icon:bullet,1.2} {c_gold}Werewolf{/c}: {c_random}[(Affix.\"Static Value 1\"+Affix_Value_1)*100|x%|]{/c} increased Critical Strike Damage to Close enemies.\r\n{icon:bullet,1.2} {c_gold}Werebear{/c}: {c_random}[(Affix.\"Static Value 2\"+Affix_Value_1)*100|x%|]{/c} increased damage while you have {c_important}{u}Resolve{/u}{/c}.",
+    "Localisation": "Gain an additional passive bonus for each Druid form:\r\n\r\n{icon:bullet,1.2} {c_gold}Human{/c}: {c_random}[Affix_Value_1*100|x%|]{/c} increased damage to Distant enemies.\r\n{icon:bullet,1.2} {c_gold}Werewolf{/c}: {c_random}[Affix_Value_1*100|x%|]{/c} increased Critical Strike Damage to Close enemies.\r\n{icon:bullet,1.2} {c_gold}Werebear{/c}: {c_random}[Affix_Value_1*100|x%|]{/c} increased damage while you have {c_important}{u}Resolve{/u}{/c}.",
     "IsSeasonal": false,
     "IsCodex": true,
     "Dungeon": "",
@@ -4356,12 +4356,10 @@
       0
     ],
     "AllowedItemLabels": [
-      16,
-      17,
-      30,
-      26,
+      0,
       28,
-      29
+      26,
+      19
     ]
   },
   {
@@ -12086,7 +12084,7 @@
     "Name": "of Ignition",
     "Description": "Skills empowered by Volatility deal an additional #% increased damage and you have a #% chance for Volatility to persist on casting an empowered Skill.",
     "DescriptionClean": "Skills empowered by Volatility deal an additional increased damage and you have a chance for Volatility to persist on casting an empowered Skill.",
-    "Localisation": "Skills empowered by {c_important}{u}Volatility{/u}{/c} deal an additional {c_number}[40|x%|]{/c} increased damage and you have a {c_random}[Affix_Value_1|1%|]{/c} chance for {c_important}{u}Volatility{/u}{/c} to persist on casting an empowered Skill.",
+    "Localisation": "Skills empowered by {c_important}{u}Volatility{/u}{/c} deal an additional {c_number}[60|x%|]{/c} increased damage and you have a {c_random}[Affix_Value_1|1%|]{/c} chance for {c_important}{u}Volatility{/u}{/c} to persist on casting an empowered Skill.",
     "IsSeasonal": false,
     "IsCodex": true,
     "Dungeon": "",

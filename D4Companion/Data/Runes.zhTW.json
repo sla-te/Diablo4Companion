@@ -34,9 +34,9 @@
     "IdName": "Item_Rune_Effect_Paladin_Rally",
     "RuneType": "effect",
     "Name": "凱爾",
-    "Description": "喚起聖騎士的奮戰號召技能，獲得資源和攻擊速度，持續 # 秒。",
-    "DescriptionClean": "喚起聖騎士的奮戰號召技能，獲得資源和攻擊速度，持續 秒。",
-    "RuneDescription": "{c_RuneEffect}喚起聖騎士的{c_important}奮戰號召{/c}技能，獲得資源和攻擊速度，持續 {c_number}{s1}{/c} 秒。{/c}",
+    "Description": "引發聖騎士的奮戰號召技能，獲得資源和移動速度，持續 # 秒。",
+    "DescriptionClean": "引發聖騎士的奮戰號召技能，獲得資源和移動速度，持續 秒。",
+    "RuneDescription": "{c_RuneEffect}引發聖騎士的{c_important}奮戰號召{/c}技能，獲得資源和移動速度，持續 {c_number}{s1}{/c} 秒。{/c}",
     "RuneOverflowBehavior": "資源提高"
   },
   {
@@ -354,9 +354,9 @@
     "IdName": "Item_Rune_Effect_Druid_Petrify",
     "RuneType": "effect",
     "Name": "約姆",
-    "Description": "引發德魯伊的石化技能，使敵人昏迷並恢復主要資源。",
-    "DescriptionClean": "引發德魯伊的石化技能，使敵人昏迷並恢復主要資源。",
-    "RuneDescription": "{c_RuneEffect}引發德魯伊的{c_important}石化{/c}技能，使敵人昏迷並恢復主要資源。{/c}",
+    "Description": "引發德魯伊的石化技能，使敵人昏迷並提高你對其造成的爆擊傷害。",
+    "DescriptionClean": "引發德魯伊的石化技能，使敵人昏迷並提高你對其造成的爆擊傷害。",
+    "RuneDescription": "{c_RuneEffect}引發德魯伊的{c_important}石化{/c}技能，使敵人昏迷並提高你對其造成的爆擊傷害。{/c}",
     "RuneOverflowBehavior": "延長昏迷持續時間"
   },
   {

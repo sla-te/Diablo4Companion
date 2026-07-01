@@ -954,8 +954,35 @@
     "Type": "Minor"
   },
   {
+    "IdSno": 2646843,
+    "IdName": "DungeonAffix_Positive_Torment_TreasureGoblins",
+    "Name": "Esplorazione delle spedizioni",
+    "Description": "Completare la spedizione fornisce esperienza e ricompense aggiuntive.",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
     "IdSno": 2613077,
     "IdName": "DungeonAffix_Positive_IncreasedRewards",
+    "Name": "Esplorazione delle spedizioni",
+    "Description": "Completare la spedizione fornisce esperienza e ricompense aggiuntive.",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
+    "IdSno": 2646836,
+    "IdName": "DungeonAffix_Positive_Torment_MythicElites",
+    "Name": "Esplorazione delle spedizioni",
+    "Description": "Completare la spedizione fornisce esperienza e ricompense aggiuntive.",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
+    "IdSno": 2646845,
+    "IdName": "DungeonAffix_Positive_Torment_AncestralElites",
     "Name": "Esplorazione delle spedizioni",
     "Description": "Completare la spedizione fornisce esperienza e ricompense aggiuntive.",
     "DungeonZoneInfo": "",
@@ -1301,7 +1328,7 @@
     "Name": "L'Entroterra",
     "Description": "Pochi hanno attraversato questa costa, nonostante le voci sul tesoro nascosto.",
     "DungeonZoneInfo": "presso Skovos",
-    "IsSeasonal": true,
+    "IsSeasonal": false,
     "Type": "Dungeon"
   },
   {
@@ -1449,6 +1476,15 @@
     "Type": "Dungeon"
   },
   {
+    "IdSno": 2321556,
+    "IdName": "DungeonAffix_Positive_Astaroth_BelialBossMats",
+    "Name": "Offerta Suprema",
+    "Description": "Le ricompense di Astaroth includono Chiavi del Covo Supreme",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Positive"
+  },
+  {
     "IdSno": 2420535,
     "IdName": "DungeonAffix_Positive_Astaroth_MephistoBossMats",
     "Name": "Offerta dell'Alfiere dell'Odio",
@@ -1462,15 +1498,6 @@
     "IdName": "DungeonAffix_Positive_Astaroth_AndarielBossMats",
     "Name": "Offerta di Andariel",
     "Description": "Le ricompense di Astaroth includono Bambole Puntaspilli, necessarie per aprire il Tesoro di Andariel.",
-    "DungeonZoneInfo": "",
-    "IsSeasonal": false,
-    "Type": "Positive"
-  },
-  {
-    "IdSno": 2321556,
-    "IdName": "DungeonAffix_Positive_Astaroth_BelialBossMats",
-    "Name": "Offerta di Belial",
-    "Description": "Le ricompense di Astaroth includono Gusci del Traditore, necessari per aprire il Tesoro di Belial.",
     "DungeonZoneInfo": "",
     "IsSeasonal": false,
     "Type": "Positive"
@@ -2394,8 +2421,8 @@
     "Type": "Positive"
   },
   {
-    "IdSno": 2579464,
-    "IdName": "World_DGN_QST_Skov_Skar_Sphinx_01_B",
+    "IdSno": 2579466,
+    "IdName": "World_DGN_QST_Skov_Skar_Sphinx_01_C",
     "Name": "Sentiero Scoriaceo",
     "Description": "Per i più temerari, le grotte scolpite dalla lava conducono a ricchezze inimmaginabili.",
     "DungeonZoneInfo": "presso Skovos",
@@ -2403,8 +2430,8 @@
     "Type": "Dungeon"
   },
   {
-    "IdSno": 2579466,
-    "IdName": "World_DGN_QST_Skov_Skar_Sphinx_01_C",
+    "IdSno": 2579464,
+    "IdName": "World_DGN_QST_Skov_Skar_Sphinx_01_B",
     "Name": "Sentiero Scoriaceo",
     "Description": "Per i più temerari, le grotte scolpite dalla lava conducono a ricchezze inimmaginabili.",
     "DungeonZoneInfo": "presso Skovos",
@@ -2826,15 +2853,6 @@
     "Type": "Major"
   },
   {
-    "IdSno": 2355995,
-    "IdName": "DungeonAffix_Minor_S9_Suppressor",
-    "Name": "Élite (Soppressore)",
-    "Description": "I mostri élite hanno l'affisso \"Soppressore\" e infliggono il 20% di danni aggiuntivi.",
-    "DungeonZoneInfo": "",
-    "IsSeasonal": false,
-    "Type": "Minor"
-  },
-  {
     "IdSno": 1314333,
     "IdName": "DungeonAffix_Major_Empowered Elites (Suppressor)",
     "Name": "Élite (Soppressore)",
@@ -2842,6 +2860,15 @@
     "DungeonZoneInfo": "",
     "IsSeasonal": false,
     "Type": "Major"
+  },
+  {
+    "IdSno": 2355995,
+    "IdName": "DungeonAffix_Minor_S9_Suppressor",
+    "Name": "Élite (Soppressore)",
+    "Description": "I mostri élite hanno l'affisso \"Soppressore\" e infliggono il 20% di danni aggiuntivi.",
+    "DungeonZoneInfo": "",
+    "IsSeasonal": false,
+    "Type": "Minor"
   },
   {
     "IdSno": 1314342,

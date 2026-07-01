@@ -187,7 +187,7 @@
     "Name": "archidruidique",
     "Description": "Vous obtenez un bonus passif pour chaque forme de druide.\r\n\r\n Forme humaine\u00A0: #% de dégâts supplémentaires contre les adversaires à distance.\r\n Lycanthrope\u00A0: #% de dégâts critiques supplémentaires contre les adversaires à proximité.\r\n Ursoïde\u00A0: #% de dégâts supplémentaires tant que vous bénéficiez de détermination.",
     "DescriptionClean": "Vous obtenez un bonus passif pour chaque forme de druide.  Forme humaine\u00A0: de dégâts supplémentaires contre les adversaires à distance. Lycanthrope\u00A0: de dégâts critiques supplémentaires contre les adversaires à proximité. Ursoïde\u00A0: de dégâts supplémentaires tant que vous bénéficiez de détermination.",
-    "Localisation": "Vous obtenez un bonus passif pour chaque forme de druide.\r\n\r\n{icon:bullet,1.2} {c_gold}Forme humaine{/c}\u00A0: {c_random}[(Affix.\"Static Value 0\"+Affix_Value_1)*100|x%|]{/c} de dégâts supplémentaires contre les adversaires à distance.\r\n{icon:bullet,1.2} {c_gold}Lycanthrope{/c}\u00A0: {c_random}[(Affix.\"Static Value 1\"+Affix_Value_1)*100|x%|]{/c} de dégâts critiques supplémentaires contre les adversaires à proximité.\r\n{icon:bullet,1.2} {c_gold}Ursoïde{/c}\u00A0: {c_random}[(Affix.\"Static Value 2\"+Affix_Value_1)*100|x%|]{/c} de dégâts supplémentaires tant que vous bénéficiez de {c_important}{u}détermination{/u}{/c}.",
+    "Localisation": "Vous obtenez un bonus passif pour chaque forme de druide.\r\n\r\n{icon:bullet,1.2} {c_gold}Forme humaine{/c}\u00A0: {c_random}[Affix_Value_1*100|x%|]{/c} de dégâts supplémentaires contre les adversaires à distance.\r\n{icon:bullet,1.2} {c_gold}Lycanthrope{/c}\u00A0: {c_random}[Affix_Value_1*100|x%|]{/c} de dégâts critiques supplémentaires contre les adversaires à proximité.\r\n{icon:bullet,1.2} {c_gold}Ursoïde{/c}\u00A0: {c_random}[Affix_Value_1*100|x%|]{/c} de dégâts supplémentaires tant que vous bénéficiez de {c_important}{u}détermination{/u}{/c}.",
     "IsSeasonal": false,
     "IsCodex": true,
     "Dungeon": "",
@@ -1652,9 +1652,9 @@
       "legendary_barb_020"
     ],
     "Name": "de colère débordante",
-    "Description": "Lorsque vous dépensez #\u00A0points de fureur, les dégâts de vos compétences de combat augmentent de #% pendant #\u00A0s.",
-    "DescriptionClean": "Lorsque vous dépensez \u00A0points de fureur, les dégâts de vos compétences de combat augmentent de pendant \u00A0s.",
-    "Localisation": "Lorsque vous dépensez {c_number}[Affix.\"Static Value 0\"]{/c}\u00A0|4point:points; de fureur, les dégâts de vos compétences de {c_important}combat{/c} augmentent de {c_random}[Affix_Value_1|%x|]{/c} pendant {c_number}[Affix.\"Static Value 1\"]{/c}\u00A0s.",
+    "Description": "Lorsque vous dépensez #\u00A0points de fureur, les dégâts de vos compétences de bagarre augmentent de #% pendant #\u00A0s.",
+    "DescriptionClean": "Lorsque vous dépensez \u00A0points de fureur, les dégâts de vos compétences de bagarre augmentent de pendant \u00A0s.",
+    "Localisation": "Lorsque vous dépensez {c_number}[Affix.\"Static Value 0\"]{/c}\u00A0|4point:points; de fureur, les dégâts de vos compétences de {c_important}bagarre{/c} augmentent de {c_random}[Affix_Value_1|%x|]{/c} pendant {c_number}[Affix.\"Static Value 1\"]{/c}\u00A0s.",
     "IsSeasonal": false,
     "IsCodex": true,
     "Dungeon": "",
@@ -2543,9 +2543,9 @@
       "legendary_barb_005_x2"
     ],
     "Name": "de duelliste",
-    "Description": "Lorsque vous maniez une arme à une main, votre vitesse d’attaque est augmentée de #%.",
-    "DescriptionClean": "Lorsque vous maniez une arme à une main, votre vitesse d’attaque est augmentée de.",
-    "Localisation": "Lorsque vous maniez une arme à une main, votre vitesse d’attaque est augmentée de {c_random}[Affix_Value_1|%+|]{/c}.",
+    "Description": "Lorsque vous maniez une arme à une main, les attaques augmentent les dégâts que vous infligez avec cette arme de #%, et ce jusqu’à #\u00A0fois. Ce bonus est perdu lorsque vous changez d’arme.",
+    "DescriptionClean": "Lorsque vous maniez une arme à une main, les attaques augmentent les dégâts que vous infligez avec cette arme de , et ce jusqu’à \u00A0fois. Ce bonus est perdu lorsque vous changez d’arme.",
+    "Localisation": "Lorsque vous maniez une arme à une main, les attaques augmentent les dégâts que vous infligez avec cette arme de {c_random}[Affix_Value_1*100|1%|]{/c}, et ce jusqu’à {c_number}[Affix.\"Static Value 0\"]{/c}\u00A0fois. Ce bonus est perdu lorsque vous changez d’arme.",
     "IsSeasonal": false,
     "IsCodex": true,
     "Dungeon": "",
@@ -3039,9 +3039,9 @@
       "legendary_barb_011_x2"
     ],
     "Name": "de ferveur du combat",
-    "Description": "Les compétences de combat octroient Rage du berserker pendant #\u00A0s lorsqu’elles touchent pour la première fois. Vous obtenez #% de réduction des dégâts lorsque vous êtes sous l’effet de Rage du berserker.",
-    "DescriptionClean": "Les compétences de combat octroient Rage du berserker pendant \u00A0s lorsqu’elles touchent pour la première fois. Vous obtenez de réduction des dégâts lorsque vous êtes sous l’effet de Rage du berserker.",
-    "Localisation": "Les compétences de {c_important}combat{/c} octroient {c_important}{u}Rage du berserker{/u}{/c} pendant {c_number}[Affix.\"Static Value 0\"||]{/c}\u00A0s lorsqu’elles touchent pour la première fois. Vous obtenez {c_random}[Affix_Value_1|1%|]{/c} de réduction des dégâts lorsque vous êtes sous l’effet de {c_important}{u}Rage du berserker{/u}{/c}.",
+    "Description": "Les compétences de bagarre octroient Rage du berserker pendant #\u00A0s lorsqu’elles touchent leur première cible. Vous obtenez #% de réduction des dégâts lorsque vous êtes sous l’effet de Rage du berserker.",
+    "DescriptionClean": "Les compétences de bagarre octroient Rage du berserker pendant \u00A0s lorsqu’elles touchent leur première cible. Vous obtenez de réduction des dégâts lorsque vous êtes sous l’effet de Rage du berserker.",
+    "Localisation": "Les compétences de {c_important}bagarre{/c} octroient {c_important}{u}Rage du berserker{/u}{/c} pendant {c_number}[Affix.\"Static Value 0\"||]{/c}\u00A0s lorsqu’elles touchent leur première cible. Vous obtenez {c_random}[Affix_Value_1|1%|]{/c} de réduction des dégâts lorsque vous êtes sous l’effet de {c_important}{u}Rage du berserker{/u}{/c}.",
     "IsSeasonal": false,
     "IsCodex": true,
     "Dungeon": "",
@@ -3754,41 +3754,6 @@
     ]
   },
   {
-    "IdSno": "1943568",
-    "IdName": "S05_BSK_Rogue_003",
-    "IdSnoList": [
-      "1943568"
-    ],
-    "IdNameList": [
-      "S05_BSK_Rogue_003"
-    ],
-    "Name": "de froid mordant",
-    "Description": "Vous infligez #% de dégâts supplémentaires aux cibles glacées ou gelées ainsi que lorsque vous infligez des dégâts de froid aux boss.",
-    "DescriptionClean": "Vous infligez de dégâts supplémentaires aux cibles glacées ou gelées ainsi que lorsque vous infligez des dégâts de froid aux boss.",
-    "Localisation": "Vous infligez {c_random}[Affix_Value_1|x%|]{/c} de dégâts supplémentaires aux cibles {c_important}{u}glacées{/u}{/c} ou {c_important}{u}gelées{/u}{/c} ainsi que lorsque vous infligez des dégâts de froid aux boss.",
-    "IsSeasonal": false,
-    "IsCodex": true,
-    "Dungeon": "",
-    "Category": "FILTER_Legendary_Offensive",
-    "MagicType": 1,
-    "AllowedForPlayerClass": [
-      0,
-      0,
-      0,
-      1,
-      0,
-      0,
-      0,
-      0
-    ],
-    "AllowedItemLabels": [
-      0,
-      28,
-      26,
-      19
-    ]
-  },
-  {
     "IdSno": "2575334",
     "IdName": "legendary_coldUser_003_x2",
     "IdSnoList": [
@@ -3824,6 +3789,41 @@
       26,
       30,
       15
+    ]
+  },
+  {
+    "IdSno": "1943568",
+    "IdName": "S05_BSK_Rogue_003",
+    "IdSnoList": [
+      "1943568"
+    ],
+    "IdNameList": [
+      "S05_BSK_Rogue_003"
+    ],
+    "Name": "de froid mordant",
+    "Description": "Vous infligez #% de dégâts supplémentaires aux cibles glacées ou gelées ainsi que lorsque vous infligez des dégâts de froid aux boss.",
+    "DescriptionClean": "Vous infligez de dégâts supplémentaires aux cibles glacées ou gelées ainsi que lorsque vous infligez des dégâts de froid aux boss.",
+    "Localisation": "Vous infligez {c_random}[Affix_Value_1|x%|]{/c} de dégâts supplémentaires aux cibles {c_important}{u}glacées{/u}{/c} ou {c_important}{u}gelées{/u}{/c} ainsi que lorsque vous infligez des dégâts de froid aux boss.",
+    "IsSeasonal": false,
+    "IsCodex": true,
+    "Dungeon": "",
+    "Category": "FILTER_Legendary_Offensive",
+    "MagicType": 1,
+    "AllowedForPlayerClass": [
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0
+    ],
+    "AllowedItemLabels": [
+      0,
+      28,
+      26,
+      19
     ]
   },
   {
@@ -4533,6 +4533,41 @@
       28,
       26,
       15
+    ]
+  },
+  {
+    "IdSno": "578716",
+    "IdName": "legendary_barb_018",
+    "IdSnoList": [
+      "578716"
+    ],
+    "IdNameList": [
+      "legendary_barb_018"
+    ],
+    "Name": "de la bagarre",
+    "Description": "Les cibles tuées dans les #\u00A0s après avoir été touchées par Coup de pied ou Charge explosent en infligeant #\u00A0points de dégâts aux adversaires à proximité.",
+    "DescriptionClean": "Les cibles tuées dans les \u00A0s après avoir été touchées par Coup de pied ou Charge explosent en infligeant \u00A0points de dégâts aux adversaires à proximité.",
+    "Localisation": "Les cibles tuées dans les {c_number}[Affix.\"Static Value 0\"]{/c}\u00A0s après avoir été touchées par {c_important}Coup de pied{/c} ou {c_important}Charge{/c} explosent en infligeant {c_random}[(Owner.Weapon_Damage_Min_Total + Owner.Weapon_Damage_Delta_Total) * Affix_Value_1]{/c}\u00A0|4point:points; de dégâts aux adversaires à proximité.",
+    "IsSeasonal": false,
+    "IsCodex": true,
+    "Dungeon": "Refuge hanté",
+    "Category": "FILTER_Legendary_Offensive",
+    "MagicType": 1,
+    "AllowedForPlayerClass": [
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "AllowedItemLabels": [
+      0,
+      28,
+      26,
+      19
     ]
   },
   {
@@ -5820,9 +5855,9 @@
       "legendary_paladin_031"
     ],
     "Name": "de l’enclume de Glynn",
-    "Description": "Votre maximum de détermination est augmenté de # et vous obtenez #% de réduction des dégâts par cumul de détermination.",
-    "DescriptionClean": "Votre maximum de détermination est augmenté de et vous obtenez de réduction des dégâts par cumul de détermination.",
-    "Localisation": "Votre maximum de {c_important}{u}détermination{/u}{/c} est augmenté de {c_number}[Affix.\"Static Value 0\"]{/c} et vous obtenez {c_random}[Affix_Value_1|%|]{/c} de réduction des dégâts par cumul de {u}{c_important}détermination{/c}{/u}.",
+    "Description": "Votre maximum de détermination est augmenté de # et vous obtenez #% de réduction des dégâts par cumul de détermination, jusqu’à un maximum de #%.",
+    "DescriptionClean": "Votre maximum de détermination est augmenté de et vous obtenez de réduction des dégâts par cumul de détermination, jusqu’à un maximum de.",
+    "Localisation": "Votre maximum de {c_important}{u}détermination{/u}{/c} est augmenté de {c_number}[Affix.\"Static Value 0\"]{/c} et vous obtenez {c_random}[Affix_Value_1|1%|]{/c} de réduction des dégâts par cumul de {u}{c_important}détermination{/c}{/u}, jusqu’à un maximum de {c_random}[Affix_Value_1*Affix.\"Static Value 1\"|%|]{/c}.",
     "IsSeasonal": false,
     "IsCodex": true,
     "Dungeon": "",
@@ -8244,9 +8279,9 @@
       "Legendary_Barb_110"
     ],
     "Name": "de rage infinie",
-    "Description": "Chaque point de fureur que vous générez augmente les dégâts que vous infligez de #%. Ce bonus est perdu au bout de #\u00A0s.",
-    "DescriptionClean": "Chaque point de fureur que vous générez augmente les dégâts que vous infligez de. Ce bonus est perdu au bout de \u00A0s.",
-    "Localisation": "Chaque point de fureur que vous générez augmente les dégâts que vous infligez de {c_random}[Affix_Value_1|2%x|]{/c}. Ce bonus est perdu au bout de {c_number}[Affix.\"Static Value 0\"]{/c}\u00A0s.",
+    "Description": "Chaque point de fureur que vous générez augmente les dégâts que vous infligez de #%, jusqu’à un maximum de #\u00A0points de fureur. Ce bonus est perdu au bout de #\u00A0s.",
+    "DescriptionClean": "Chaque point de fureur que vous générez augmente les dégâts que vous infligez de , jusqu’à un maximum de \u00A0points de fureur. Ce bonus est perdu au bout de \u00A0s.",
+    "Localisation": "Chaque point de fureur que vous générez augmente les dégâts que vous infligez de {c_random}[Affix_Value_1|2%x|]{/c}, jusqu’à un maximum de {c_number}[Affix.\"Static Value 1\"]{/c}\u00A0points de fureur. Ce bonus est perdu au bout de {c_number}[Affix.\"Static Value 0\"]{/c}\u00A0s.",
     "IsSeasonal": false,
     "IsCodex": true,
     "Dungeon": "",
@@ -8841,7 +8876,7 @@
     "Name": "de réfutation",
     "Description": "Vos compétences défensives obtiennent #\u00A0charges.",
     "DescriptionClean": "Vos compétences défensives obtiennent \u00A0charges.",
-    "Localisation": "Vos compétences {c_important}défensives{/c_important} obtiennent {c_random}[Affix_Value_1]{/c}\u00A0charges.",
+    "Localisation": "Vos compétences {c_important}défensives{/c_important} obtiennent {c_random}[Floor(Affix_Value_1)]{/c}\u00A0charges.",
     "IsSeasonal": false,
     "IsCodex": true,
     "Dungeon": "",
@@ -9162,9 +9197,9 @@
       "legendary_generic_123_x2"
     ],
     "Name": "de sang bouillonnant",
-    "Description": "Toutes les #\u00A0s, vous obtenez #\u00A0cumuls d’accablement. Lorsque vous accablez, vous faites apparaître #\u00A0|4goutte:gouttes; de sang instable. Ramassez-les pour les faire exploser et infliger #\u00A0points de dégâts physiques autour de vous.",
-    "DescriptionClean": "Toutes les \u00A0s, vous obtenez \u00A0cumuls d’accablement. Lorsque vous accablez, vous faites apparaître \u00A0|4goutte:gouttes; de sang instable. Ramassez-les pour les faire exploser et infliger \u00A0points de dégâts physiques autour de vous.",
-    "Localisation": "Toutes les {c_number}[Affix.\"Static Value 1\"]{/c}\u00A0s, vous obtenez {c_number}[Affix.\"Static Value 2\"]{/c}\u00A0|4cumul:cumuls; {c_important}{u}d’accablement{/u}{/c}. Lorsque vous {c_important}{u}accablez{/u}{/c}, vous faites apparaître {c_number}[Affix.\"Static Value 0\"]{/c}\u00A0|4goutte:gouttes; de sang instable. Ramassez-les pour les faire exploser et infliger {c_random}[(Owner.Weapon_Damage_Min_Total + Owner.Weapon_Damage_Delta_Total) * (1 + Owner.Main_Hand_Damage_Percent_Bonus) * Affix_Value_1]{/c}\u00A0points de dégâts physiques autour de vous.",
+    "Description": "Toutes les #\u00A0s, vous obtenez #\u00A0cumuls d’accablement. Lorsque vous utilisez des cumuls d’accablement, vous faites apparaître #\u00A0|4goutte:gouttes; de sang instable. Ramassez-les pour les faire exploser et infliger #\u00A0points de dégâts physiques autour de vous.",
+    "DescriptionClean": "Toutes les \u00A0s, vous obtenez \u00A0cumuls d’accablement. Lorsque vous utilisez des cumuls d’accablement, vous faites apparaître \u00A0|4goutte:gouttes; de sang instable. Ramassez-les pour les faire exploser et infliger \u00A0points de dégâts physiques autour de vous.",
+    "Localisation": "Toutes les {c_number}[Affix.\"Static Value 1\"]{/c}\u00A0s, vous obtenez {c_number}[Affix.\"Static Value 2\"]{/c}\u00A0|4cumul:cumuls; {c_important}{u}d’accablement{/u}{/c}. Lorsque vous utilisez des cumuls {c_important}{u}d’accablement{/u}{/c}, vous faites apparaître {c_number}[Affix.\"Static Value 0\"]{/c}\u00A0|4goutte:gouttes; de sang instable. Ramassez-les pour les faire exploser et infliger {c_random}[(Owner.Weapon_Damage_Min_Total + Owner.Weapon_Damage_Delta_Total) * (1 + Owner.Main_Hand_Damage_Percent_Bonus) * Affix_Value_1]{/c}\u00A0|4point:points; de dégâts physiques autour de vous.",
     "IsSeasonal": false,
     "IsCodex": true,
     "Dungeon": "",
@@ -9511,7 +9546,7 @@
     "Name": "de sorcellerie de combat",
     "Description": "Coup de chance\u00A0: les dégâts de conjuration ont jusqu’à #% de chances d’augmenter leurs dégâts de #% et leurs chances d’obtenir un coup de chance de #% pendant #\u00A0s. Cet effet est cumulable jusqu’à #\u00A0fois.",
     "DescriptionClean": "Coup de chance\u00A0: les dégâts de conjuration ont jusqu’à de chances d’augmenter leurs dégâts de et leurs chances d’obtenir un coup de chance de pendant \u00A0s. Cet effet est cumulable jusqu’à \u00A0fois.",
-    "Localisation": "{c_important}Coup de chance\u00A0:{/c} les dégâts de {c_important}conjuration{/c} ont jusqu’à {c_number}[Affix.\"Static Value 0\"|%|]{/c} de chances d’augmenter leurs dégâts de {c_random}[Affix_Value_1|1%|]{/c} et leurs chances d’obtenir un coup de chance de {c_number}[Affix.\"Static Value 1\"|1%+|]{/c} pendant {c_number}[Affix.\"Static Value 2\"]{/c}\u00A0s. Cet effet est cumulable jusqu’à {c_number}[Affix.\"Static Value 3\"]{/c}\u00A0fois.",
+    "Localisation": "{c_label}Coup de chance\u00A0:{/c} les dégâts de {c_important}conjuration{/c} ont jusqu’à {c_number}[Affix.\"Static Value 0\"|%|]{/c} de chances d’augmenter leurs dégâts de {c_random}[Affix_Value_1|1%|]{/c} et leurs chances d’obtenir un coup de chance de {c_number}[Affix.\"Static Value 1\"|1%+|]{/c} pendant {c_number}[Affix.\"Static Value 2\"]{/c}\u00A0s. Cet effet est cumulable jusqu’à {c_number}[Affix.\"Static Value 3\"]{/c}\u00A0fois.",
     "IsSeasonal": false,
     "IsCodex": true,
     "Dungeon": "",
@@ -9711,41 +9746,6 @@
     ]
   },
   {
-    "IdSno": "1937739",
-    "IdName": "x1_legendary_sorc_142",
-    "IdSnoList": [
-      "1937739"
-    ],
-    "IdNameList": [
-      "x1_legendary_sorc_142"
-    ],
-    "Name": "de surchauffe",
-    "Description": "Après une canalisation de #\u00A0s, Incinération inflige #% de dégâts supplémentaires pendant #\u00A0s. L’utilisation d’Incinération réinitialise et conserve ce bonus. ",
-    "DescriptionClean": "Après une canalisation de \u00A0s, Incinération inflige de dégâts supplémentaires pendant \u00A0s. L’utilisation d’Incinération réinitialise et conserve ce bonus.",
-    "Localisation": "Après une canalisation de {c_number}[PowerTag.Sorcerer_Incinerate.\"Script Formula 58\"]{/c}\u00A0s, {c_important}Incinération{/c} inflige {c_random}[Affix_Value_1|%x|]{/c} de dégâts supplémentaires pendant {c_number}[Affix.\"Static Value 0\"]{/c}\u00A0s. L’utilisation {c_important}d’Incinération{/c} réinitialise et conserve ce bonus. ",
-    "IsSeasonal": false,
-    "IsCodex": true,
-    "Dungeon": "",
-    "Category": "",
-    "MagicType": 1,
-    "AllowedForPlayerClass": [
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
-    ],
-    "AllowedItemLabels": [
-      0,
-      28,
-      26,
-      19
-    ]
-  },
-  {
     "IdSno": "2574616",
     "IdName": "legendary_burningUser_001_x2",
     "IdSnoList": [
@@ -9781,6 +9781,41 @@
       26,
       30,
       15
+    ]
+  },
+  {
+    "IdSno": "1937739",
+    "IdName": "x1_legendary_sorc_142",
+    "IdSnoList": [
+      "1937739"
+    ],
+    "IdNameList": [
+      "x1_legendary_sorc_142"
+    ],
+    "Name": "de surchauffe",
+    "Description": "Après une canalisation de #\u00A0s, Incinération inflige #% de dégâts supplémentaires pendant #\u00A0s. L’utilisation d’Incinération réinitialise et conserve ce bonus. ",
+    "DescriptionClean": "Après une canalisation de \u00A0s, Incinération inflige de dégâts supplémentaires pendant \u00A0s. L’utilisation d’Incinération réinitialise et conserve ce bonus.",
+    "Localisation": "Après une canalisation de {c_number}[PowerTag.Sorcerer_Incinerate.\"Script Formula 58\"]{/c}\u00A0s, {c_important}Incinération{/c} inflige {c_random}[Affix_Value_1|%x|]{/c} de dégâts supplémentaires pendant {c_number}[Affix.\"Static Value 0\"]{/c}\u00A0s. L’utilisation {c_important}d’Incinération{/c} réinitialise et conserve ce bonus. ",
+    "IsSeasonal": false,
+    "IsCodex": true,
+    "Dungeon": "",
+    "Category": "",
+    "MagicType": 1,
+    "AllowedForPlayerClass": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "AllowedItemLabels": [
+      0,
+      28,
+      26,
+      19
     ]
   },
   {
@@ -10278,39 +10313,6 @@
     ]
   },
   {
-    "IdSno": "1224753",
-    "IdName": "legendary_necro_100",
-    "IdSnoList": [
-      "1224753"
-    ],
-    "IdNameList": [
-      "legendary_necro_100"
-    ],
-    "Name": "de tourment",
-    "Description": "Les coups critiques infligés avec des compétences d’os augmentent votre régénération d’essence de #% pendant #\u00A0s.",
-    "DescriptionClean": "Les coups critiques infligés avec des compétences d’os augmentent votre régénération d’essence de pendant \u00A0s.",
-    "Localisation": "Les coups critiques infligés avec des compétences d’{c_important}os{/c} augmentent votre régénération d’essence de {c_random}[Affix_Value_1|1%x|]{/c} pendant {c_number}[Affix.\"Affix Value 0\"]{/c}\u00A0s.",
-    "IsSeasonal": false,
-    "IsCodex": true,
-    "Dungeon": "Asile noir",
-    "Category": "FILTER_Legendary_Resource",
-    "MagicType": 1,
-    "AllowedForPlayerClass": [
-      0,
-      0,
-      0,
-      0,
-      1,
-      0,
-      0,
-      0
-    ],
-    "AllowedItemLabels": [
-      19,
-      26
-    ]
-  },
-  {
     "IdSno": "1858282",
     "IdName": "legendary_spiritborn_020_x1",
     "IdSnoList": [
@@ -10343,6 +10345,39 @@
       28,
       26,
       19
+    ]
+  },
+  {
+    "IdSno": "1224753",
+    "IdName": "legendary_necro_100",
+    "IdSnoList": [
+      "1224753"
+    ],
+    "IdNameList": [
+      "legendary_necro_100"
+    ],
+    "Name": "de tourment",
+    "Description": "Les coups critiques infligés avec des compétences d’os augmentent votre régénération d’essence de #% pendant #\u00A0s.",
+    "DescriptionClean": "Les coups critiques infligés avec des compétences d’os augmentent votre régénération d’essence de pendant \u00A0s.",
+    "Localisation": "Les coups critiques infligés avec des compétences d’{c_important}os{/c} augmentent votre régénération d’essence de {c_random}[Affix_Value_1|1%x|]{/c} pendant {c_number}[Affix.\"Affix Value 0\"]{/c}\u00A0s.",
+    "IsSeasonal": false,
+    "IsCodex": true,
+    "Dungeon": "Asile noir",
+    "Category": "FILTER_Legendary_Resource",
+    "MagicType": 1,
+    "AllowedForPlayerClass": [
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0
+    ],
+    "AllowedItemLabels": [
+      19,
+      26
     ]
   },
   {
@@ -10446,12 +10481,10 @@
       0
     ],
     "AllowedItemLabels": [
-      16,
-      17,
-      30,
-      26,
+      0,
       28,
-      29
+      26,
+      19
     ]
   },
   {
@@ -11366,10 +11399,10 @@
     "IdNameList": [
       "legendary_barb_040"
     ],
-    "Name": "de vétéran du combat",
-    "Description": "Chaque fois qu’une compétence de combat inflige des dégâts directs à une cible, votre utilisation de Charge, Bond ou Coup de pied inflige #% de dégâts supplémentaires pendant #\u00A0s, jusqu’à un maximum de #%.",
-    "DescriptionClean": "Chaque fois qu’une compétence de combat inflige des dégâts directs à une cible, votre utilisation de Charge, Bond ou Coup de pied inflige de dégâts supplémentaires pendant \u00A0s, jusqu’à un maximum de.",
-    "Localisation": "Chaque fois qu’une compétence de {c_important}combat{/c} inflige des dégâts directs à une cible, votre utilisation de {c_important}Charge{/c}, {c_important}Bond{/c} ou {c_important}Coup de pied{/c} inflige {c_random}[Affix_Value_1|1%x|]{/c} de dégâts supplémentaires pendant {c_number}[Affix.\"Static Value 0\"||]{/c}\u00A0s, jusqu’à un maximum de {c_random}[Affix_Value_1 * Affix_Value_2|%x|]{/c}.",
+    "Name": "de vétéran de bagarre",
+    "Description": "Chaque fois qu’une compétence de bagarre inflige des dégâts directs à une cible, votre utilisation de Charge, Bond ou Coup de pied inflige #% de dégâts supplémentaires pendant #\u00A0s, jusqu’à un maximum de #%.",
+    "DescriptionClean": "Chaque fois qu’une compétence de bagarre inflige des dégâts directs à une cible, votre utilisation de Charge, Bond ou Coup de pied inflige de dégâts supplémentaires pendant \u00A0s, jusqu’à un maximum de.",
+    "Localisation": "Chaque fois qu’une compétence de {c_important}bagarre{/c} inflige des dégâts directs à une cible, votre utilisation de {c_important}Charge{/c}, {c_important}Bond{/c} ou {c_important}Coup de pied{/c} inflige {c_random}[Affix_Value_1|1%x|]{/c} de dégâts supplémentaires pendant {c_number}[Affix.\"Static Value 0\"||]{/c}\u00A0s, jusqu’à un maximum de {c_random}[Affix_Value_1 * Affix_Value_2|%x|]{/c}.",
     "IsSeasonal": false,
     "IsCodex": true,
     "Dungeon": "Asile des hérétiques",
@@ -11473,9 +11506,9 @@
       "legendary_sorc_117_x2"
     ],
     "Name": "des courants accablants",
-    "Description": "Les coups critiques des compétences de foudre augmentent les dégâts de Décharge électrique de #% pendant #\u00A0s. Les cumuls ne réinitialisent pas la durée.",
-    "DescriptionClean": "Les coups critiques des compétences de foudre augmentent les dégâts de Décharge électrique de pendant \u00A0s. Les cumuls ne réinitialisent pas la durée.",
-    "Localisation": "Les coups critiques des compétences de {c_important}foudre{/c} augmentent les dégâts de {c_important}Décharge électrique{/c} de {c_random}[Affix_Value_1|2%x|]{/c} pendant {c_number}[Affix.\"Static Value 0\"]{/c}\u00A0s. Les cumuls ne réinitialisent pas la durée.",
+    "Description": "Les coups critiques des compétences de foudre augmentent fréquemment les dégâts de Décharge électrique de #% pendant #\u00A0s. Les cumuls ne réinitialisent pas la durée.",
+    "DescriptionClean": "Les coups critiques des compétences de foudre augmentent fréquemment les dégâts de Décharge électrique de pendant \u00A0s. Les cumuls ne réinitialisent pas la durée.",
+    "Localisation": "Les coups critiques des compétences de {c_important}foudre{/c} augmentent fréquemment les dégâts de {c_important}Décharge électrique{/c} de {c_random}[Affix_Value_1|2%x|]{/c} pendant {c_number}[Affix.\"Static Value 0\"]{/c}\u00A0s. Les cumuls ne réinitialisent pas la durée.",
     "IsSeasonal": false,
     "IsCodex": true,
     "Dungeon": "",
@@ -11900,9 +11933,9 @@
       "legendary_barb_107"
     ],
     "Name": "du berserker de l’Ours",
-    "Description": "Les éliminations sous l’effet de Rage du berserker réduisent le temps de recharge de vos compétences de combat de #% pendant #\u00A0s.",
-    "DescriptionClean": "Les éliminations sous l’effet de Rage du berserker réduisent le temps de recharge de vos compétences de combat de pendant \u00A0s.",
-    "Localisation": "Les éliminations sous l’effet de {c_important}{u}Rage du berserker{/u}{/c} réduisent le temps de recharge de vos compétences de {c_important}combat{/c} de {c_random}[Affix_Value_1|%|]{/c} pendant {c_number}[Affix.\"Static Value 1\"]{/c}\u00A0s.",
+    "Description": "Les éliminations sous l’effet de Rage du berserker réduisent le temps de recharge de vos compétences de bagarre de #% pendant #\u00A0s.",
+    "DescriptionClean": "Les éliminations sous l’effet de Rage du berserker réduisent le temps de recharge de vos compétences de bagarre de pendant \u00A0s.",
+    "Localisation": "Les éliminations sous l’effet de {c_important}{u}Rage du berserker{/u}{/c} réduisent le temps de recharge de vos compétences de {c_important}bagarre{/c} de {c_random}[Affix_Value_1|%|]{/c} pendant {c_number}[Affix.\"Static Value 1\"]{/c}\u00A0s.",
     "IsSeasonal": false,
     "IsCodex": true,
     "Dungeon": "",
@@ -12027,41 +12060,6 @@
     "AllowedItemLabels": [
       19,
       26
-    ]
-  },
-  {
-    "IdSno": "578716",
-    "IdName": "legendary_barb_018",
-    "IdSnoList": [
-      "578716"
-    ],
-    "IdNameList": [
-      "legendary_barb_018"
-    ],
-    "Name": "du combat",
-    "Description": "Les cibles tuées dans les #\u00A0s après avoir été touchées par Coup de pied ou Charge explosent en infligeant #\u00A0points de dégâts aux adversaires à proximité.",
-    "DescriptionClean": "Les cibles tuées dans les \u00A0s après avoir été touchées par Coup de pied ou Charge explosent en infligeant \u00A0points de dégâts aux adversaires à proximité.",
-    "Localisation": "Les cibles tuées dans les {c_number}[Affix.\"Static Value 0\"]{/c}\u00A0s après avoir été touchées par {c_important}Coup de pied{/c} ou {c_important}Charge{/c} explosent en infligeant {c_random}[(Owner.Weapon_Damage_Min_Total + Owner.Weapon_Damage_Delta_Total) * Affix_Value_1]{/c}\u00A0|4point:points; de dégâts aux adversaires à proximité.",
-    "IsSeasonal": false,
-    "IsCodex": true,
-    "Dungeon": "Refuge hanté",
-    "Category": "FILTER_Legendary_Offensive",
-    "MagicType": 1,
-    "AllowedForPlayerClass": [
-      0,
-      0,
-      1,
-      0,
-      0,
-      0,
-      0,
-      0
-    ],
-    "AllowedItemLabels": [
-      0,
-      28,
-      26,
-      19
     ]
   },
   {
@@ -13354,7 +13352,7 @@
     "Name": "d’allumage",
     "Description": "Les compétences renforcées par Instabilité infligent #% de dégâts supplémentaires et vous avez #% de chances que l’instabilité persiste en utilisant une compétence renforcée.",
     "DescriptionClean": "Les compétences renforcées par Instabilité infligent de dégâts supplémentaires et vous avez de chances que l’instabilité persiste en utilisant une compétence renforcée.",
-    "Localisation": "Les compétences renforcées par {c_important}{u}Instabilité{/u}{/c} infligent {c_number}[40|x%|]{/c} de dégâts supplémentaires et vous avez {c_random}[Affix_Value_1|1%|]{/c} de chances que {c_important}{u}l’instabilité{/u}{/c} persiste en utilisant une compétence renforcée.",
+    "Localisation": "Les compétences renforcées par {c_important}{u}Instabilité{/u}{/c} infligent {c_number}[60|x%|]{/c} de dégâts supplémentaires et vous avez {c_random}[Affix_Value_1|1%|]{/c} de chances que {c_important}{u}l’instabilité{/u}{/c} persiste en utilisant une compétence renforcée.",
     "IsSeasonal": false,
     "IsCodex": true,
     "Dungeon": "",
@@ -13606,9 +13604,9 @@
       "legendary_sorc_043_x2"
     ],
     "Name": "d’armageddon",
-    "Description": "Lorsqu’elle est active, votre compétence ultime vous octroie #% de dégâts supplémentaires de son élément.",
-    "DescriptionClean": "Lorsqu’elle est active, votre compétence ultime vous octroie de dégâts supplémentaires de son élément.",
-    "Localisation": "Lorsqu’elle est active, votre compétence {c_important}ultime{/c} vous octroie {c_random}[Affix_Value_1|1%|]{/c} de dégâts supplémentaires de son élément.",
+    "Description": "Votre compétence ultime vous octroie #% de dégâts supplémentaires de son élément pendant # s.",
+    "DescriptionClean": "Votre compétence ultime vous octroie de dégâts supplémentaires de son élément pendant s.",
+    "Localisation": "Votre compétence {c_important}ultime{/c} vous octroie {c_random}[Affix_Value_1|1%|]{/c} de dégâts supplémentaires de son élément pendant {c_number}[Affix.\"Static Value 0\"]{/c} s.",
     "IsSeasonal": false,
     "IsCodex": true,
     "Dungeon": "",

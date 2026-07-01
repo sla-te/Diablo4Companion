@@ -474,9 +474,9 @@
     "IdName": "Item_Rune_Effect_Druid_Petrify",
     "RuneType": "effect",
     "Name": "Yom",
-    "Description": "Używasz Petryfikacji druida, dzięki czemu ogłuszasz potwory i odzyskujesz punkty podstawowego zasobu.",
-    "DescriptionClean": "Używasz Petryfikacji druida, dzięki czemu ogłuszasz potwory i odzyskujesz punkty podstawowego zasobu.",
-    "RuneDescription": "{c_RuneEffect}Używasz {c_important}Petryfikacji{/c} druida, dzięki czemu ogłuszasz potwory i odzyskujesz punkty podstawowego zasobu.{/c}",
+    "Description": "Wywołujesz Petryfikację druida, która ogłusza wrogów i zwiększa zadawane im obrażenia od trafień krytycznych.",
+    "DescriptionClean": "Wywołujesz Petryfikację druida, która ogłusza wrogów i zwiększa zadawane im obrażenia od trafień krytycznych.",
+    "RuneDescription": "{c_RuneEffect}Wywołujesz {c_important}Petryfikację{/c} druida, która ogłusza wrogów i zwiększa zadawane im obrażenia od trafień krytycznych.{/c}",
     "RuneOverflowBehavior": "wydłużony czas ogłuszenia"
   },
   {
