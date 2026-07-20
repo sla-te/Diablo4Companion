@@ -910,7 +910,7 @@
     "Name": "Brutal",
     "Description": "You gain #% of your Attack Speed as increased damage but no longer attack faster.\r\n\r\nCurrent Bonus: #%",
     "DescriptionClean": "You gain of your Attack Speed as increased damage but no longer attack faster. Current Bonus:",
-    "Localisation": "You gain {c_random}[Affix_Value_1*100|%|]{/c} of your Attack Speed as increased damage but no longer attack faster.\r\n\r\nCurrent Bonus: {c_number}[(Owner.Attack_Speed_Percent_Bonus_Total)*(Affix_Value_1*100)|2%|]{/c}",
+    "Localisation": "You gain {c_random}[Affix_Value_1*100|%|]{/c} of your Attack Speed as increased damage but no longer attack faster.\r\n\r\nCurrent Bonus: {c_number}[Min(Owner.Attack_Speed_Percent_Bonus_Total, 1)*(Affix_Value_1*100)|2%|]{/c}",
     "IsSeasonal": false,
     "IsCodex": true,
     "Dungeon": "",
