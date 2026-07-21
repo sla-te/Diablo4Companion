@@ -146,16 +146,24 @@ namespace D4Companion.Services
                             continue;
                     }
 
-                    // Match the CanonicalItem the adapter produced for this same slot entry.
-                    // The adapter skips exactly the slot ids that hit "default" above, so the
-                    // surviving entries line up index-for-index with canonicalVariant.Items.
-                    var canonicalItem = canonicalVariant.Items[canonicalItemIndex++];
-
-                    // Skip Charm and HoradricSeal. Not implemented yet.
+                    // Skip Charm and HoradricSeal. Not implemented yet, and MaxrollBuildAdapter.ResolveSlot
+                    // returns null for these slots, so the adapter never emits a CanonicalItem for them
+                    // either. Skip here before touching canonicalItemIndex so the two stay aligned.
                     if (itemType.Equals(Constants.ItemTypeConstants.Charm) || itemType.Equals(Constants.ItemTypeConstants.HoradricSeal))
                     {
                         continue;
                     }
+
+                    // Match the CanonicalItem the adapter produced for this same slot entry.
+                    // Invariant: the adapter and this manager must skip identical item types, so the
+                    // surviving entries line up index-for-index with canonicalVariant.Items. If that
+                    // invariant is ever violated, fail loudly instead of binding affixes to the wrong item.
+                    if (canonicalItemIndex >= canonicalVariant.Items.Count)
+                    {
+                        _logger.LogError($"{MethodBase.GetCurrentMethod()?.Name}: canonicalItemIndex {canonicalItemIndex} out of range for {canonicalVariant.Items.Count} canonical items. Adapter and manager item-type skip lists have diverged.");
+                        break;
+                    }
+                    var canonicalItem = canonicalVariant.Items[canonicalItemIndex++];
 
                     // Process runes
                     foreach (var socket in maxrollBuild.Data.Items[item.Value].Sockets)

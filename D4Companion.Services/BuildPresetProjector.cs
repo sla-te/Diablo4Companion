@@ -116,8 +116,14 @@ namespace D4Companion.Services
         {
             var settings = _settingsManager.Settings;
             if (affix.IsImplicit) return settings.DefaultColorImplicit;
+            // Greater deliberately outranks Tempered: D2Core and Mobalytics, the original
+            // importers that supported both flags, both treated Greater as winning over
+            // Tempered, and D4Builds had no Greater arm at all. Unifying on Tempered-first
+            // would silently change every greater+tempered affix from D2Core and Mobalytics
+            // builds away from the user's Greater colour, so Greater is checked first here.
+            if (affix.IsGreater) return settings.DefaultColorGreater;
             if (affix.IsTempered) return settings.DefaultColorTempered;
-            return affix.IsGreater ? settings.DefaultColorGreater : settings.DefaultColorNormal;
+            return settings.DefaultColorNormal;
         }
 
         private static void SortAffixes(AffixPreset preset)

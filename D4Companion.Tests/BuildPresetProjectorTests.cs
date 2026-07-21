@@ -1,3 +1,4 @@
+using System.Windows.Media;
 using D4Companion.Constants;
 using D4Companion.Entities;
 using D4Companion.Entities.Canonical;
@@ -132,6 +133,27 @@ namespace D4Companion.Tests
             var preset = _projector.Project(VariantWith(), "My Preset");
 
             Assert.That(preset.Name, Is.EqualTo("My Preset"));
+        }
+
+        [Test]
+        public void Project_GreaterAndTemperedAffix_ResolvesToGreaterColour()
+        {
+            // Regression guard: Greater must outrank Tempered, matching the D2Core and
+            // Mobalytics importers this behaviour was unified from.
+            var settingsManager = new SettingsManagerStub();
+            settingsManager.Settings.DefaultColorGreater = Colors.Gold;
+            settingsManager.Settings.DefaultColorTempered = Colors.Purple;
+            var projector = new BuildPresetProjector(settingsManager);
+
+            var variant = VariantWith(new CanonicalItem
+            {
+                Slot = ItemTypeConstants.Helm,
+                Affixes = { new CanonicalAffix { Id = "CoreStat_Strength", IsGreater = true, IsTempered = true } }
+            });
+
+            var preset = projector.Project(variant, "test");
+
+            Assert.That(preset.ItemAffixes[0].Color, Is.EqualTo(Colors.Gold));
         }
     }
 
