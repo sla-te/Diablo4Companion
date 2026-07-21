@@ -86,6 +86,7 @@ namespace D4Companion
 
             // Services
             services.AddSingleton<IAffixManager, AffixManager>();
+            services.AddSingleton<IBuildPresetProjector, BuildPresetProjector>();
             services.AddSingleton<IBuildsManagerD2Core, BuildsManagerD2Core>();
             services.AddSingleton<IBuildsManagerD4Builds, BuildsManagerD4Builds>();
             services.AddSingleton<IBuildsManagerMaxroll, BuildsManagerMaxroll>();
