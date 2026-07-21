@@ -14,14 +14,16 @@ namespace D4Companion.Comparers
     /// appear in, because WPF forms groups in the order it encounters items.
     ///
     /// Within a group the comparer must reproduce BuildPresetProjector.SortAffixes
-    /// (implicit first, tempered last) - CustomSort replaces the projector's ordering
-    /// rather than layering on top of it, so anything not restated here is lost. The final
+    /// (implicit first, tempered last, then by stat priority) - CustomSort replaces the
+    /// projector's ordering rather than layering on top of it, so anything not restated
+    /// here is lost. Note GroupRankOf's "rank" is the Arsenal section, unrelated to
+    /// ItemAffix.Rank, which is the build guide's stat priority. The final
     /// Id tie-break exists because ListCollectionView.CustomSort runs an unstable sort:
     /// without a total ordering, entries sharing a group could permute on every refresh.
     /// </summary>
     public class WeaponGroupComparer : IComparer
     {
-        public static int RankOf(string? itemType)
+        public static int GroupRankOf(string? itemType)
         {
             switch (itemType)
             {
@@ -45,8 +47,8 @@ namespace D4Companion.Comparers
             var affixX = x as ItemAffix;
             var affixY = y as ItemAffix;
 
-            int rankComparison = RankOf(affixX?.Type).CompareTo(RankOf(affixY?.Type));
-            if (rankComparison != 0) return rankComparison;
+            int groupComparison = GroupRankOf(affixX?.Type).CompareTo(GroupRankOf(affixY?.Type));
+            if (groupComparison != 0) return groupComparison;
 
             // Distinct types can share a rank (anything falling to the default), so the
             // type still has to separate them into their own groups.
@@ -55,6 +57,9 @@ namespace D4Companion.Comparers
 
             if (affixX?.IsTempered != affixY?.IsTempered) return affixX?.IsTempered == true ? 1 : -1;
             if (affixX?.IsImplicit != affixY?.IsImplicit) return affixX?.IsImplicit == true ? -1 : 1;
+
+            int statRankComparison = ItemAffix.CompareRank(affixX?.Rank ?? 0, affixY?.Rank ?? 0);
+            if (statRankComparison != 0) return statRankComparison;
 
             return string.CompareOrdinal(affixX?.Id, affixY?.Id);
         }

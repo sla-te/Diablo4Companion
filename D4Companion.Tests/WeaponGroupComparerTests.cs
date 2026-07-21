@@ -27,14 +27,14 @@ namespace D4Companion.Tests
         {
             // Plain-weapon entries apply to all four groups rather than one, so they belong
             // in a trailing section instead of interleaved among the specific ones.
-            int plainRank = WeaponGroupComparer.RankOf(ItemTypeConstants.Weapon);
+            int plainRank = WeaponGroupComparer.GroupRankOf(ItemTypeConstants.Weapon);
 
             Assert.Multiple(() =>
             {
-                Assert.That(plainRank, Is.GreaterThan(WeaponGroupComparer.RankOf(ItemTypeConstants.WeaponBludgeoning)));
-                Assert.That(plainRank, Is.GreaterThan(WeaponGroupComparer.RankOf(ItemTypeConstants.WeaponSlicing)));
-                Assert.That(plainRank, Is.GreaterThan(WeaponGroupComparer.RankOf(ItemTypeConstants.WeaponMainhand)));
-                Assert.That(plainRank, Is.GreaterThan(WeaponGroupComparer.RankOf(ItemTypeConstants.WeaponOffhand)));
+                Assert.That(plainRank, Is.GreaterThan(WeaponGroupComparer.GroupRankOf(ItemTypeConstants.WeaponBludgeoning)));
+                Assert.That(plainRank, Is.GreaterThan(WeaponGroupComparer.GroupRankOf(ItemTypeConstants.WeaponSlicing)));
+                Assert.That(plainRank, Is.GreaterThan(WeaponGroupComparer.GroupRankOf(ItemTypeConstants.WeaponMainhand)));
+                Assert.That(plainRank, Is.GreaterThan(WeaponGroupComparer.GroupRankOf(ItemTypeConstants.WeaponOffhand)));
             });
         }
 
@@ -45,12 +45,12 @@ namespace D4Companion.Tests
             // weapon_onehand. It must not share a rank with plain "weapon": grouping is on
             // the exact type, so the two would form separate sections that both rendered
             // under the same caption - two identical headers in a row.
-            int oneHandRank = WeaponGroupComparer.RankOf(ItemTypeConstants.WeaponOneHand);
+            int oneHandRank = WeaponGroupComparer.GroupRankOf(ItemTypeConstants.WeaponOneHand);
 
             Assert.Multiple(() =>
             {
-                Assert.That(oneHandRank, Is.GreaterThan(WeaponGroupComparer.RankOf(ItemTypeConstants.WeaponOffhand)));
-                Assert.That(oneHandRank, Is.LessThan(WeaponGroupComparer.RankOf(ItemTypeConstants.Weapon)));
+                Assert.That(oneHandRank, Is.GreaterThan(WeaponGroupComparer.GroupRankOf(ItemTypeConstants.WeaponOffhand)));
+                Assert.That(oneHandRank, Is.LessThan(WeaponGroupComparer.GroupRankOf(ItemTypeConstants.Weapon)));
             });
         }
 
@@ -88,6 +88,36 @@ namespace D4Companion.Tests
                 Assert.That(comparer.Compare(b, a), Is.GreaterThan(0));
                 Assert.That(comparer.Compare(a, a), Is.Zero);
             });
+        }
+
+        [Test]
+        public void Sorting_WithinAGroup_OrdersByStatPriorityBeforeFallingBackToId()
+        {
+            // Ids chosen so the alphabetical tie-break would give the opposite order - this
+            // fails if rank is not consulted first.
+            var affixes = new List<ItemAffix>
+            {
+                new ItemAffix { Id = "aaa_low_priority", Type = ItemTypeConstants.WeaponMainhand, Rank = 4 },
+                new ItemAffix { Id = "zzz_top_priority", Type = ItemTypeConstants.WeaponMainhand, Rank = 1 }
+            };
+
+            affixes.Sort((x, y) => new WeaponGroupComparer().Compare(x, y));
+
+            Assert.That(affixes.Select(a => a.Id), Is.EqualTo(new[] { "zzz_top_priority", "aaa_low_priority" }));
+        }
+
+        [Test]
+        public void Sorting_UnrankedAffix_FallsBelowRankedOnesInTheSameGroup()
+        {
+            var affixes = new List<ItemAffix>
+            {
+                new ItemAffix { Id = "unranked", Type = ItemTypeConstants.WeaponMainhand, Rank = 0 },
+                new ItemAffix { Id = "ranked", Type = ItemTypeConstants.WeaponMainhand, Rank = 3 }
+            };
+
+            affixes.Sort((x, y) => new WeaponGroupComparer().Compare(x, y));
+
+            Assert.That(affixes.Select(a => a.Id), Is.EqualTo(new[] { "ranked", "unranked" }));
         }
     }
 }

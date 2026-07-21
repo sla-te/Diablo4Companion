@@ -55,7 +55,8 @@ namespace D4Companion.Services
                     Color = ColorFor(affix),
                     IsGreater = affix.IsGreater,
                     IsImplicit = affix.IsImplicit,
-                    IsTempered = affix.IsTempered
+                    IsTempered = affix.IsTempered,
+                    Rank = affix.Rank
                 });
             }
         }
@@ -134,7 +135,14 @@ namespace D4Companion.Services
             {
                 if (x.IsTempered != y.IsTempered) return x.IsTempered ? 1 : -1;
                 if (x.IsImplicit != y.IsImplicit) return x.IsImplicit ? -1 : 1;
-                return string.Compare(x.Type, y.Type, StringComparison.Ordinal);
+
+                int typeComparison = string.Compare(x.Type, y.Type, StringComparison.Ordinal);
+                if (typeComparison != 0) return typeComparison;
+
+                // Within a slot, the source's stat priority is the order. Unranked affixes
+                // sort after ranked ones rather than before, which is where rank 0 would
+                // land on a plain numeric compare.
+                return ItemAffix.CompareRank(x.Rank, y.Rank);
             });
         }
     }

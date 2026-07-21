@@ -155,6 +155,79 @@ namespace D4Companion.Tests
 
             Assert.That(preset.ItemAffixes[0].Color, Is.EqualTo(Colors.Gold));
         }
+
+        [Test]
+        public void DefaultColours_DistinguishGreaterFromNormal()
+        {
+            // Every affix colour used to default to the same green, so an imported Greater
+            // flag was invisible without the user first editing the colour by hand.
+            var defaults = new SettingsD4();
+
+            Assert.That(defaults.DefaultColorGreater, Is.Not.EqualTo(defaults.DefaultColorNormal));
+        }
+
+        [Test]
+        public void Project_RankedAffixes_KeepTheSourcePriorityOrder()
+        {
+            // Passed in worst-first so a preserved input order would fail the assertion.
+            var variant = VariantWith(new CanonicalItem
+            {
+                Slot = ItemTypeConstants.Amulet,
+                Affixes =
+                {
+                    new CanonicalAffix { Id = "CoreStat_Strength", Rank = 6 },
+                    new CanonicalAffix { Id = "Crit_Percent_Bonus", Rank = 1 },
+                    new CanonicalAffix { Id = "Flat_Hitpoints_Max_Bonus", Rank = 7 }
+                }
+            });
+
+            var preset = _projector.Project(variant, "test");
+
+            Assert.That(preset.ItemAffixes.Select(a => a.Rank), Is.EqualTo(new[] { 1, 6, 7 }));
+        }
+
+        [Test]
+        public void Project_UnrankedAffixes_SortAfterRankedOnes()
+        {
+            // Rank 0 means the source published no priority. A plain numeric sort would put
+            // it ahead of the guide's top-priority stat.
+            var variant = VariantWith(new CanonicalItem
+            {
+                Slot = ItemTypeConstants.Amulet,
+                Affixes =
+                {
+                    new CanonicalAffix { Id = "Unranked_Affix", Rank = 0 },
+                    new CanonicalAffix { Id = "Crit_Percent_Bonus", Rank = 1 }
+                }
+            });
+
+            var preset = _projector.Project(variant, "test");
+
+            Assert.That(preset.ItemAffixes[0].Id, Is.EqualTo("Crit_Percent_Bonus"));
+        }
+
+        [Test]
+        public void Project_ImplicitAndTempered_StillBracketTheRankedExplicits()
+        {
+            // Rank orders within a bracket, it does not break out of one: the implicit has
+            // no rank yet must stay first, and the tempered affix last.
+            var variant = VariantWith(new CanonicalItem
+            {
+                Slot = ItemTypeConstants.Amulet,
+                Affixes =
+                {
+                    new CanonicalAffix { Id = "Temper", IsTempered = true },
+                    new CanonicalAffix { Id = "Rank2", Rank = 2 },
+                    new CanonicalAffix { Id = "Implicit", IsImplicit = true },
+                    new CanonicalAffix { Id = "Rank1", Rank = 1 }
+                }
+            });
+
+            var preset = _projector.Project(variant, "test");
+
+            Assert.That(preset.ItemAffixes.Select(a => a.Id),
+                Is.EqualTo(new[] { "Implicit", "Rank1", "Rank2", "Temper" }));
+        }
     }
 
     /// <summary>

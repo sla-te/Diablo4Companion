@@ -71,6 +71,22 @@ namespace D4Companion.Tests
         }
 
         [Test]
+        public void GlovesAspectEntry_IsLastSoEarlierRanksSurviveIt()
+        {
+            // The gloves are a unique and their seventh explicit (sno 2577891) is the item's
+            // own aspect, not an affix - it resolves to nothing and is skipped on import.
+            // Ranks come from the loop index rather than a counter over resolved affixes, so
+            // this entry must not shift the ranks of the six real stats above it.
+            var gloves = ItemInSlot(13);
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(gloves.Explicits, Has.Count.EqualTo(7));
+                Assert.That(gloves.Explicits[6].Nid, Is.EqualTo(2577891));
+            });
+        }
+
+        [Test]
         public void GreaterKeyAlone_StillMarksAStatAsGreater()
         {
             // Maxroll emits two independent markers. "greater" is a flat yes/no, and it is
