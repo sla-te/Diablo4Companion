@@ -29,7 +29,17 @@ namespace D4Companion.Entities
         public List<D4buildsAffix> Boots { get; set; } = new();
         public List<D4buildsAffix> Amulet { get; set; } = new();
         public List<D4buildsAffix> Ring { get; set; } = new();
+
+        // Weapon subtype provenance, from D4Builds' own structural stats-group selectors
+        // (".BludgeoningWeapon", ".SlashingWeapon", ".Dual-WieldWeapon1/2"), not localized
+        // display text. Missing on any build cached before this split was added; that is
+        // fine, JSON deserialization defaults these to empty lists and the plain Weapon
+        // bucket below still carries the affix data for those cached builds.
         public List<D4buildsAffix> Weapon { get; set; } = new();
+        public List<D4buildsAffix> WeaponBludgeoning { get; set; } = new();
+        public List<D4buildsAffix> WeaponSlicing { get; set; } = new();
+        public List<D4buildsAffix> WeaponOneHand { get; set; } = new();
+
         public List<D4buildsAffix> Ranged { get; set; } = new();
         public List<D4buildsAffix> Offhand { get; set; } = new();
         public List<string> Aspect { get; set; } = new();

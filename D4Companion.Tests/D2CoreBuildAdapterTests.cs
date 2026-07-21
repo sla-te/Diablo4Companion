@@ -99,17 +99,21 @@ namespace D4Companion.Tests
                 ("DruidOffhand", ItemTypeConstants.Offhand),
                 ("Focus", ItemTypeConstants.Offhand),
                 ("Shield", ItemTypeConstants.Offhand),
+                // Handedness/damage type confirmed via the paired class-name evidence
+                // (Mace/Mace2H, Sword/Sword2H) and, for Polearm, an explicit exception.
+                ("Mace", ItemTypeConstants.WeaponOneHand),
+                ("Mace2H", ItemTypeConstants.WeaponBludgeoning),
+                ("Sword", ItemTypeConstants.WeaponOneHand),
+                ("Sword2H", ItemTypeConstants.WeaponSlicing),
+                ("Polearm", ItemTypeConstants.WeaponSlicing),
+                // Unverified handedness/damage type - no paired class evidence, kept as
+                // plain Weapon rather than guessed.
                 ("Dagger", ItemTypeConstants.Weapon),
                 ("Glaive", ItemTypeConstants.Weapon),
-                ("Mace", ItemTypeConstants.Weapon),
-                ("Mace2H", ItemTypeConstants.Weapon),
-                ("Polearm", ItemTypeConstants.Weapon),
                 ("Quarterstaff", ItemTypeConstants.Weapon),
                 ("Scythe", ItemTypeConstants.Weapon),
                 ("Scythe2H", ItemTypeConstants.Weapon),
                 ("Staff", ItemTypeConstants.Weapon),
-                ("Sword", ItemTypeConstants.Weapon),
-                ("Sword2H", ItemTypeConstants.Weapon),
                 ("Wand", ItemTypeConstants.Weapon),
                 ("Bow", ItemTypeConstants.Ranged),
                 ("Crossbow2H", ItemTypeConstants.Ranged),
