@@ -297,13 +297,14 @@ namespace D4Companion.Services
                     }*/
 
                     // Add all explicit affixes for current item.Value
+                    // Import every listed stat, not just the four an item can physically
+                    // roll. Maxroll's explicit list is a ranked stat-priority list - the
+                    // amulet in the Whirlwind guide names seven - so truncating it to four
+                    // left the lower-priority stats unmatched and showing as unwanted.
+                    // Entries that are not affixes at all (a unique's own aspect) still fall
+                    // out below, where an unresolved sno is skipped.
                     for (int i = 0; i < maxrollBuild.Data.Items[item.Value].Explicits.Count; i++)
                     {
-                        // For legendary items only add the first four affixes.
-                        if (uniqueInfo == null && i > 3) break;
-                        // For unique items only add the first four affixes. First index contains id of unique item.
-                        if (uniqueInfo != null && i > 4) break;
-
                         var explicitAffix = maxrollBuild.Data.Items[item.Value].Explicits[i];
                         int affixSno = explicitAffix.Nid;
                         AffixInfo? affixInfo = _affixManager.GetAffixInfoMaxrollByIdSno(affixSno.ToString());
@@ -327,7 +328,7 @@ namespace D4Companion.Services
                             canonicalItem.Affixes.Add(new CanonicalAffix
                             {
                                 Id = affixInfo.IdName,
-                                IsGreater = explicitAffix.Greater
+                                IsGreater = explicitAffix.IsGreaterAffix
                             });
                         }
                     }

@@ -68,8 +68,23 @@ namespace D4Companion.Entities
     {
         [JsonPropertyName("nid")]
         public int Nid { get; set; }
+
+        // A flat "aim for a Greater Affix here" flag. Independent of UpgradePriority below -
+        // a stat may carry either, both, or neither - so neither key may be read alone.
         [JsonPropertyName("greater")]
         public bool Greater { get; set; } = false;
+
+        /// <summary>
+        /// Number of green up-arrows the planner shows beside the stat - Maxroll's way of
+        /// saying "aim for a Greater Affix here". Absent on stats with no arrows.
+        ///
+        /// Not to be confused with the sibling "upgrade" field, which is set on stats that
+        /// carry no arrows at all and therefore means something else.
+        /// </summary>
+        [JsonPropertyName("upgradePriority")]
+        public int? UpgradePriority { get; set; }
+
+        public bool IsGreaterAffix => Greater || UpgradePriority > 0;
     }
 
     public class MaxrollBuildDataItemImplicitJson
