@@ -1571,7 +1571,9 @@ namespace D4Companion.ViewModels
 
             ItemAffix itemAffix = (ItemAffix)selectedAffixObj;
 
-            return itemAffix.Type.Equals(ItemTypeConstants.Weapon);
+            // Match the Arsenal subtypes too, otherwise an affix typed weapon_bludgeoning
+            // or weapon_slicing has no panel to appear in and silently vanishes from the UI.
+            return D4Companion.Services.AffixManager.IsTypeMatch(ItemTypeConstants.Weapon, itemAffix.Type);
         }
 
         private void CreateSelectedAffixesRangedFilteredView()
@@ -1631,7 +1633,17 @@ namespace D4Companion.ViewModels
 
             ItemAffix itemAffix = (ItemAffix)selectedAspectObj;
 
-            return !SelectedAspectsFiltered?.Cast<ItemAffix>().Any(a => a.Id.Equals(itemAffix.Id)) ?? false;
+            // Show each aspect once, no matter how many slots carry it.
+            //
+            // Presets created before the ingest rework hold one entry per aspect per slot
+            // (ten identical rows), so this dedup still has to exist for them. It is
+            // deliberately evaluated against SelectedAspects, the backing collection, and
+            // NOT against SelectedAspectsFiltered: the previous version queried the very
+            // view this predicate filters, re-entering itself on every evaluation, which
+            // made the result depend on enumeration order.
+            ItemAffix? first = SelectedAspects.FirstOrDefault(aspect => aspect.Id.Equals(itemAffix.Id));
+
+            return ReferenceEquals(first, itemAffix);
         }
 
         private void InitAffixLanguages()

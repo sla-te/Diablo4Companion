@@ -152,7 +152,9 @@ namespace D4Companion.ViewModels.Dialogs
         {
             get
             {
-                int count = SelectedAffixes.Count(a => a.Id.Equals(_affixInfo.IdName) && a.Type.Equals(Constants.ItemTypeConstants.Weapon));
+                // Count the Arsenal subtypes as weapons too, otherwise an affix selected on
+                // weapon_bludgeoning or weapon_slicing reports a count of zero here.
+                int count = SelectedAffixes.Count(a => a.Id.Equals(_affixInfo.IdName) && Services.AffixManager.IsTypeMatch(Constants.ItemTypeConstants.Weapon, a.Type));
                 return count > 0 ? count : null;
             }
         }
