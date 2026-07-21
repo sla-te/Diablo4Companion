@@ -70,5 +70,44 @@ namespace D4Companion.Helpers
                 || itemType.Equals(ItemTypeConstants.WeaponSlicing, StringComparison.Ordinal)
                 || itemType.Equals(ItemTypeConstants.WeaponOneHand, StringComparison.Ordinal);
         }
+
+        /// <summary>
+        /// Builds an index-aligned weapon-subtype classification from an authoritative
+        /// reference locale's ItemTypes entries (normally enUS, the only locale whose Name
+        /// carries the "(Bludgeoning)"/"(Slashing)" damage-type suffix).
+        ///
+        /// Position i of the result corresponds to referenceItemTypes[i]. Non-weapon entries
+        /// keep their original Type value unchanged.
+        /// </summary>
+        public static IReadOnlyList<string> BuildSubtypeIndex(IEnumerable<(string Name, string Type)> referenceItemTypes)
+        {
+            return referenceItemTypes
+                .Select(entry => entry.Type.Equals(ItemTypeConstants.Weapon, StringComparison.Ordinal)
+                    ? FromItemTypeName(entry.Name)
+                    : entry.Type)
+                .ToList();
+        }
+
+        /// <summary>
+        /// Verifies that a locale's ItemTypes list is index-aligned with a reference list:
+        /// same entry count, and an identical Type value at every index. When this holds,
+        /// BuildSubtypeIndex(reference) can be applied to the locale by array index instead
+        /// of parsing the locale's own (possibly non-English) Name text.
+        ///
+        /// Not every shipped locale satisfies this - some ItemTypes.*.json files are missing
+        /// entries relative to enUS, which shifts every later index out of alignment. Callers
+        /// must check this per locale rather than assuming it holds universally.
+        /// </summary>
+        public static bool IsIndexAligned(IReadOnlyList<(string Name, string Type)> reference, IReadOnlyList<(string Name, string Type)> locale)
+        {
+            if (reference.Count != locale.Count) return false;
+
+            for (int i = 0; i < reference.Count; i++)
+            {
+                if (!reference[i].Type.Equals(locale[i].Type, StringComparison.Ordinal)) return false;
+            }
+
+            return true;
+        }
     }
 }

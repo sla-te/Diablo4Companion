@@ -710,6 +710,8 @@ namespace D4Companion.Services
             _runeMapDescriptionToId = _runes.ToDictionary(rune => rune.DescriptionClean, rune => rune.IdName);
         }
 
+        private const string ItemTypesReferenceLanguage = "enUS";
+
         private void InitItemTypeData()
         {
             string language = _settingsManager.Settings.SelectedAffixLanguage;
@@ -738,19 +740,58 @@ namespace D4Companion.Services
             _itemTypesDescriptions = _itemTypes.Select(itemType => itemType.Name).ToList();
 
             // Create dictionary to map itemtype names with type id
-            // Data/ItemTypes.*.json collapses every weapon subtype to "weapon", but the
-            // matched Name still carries "(Bludgeoning)" or "(Slashing)". Preserve that
-            // distinction so the Barbarian Arsenal slots do not share one bucket.
+            // Data/ItemTypes.*.json collapses every weapon subtype to "weapon", but only the
+            // enUS Name carries the "(Bludgeoning)"/"(Slashing)" damage-type suffix. Parsing
+            // the loaded locale's own Name text (WeaponTypeResolver.FromItemTypeName) only
+            // recovers the Arsenal split for enUS itself.
+            //
+            // Ten of the fourteen shipped locales are index-aligned with enUS: identical
+            // entry count and an identical Type at every index (verified in
+            // WeaponSubtypeLocaleAlignmentTests). For those, the subtype can be resolved
+            // from the enUS entry at the SAME index instead of the loaded locale's text.
+            // Locales that are not fully aligned (frFR, plPL, ptBR, trTR as of this writing -
+            // each is missing entries relative to enUS, which shifts every later index) fall
+            // back to the legacy per-name parse for every entry, exactly today's behaviour:
+            // no regression, simply no fix for those locales.
+            IReadOnlyList<string>? weaponSubtypeIndex = null;
+            if (!language.Equals(ItemTypesReferenceLanguage, StringComparison.Ordinal))
+            {
+                List<ItemTypeInfo> referenceItemTypes = LoadItemTypes(ItemTypesReferenceLanguage);
+                var referencePairs = referenceItemTypes.Select(t => (t.Name, t.Type)).ToList();
+                var localePairs = _itemTypes.Select(t => (t.Name, t.Type)).ToList();
+
+                if (WeaponTypeResolver.IsIndexAligned(referencePairs, localePairs))
+                {
+                    weaponSubtypeIndex = WeaponTypeResolver.BuildSubtypeIndex(referencePairs);
+                }
+            }
+
             _itemTypeMapNameToId.Clear();
-            _itemTypeMapNameToId = _itemTypes.ToDictionary(
-                itemType => itemType.Name,
-                itemType => itemType.Type.Equals(Constants.ItemTypeConstants.Weapon)
-                    ? WeaponTypeResolver.FromItemTypeName(itemType.Name)
-                    : itemType.Type);
+            _itemTypeMapNameToId = _itemTypes.Select((itemType, index) => (itemType, index)).ToDictionary(
+                pair => pair.itemType.Name,
+                pair => pair.itemType.Type.Equals(Constants.ItemTypeConstants.Weapon)
+                    ? (weaponSubtypeIndex?[pair.index] ?? WeaponTypeResolver.FromItemTypeName(pair.itemType.Name))
+                    : pair.itemType.Type);
 
             // Create dictionary to map itemtype names with rarity
             _itemTypeMapNameToRarity.Clear();
             _itemTypeMapNameToRarity = _itemTypes.ToDictionary(itemType => itemType.Name, itemType => itemType.Rarerity);
+        }
+
+        private static List<ItemTypeInfo> LoadItemTypes(string language)
+        {
+            string resourcePath = @$".\Data\ItemTypes.{language}.json";
+            using FileStream? stream = File.OpenRead(resourcePath);
+            if (stream == null) return new List<ItemTypeInfo>();
+
+            var options = new JsonSerializerOptions()
+            {
+                WriteIndented = true
+            };
+            options.Converters.Add(new BoolConverter());
+            options.Converters.Add(new IntConverter());
+
+            return JsonSerializer.Deserialize<List<ItemTypeInfo>>(stream, options) ?? new List<ItemTypeInfo>();
         }
 
         private void InitSigilData()

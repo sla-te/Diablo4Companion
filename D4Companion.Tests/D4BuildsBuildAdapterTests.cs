@@ -1,6 +1,7 @@
 using D4Companion.Constants;
 using D4Companion.Entities;
 using D4Companion.Services.BuildAdapters;
+using System.Text.Json;
 
 namespace D4Companion.Tests
 {
@@ -101,6 +102,70 @@ namespace D4Companion.Tests
             {
                 Assert.That(canonical.Name, Is.EqualTo("Test Build"));
                 Assert.That(canonical.Variants.Single().Name, Is.EqualTo("Variant A"));
+            });
+        }
+
+        [Test]
+        public void ToCanonical_WeaponSubtypeLists_MapToDistinctCanonicalSlots()
+        {
+            // D4Builds' own structural stats-group selectors already distinguish the
+            // Barbarian Arsenal slots; the adapter must preserve that instead of merging
+            // everything back into one Weapon bucket.
+            var sourceVariant = new D4BuildsBuildVariant
+            {
+                Name = "Variant A",
+                Weapon = { new D4buildsAffix { AffixText = "PlainWeaponAffix" } },
+                WeaponBludgeoning = { new D4buildsAffix { AffixText = "BludgeoningAffix" } },
+                WeaponSlicing = { new D4buildsAffix { AffixText = "SlicingAffix" } },
+                WeaponOneHand = { new D4buildsAffix { AffixText = "OneHandAffix" } }
+            };
+
+            var canonical = _adapter.ToCanonical(sourceVariant, "Test Build");
+            var items = canonical.Variants.Single().Items;
+
+            Assert.Multiple(() =>
+            {
+                // SlotIsKnown filters out the always-present unslotted aspect-carrier item,
+                // which also reports Slot == ItemTypeConstants.Weapon.
+                Assert.That(items.Single(i => i.SlotIsKnown && i.Slot == ItemTypeConstants.Weapon).Affixes.Single().Id,
+                    Is.EqualTo("PlainWeaponAffix"));
+                Assert.That(items.Single(i => i.Slot == ItemTypeConstants.WeaponBludgeoning).Affixes.Single().Id,
+                    Is.EqualTo("BludgeoningAffix"));
+                Assert.That(items.Single(i => i.Slot == ItemTypeConstants.WeaponSlicing).Affixes.Single().Id,
+                    Is.EqualTo("SlicingAffix"));
+                Assert.That(items.Single(i => i.Slot == ItemTypeConstants.WeaponOneHand).Affixes.Single().Id,
+                    Is.EqualTo("OneHandAffix"));
+            });
+        }
+
+        [Test]
+        public void ToCanonical_OldShapeCachedJson_DeserializesAndKeepsPlainWeaponAffixes()
+        {
+            // Regression guard for the on-disk Builds/D4Builds/ cache: builds downloaded
+            // before the weapon-subtype split was added serialized D4BuildsBuildVariant
+            // without WeaponBludgeoning/WeaponSlicing/WeaponOneHand at all. Deserializing
+            // that JSON shape today must not crash and must not lose the plain Weapon
+            // affix data that was already there.
+            const string oldShapeJson = """
+                {
+                    "Name": "Variant A",
+                    "Weapon": [ { "AffixText": "PlainWeaponAffix", "IsGreater": false, "IsImplicit": false, "IsTempered": false } ]
+                }
+                """;
+
+            var deserialized = JsonSerializer.Deserialize<D4BuildsBuildVariant>(oldShapeJson);
+            Assert.That(deserialized, Is.Not.Null);
+
+            var canonical = _adapter.ToCanonical(deserialized!, "Test Build");
+            var items = canonical.Variants.Single().Items;
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(items.Single(i => i.SlotIsKnown && i.Slot == ItemTypeConstants.Weapon).Affixes.Single().Id,
+                    Is.EqualTo("PlainWeaponAffix"));
+                Assert.That(items.Any(i => i.Slot == ItemTypeConstants.WeaponBludgeoning), Is.False);
+                Assert.That(items.Any(i => i.Slot == ItemTypeConstants.WeaponSlicing), Is.False);
+                Assert.That(items.Any(i => i.Slot == ItemTypeConstants.WeaponOneHand), Is.False);
             });
         }
 

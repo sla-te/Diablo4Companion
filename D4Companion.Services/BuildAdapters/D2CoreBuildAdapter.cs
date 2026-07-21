@@ -51,8 +51,23 @@ namespace D4Companion.Services.BuildAdapters
                 "Helm" => ItemTypeConstants.Helm,
                 "ChestArmor" => ItemTypeConstants.Chest,
                 "DruidOffhand" or "Focus" or "Shield" => ItemTypeConstants.Offhand,
-                "Dagger" or "Glaive" or "Mace" or "Mace2H" or "Polearm" or "Quarterstaff"
-                    or "Scythe" or "Scythe2H" or "Staff" or "Sword" or "Sword2H" or "Wand"
+
+                // Handedness is confirmed for these classes because D2Core pairs a plain
+                // class name with an explicit "2H" variant (Mace/Mace2H, Sword/Sword2H);
+                // Polearm is the sole exception (two-handed despite carrying no "2H"
+                // marker - confirmed separately, mirrors WeaponTypeResolver). Damage type
+                // mirrors WeaponTypeResolver.MaxrollPrefixMap, already verified for these
+                // exact classes.
+                "Mace2H" => ItemTypeConstants.WeaponBludgeoning,
+                "Sword2H" or "Polearm" => ItemTypeConstants.WeaponSlicing,
+                "Mace" or "Sword" => ItemTypeConstants.WeaponOneHand,
+
+                // Dagger, Glaive, Quarterstaff, Scythe, Scythe2H, Staff and Wand have no
+                // paired "class / class2H" evidence in the D2Core data and no confirming
+                // reference elsewhere in this codebase, so their handedness is not verified
+                // here. Left as plain Weapon rather than guessed - see
+                // followup-c-report.md.
+                "Dagger" or "Glaive" or "Quarterstaff" or "Scythe" or "Scythe2H" or "Staff" or "Wand"
                     => ItemTypeConstants.Weapon,
                 "Bow" or "Crossbow2H" => ItemTypeConstants.Ranged,
                 "Gloves" => ItemTypeConstants.Gloves,
