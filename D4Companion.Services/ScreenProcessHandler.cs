@@ -1791,12 +1791,17 @@ namespace D4Companion.Services
                     {
                         bool isImplicitArea = _currentTooltip.ItemAffixAreas[currentItemAffix.Item1].AffixType.Equals(Constants.AffixTypeConstants.Implicit);
                         bool isTemperedArea = _currentTooltip.ItemAffixAreas[currentItemAffix.Item1].AffixType.Equals(Constants.AffixTypeConstants.Tempered);
-                        var affix = preset.ItemAffixes.FirstOrDefault(a => a.Id.Equals(currentItemAffix.Item2.Id) && a.Type.Equals(_currentTooltip.ItemType) && a.IsImplicit == isImplicitArea && a.IsTempered == isTemperedArea);
+                        // IsTypeMatch, not Type.Equals: a Barbarian Arsenal weapon is detected as
+                        // a subtype (weapon_bludgeoning and friends) while an existing preset
+                        // entry is typed plain "weapon". Exact equality would never match those.
+                        var affix = preset.ItemAffixes.FirstOrDefault(a => a.Id.Equals(currentItemAffix.Item2.Id) && AffixManager.IsTypeMatch(a.Type, _currentTooltip.ItemType) && a.IsImplicit == isImplicitArea && a.IsTempered == isTemperedArea);
                         if (affix == null)
                         {
-                            // Check if the affix is set to accept any item type.
-                            affix = preset.ItemAffixes.FirstOrDefault(a => a.Id.Equals(currentItemAffix.Item2.Id));
-                            affix = affix?.IsAnyType ?? false ? affix : null;
+                            // Check if the affix is set to accept any item type. Filter on
+                            // IsAnyType inside the predicate rather than testing it after the
+                            // fact, so an earlier non-any-type entry with the same id cannot
+                            // mask a later any-type one.
+                            affix = preset.ItemAffixes.FirstOrDefault(a => a.Id.Equals(currentItemAffix.Item2.Id) && a.IsAnyType);
                         }
 
                         if (affix != null)

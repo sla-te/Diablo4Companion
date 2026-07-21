@@ -548,8 +548,10 @@ namespace D4Companion.Services
             // Check if the affix is set to accept any item type.
             if (affix == null)
             {
-                affix = preset.ItemAffixes.FirstOrDefault(a => a.Id.Equals(affixId));
-                affix = affix?.IsAnyType ?? false ? affix : null;
+                // Filter on IsAnyType inside the predicate rather than testing it after the
+                // fact, so an earlier non-any-type entry with the same id cannot mask a later
+                // any-type one. GetAspect resolves this the same way; keep the two in step.
+                affix = preset.ItemAffixes.FirstOrDefault(a => a.Id.Equals(affixId) && a.IsAnyType);
             }
 
             if (affix == null) return affixDefault;
