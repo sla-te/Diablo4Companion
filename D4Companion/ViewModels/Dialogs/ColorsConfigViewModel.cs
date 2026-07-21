@@ -107,6 +107,18 @@ namespace D4Companion.ViewModels.Dialogs
             }
         }
 
+        public Color DefaultColorAspectsOffSlot
+        {
+            get => _settingsManager.Settings.DefaultColorAspectsOffSlot;
+            set
+            {
+                _settingsManager.Settings.DefaultColorAspectsOffSlot = value;
+                OnPropertyChanged(nameof(DefaultColorAspectsOffSlot));
+
+                _settingsManager.SaveSettings();
+            }
+        }
+
         public Color DefaultColorUniques
         {
             get => _settingsManager.Settings.DefaultColorUniques;
@@ -150,6 +162,7 @@ namespace D4Companion.ViewModels.Dialogs
                 affixType.Equals("Greater") ? DefaultColorGreater :
                 affixType.Equals("Tempered") ? DefaultColorTempered :
                 affixType.Equals("Aspects") ? DefaultColorAspects :
+                affixType.Equals("AspectsOffSlot") ? DefaultColorAspectsOffSlot :
                 affixType.Equals("Uniques") ? DefaultColorUniques :
                 affixType.Equals("Runes") ? DefaultColorRunes : DefaultColorNormal;
 
@@ -178,6 +191,9 @@ namespace D4Companion.ViewModels.Dialogs
                     break;
                 case "Aspects":
                     DefaultColorAspects = dataContext.SelectedColor.Value;
+                    break;
+                case "AspectsOffSlot":
+                    DefaultColorAspectsOffSlot = dataContext.SelectedColor.Value;
                     break;
                 case "Uniques":
                     DefaultColorUniques = dataContext.SelectedColor.Value;
