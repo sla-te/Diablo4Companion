@@ -635,6 +635,65 @@ namespace D4Companion.Services
             return false;
         }
 
+        /// <summary>
+        /// Outcome of <see cref="FindBestAspectMatch"/>: which of the three resolution
+        /// steps produced the returned entry, or that none did.
+        /// </summary>
+        public enum AspectMatchKind
+        {
+            None,
+            ExactSlot,
+            AnyType,
+            OffSlot
+        }
+
+        /// <summary>
+        /// The single source of truth for "does this aspect id/item type match an entry
+        /// in this candidate list, and how". Both GetAspect (single selected preset) and
+        /// multi-build mode (many presets, no selected-preset lookup) must resolve through
+        /// this method so the rule lives in exactly one place. Resolution order:
+        ///
+        /// 1. Exact slot, honouring the weapon supertype rule (<see cref="IsTypeMatch"/>).
+        /// 2. An IsAnyType entry: source could not supply slot provenance. Mirrors the
+        ///    fallback in GetAffix.
+        /// 3. An entry present on a DIFFERENT slot: in the build, but an extraction
+        ///    target at the Occultist, not a wearable upgrade for that slot.
+        /// </summary>
+        /// <param name="candidates">The ItemAspects list of the preset(s) to search.</param>
+        /// <param name="aspectId">The detected aspect id.</param>
+        /// <param name="itemType">The detected item's slot/type.</param>
+        /// <param name="matchKind">Which step produced the result, or None.</param>
+        /// <returns>The matching preset entry, or null if none of the three steps matched.</returns>
+        public static ItemAffix? FindBestAspectMatch(IEnumerable<ItemAffix> candidates, string aspectId, string itemType, out AspectMatchKind matchKind)
+        {
+            // 1. Exact slot, honouring the weapon supertype rule.
+            var exactSlot = candidates.FirstOrDefault(a => a.Id.Equals(aspectId) && IsTypeMatch(a.Type, itemType));
+            if (exactSlot != null)
+            {
+                matchKind = AspectMatchKind.ExactSlot;
+                return exactSlot;
+            }
+
+            // 2. Source could not supply provenance. Mirrors the fallback in GetAffix.
+            var anyType = candidates.FirstOrDefault(a => a.Id.Equals(aspectId) && a.IsAnyType);
+            if (anyType != null)
+            {
+                matchKind = AspectMatchKind.AnyType;
+                return anyType;
+            }
+
+            // 3. In the build, but on another slot: an extraction target, not an upgrade.
+            var offSlot = candidates.FirstOrDefault(a => a.Id.Equals(aspectId));
+            if (offSlot != null)
+            {
+                matchKind = AspectMatchKind.OffSlot;
+                return offSlot;
+            }
+
+            matchKind = AspectMatchKind.None;
+            return null;
+        }
+
         public ItemAffix GetAspect(string aspectId, string itemType)
         {
             var affixDefault = new ItemAffix { Id = aspectId, Type = itemType, Color = Colors.Red };
@@ -643,18 +702,12 @@ namespace D4Companion.Services
                 preset.Name.Equals(_settingsManager.Settings.SelectedAffixPreset));
             if (preset == null) return affixDefault;
 
-            // 1. Exact slot, honouring the weapon supertype rule.
-            var aspect = preset.ItemAspects.FirstOrDefault(a =>
-                a.Id.Equals(aspectId) && IsTypeMatch(a.Type, itemType));
-            if (aspect != null) return aspect;
+            var match = FindBestAspectMatch(preset.ItemAspects, aspectId, itemType, out var matchKind);
+            if (match == null) return affixDefault;
 
-            // 2. Source could not supply provenance. Mirrors the fallback in GetAffix.
-            var anyType = preset.ItemAspects.FirstOrDefault(a => a.Id.Equals(aspectId) && a.IsAnyType);
-            if (anyType != null) return anyType;
-
-            // 3. In the build, but on another slot: an extraction target, not an upgrade.
-            var offSlot = preset.ItemAspects.FirstOrDefault(a => a.Id.Equals(aspectId));
-            if (offSlot != null)
+            // An off-slot match resolves to a distinct colour meaning "worth extracting
+            // at the Occultist", never the matched entry's own (wearable-upgrade) colour.
+            if (matchKind == AspectMatchKind.OffSlot)
             {
                 return new ItemAffix
                 {
@@ -664,7 +717,7 @@ namespace D4Companion.Services
                 };
             }
 
-            return affixDefault;
+            return match;
         }
 
         public string GetAspectDescription(string aspectId)
