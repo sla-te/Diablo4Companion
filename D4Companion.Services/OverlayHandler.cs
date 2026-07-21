@@ -276,47 +276,38 @@ namespace D4Companion.Services
                         {
                             if (itemPowerLimitCheckOk)
                             {
-                                if (_currentTooltip.ItemType.Contains(ItemTypeConstants.Sigil) && _affixManager.GetSigilType(itemAffix.Item2.Id).Equals("Dungeon"))
-                                {
-                                    // Handle sigil dungeon locations
-                                    gfx.OutlineFillRectangle(_brushes[Colors.Black.ToString()], _brushes[affixColor.ToString()], left - length / 2, top, left - length / 2 + length, top + length, 2);
+                                bool isDungeonSigil = _currentTooltip.ItemType.Contains(ItemTypeConstants.Sigil) && _affixManager.GetSigilType(itemAffix.Item2.Id).Equals("Dungeon");
+                                bool isBelowMinimalValue = _currentTooltip.ItemAffixAreas[i].AffixValue < _currentTooltip.ItemAffixAreas[i].AffixThresholdValue;
 
-                                    if (_settingsManager.Settings.DungeonTiers)
-                                    {
-                                        string tier = _affixManager.GetSigilDungeonTier(itemAffix.Item2.Id);
-                                        SolidBrush GetContrastColor(System.Windows.Media.Color backgroundColor)
-                                        {
-                                            return (backgroundColor.R + backgroundColor.G + backgroundColor.B) / 3 <= 128 ? _brushes["text"] : _brushes["textdark"];
-                                        }
-                                        gfx.DrawText(_fonts["consolasBold"], GetContrastColor(_currentTooltip.ItemAspect.Color), left - length / 4, top, tier);
-                                    }
-                                }
-                                else
+                                switch (OverlayMarkResolver.Resolve(itemAffix.Item2, isDungeonSigil, _settingsManager.Settings.IsMinimalAffixValueFilterEnabled, isBelowMinimalValue))
                                 {
-                                    // Handle different shapes
-                                    // - Circle: For all normal affixes.
-                                    // - Rectangle: For affixes set to ignore the specified item type.
-                                    // - Rectangle: For affixes below minimal value.
-                                    // - Triangle: For affixes set to greater affix.
-                                    if (itemAffix.Item2.IsAnyType)
-                                    {
+                                    case OverlayMarkKind.SigilDungeon:
+                                        gfx.OutlineFillRectangle(_brushes[Colors.Black.ToString()], _brushes[affixColor.ToString()], left - length / 2, top, left - length / 2 + length, top + length, 2);
+
+                                        if (_settingsManager.Settings.DungeonTiers)
+                                        {
+                                            string tier = _affixManager.GetSigilDungeonTier(itemAffix.Item2.Id);
+                                            SolidBrush GetContrastColor(System.Windows.Media.Color backgroundColor)
+                                            {
+                                                return (backgroundColor.R + backgroundColor.G + backgroundColor.B) / 3 <= 128 ? _brushes["text"] : _brushes["textdark"];
+                                            }
+                                            gfx.DrawText(_fonts["consolasBold"], GetContrastColor(_currentTooltip.ItemAspect.Color), left - length / 4, top, tier);
+                                        }
+                                        break;
+
+                                    case OverlayMarkKind.Rectangle:
                                         gfx.OutlineFillRectangle(_brushes[Colors.Black.ToString()], _brushes[affixColor.ToString()], left - length / 2, top, left - length / 2 + length, top + length, 1);
-                                    }
-                                    else if (itemAffix.Item2.IsGreater)
-                                    {
+                                        break;
+
+                                    case OverlayMarkKind.Triangle:
                                         Triangle triangle = new Triangle(left - (length / 2), top + length, left + (length / 2), top + length, left, top);
                                         gfx.FillTriangle(_brushes[affixColor.ToString()], triangle);
                                         gfx.DrawTriangle(_brushes[Colors.Black.ToString()], triangle, 2);
-                                    }
-                                    else if (_settingsManager.Settings.IsMinimalAffixValueFilterEnabled &&
-                                        _currentTooltip.ItemAffixAreas[i].AffixValue < _currentTooltip.ItemAffixAreas[i].AffixThresholdValue)
-                                    {
-                                        gfx.OutlineFillRectangle(_brushes[Colors.Black.ToString()], _brushes[affixColor.ToString()], left - length / 2, top, left - length / 2 + length, top + length, 1);
-                                    }
-                                    else
-                                    {
+                                        break;
+
+                                    default:
                                         gfx.OutlineFillCircle(_brushes[Colors.Black.ToString()], _brushes[affixColor.ToString()], left, top + (itemAffixLocation.Location.Height / 2), radius, 2);
-                                    }
+                                        break;
                                 }
                             }
                         }
@@ -363,47 +354,38 @@ namespace D4Companion.Services
                         {
                             if (itemPowerLimitCheckOk)
                             {
-                                if (_currentTooltip.ItemType.Contains(ItemTypeConstants.Sigil) && _affixManager.GetSigilType(itemAffix.Item2.Id).Equals("Dungeon"))
-                                {
-                                    // Handle sigil dungeon locations
-                                    gfx.OutlineFillRectangle(_brushes[Colors.Black.ToString()], _brushes[affixColor.ToString()], left - length / 2, top, left - length / 2 + length, top + length, 2);
+                                bool isDungeonSigil = _currentTooltip.ItemType.Contains(ItemTypeConstants.Sigil) && _affixManager.GetSigilType(itemAffix.Item2.Id).Equals("Dungeon");
+                                bool isBelowMinimalValue = _currentTooltip.ItemAffixAreas[i].AffixValue < _currentTooltip.ItemAffixAreas[i].AffixThresholdValue;
 
-                                    if (_settingsManager.Settings.DungeonTiers)
-                                    {
-                                        string tier = _affixManager.GetSigilDungeonTier(itemAffix.Item2.Id);
-                                        SolidBrush GetContrastColor(System.Windows.Media.Color backgroundColor)
-                                        {
-                                            return (backgroundColor.R + backgroundColor.G + backgroundColor.B) / 3 <= 128 ? _brushes["text"] : _brushes["textdark"];
-                                        }
-                                        gfx.DrawText(_fonts["consolasBold"], GetContrastColor(affixColor), left - length / 4, top, tier);
-                                    }
-                                }
-                                else
+                                switch (OverlayMarkResolver.Resolve(itemAffix.Item2, isDungeonSigil, _settingsManager.Settings.IsMinimalAffixValueFilterEnabled, isBelowMinimalValue))
                                 {
-                                    // Handle different shapes
-                                    // - Circle: For all normal affixes.
-                                    // - Rectangle: For affixes set to ignore the specified item type.
-                                    // - Rectangle: For affixes below minimal value.
-                                    // - Triangle: For affixes set to greater affix.
-                                    if (itemAffix.Item2.IsAnyType)
-                                    {
+                                    case OverlayMarkKind.SigilDungeon:
+                                        gfx.OutlineFillRectangle(_brushes[Colors.Black.ToString()], _brushes[affixColor.ToString()], left - length / 2, top, left - length / 2 + length, top + length, 2);
+
+                                        if (_settingsManager.Settings.DungeonTiers)
+                                        {
+                                            string tier = _affixManager.GetSigilDungeonTier(itemAffix.Item2.Id);
+                                            SolidBrush GetContrastColor(System.Windows.Media.Color backgroundColor)
+                                            {
+                                                return (backgroundColor.R + backgroundColor.G + backgroundColor.B) / 3 <= 128 ? _brushes["text"] : _brushes["textdark"];
+                                            }
+                                            gfx.DrawText(_fonts["consolasBold"], GetContrastColor(affixColor), left - length / 4, top, tier);
+                                        }
+                                        break;
+
+                                    case OverlayMarkKind.Rectangle:
                                         gfx.OutlineFillRectangle(_brushes[Colors.Black.ToString()], _brushes[affixColor.ToString()], left - length / 2, top, left - length / 2 + length, top + length, 1);
-                                    }
-                                    else if (itemAffix.Item2.IsGreater)
-                                    {
+                                        break;
+
+                                    case OverlayMarkKind.Triangle:
                                         Triangle triangle = new Triangle(left - (length / 2), top + length, left + (length / 2), top + length, left, top);
                                         gfx.FillTriangle(_brushes[affixColor.ToString()], triangle);
                                         gfx.DrawTriangle(_brushes[Colors.Black.ToString()], triangle, 2);
-                                    }
-                                    else if (_settingsManager.Settings.IsMinimalAffixValueFilterEnabled &&
-                                        _currentTooltip.ItemAffixAreas[i].AffixValue < _currentTooltip.ItemAffixAreas[i].AffixThresholdValue)
-                                    {
-                                        gfx.OutlineFillRectangle(_brushes[Colors.Black.ToString()], _brushes[affixColor.ToString()], left - length / 2, top, left - length / 2 + length, top + length, 1);
-                                    }
-                                    else
-                                    {
+                                        break;
+
+                                    default:
                                         gfx.OutlineFillCircle(_brushes[Colors.Black.ToString()], _brushes[affixColor.ToString()], left, top + (itemAffixLocation.Location.Height / 2), radius, 2);
-                                    }
+                                        break;
                                 }
                             }
                         }
