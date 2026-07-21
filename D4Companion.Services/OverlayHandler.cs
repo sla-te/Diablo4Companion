@@ -174,6 +174,7 @@ namespace D4Companion.Services
                         {
                             DrawGraphicsAffixes(sender, e, itemPowerLimitCheckOk);
                             DrawGraphicsAspects(sender, e, itemPowerLimitCheckOk);
+                            DrawGraphicsMissingAffixes(e);
                         }
 
                         // Trading
@@ -253,8 +254,8 @@ namespace D4Companion.Services
             if (_currentTooltip.ItemAffixLocations.Any())
             {
                 var gfx = e.Graphics;
-                int radius = 10;
-                int length = 20;
+                int radius = MarkerWidth / 2;
+                int length = MarkerWidth;
 
                 for (int i = 0; i < _currentTooltip.ItemAffixLocations.Count; i++)
                 {
@@ -276,48 +277,41 @@ namespace D4Companion.Services
                         {
                             if (itemPowerLimitCheckOk)
                             {
-                                if (_currentTooltip.ItemType.Contains(ItemTypeConstants.Sigil) && _affixManager.GetSigilType(itemAffix.Item2.Id).Equals("Dungeon"))
-                                {
-                                    // Handle sigil dungeon locations
-                                    gfx.OutlineFillRectangle(_brushes[Colors.Black.ToString()], _brushes[affixColor.ToString()], left - length / 2, top, left - length / 2 + length, top + length, 2);
+                                bool isDungeonSigil = _currentTooltip.ItemType.Contains(ItemTypeConstants.Sigil) && _affixManager.GetSigilType(itemAffix.Item2.Id).Equals("Dungeon");
+                                bool isBelowMinimalValue = _currentTooltip.ItemAffixAreas[i].AffixValue < _currentTooltip.ItemAffixAreas[i].AffixThresholdValue;
 
-                                    if (_settingsManager.Settings.DungeonTiers)
-                                    {
-                                        string tier = _affixManager.GetSigilDungeonTier(itemAffix.Item2.Id);
-                                        SolidBrush GetContrastColor(System.Windows.Media.Color backgroundColor)
-                                        {
-                                            return (backgroundColor.R + backgroundColor.G + backgroundColor.B) / 3 <= 128 ? _brushes["text"] : _brushes["textdark"];
-                                        }
-                                        gfx.DrawText(_fonts["consolasBold"], GetContrastColor(_currentTooltip.ItemAspect.Color), left - length / 4, top, tier);
-                                    }
-                                }
-                                else
+                                switch (OverlayMarkResolver.Resolve(itemAffix.Item2, isDungeonSigil, _settingsManager.Settings.IsMinimalAffixValueFilterEnabled, isBelowMinimalValue))
                                 {
-                                    // Handle different shapes
-                                    // - Circle: For all normal affixes.
-                                    // - Rectangle: For affixes set to ignore the specified item type.
-                                    // - Rectangle: For affixes below minimal value.
-                                    // - Triangle: For affixes set to greater affix.
-                                    if (itemAffix.Item2.IsAnyType)
-                                    {
+                                    case OverlayMarkKind.SigilDungeon:
+                                        gfx.OutlineFillRectangle(_brushes[Colors.Black.ToString()], _brushes[affixColor.ToString()], left - length / 2, top, left - length / 2 + length, top + length, 2);
+
+                                        if (_settingsManager.Settings.DungeonTiers)
+                                        {
+                                            string tier = _affixManager.GetSigilDungeonTier(itemAffix.Item2.Id);
+                                            SolidBrush GetContrastColor(System.Windows.Media.Color backgroundColor)
+                                            {
+                                                return (backgroundColor.R + backgroundColor.G + backgroundColor.B) / 3 <= 128 ? _brushes["text"] : _brushes["textdark"];
+                                            }
+                                            gfx.DrawText(_fonts["consolasBold"], GetContrastColor(_currentTooltip.ItemAspect.Color), left - length / 4, top, tier);
+                                        }
+                                        break;
+
+                                    case OverlayMarkKind.Rectangle:
                                         gfx.OutlineFillRectangle(_brushes[Colors.Black.ToString()], _brushes[affixColor.ToString()], left - length / 2, top, left - length / 2 + length, top + length, 1);
-                                    }
-                                    else if (itemAffix.Item2.IsGreater)
-                                    {
+                                        break;
+
+                                    case OverlayMarkKind.Triangle:
                                         Triangle triangle = new Triangle(left - (length / 2), top + length, left + (length / 2), top + length, left, top);
                                         gfx.FillTriangle(_brushes[affixColor.ToString()], triangle);
                                         gfx.DrawTriangle(_brushes[Colors.Black.ToString()], triangle, 2);
-                                    }
-                                    else if (_settingsManager.Settings.IsMinimalAffixValueFilterEnabled &&
-                                        _currentTooltip.ItemAffixAreas[i].AffixValue < _currentTooltip.ItemAffixAreas[i].AffixThresholdValue)
-                                    {
-                                        gfx.OutlineFillRectangle(_brushes[Colors.Black.ToString()], _brushes[affixColor.ToString()], left - length / 2, top, left - length / 2 + length, top + length, 1);
-                                    }
-                                    else
-                                    {
+                                        break;
+
+                                    default:
                                         gfx.OutlineFillCircle(_brushes[Colors.Black.ToString()], _brushes[affixColor.ToString()], left, top + (itemAffixLocation.Location.Height / 2), radius, 2);
-                                    }
+                                        break;
                                 }
+
+                                DrawStatPriority(gfx, itemAffix.Item2, affixColor, left, top, itemAffixLocation.Location.Height);
                             }
                         }
                     }
@@ -340,8 +334,8 @@ namespace D4Companion.Services
             if (_currentTooltip.ItemAffixLocations.Any())
             {
                 var gfx = e.Graphics;
-                int radius = 10;
-                int length = 20;
+                int radius = MarkerWidth / 2;
+                int length = MarkerWidth;
 
                 for (int i = 0; i < _currentTooltip.ItemAffixLocations.Count; i++)
                 {
@@ -363,48 +357,41 @@ namespace D4Companion.Services
                         {
                             if (itemPowerLimitCheckOk)
                             {
-                                if (_currentTooltip.ItemType.Contains(ItemTypeConstants.Sigil) && _affixManager.GetSigilType(itemAffix.Item2.Id).Equals("Dungeon"))
-                                {
-                                    // Handle sigil dungeon locations
-                                    gfx.OutlineFillRectangle(_brushes[Colors.Black.ToString()], _brushes[affixColor.ToString()], left - length / 2, top, left - length / 2 + length, top + length, 2);
+                                bool isDungeonSigil = _currentTooltip.ItemType.Contains(ItemTypeConstants.Sigil) && _affixManager.GetSigilType(itemAffix.Item2.Id).Equals("Dungeon");
+                                bool isBelowMinimalValue = _currentTooltip.ItemAffixAreas[i].AffixValue < _currentTooltip.ItemAffixAreas[i].AffixThresholdValue;
 
-                                    if (_settingsManager.Settings.DungeonTiers)
-                                    {
-                                        string tier = _affixManager.GetSigilDungeonTier(itemAffix.Item2.Id);
-                                        SolidBrush GetContrastColor(System.Windows.Media.Color backgroundColor)
-                                        {
-                                            return (backgroundColor.R + backgroundColor.G + backgroundColor.B) / 3 <= 128 ? _brushes["text"] : _brushes["textdark"];
-                                        }
-                                        gfx.DrawText(_fonts["consolasBold"], GetContrastColor(affixColor), left - length / 4, top, tier);
-                                    }
-                                }
-                                else
+                                switch (OverlayMarkResolver.Resolve(itemAffix.Item2, isDungeonSigil, _settingsManager.Settings.IsMinimalAffixValueFilterEnabled, isBelowMinimalValue))
                                 {
-                                    // Handle different shapes
-                                    // - Circle: For all normal affixes.
-                                    // - Rectangle: For affixes set to ignore the specified item type.
-                                    // - Rectangle: For affixes below minimal value.
-                                    // - Triangle: For affixes set to greater affix.
-                                    if (itemAffix.Item2.IsAnyType)
-                                    {
+                                    case OverlayMarkKind.SigilDungeon:
+                                        gfx.OutlineFillRectangle(_brushes[Colors.Black.ToString()], _brushes[affixColor.ToString()], left - length / 2, top, left - length / 2 + length, top + length, 2);
+
+                                        if (_settingsManager.Settings.DungeonTiers)
+                                        {
+                                            string tier = _affixManager.GetSigilDungeonTier(itemAffix.Item2.Id);
+                                            SolidBrush GetContrastColor(System.Windows.Media.Color backgroundColor)
+                                            {
+                                                return (backgroundColor.R + backgroundColor.G + backgroundColor.B) / 3 <= 128 ? _brushes["text"] : _brushes["textdark"];
+                                            }
+                                            gfx.DrawText(_fonts["consolasBold"], GetContrastColor(affixColor), left - length / 4, top, tier);
+                                        }
+                                        break;
+
+                                    case OverlayMarkKind.Rectangle:
                                         gfx.OutlineFillRectangle(_brushes[Colors.Black.ToString()], _brushes[affixColor.ToString()], left - length / 2, top, left - length / 2 + length, top + length, 1);
-                                    }
-                                    else if (itemAffix.Item2.IsGreater)
-                                    {
+                                        break;
+
+                                    case OverlayMarkKind.Triangle:
                                         Triangle triangle = new Triangle(left - (length / 2), top + length, left + (length / 2), top + length, left, top);
                                         gfx.FillTriangle(_brushes[affixColor.ToString()], triangle);
                                         gfx.DrawTriangle(_brushes[Colors.Black.ToString()], triangle, 2);
-                                    }
-                                    else if (_settingsManager.Settings.IsMinimalAffixValueFilterEnabled &&
-                                        _currentTooltip.ItemAffixAreas[i].AffixValue < _currentTooltip.ItemAffixAreas[i].AffixThresholdValue)
-                                    {
-                                        gfx.OutlineFillRectangle(_brushes[Colors.Black.ToString()], _brushes[affixColor.ToString()], left - length / 2, top, left - length / 2 + length, top + length, 1);
-                                    }
-                                    else
-                                    {
+                                        break;
+
+                                    default:
                                         gfx.OutlineFillCircle(_brushes[Colors.Black.ToString()], _brushes[affixColor.ToString()], left, top + (itemAffixLocation.Location.Height / 2), radius, 2);
-                                    }
+                                        break;
                                 }
+
+                                DrawStatPriority(gfx, itemAffix.Item2, affixColor, left, top, itemAffixLocation.Location.Height);
                             }
                         }
                     }
@@ -858,6 +845,10 @@ namespace D4Companion.Services
                 //_fonts["arial"] = gfx.CreateFont("Arial", 12);
                 //_fonts["consolas"] = gfx.CreateFont("Consolas", 14);
                 _fonts["consolasBold"] = gfx.CreateFont("Consolas", fontSize, true);
+                // Fixed size, not OverlayFontSize: this digit has to fit inside a marker
+                // whose radius is fixed, so scaling it with the overlay font would push it
+                // outside the shape it labels.
+                _fonts["consolasRank"] = gfx.CreateFont("Consolas", 11, true);
             }
             catch (Exception exception)
             {
@@ -1117,6 +1108,119 @@ namespace D4Companion.Services
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// Writes the build's stat priority into the marker - 1 is what the guide wants
+        /// most. Colour and shape already say "wanted" and "wants a Greater Affix", but
+        /// neither separates the top-priority stat from the last one on the list, which is
+        /// the difference between an item worth equipping and one worth salvaging.
+        ///
+        /// Nothing is drawn for rank 0. That means the build source published no ranking -
+        /// every importer other than Maxroll, and any preset saved before ranks existed - so
+        /// a zero would be a claim the source never made.
+        /// </summary>
+        /// <summary>
+        /// Draws the missing stats as a panel under the tooltip, and draws nothing at all
+        /// when the item already carries everything the build wants - the absence of the
+        /// panel is itself the answer.
+        /// </summary>
+        private void DrawGraphicsMissingAffixes(DrawGraphicsEventArgs e)
+        {
+            // The same precondition the markers draw under. DrawGraphics rebuilds
+            // _currentTooltip empty on every unlocked frame and detection refills it from a
+            // background task, but ItemType carries over from the previous tooltip - so
+            // between the two there is a window where the item type is known and no affix has
+            // been matched yet. Judged on its own the panel would call every stat missing and
+            // flash at full height each time detection re-ran. It is a statement about a
+            // detected tooltip; without detected rows there is nothing to make it about.
+            if (!_currentTooltip.ItemAffixLocations.Any()) return;
+
+            var preset = _affixManager.AffixPresets.FirstOrDefault(preset => preset.Name.Equals(_settingsManager.Settings.SelectedAffixPreset));
+            var missing = MissingAffixResolver.Resolve(preset, _currentTooltip.ItemType,
+                _currentTooltip.ItemAffixes.Select(itemAffix => itemAffix.Item2.Id));
+            if (missing.Count == 0) return;
+
+            var gfx = e.Graphics;
+            float fontSize = _settingsManager.Settings.OverlayFontSize;
+
+            var shown = missing.Take(MissingAffixMaxLines).ToList();
+            var lines = shown
+                .Select(affix => (Text: $"{(affix.Rank > 0 ? affix.Rank.ToString() : "-")}  {_affixManager.GetAffixDescription(affix.Id)}", Color: affix.Color))
+                .ToList();
+
+            // Says so rather than truncating silently, so a short panel always means a short
+            // list of missing stats and never a clipped one.
+            if (missing.Count > shown.Count)
+            {
+                lines.Add(($"   and {missing.Count - shown.Count} more", _settingsManager.Settings.DefaultColorNormal));
+            }
+
+            float lineHeight = gfx.MeasureString(_fonts["consolasBold"], fontSize, "0").Y;
+            // Anchored to the window, deliberately not to the tooltip, and drawn as bare text
+            // with no fill or border.
+            //
+            // ScreenCapture takes the game window with CAPTUREBLT, which by its own comment
+            // includes layered windows - so the app photographs its own overlay and feeds it
+            // back into detection. Anything drawn in the tooltip's own column lands in the
+            // region the next capture is scanned for a tooltip. Under the tooltip as a
+            // bordered box it extended the detected bounds and threw the markers off the
+            // item; as plain text in the same place it still made the overlay oscillate.
+            //
+            // Every marker upstream draws sits in the thin left margin beside the tooltip.
+            // That is not a style choice, it is this constraint, and a block of text has to
+            // stay out of the tooltip's neighbourhood entirely to respect it.
+            float textLeft = MissingAffixMargin;
+            float textTop = MissingAffixMargin;
+            gfx.DrawText(_fonts["consolasBold"], fontSize, _brushes["text"], textLeft, textTop, MissingAffixHeader);
+
+            for (int i = 0; i < lines.Count; i++)
+            {
+                gfx.DrawText(_fonts["consolasBold"], fontSize, _brushes[lines[i].Color.ToString()],
+                    textLeft, textTop + (lineHeight * (i + 1)), lines[i].Text);
+            }
+        }
+
+        private const string MissingAffixHeader = "Missing";
+
+        // Top left of the game window. The tooltip follows the cursor and the inventory grid
+        // sits right, so this is the corner least likely to have anything under it - and,
+        // more to the point, the furthest from where detection looks.
+        private const int MissingAffixMargin = 24;
+
+        // A panel taller than the tooltip it hangs off stops being a hint and starts covering
+        // the game. An item short of more stats than this is not a close call anyway.
+        private const int MissingAffixMaxLines = 6;
+
+        /// <summary>
+        /// The box every affix marker is drawn inside, centred on the tooltip's marker
+        /// column. The square uses it whole, the triangle spans it, and the circle takes
+        /// half of it as its radius.
+        /// </summary>
+        private const int MarkerWidth = 20;
+
+        // Consolas 11 bold, measured rather than asked for at draw time: the digit is placed
+        // relative to the marker, so its box has to be known before it is drawn. Ranks stay
+        // single-digit in practice, and a hypothetical two-digit rank would only shift left
+        // into empty tooltip margin.
+        private const int RankDigitWidth = 9;
+        private const int RankDigitHeight = 11;
+
+        private void DrawStatPriority(Graphics gfx, ItemAffix itemAffix, System.Windows.Media.Color affixColor, float left, float top, int affixHeight)
+        {
+            if (itemAffix.Rank <= 0) return;
+
+            // Inside the marker. Placed beside it instead, the digit read as a number floating
+            // in the tooltip margin rather than as a property of the mark it belongs to.
+            //
+            // The cost is that it fills the greater-affix triangle enough to blunt its apex,
+            // so a marked greater affix can read as a diamond. The shape stays the signal for
+            // what kind of affix this is; the digit only says where the build ranks it.
+            var brush = (affixColor.R + affixColor.G + affixColor.B) / 3 <= 128 ? _brushes["text"] : _brushes["textdark"];
+
+            gfx.DrawText(_fonts["consolasRank"], brush,
+                left - (RankDigitWidth / 2), top + (affixHeight / 2) - (RankDigitHeight / 2),
+                itemAffix.Rank.ToString());
         }
 
         private IEnumerable<KeyValuePair<string, System.Windows.Media.Color>> GetColors()

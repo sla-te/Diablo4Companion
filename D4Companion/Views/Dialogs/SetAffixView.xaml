@@ -77,7 +77,7 @@
         </StackPanel>
 
         <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal">
-            <mah:Badged Margin="4" BadgeBackground="Red" Badge="{Binding AffixCounterMainHand}">
+            <mah:Badged Margin="4" BadgeBackground="Red" Badge="{Binding AffixCounterWeapon}">
                 <Button Width="50" Height="50" Style="{DynamicResource MahApps.Styles.Button.Circle}"
                     Command="{Binding AddAffixCommand}" CommandParameter="{Binding ImageMainHand}">
                     <Image Stretch="Uniform" StretchDirection="Both" Source="{Binding ImageMainHand}" ToolTip="Weapon"/>

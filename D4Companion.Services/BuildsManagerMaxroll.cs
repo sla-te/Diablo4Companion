@@ -103,8 +103,12 @@ namespace D4Companion.Services
                         case 7: // 1HAxe, 1HFlail
                         case 8: // 2HMace
                         case 9: // 2HAxe
-                        case 11: // 1HMace, 1HSword
-                        case 12: // 1HMace, 1HSword
+                        case 11: // 1HMace, 1HSword - mainhand
+                        case 12: // 1HMace, 1HSword - offhand
+                            // Coarser than what the preset ends up carrying, and that is
+                            // fine: itemType survives only as far as the Charm/Seal skip
+                            // below. The type actually written comes from CanonicalItem.Slot
+                            // via MaxrollBuildAdapter, which does separate the two hands.
                             itemType = Constants.ItemTypeConstants.Weapon;
                             break;
                         case 10: // 2HCrossbow
@@ -293,13 +297,14 @@ namespace D4Companion.Services
                     }*/
 
                     // Add all explicit affixes for current item.Value
+                    // Import every listed stat, not just the four an item can physically
+                    // roll. Maxroll's explicit list is a ranked stat-priority list - the
+                    // amulet in the Whirlwind guide names seven - so truncating it to four
+                    // left the lower-priority stats unmatched and showing as unwanted.
+                    // Entries that are not affixes at all (a unique's own aspect) still fall
+                    // out below, where an unresolved sno is skipped.
                     for (int i = 0; i < maxrollBuild.Data.Items[item.Value].Explicits.Count; i++)
                     {
-                        // For legendary items only add the first four affixes.
-                        if (uniqueInfo == null && i > 3) break;
-                        // For unique items only add the first four affixes. First index contains id of unique item.
-                        if (uniqueInfo != null && i > 4) break;
-
                         var explicitAffix = maxrollBuild.Data.Items[item.Value].Explicits[i];
                         int affixSno = explicitAffix.Nid;
                         AffixInfo? affixInfo = _affixManager.GetAffixInfoMaxrollByIdSno(affixSno.ToString());
@@ -323,7 +328,12 @@ namespace D4Companion.Services
                             canonicalItem.Affixes.Add(new CanonicalAffix
                             {
                                 Id = affixInfo.IdName,
-                                IsGreater = explicitAffix.Greater
+                                IsGreater = explicitAffix.IsGreaterAffix,
+                                // The loop index, not a running counter over the affixes we
+                                // managed to resolve. An entry that resolves to nothing is
+                                // still numbered in the guide, so renumbering around it would
+                                // shift every later stat one rank up.
+                                Rank = i + 1
                             });
                         }
                     }

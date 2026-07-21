@@ -30,6 +30,9 @@
     <None Update="Fixtures\ce9zox0y.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Fixtures\tooltip-1h-sword-slashing.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

@@ -38,7 +38,12 @@ namespace D4Companion.Entities
         public List<D4buildsAffix> Weapon { get; set; } = new();
         public List<D4buildsAffix> WeaponBludgeoning { get; set; } = new();
         public List<D4buildsAffix> WeaponSlicing { get; set; } = new();
+        // D4Builds names the two dual-wield positions separately, so the hands survive the
+        // scrape. WeaponOneHand is kept for cache files written before the split - it
+        // deserializes populated there and empty for anything scraped since.
         public List<D4buildsAffix> WeaponOneHand { get; set; } = new();
+        public List<D4buildsAffix> WeaponMainhand { get; set; } = new();
+        public List<D4buildsAffix> WeaponOffhand { get; set; } = new();
 
         public List<D4buildsAffix> Ranged { get; set; } = new();
         public List<D4buildsAffix> Offhand { get; set; } = new();

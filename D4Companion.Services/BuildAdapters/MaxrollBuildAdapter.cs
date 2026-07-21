@@ -47,6 +47,11 @@ namespace D4Companion.Services.BuildAdapters
         /// Maps a Maxroll equipment-slot id to an item type. Weapon slots defer to the
         /// item id so that Bludgeoning, Slicing and one-handed weapons separate.
         /// Returns null for slots that are deliberately not imported.
+        ///
+        /// Slots 11 and 12 are the Arsenal's two one-handed positions, and Maxroll keeps
+        /// them distinct where a scanned tooltip cannot: 11 is mainhand, 12 is offhand.
+        /// The refinement applies only to one-handers, so a two-hander parked in one of
+        /// these slots keeps its damage-type classification.
         /// </summary>
         private static string? ResolveSlot(int slotId, string itemId)
         {
@@ -55,11 +60,11 @@ namespace D4Companion.Services.BuildAdapters
                 case 4: return ItemTypeConstants.Helm;
                 case 5: return ItemTypeConstants.Chest;
                 case 6: return ItemTypeConstants.Offhand;
+                case 11: return WeaponTypeResolver.RefineOneHandToHand(WeaponTypeResolver.FromMaxrollItemId(itemId), isMainhand: true);
+                case 12: return WeaponTypeResolver.RefineOneHandToHand(WeaponTypeResolver.FromMaxrollItemId(itemId), isMainhand: false);
                 case 7:
                 case 8:
-                case 9:
-                case 11:
-                case 12: return WeaponTypeResolver.FromMaxrollItemId(itemId);
+                case 9: return WeaponTypeResolver.FromMaxrollItemId(itemId);
                 case 10: return ItemTypeConstants.Ranged;
                 case 13: return ItemTypeConstants.Gloves;
                 case 14: return ItemTypeConstants.Pants;

@@ -77,6 +77,8 @@ namespace D4Companion.Entities
                     case Constants.ItemTypeConstants.WeaponBludgeoning:
                     case Constants.ItemTypeConstants.WeaponSlicing:
                     case Constants.ItemTypeConstants.WeaponOneHand:
+                    case Constants.ItemTypeConstants.WeaponMainhand:
+                    case Constants.ItemTypeConstants.WeaponOffhand:
                         // The Arsenal subtypes share the weapon icon; no per-subtype art exists.
                         return "/Images/mainhand_icon.png";
                     default:

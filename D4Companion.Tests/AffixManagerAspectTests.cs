@@ -57,5 +57,51 @@ namespace D4Companion.Tests
                 AffixManager.IsTypeMatch(ItemTypeConstants.WeaponSlicing, ItemTypeConstants.WeaponOneHand),
                 Is.False);
         }
+
+        [TestCase(ItemTypeConstants.WeaponMainhand)]
+        [TestCase(ItemTypeConstants.WeaponOffhand)]
+        public void IsTypeMatch_ArsenalHandPresetEntry_MatchesScannedOneHandedItem(string presetType)
+        {
+            // Build sites know which Arsenal hand an item occupies; a tooltip does not. OCR
+            // therefore resolves every one-hander to the parent weapon_onehand, and both
+            // hand-specific preset entries must still match it - otherwise every imported
+            // one-handed entry would be permanently unmatchable.
+            Assert.That(AffixManager.IsTypeMatch(presetType, ItemTypeConstants.WeaponOneHand), Is.True);
+            Assert.That(AffixManager.IsTypeMatch(ItemTypeConstants.WeaponOneHand, presetType), Is.True);
+        }
+
+        [TestCase(ItemTypeConstants.WeaponMainhand)]
+        [TestCase(ItemTypeConstants.WeaponOffhand)]
+        public void IsTypeMatch_ArsenalHandEntry_StillMatchesPlainWeapon(string handType)
+        {
+            // The hands are weapon subtypes, so the plain-weapon supertype rule must reach
+            // them too - same non-Barbarian and non-English-locale argument as above.
+            Assert.That(AffixManager.IsTypeMatch(ItemTypeConstants.Weapon, handType), Is.True);
+            Assert.That(AffixManager.IsTypeMatch(handType, ItemTypeConstants.Weapon), Is.True);
+        }
+
+        [Test]
+        public void IsTypeMatch_MainhandAndOffhand_DoNotMatchEachOther()
+        {
+            // Scanning never produces this pairing - both sides only ever meet through the
+            // weapon_onehand parent - but the UI counts and groups entries per hand, and
+            // collapsing the two here would merge those sections back together.
+            Assert.That(
+                AffixManager.IsTypeMatch(ItemTypeConstants.WeaponMainhand, ItemTypeConstants.WeaponOffhand),
+                Is.False);
+            Assert.That(
+                AffixManager.IsTypeMatch(ItemTypeConstants.WeaponOffhand, ItemTypeConstants.WeaponMainhand),
+                Is.False);
+        }
+
+        [TestCase(ItemTypeConstants.WeaponBludgeoning)]
+        [TestCase(ItemTypeConstants.WeaponSlicing)]
+        public void IsTypeMatch_ArsenalHandEntry_DoesNotMatchTwoHandedSubtype(string twoHandedType)
+        {
+            // A one-handed entry must not highlight on a two-hander. This is the same
+            // separation the Bludgeoning/Slicing split enforces, one level down.
+            Assert.That(AffixManager.IsTypeMatch(ItemTypeConstants.WeaponMainhand, twoHandedType), Is.False);
+            Assert.That(AffixManager.IsTypeMatch(twoHandedType, ItemTypeConstants.WeaponOffhand), Is.False);
+        }
     }
 }

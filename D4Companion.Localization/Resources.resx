@@ -133,6 +133,9 @@
   <data name="rsTooltipSetAffix" xml:space="preserve">
     <value>Set affix</value>
   </data>
+  <data name="rsTooltipStatPriority" xml:space="preserve">
+    <value>Stat priority in the imported build - 1 is the highest</value>
+  </data>
   <data name="rsTooltipSeasonal" xml:space="preserve">
     <value>Seasonal</value>
   </data>
@@ -189,6 +192,24 @@
   </data>
   <data name="rsCapWeapon" xml:space="preserve">
     <value>Weapon</value>
+  </data>
+  <data name="rsCapWeaponBludgeoning" xml:space="preserve">
+    <value>Bludgeoning Weapon</value>
+  </data>
+  <data name="rsCapWeaponSlicing" xml:space="preserve">
+    <value>Slicing Weapon</value>
+  </data>
+  <data name="rsCapWeaponMainhand" xml:space="preserve">
+    <value>Mainhand</value>
+  </data>
+  <data name="rsCapWeaponOffhand" xml:space="preserve">
+    <value>Offhand (one-handed)</value>
+  </data>
+  <data name="rsCapWeaponOneHand" xml:space="preserve">
+    <value>One-Handed (hand not specified)</value>
+  </data>
+  <data name="rsCapWeaponAny" xml:space="preserve">
+    <value>Any Weapon</value>
   </data>
   <data name="rsCapRanged" xml:space="preserve">
     <value>Ranged</value>

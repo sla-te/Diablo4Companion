@@ -64,13 +64,21 @@ namespace D4Companion.Tests
         }
 
         [Test]
-        public void ToCanonical_OneHandedWeaponsMergeIntoOneHandSlot()
+        public void ToCanonical_OneHandedWeaponsSplitByArsenalHand()
         {
-            // Edgemaster's (raw Nid 578875) is on a 1H sword. Mainhand and offhand are
-            // indistinguishable.
+            // Maxroll keeps the two Arsenal hands in separate slots - 11 is mainhand,
+            // 12 is offhand - so both one-handers must land in distinct buckets rather
+            // than merging. In the Midgame variant slot 11 holds Ramaladni's Magnum Opus,
+            // a unique that contributes no aspect, and slot 12 holds Edgemaster's
+            // (raw Nid 578875).
             var edgemasters = _midgame.Items.Single(i => i.AspectIds.Contains("578875"));
 
-            Assert.That(edgemasters.Slot, Is.EqualTo(ItemTypeConstants.WeaponOneHand));
+            Assert.Multiple(() =>
+            {
+                Assert.That(edgemasters.Slot, Is.EqualTo(ItemTypeConstants.WeaponOffhand));
+                Assert.That(_midgame.Items.Select(i => i.Slot), Has.Exactly(1).EqualTo(ItemTypeConstants.WeaponMainhand));
+                Assert.That(_midgame.Items.Select(i => i.Slot), Has.None.EqualTo(ItemTypeConstants.WeaponOneHand));
+            });
         }
 
         [Test]
