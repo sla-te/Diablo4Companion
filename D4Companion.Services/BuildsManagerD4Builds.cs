@@ -532,13 +532,23 @@ namespace D4Companion.Services
                 d4BuildsBuildVariant.Ring.AddRange(GetAllAffixes("Ring2"));
                 d4BuildsBuildVariant.Ring = d4BuildsBuildVariant.Ring.Distinct().ToList();
 
-                // Weapons
+                // Weapons. D4Builds' own structural selectors already distinguish the
+                // Barbarian Arsenal slots (BludgeoningWeapon / SlashingWeapon /
+                // Dual-WieldWeapon1+2 = mainhand+offhand); preserve that instead of
+                // merging everything into one Weapon bucket.
                 d4BuildsBuildVariant.Weapon.AddRange(GetAllAffixes("Weapon"));
-                d4BuildsBuildVariant.Weapon.AddRange(GetAllAffixes("BludgeoningWeapon"));
-                d4BuildsBuildVariant.Weapon.AddRange(GetAllAffixes("SlashingWeapon"));
-                d4BuildsBuildVariant.Weapon.AddRange(GetAllAffixes("Dual-WieldWeapon1"));
-                d4BuildsBuildVariant.Weapon.AddRange(GetAllAffixes("Dual-WieldWeapon2"));
                 d4BuildsBuildVariant.Weapon = d4BuildsBuildVariant.Weapon.Distinct().ToList();
+
+                d4BuildsBuildVariant.WeaponBludgeoning.AddRange(GetAllAffixes("BludgeoningWeapon"));
+                d4BuildsBuildVariant.WeaponBludgeoning = d4BuildsBuildVariant.WeaponBludgeoning.Distinct().ToList();
+
+                d4BuildsBuildVariant.WeaponSlicing.AddRange(GetAllAffixes("SlashingWeapon"));
+                d4BuildsBuildVariant.WeaponSlicing = d4BuildsBuildVariant.WeaponSlicing.Distinct().ToList();
+
+                d4BuildsBuildVariant.WeaponOneHand.AddRange(GetAllAffixes("Dual-WieldWeapon1"));
+                d4BuildsBuildVariant.WeaponOneHand.AddRange(GetAllAffixes("Dual-WieldWeapon2"));
+                d4BuildsBuildVariant.WeaponOneHand = d4BuildsBuildVariant.WeaponOneHand.Distinct().ToList();
+
                 d4BuildsBuildVariant.Ranged = GetAllAffixes("RangedWeapon");
                 d4BuildsBuildVariant.Offhand = GetAllAffixes("Offhand");
 

@@ -32,6 +32,9 @@ namespace D4Companion.Services.BuildAdapters
             AddSlot(variant, ItemTypeConstants.Amulet, sourceVariant.Amulet);
             AddSlot(variant, ItemTypeConstants.Ring, sourceVariant.Ring);
             AddSlot(variant, ItemTypeConstants.Weapon, sourceVariant.Weapon);
+            AddSlot(variant, ItemTypeConstants.WeaponBludgeoning, sourceVariant.WeaponBludgeoning);
+            AddSlot(variant, ItemTypeConstants.WeaponSlicing, sourceVariant.WeaponSlicing);
+            AddSlot(variant, ItemTypeConstants.WeaponOneHand, sourceVariant.WeaponOneHand);
             AddSlot(variant, ItemTypeConstants.Ranged, sourceVariant.Ranged);
             AddSlot(variant, ItemTypeConstants.Offhand, sourceVariant.Offhand);
 
