@@ -1143,7 +1143,6 @@ namespace D4Companion.Services
 
             var gfx = e.Graphics;
             float fontSize = _settingsManager.Settings.OverlayFontSize;
-            float padding = 6;
 
             var shown = missing.Take(MissingAffixMaxLines).ToList();
             var lines = shown
@@ -1158,19 +1157,21 @@ namespace D4Companion.Services
             }
 
             float lineHeight = gfx.MeasureString(_fonts["consolasBold"], fontSize, "0").Y;
-            float width = lines.Max(line => gfx.MeasureString(_fonts["consolasBold"], fontSize, line.Text).X);
-            float headerWidth = gfx.MeasureString(_fonts["consolasBold"], fontSize, MissingAffixHeader).X;
-
-            float panelLeft = _currentTooltip.Location.X + _currentTooltip.OffsetX;
-            float panelTop = _currentTooltip.Location.Y + _currentTooltip.Location.Height;
-            float panelRight = panelLeft + Math.Max(width, headerWidth) + (padding * 2);
-            float panelBottom = panelTop + (lineHeight * (lines.Count + 1)) + (padding * 2);
-
-            gfx.FillRectangle(_brushes["background"], panelLeft, panelTop, panelRight, panelBottom);
-            gfx.DrawRectangle(_brushes["border"], panelLeft, panelTop, panelRight, panelBottom, stroke: 1);
-
-            float textLeft = panelLeft + padding;
-            float textTop = panelTop + padding;
+            // Anchored to the window, deliberately not to the tooltip, and drawn as bare text
+            // with no fill or border.
+            //
+            // ScreenCapture takes the game window with CAPTUREBLT, which by its own comment
+            // includes layered windows - so the app photographs its own overlay and feeds it
+            // back into detection. Anything drawn in the tooltip's own column lands in the
+            // region the next capture is scanned for a tooltip. Under the tooltip as a
+            // bordered box it extended the detected bounds and threw the markers off the
+            // item; as plain text in the same place it still made the overlay oscillate.
+            //
+            // Every marker upstream draws sits in the thin left margin beside the tooltip.
+            // That is not a style choice, it is this constraint, and a block of text has to
+            // stay out of the tooltip's neighbourhood entirely to respect it.
+            float textLeft = MissingAffixMargin;
+            float textTop = MissingAffixMargin;
             gfx.DrawText(_fonts["consolasBold"], fontSize, _brushes["text"], textLeft, textTop, MissingAffixHeader);
 
             for (int i = 0; i < lines.Count; i++)
@@ -1181,6 +1182,11 @@ namespace D4Companion.Services
         }
 
         private const string MissingAffixHeader = "Missing";
+
+        // Top left of the game window. The tooltip follows the cursor and the inventory grid
+        // sits right, so this is the corner least likely to have anything under it - and,
+        // more to the point, the furthest from where detection looks.
+        private const int MissingAffixMargin = 24;
 
         // A panel taller than the tooltip it hangs off stops being a hint and starts covering
         // the game. An item short of more stats than this is not a close call anyway.
