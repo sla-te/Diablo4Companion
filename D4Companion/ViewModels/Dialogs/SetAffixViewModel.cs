@@ -148,12 +148,14 @@ namespace D4Companion.ViewModels.Dialogs
             }
         }
 
-        public int? AffixCounterMainHand
+        public int? AffixCounterWeapon
         {
             get
             {
-                // Count the Arsenal subtypes as weapons too, otherwise an affix selected on
-                // weapon_bludgeoning or weapon_slicing reports a count of zero here.
+                // Counts every weapon subtype, not one Arsenal slot - the dialog offers a
+                // single weapon button that adds the plain "weapon" supertype, so there is
+                // nothing per-hand to count here. Named for the supertype deliberately:
+                // "MainHand" would now read as the weapon_mainhand slot, which this is not.
                 int count = SelectedAffixes.Count(a => a.Id.Equals(_affixInfo.IdName) && Services.AffixManager.IsTypeMatch(Constants.ItemTypeConstants.Weapon, a.Type));
                 return count > 0 ? count : null;
             }
@@ -260,7 +262,7 @@ namespace D4Companion.ViewModels.Dialogs
             OnPropertyChanged(nameof(AffixCounterFeet));
             OnPropertyChanged(nameof(AffixCounterNeck));
             OnPropertyChanged(nameof(AffixCounterRing));
-            OnPropertyChanged(nameof(AffixCounterMainHand));
+            OnPropertyChanged(nameof(AffixCounterWeapon));
             OnPropertyChanged(nameof(AffixCounterRanged));
             OnPropertyChanged(nameof(AffixCounterOffHand));
         }

@@ -1555,10 +1555,16 @@ namespace D4Companion.ViewModels
         {
             Application.Current?.Dispatcher?.Invoke(() =>
             {
-                SelectedAffixesFilteredWeapon = new ListCollectionView(SelectedAffixes)
+                var weaponView = new ListCollectionView(SelectedAffixes)
                 {
-                    Filter = FilterSelectedAffixesWeapon
+                    Filter = FilterSelectedAffixesWeapon,
+                    // Sort before grouping: WPF forms groups in encounter order, so the
+                    // comparer is what puts the Arsenal sections in guide order.
+                    CustomSort = new Comparers.WeaponGroupComparer()
                 };
+                weaponView.GroupDescriptions.Add(new PropertyGroupDescription(nameof(ItemAffix.Type)));
+
+                SelectedAffixesFilteredWeapon = weaponView;
             });
         }
 
