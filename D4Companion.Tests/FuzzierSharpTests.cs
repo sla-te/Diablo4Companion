@@ -363,13 +363,40 @@ namespace D4Companion.Tests
                 }
             }
 
-            // Create affix description list for FuzzierSharp
+            // Create sigil name list for FuzzierSharp.
+            // Mirrors OcrHandler.InitSigilData; keep the two in step.
             _sigilNames.Clear();
-            _sigilNames = _sigils.Select(affix => affix.Name).ToList();
+            _sigilNames = _sigils.Select(sigil =>
+            {
+                string name = sigil.Name;
+                if (sigil.Type.Equals(D4Companion.Constants.SigilTypeConstants.Dungeon))
+                {
+                    name = $"{name} {sigil.DungeonZoneInfo}";
+                }
+                return name;
+            }).ToList();
 
-            // Create dictionary to map affix description with affix id
+            // Create dictionary to map sigil name with sigil id.
+            // Use foreach instead of ToDictionary because of duplicate names in some
+            // languages. Disambiguating by DungeonZoneInfo is not sufficient on its own:
+            // "Scoriaceous Path" appears three times with Type "Dungeon" AND the same
+            // zone, and "Dungeon Delve" / "Hidden Armory" / "Suppressor Elites"
+            // duplicate under non-Dungeon types with an empty DungeonZoneInfo.
+            // First entry wins, matching OcrHandler.
             _sigilMapNameToId.Clear();
-            _sigilMapNameToId = _sigils.ToDictionary(sigil => sigil.Name, sigil => sigil.IdName);
+            foreach (var sigil in _sigils)
+            {
+                string name = sigil.Name;
+                if (sigil.Type.Equals(D4Companion.Constants.SigilTypeConstants.Dungeon))
+                {
+                    name = $"{name} {sigil.DungeonZoneInfo}";
+                }
+
+                if (!_sigilMapNameToId.ContainsKey(name))
+                {
+                    _sigilMapNameToId.Add(name, sigil.IdName);
+                }
+            }
         }
 
         private void InitTestData()

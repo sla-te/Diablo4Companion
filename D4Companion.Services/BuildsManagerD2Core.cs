@@ -1,8 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
 using D4Companion.Entities;
+using D4Companion.Entities.Canonical;
 using D4Companion.Helpers;
 using D4Companion.Interfaces;
 using D4Companion.Messages;
+using D4Companion.Services.BuildAdapters;
 using Microsoft.Extensions.Logging;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -25,7 +27,9 @@ namespace D4Companion.Services
     {
         private readonly IAffixManager _affixManager;
         private readonly ILogger _logger;
+        private readonly IBuildPresetProjector _projector;
         private readonly ISettingsManager _settingsManager;
+        private readonly D2CoreBuildAdapter _d2CoreBuildAdapter = new();
 
         private string _buildId = string.Empty;
         private string _buildUrl = string.Empty;
@@ -41,11 +45,12 @@ namespace D4Companion.Services
 
         #region Constructors
 
-        public BuildsManagerD2Core(ILogger<BuildsManagerD2Core> logger, IAffixManager affixManager, ISettingsManager settingsManager)
+        public BuildsManagerD2Core(ILogger<BuildsManagerD2Core> logger, IAffixManager affixManager, IBuildPresetProjector projector, ISettingsManager settingsManager)
         {
             // Init services
             _affixManager = affixManager;
             _logger = logger;
+            _projector = projector;
             _settingsManager = settingsManager;
 
             // Init timers
@@ -284,16 +289,15 @@ namespace D4Companion.Services
             // Note: Only allow one D2Core build. Update if already exists.
             _affixManager.AffixPresets.RemoveAll(p => p.Name.Equals(buildName));
 
-            var affixPreset = new AffixPreset
-            {
-                Name = buildName
-            };
-
             var d2CoreBuildDataVariantJson = d2CoreBuild.Data.Variants.FirstOrDefault(v => v.Name.Equals(buildNameOriginal));
             if (d2CoreBuildDataVariantJson == null) return;
 
+            var canonicalBuild = _d2CoreBuildAdapter.ToCanonical(d2CoreBuild);
+            var canonicalVariant = canonicalBuild.Variants.FirstOrDefault(v => v.Name.Equals(buildNameOriginal));
+            if (canonicalVariant == null) return;
+
             // Loop through all items
-            List<string> aspects = [];
+            int canonicalItemIndex = 0;
             string itemType = string.Empty;
             foreach (var item in d2CoreBuildDataVariantJson.Gear)
             {
@@ -352,15 +356,22 @@ namespace D4Companion.Services
                         continue;
                 }
 
+                // Invariant: the adapter and this manager must skip identical item types, so the
+                // surviving entries line up index-for-index with canonicalVariant.Items. If that
+                // invariant is ever violated, fail loudly instead of binding affixes to the wrong item.
+                if (canonicalItemIndex >= canonicalVariant.Items.Count)
+                {
+                    _logger.LogError($"{MethodBase.GetCurrentMethod()?.Name}: canonicalItemIndex {canonicalItemIndex} out of range for {canonicalVariant.Items.Count} canonical items. Adapter and manager item-type skip lists have diverged.");
+                    break;
+                }
+                var canonicalItem = canonicalVariant.Items[canonicalItemIndex++];
+
                 // Process runes
                 foreach (var socket in item.Value.Sockets)
                 {
                     if (!socket.Type.Equals("rune")) continue;
 
-                    if (!affixPreset.ItemRunes.Any(r => r.Id.Equals($"Item_{socket.Key}")))
-                    {
-                        affixPreset.ItemRunes.Add(new ItemAffix { Id = $"Item_{socket.Key}", Type = Constants.ItemTypeConstants.Rune });
-                    }
+                    canonicalItem.RuneIds.Add($"Item_{socket.Key}");
                 }
 
                 // Process unique items
@@ -373,12 +384,7 @@ namespace D4Companion.Services
                     if (uniqueInfo != null)
                     {
                         // Add unique items
-                        affixPreset.ItemUniques.Add(new ItemAffix
-                        {
-                            Id = uniqueInfo.IdName,
-                            Type = string.Empty,
-                            Color = _settingsManager.Settings.DefaultColorUniques
-                        });
+                        canonicalItem.UniqueIds.Add(uniqueInfo.IdName);
                     }
                 }
 
@@ -400,46 +406,22 @@ namespace D4Companion.Services
                     }
                     else
                     {
-                        if (!affixPreset.ItemAffixes.Any(a => a.Id.Equals(affixInfo.IdName) && a.Type.Equals(itemType) && !a.IsImplicit))
+                        canonicalItem.Affixes.Add(new CanonicalAffix
                         {
-                            affixPreset.ItemAffixes.Add(new ItemAffix
-                            {
-                                Id = affixInfo.IdName,
-                                Type = itemType,
-                                Color = affix.Greater ? _settingsManager.Settings.DefaultColorGreater : _settingsManager.Settings.DefaultColorNormal,
-                                IsGreater = affix.Greater,
-                                IsTempered = affix.Name.StartsWith("Tempered_",StringComparison.OrdinalIgnoreCase)
-                            });
-                        }
+                            Id = affixInfo.IdName,
+                            IsGreater = affix.Greater,
+                            IsTempered = affix.Name.StartsWith("Tempered_", StringComparison.OrdinalIgnoreCase)
+                        });
                     }
                 }
 
                 // Process aspect / legendary power
-                if (item.Value.Type.Equals("legendary"))
-                {
-                    aspects.Add(item.Value.Key);
-                }
+                // Note: The adapter already resolved AspectIds to the final IdName
+                // (a plain "Affix_" prefix strip, no IAffixManager lookup needed), so
+                // there is nothing left to do here.
             }
 
-            // Add all aspects / legendary powers
-            foreach (var aspect in aspects)
-            {
-                var aspectId = aspect.Replace("Affix_", string.Empty, StringComparison.OrdinalIgnoreCase);
-
-                if (!affixPreset.ItemAspects.Any(a => a.Id.Equals(aspectId)))
-                {
-                    affixPreset.ItemAspects.Add(new ItemAffix { Id = aspectId!, Type = Constants.ItemTypeConstants.Helm });
-                    affixPreset.ItemAspects.Add(new ItemAffix { Id = aspectId!, Type = Constants.ItemTypeConstants.Chest });
-                    affixPreset.ItemAspects.Add(new ItemAffix { Id = aspectId!, Type = Constants.ItemTypeConstants.Gloves });
-                    affixPreset.ItemAspects.Add(new ItemAffix { Id = aspectId!, Type = Constants.ItemTypeConstants.Pants });
-                    affixPreset.ItemAspects.Add(new ItemAffix { Id = aspectId!, Type = Constants.ItemTypeConstants.Boots });
-                    affixPreset.ItemAspects.Add(new ItemAffix { Id = aspectId!, Type = Constants.ItemTypeConstants.Amulet });
-                    affixPreset.ItemAspects.Add(new ItemAffix { Id = aspectId!, Type = Constants.ItemTypeConstants.Ring });
-                    affixPreset.ItemAspects.Add(new ItemAffix { Id = aspectId!, Type = Constants.ItemTypeConstants.Weapon });
-                    affixPreset.ItemAspects.Add(new ItemAffix { Id = aspectId!, Type = Constants.ItemTypeConstants.Ranged });
-                    affixPreset.ItemAspects.Add(new ItemAffix { Id = aspectId!, Type = Constants.ItemTypeConstants.Offhand });
-                }
-            }
+            var affixPreset = _projector.Project(canonicalVariant, buildName);
 
             // Process paragon boards
             if (_settingsManager.Settings.IsImportParagonD2CoreEnabled)

@@ -74,6 +74,10 @@ namespace D4Companion.Entities
                     case Constants.ItemTypeConstants.Ring:
                         return "/Images/ring_icon.png";
                     case Constants.ItemTypeConstants.Weapon:
+                    case Constants.ItemTypeConstants.WeaponBludgeoning:
+                    case Constants.ItemTypeConstants.WeaponSlicing:
+                    case Constants.ItemTypeConstants.WeaponOneHand:
+                        // The Arsenal subtypes share the weapon icon; no per-subtype art exists.
                         return "/Images/mainhand_icon.png";
                     default:
                         return string.Empty;

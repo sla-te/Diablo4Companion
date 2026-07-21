@@ -1791,12 +1791,17 @@ namespace D4Companion.Services
                     {
                         bool isImplicitArea = _currentTooltip.ItemAffixAreas[currentItemAffix.Item1].AffixType.Equals(Constants.AffixTypeConstants.Implicit);
                         bool isTemperedArea = _currentTooltip.ItemAffixAreas[currentItemAffix.Item1].AffixType.Equals(Constants.AffixTypeConstants.Tempered);
-                        var affix = preset.ItemAffixes.FirstOrDefault(a => a.Id.Equals(currentItemAffix.Item2.Id) && a.Type.Equals(_currentTooltip.ItemType) && a.IsImplicit == isImplicitArea && a.IsTempered == isTemperedArea);
+                        // IsTypeMatch, not Type.Equals: a Barbarian Arsenal weapon is detected as
+                        // a subtype (weapon_bludgeoning and friends) while an existing preset
+                        // entry is typed plain "weapon". Exact equality would never match those.
+                        var affix = preset.ItemAffixes.FirstOrDefault(a => a.Id.Equals(currentItemAffix.Item2.Id) && AffixManager.IsTypeMatch(a.Type, _currentTooltip.ItemType) && a.IsImplicit == isImplicitArea && a.IsTempered == isTemperedArea);
                         if (affix == null)
                         {
-                            // Check if the affix is set to accept any item type.
-                            affix = preset.ItemAffixes.FirstOrDefault(a => a.Id.Equals(currentItemAffix.Item2.Id));
-                            affix = affix?.IsAnyType ?? false ? affix : null;
+                            // Check if the affix is set to accept any item type. Filter on
+                            // IsAnyType inside the predicate rather than testing it after the
+                            // fact, so an earlier non-any-type entry with the same id cannot
+                            // mask a later any-type one.
+                            affix = preset.ItemAffixes.FirstOrDefault(a => a.Id.Equals(currentItemAffix.Item2.Id) && a.IsAnyType);
                         }
 
                         if (affix != null)
@@ -1828,8 +1833,15 @@ namespace D4Companion.Services
 
                     if (_settingsManager.Settings.IsAspectDetectionEnabled && !_currentTooltip.IsUniqueItem)
                     {
-                        var aspect = preset.ItemAspects.FirstOrDefault(a => a.Id.Equals(_currentTooltip.ItemAspect.Id) && a.Type.Equals(_currentTooltip.ItemAspect.Type));
-                        if (aspect != null)
+                        // Route through the same rule as GetAspect (exact slot, then IsAnyType,
+                        // then off-slot) instead of a plain Id+Type lookup - multi-build mode
+                        // cannot call GetAspect itself since that resolves against the single
+                        // selected preset, not the many presets iterated here.
+                        var aspect = AffixManager.FindBestAspectMatch(preset.ItemAspects, _currentTooltip.ItemAspect.Id, _currentTooltip.ItemAspect.Type, out var aspectMatchKind);
+                        // An off-slot match is an extraction target, not a wearable upgrade for
+                        // this build, so it does not count as a hit here - stays the default
+                        // (non-build) colour rather than being painted as "this build wants it".
+                        if (aspect != null && aspectMatchKind != AffixManager.AspectMatchKind.OffSlot)
                         {
                             color = buildColor;
                         }

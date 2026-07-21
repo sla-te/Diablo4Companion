@@ -20,6 +20,10 @@ namespace D4Companion.Entities
         public Color DefaultColorNormal { get; set; } = Colors.Green;
         public Color DefaultColorTempered { get; set; } = Colors.Green;
         public Color DefaultColorAspects { get; set; } = Colors.Green;
+        // Shown when a build aspect appears on a slot the build does not use. Such an
+        // item is still worth picking up to extract at the Occultist, so it highlights,
+        // but must not read as a wearable upgrade.
+        public Color DefaultColorAspectsOffSlot { get; set; } = Colors.Gray;
         public Color DefaultColorUniques { get; set; } = Colors.Green;
         public Color DefaultColorRunes { get; set; } = Colors.Green;
         public bool DevMode { get; set; } = false;

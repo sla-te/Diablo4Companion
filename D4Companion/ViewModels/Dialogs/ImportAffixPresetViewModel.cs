@@ -927,6 +927,7 @@ namespace D4Companion.ViewModels.Dialogs
                 {
                     Id = a.Id,
                     Type = a.Type,
+                    IsAnyType = a.IsAnyType,
                     Color = ChangeColorBuild1 ? ColorBuild1 : a.Color
                 };
             }));
@@ -970,12 +971,19 @@ namespace D4Companion.ViewModels.Dialogs
                     {
                         Id = itemAspectBuild2.Id,
                         Type = itemAspectBuild2.Type,
+                        IsAnyType = itemAspectBuild2.IsAnyType,
                         Color = ChangeColorBuild2 ? ColorBuild2 : itemAspectBuild2.Color
                     });
                 }
                 else
                 {
                     itemAspect.Color = ChangeColorBuild12 ? ColorBuild12 : itemAspect.Color;
+
+                    // Sources that cannot report which slot an aspect sits on (D4Builds,
+                    // Mobalytics) mark it IsAnyType. When two builds disagree, the merged
+                    // preset must stay at least as permissive as either input, or the
+                    // any-slot aspect would silently narrow to a single slot.
+                    itemAspect.IsAnyType = itemAspect.IsAnyType || itemAspectBuild2.IsAnyType;
                 }
             }
             foreach (var itemSigilsBuild2 in SelectedAffixPresetBuild2.ItemSigils)

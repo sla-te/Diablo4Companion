@@ -1,7 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
 using D4Companion.Entities;
+using D4Companion.Entities.Canonical;
 using D4Companion.Interfaces;
 using D4Companion.Messages;
+using D4Companion.Services.BuildAdapters;
 using Microsoft.Extensions.Logging;
 using System.IO;
 using System.Reflection;
@@ -13,8 +15,10 @@ namespace D4Companion.Services
     {
         private readonly ILogger _logger;
         private readonly IAffixManager _affixManager;
+        private readonly IBuildPresetProjector _projector;
         private readonly IHttpClientHandler _httpClientHandler;
         private readonly ISettingsManager _settingsManager;
+        private readonly MaxrollBuildAdapter _maxrollBuildAdapter = new();
 
         private List<MaxrollBuild> _maxrollBuilds = new();
         private Dictionary<int, int> _maxrollMappingsAspects = new();
@@ -23,10 +27,11 @@ namespace D4Companion.Services
 
         #region Constructors
 
-        public BuildsManagerMaxroll(ILogger<BuildsManagerMaxroll> logger, IAffixManager affixManager, IHttpClientHandler httpClientHandler, ISettingsManager settingsManager)
+        public BuildsManagerMaxroll(ILogger<BuildsManagerMaxroll> logger, IAffixManager affixManager, IBuildPresetProjector projector, IHttpClientHandler httpClientHandler, ISettingsManager settingsManager)
         {
             // Init services
             _affixManager = affixManager;
+            _projector = projector;
             _httpClientHandler = httpClientHandler;
             _logger = logger;
             _settingsManager = settingsManager;
@@ -71,15 +76,14 @@ namespace D4Companion.Services
             // Note: Only allow one Maxroll build. Update if already exists.
             _affixManager.AffixPresets.RemoveAll(p => p.Name.Equals(name));
 
-            var affixPreset = new AffixPreset
-            {
-                Name = name
-            };
-
             var maxrollBuildDataProfileJson = maxrollBuild.Data.Profiles.FirstOrDefault(p => p.Name.Equals(profile));
             if (maxrollBuildDataProfileJson != null)
             {
-                List<int> aspects = new List<int>();
+                var canonicalBuild = _maxrollBuildAdapter.ToCanonical(maxrollBuild);
+                var canonicalVariant = canonicalBuild.Variants.FirstOrDefault(v => v.Name.Equals(profile));
+                if (canonicalVariant == null) return;
+
+                int canonicalItemIndex = 0;
                 string itemType = string.Empty;
 
                 // Loop through all items
@@ -142,11 +146,24 @@ namespace D4Companion.Services
                             continue;
                     }
 
-                    // Skip Charm and HoradricSeal. Not implemented yet.
+                    // Skip Charm and HoradricSeal. Not implemented yet, and MaxrollBuildAdapter.ResolveSlot
+                    // returns null for these slots, so the adapter never emits a CanonicalItem for them
+                    // either. Skip here before touching canonicalItemIndex so the two stay aligned.
                     if (itemType.Equals(Constants.ItemTypeConstants.Charm) || itemType.Equals(Constants.ItemTypeConstants.HoradricSeal))
                     {
                         continue;
                     }
+
+                    // Match the CanonicalItem the adapter produced for this same slot entry.
+                    // Invariant: the adapter and this manager must skip identical item types, so the
+                    // surviving entries line up index-for-index with canonicalVariant.Items. If that
+                    // invariant is ever violated, fail loudly instead of binding affixes to the wrong item.
+                    if (canonicalItemIndex >= canonicalVariant.Items.Count)
+                    {
+                        _logger.LogError($"{MethodBase.GetCurrentMethod()?.Name}: canonicalItemIndex {canonicalItemIndex} out of range for {canonicalVariant.Items.Count} canonical items. Adapter and manager item-type skip lists have diverged.");
+                        break;
+                    }
+                    var canonicalItem = canonicalVariant.Items[canonicalItemIndex++];
 
                     // Process runes
                     foreach (var socket in maxrollBuild.Data.Items[item.Value].Sockets)
@@ -154,10 +171,7 @@ namespace D4Companion.Services
                         string runeId = socket ?? string.Empty;
                         if (!runeId.StartsWith("Rune_", StringComparison.OrdinalIgnoreCase)) continue;
 
-                        if (!affixPreset.ItemRunes.Any(r => r.Id.Equals($"Item_{runeId}")))
-                        {
-                            affixPreset.ItemRunes.Add(new ItemAffix { Id = $"Item_{runeId}", Type = Constants.ItemTypeConstants.Rune });
-                        }
+                        canonicalItem.RuneIds.Add($"Item_{runeId}");
                     }
 
                     // Process unique items
@@ -167,12 +181,7 @@ namespace D4Companion.Services
                     if (uniqueInfo != null)
                     {
                         // Add unique items
-                        affixPreset.ItemUniques.Add(new ItemAffix
-                        {
-                            Id = uniqueInfo.IdName,
-                            Type = string.Empty,
-                            Color = _settingsManager.Settings.DefaultColorUniques
-                        });
+                        canonicalItem.UniqueIds.Add(uniqueInfo.IdName);
                     }
 
                     // Process implicit affixes
@@ -205,16 +214,7 @@ namespace D4Companion.Services
                             }
                             else
                             {
-                                if (!affixPreset.ItemAffixes.Any(a => a.Id.Equals(affixInfo.IdName) && a.Type.Equals(itemType)))
-                                {
-                                    affixPreset.ItemAffixes.Add(new ItemAffix
-                                    {
-                                        Id = affixInfo.IdName,
-                                        Type = itemType,
-                                        Color = _settingsManager.Settings.DefaultColorImplicit,
-                                        IsImplicit = true
-                                    });
-                                }
+                                canonicalItem.Affixes.Add(new CanonicalAffix { Id = affixInfo.IdName, IsImplicit = true });
                             }
                         }
                     }
@@ -320,16 +320,11 @@ namespace D4Companion.Services
                         }
                         else
                         {
-                            if (!affixPreset.ItemAffixes.Any(a => a.Id.Equals(affixInfo.IdName) && a.Type.Equals(itemType) && !a.IsImplicit))
+                            canonicalItem.Affixes.Add(new CanonicalAffix
                             {
-                                affixPreset.ItemAffixes.Add(new ItemAffix
-                                {
-                                    Id = affixInfo.IdName,
-                                    Type = itemType,
-                                    Color = explicitAffix.Greater ? _settingsManager.Settings.DefaultColorGreater : _settingsManager.Settings.DefaultColorNormal,
-                                    IsGreater = explicitAffix.Greater
-                                });
-                            }
+                                Id = affixInfo.IdName,
+                                IsGreater = explicitAffix.Greater
+                            });
                         }
                     }
 
@@ -349,56 +344,38 @@ namespace D4Companion.Services
                         }
                         else
                         {
-                            if (!affixPreset.ItemAffixes.Any(a => a.Id.Equals(affixInfo.IdName) && a.Type.Equals(itemType) && a.IsTempered))
+                            canonicalItem.Affixes.Add(new CanonicalAffix
                             {
-                                affixPreset.ItemAffixes.Add(new ItemAffix
-                                {
-                                    Id = affixInfo.IdName,
-                                    Type = itemType,
-                                    Color = _settingsManager.Settings.DefaultColorTempered,
-                                    IsTempered = true
-                                });
-                            }
+                                Id = affixInfo.IdName,
+                                IsTempered = true
+                            });
                         }
                     }
 
-                    // Find all aspects / legendary powers
-                    foreach (var aspect in maxrollBuild.Data.Items[item.Value].Aspects)
+                    // Resolve aspects / legendary powers. The adapter can only stash the raw
+                    // Maxroll sno on the CanonicalItem because it has no IAffixManager access;
+                    // replace those raw values with the real IdName here.
+                    var resolvedAspectIds = new List<string>();
+                    foreach (var aspectSno in canonicalItem.AspectIds)
                     {
-                        int aspectId = aspect.Nid;
-                        if (aspectId != 0)
+                        AspectInfo? aspectInfo = _affixManager.GetAspectInfoMaxrollByIdSno(aspectSno);
+                        if (aspectInfo == null)
                         {
-                            aspects.Add(aspectId);
+                            _logger.LogWarning($"{MethodBase.GetCurrentMethod()?.Name}: Unknown aspect sno: {aspectSno}");
+                            WeakReferenceMessenger.Default.Send(new WarningOccurredMessage(new WarningOccurredMessageParams
+                            {
+                                Message = $"Imported Maxroll build contains unknown aspect sno: {aspectSno}."
+                            }));
+                        }
+                        else
+                        {
+                            resolvedAspectIds.Add(aspectInfo.IdName);
                         }
                     }
+                    canonicalItem.AspectIds = resolvedAspectIds;
                 }
 
-                // Add all aspects to preset
-                foreach (var aspectSno in aspects)
-                {
-                    AspectInfo? aspectInfo = _affixManager.GetAspectInfoMaxrollByIdSno(aspectSno.ToString());
-                    if (aspectInfo == null)
-                    {
-                        _logger.LogWarning($"{MethodBase.GetCurrentMethod()?.Name}: Unknown aspect sno: {aspectSno}");
-                        WeakReferenceMessenger.Default.Send(new WarningOccurredMessage(new WarningOccurredMessageParams
-                        {
-                            Message = $"Imported Maxroll build contains unknown aspect sno: {aspectSno}."
-                        }));
-                    }
-                    else
-                    {
-                        affixPreset.ItemAspects.Add(new ItemAffix { Id = aspectInfo.IdName, Type = Constants.ItemTypeConstants.Helm, Color = _settingsManager.Settings.DefaultColorAspects });
-                        affixPreset.ItemAspects.Add(new ItemAffix { Id = aspectInfo.IdName, Type = Constants.ItemTypeConstants.Chest, Color = _settingsManager.Settings.DefaultColorAspects });
-                        affixPreset.ItemAspects.Add(new ItemAffix { Id = aspectInfo.IdName, Type = Constants.ItemTypeConstants.Gloves, Color = _settingsManager.Settings.DefaultColorAspects });
-                        affixPreset.ItemAspects.Add(new ItemAffix { Id = aspectInfo.IdName, Type = Constants.ItemTypeConstants.Pants, Color = _settingsManager.Settings.DefaultColorAspects });
-                        affixPreset.ItemAspects.Add(new ItemAffix { Id = aspectInfo.IdName, Type = Constants.ItemTypeConstants.Boots, Color = _settingsManager.Settings.DefaultColorAspects });
-                        affixPreset.ItemAspects.Add(new ItemAffix { Id = aspectInfo.IdName, Type = Constants.ItemTypeConstants.Amulet, Color = _settingsManager.Settings.DefaultColorAspects });
-                        affixPreset.ItemAspects.Add(new ItemAffix { Id = aspectInfo.IdName, Type = Constants.ItemTypeConstants.Ring, Color = _settingsManager.Settings.DefaultColorAspects });
-                        affixPreset.ItemAspects.Add(new ItemAffix { Id = aspectInfo.IdName, Type = Constants.ItemTypeConstants.Weapon, Color = _settingsManager.Settings.DefaultColorAspects });
-                        affixPreset.ItemAspects.Add(new ItemAffix { Id = aspectInfo.IdName, Type = Constants.ItemTypeConstants.Ranged, Color = _settingsManager.Settings.DefaultColorAspects });
-                        affixPreset.ItemAspects.Add(new ItemAffix { Id = aspectInfo.IdName, Type = Constants.ItemTypeConstants.Offhand, Color = _settingsManager.Settings.DefaultColorAspects });
-                    }
-                }
+                var affixPreset = _projector.Project(canonicalVariant, name);
 
                 // Add all paragon boards
                 if (_settingsManager.Settings.IsImportParagonMaxrollEnabled)

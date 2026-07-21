@@ -171,18 +171,26 @@ namespace D4Companion.Services
             WeakReferenceMessenger.Default.Send(new SelectedAffixesChangedMessage());
         }
 
-        public void AddAspect(AspectInfo aspectInfo, string itemType)
+        public void AddAspect(AspectInfo aspectInfo, string itemType, bool isAnyType = false)
         {
             var preset = _affixPresets.FirstOrDefault(preset => preset.Name.Equals(_settingsManager.Settings.SelectedAffixPreset));
             if (preset == null) return;
 
-            if (!preset.ItemAspects.Any(a => a.Id.Equals(aspectInfo.IdName) && a.Type.Equals(itemType)))
+            // An IsAnyType entry has no slot provenance, so there is only ever one of it
+            // per aspect. Dedup on Id alone in that case, mirroring the exists-check the
+            // importers apply via BuildPresetProjector for the same reason.
+            bool exists = isAnyType
+                ? preset.ItemAspects.Any(a => a.Id.Equals(aspectInfo.IdName) && a.IsAnyType)
+                : preset.ItemAspects.Any(a => a.Id.Equals(aspectInfo.IdName) && a.Type.Equals(itemType));
+
+            if (!exists)
             {
                 preset.ItemAspects.Add(new ItemAffix
                 {
                     Id = aspectInfo.IdName,
                     Type = itemType,
-                    Color = _settingsManager.Settings.DefaultColorAspects
+                    Color = _settingsManager.Settings.DefaultColorAspects,
+                    IsAnyType = isAnyType
                 });
                 SaveAffixPresets();
             }
@@ -534,14 +542,16 @@ namespace D4Companion.Services
             bool isTempered = affixType.Equals(Constants.AffixTypeConstants.Tempered);
 
             // Since season 11 a tempered affix can become a greater affix.
-            var affix = preset.ItemAffixes.FirstOrDefault(a => a.Id.Equals(affixId) && a.Type.Equals(itemType) && a.IsImplicit == isImplicit && 
+            var affix = preset.ItemAffixes.FirstOrDefault(a => a.Id.Equals(affixId) && IsTypeMatch(a.Type, itemType) && a.IsImplicit == isImplicit &&
                 (a.IsTempered == isTempered || (a.IsTempered && isGreater)));
 
             // Check if the affix is set to accept any item type.
             if (affix == null)
             {
-                affix = preset.ItemAffixes.FirstOrDefault(a => a.Id.Equals(affixId));
-                affix = affix?.IsAnyType ?? false ? affix : null;
+                // Filter on IsAnyType inside the predicate rather than testing it after the
+                // fact, so an earlier non-any-type entry with the same id cannot mask a later
+                // any-type one. GetAspect resolves this the same way; keep the two in step.
+                affix = preset.ItemAffixes.FirstOrDefault(a => a.Id.Equals(affixId) && a.IsAnyType);
             }
 
             if (affix == null) return affixDefault;
@@ -601,21 +611,115 @@ namespace D4Companion.Services
             return _minimalAffixValues.TryGetValue(idName, out var minimalValue) ? minimalValue : 0;
         }
 
+        /// <summary>
+        /// Decides whether a preset entry typed <paramref name="presetType"/> applies to a
+        /// detected item of <paramref name="itemType"/>.
+        ///
+        /// "weapon" is a supertype and matching across it is SYMMETRIC: plain "weapon"
+        /// matches any Arsenal subtype and vice versa. Only two DIFFERENT subtypes fail
+        /// to match, which is the entire point of the split.
+        ///
+        /// The symmetry is not cosmetic. The Arsenal damage-type suffix appears only on
+        /// Barbarian tooltips and only in English data, so non-Barbarian classes and all
+        /// 13 non-English locales resolve every weapon to plain "weapon". Were matching
+        /// one-directional, those users would lose weapon matching altogether.
+        /// </summary>
+        public static bool IsTypeMatch(string presetType, string itemType)
+        {
+            if (presetType.Equals(itemType, StringComparison.Ordinal)) return true;
+
+            bool presetIsWeapon = presetType.Equals(Constants.ItemTypeConstants.Weapon, StringComparison.Ordinal);
+            bool itemIsWeapon = itemType.Equals(Constants.ItemTypeConstants.Weapon, StringComparison.Ordinal);
+
+            if (presetIsWeapon) return WeaponTypeResolver.IsWeaponSubtype(itemType);
+            if (itemIsWeapon) return WeaponTypeResolver.IsWeaponSubtype(presetType);
+
+            return false;
+        }
+
+        /// <summary>
+        /// Outcome of <see cref="FindBestAspectMatch"/>: which of the three resolution
+        /// steps produced the returned entry, or that none did.
+        /// </summary>
+        public enum AspectMatchKind
+        {
+            None,
+            ExactSlot,
+            AnyType,
+            OffSlot
+        }
+
+        /// <summary>
+        /// The single source of truth for "does this aspect id/item type match an entry
+        /// in this candidate list, and how". Both GetAspect (single selected preset) and
+        /// multi-build mode (many presets, no selected-preset lookup) must resolve through
+        /// this method so the rule lives in exactly one place. Resolution order:
+        ///
+        /// 1. Exact slot, honouring the weapon supertype rule (<see cref="IsTypeMatch"/>).
+        /// 2. An IsAnyType entry: source could not supply slot provenance. Mirrors the
+        ///    fallback in GetAffix.
+        /// 3. An entry present on a DIFFERENT slot: in the build, but an extraction
+        ///    target at the Occultist, not a wearable upgrade for that slot.
+        /// </summary>
+        /// <param name="candidates">The ItemAspects list of the preset(s) to search.</param>
+        /// <param name="aspectId">The detected aspect id.</param>
+        /// <param name="itemType">The detected item's slot/type.</param>
+        /// <param name="matchKind">Which step produced the result, or None.</param>
+        /// <returns>The matching preset entry, or null if none of the three steps matched.</returns>
+        public static ItemAffix? FindBestAspectMatch(IEnumerable<ItemAffix> candidates, string aspectId, string itemType, out AspectMatchKind matchKind)
+        {
+            // 1. Exact slot, honouring the weapon supertype rule.
+            var exactSlot = candidates.FirstOrDefault(a => a.Id.Equals(aspectId) && IsTypeMatch(a.Type, itemType));
+            if (exactSlot != null)
+            {
+                matchKind = AspectMatchKind.ExactSlot;
+                return exactSlot;
+            }
+
+            // 2. Source could not supply provenance. Mirrors the fallback in GetAffix.
+            var anyType = candidates.FirstOrDefault(a => a.Id.Equals(aspectId) && a.IsAnyType);
+            if (anyType != null)
+            {
+                matchKind = AspectMatchKind.AnyType;
+                return anyType;
+            }
+
+            // 3. In the build, but on another slot: an extraction target, not an upgrade.
+            var offSlot = candidates.FirstOrDefault(a => a.Id.Equals(aspectId));
+            if (offSlot != null)
+            {
+                matchKind = AspectMatchKind.OffSlot;
+                return offSlot;
+            }
+
+            matchKind = AspectMatchKind.None;
+            return null;
+        }
+
         public ItemAffix GetAspect(string aspectId, string itemType)
         {
-            var affixDefault = new ItemAffix
-            {
-                Id = aspectId,
-                Type = itemType,
-                Color = Colors.Red
-            };
+            var affixDefault = new ItemAffix { Id = aspectId, Type = itemType, Color = Colors.Red };
 
-            var preset = _affixPresets.FirstOrDefault(preset => preset.Name.Equals(_settingsManager.Settings.SelectedAffixPreset));
+            var preset = _affixPresets.FirstOrDefault(preset =>
+                preset.Name.Equals(_settingsManager.Settings.SelectedAffixPreset));
             if (preset == null) return affixDefault;
 
-            var aspect = preset.ItemAspects.FirstOrDefault(a => a.Id.Equals(aspectId) && a.Type.Equals(itemType));
-            if (aspect == null) return affixDefault;
-            return aspect;
+            var match = FindBestAspectMatch(preset.ItemAspects, aspectId, itemType, out var matchKind);
+            if (match == null) return affixDefault;
+
+            // An off-slot match resolves to a distinct colour meaning "worth extracting
+            // at the Occultist", never the matched entry's own (wearable-upgrade) colour.
+            if (matchKind == AspectMatchKind.OffSlot)
+            {
+                return new ItemAffix
+                {
+                    Id = aspectId,
+                    Type = itemType,
+                    Color = _settingsManager.Settings.DefaultColorAspectsOffSlot
+                };
+            }
+
+            return match;
         }
 
         public string GetAspectDescription(string aspectId)

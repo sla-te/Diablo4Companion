@@ -854,16 +854,13 @@ namespace D4Companion.ViewModels
         {
             if (aspectInfo != null)
             {
-                _affixManager.AddAspect(aspectInfo.Model, ItemTypeConstants.Helm);
-                _affixManager.AddAspect(aspectInfo.Model, ItemTypeConstants.Chest);
-                _affixManager.AddAspect(aspectInfo.Model, ItemTypeConstants.Gloves);
-                _affixManager.AddAspect(aspectInfo.Model, ItemTypeConstants.Pants);
-                _affixManager.AddAspect(aspectInfo.Model, ItemTypeConstants.Boots);
-                _affixManager.AddAspect(aspectInfo.Model, ItemTypeConstants.Amulet);
-                _affixManager.AddAspect(aspectInfo.Model, ItemTypeConstants.Ring);
-                _affixManager.AddAspect(aspectInfo.Model, ItemTypeConstants.Weapon);
-                _affixManager.AddAspect(aspectInfo.Model, ItemTypeConstants.Ranged);
-                _affixManager.AddAspect(aspectInfo.Model, ItemTypeConstants.Offhand);
+                // A manually added aspect has no slot provenance: the user picked an
+                // aspect, not an aspect-on-a-slot. That is exactly what IsAnyType models,
+                // so this adds one entry rather than fabricating one per equipment slot.
+                // The Type value itself is only used for the icon/tab display when
+                // IsAnyType is set, so Weapon is used here for the same reason the
+                // D4Builds and Mobalytics importers use it in BuildPresetProjector.
+                _affixManager.AddAspect(aspectInfo.Model, ItemTypeConstants.Weapon, isAnyType: true);
             }
         }
 
@@ -1571,7 +1568,9 @@ namespace D4Companion.ViewModels
 
             ItemAffix itemAffix = (ItemAffix)selectedAffixObj;
 
-            return itemAffix.Type.Equals(ItemTypeConstants.Weapon);
+            // Match the Arsenal subtypes too, otherwise an affix typed weapon_bludgeoning
+            // or weapon_slicing has no panel to appear in and silently vanishes from the UI.
+            return D4Companion.Services.AffixManager.IsTypeMatch(ItemTypeConstants.Weapon, itemAffix.Type);
         }
 
         private void CreateSelectedAffixesRangedFilteredView()
@@ -1631,7 +1630,17 @@ namespace D4Companion.ViewModels
 
             ItemAffix itemAffix = (ItemAffix)selectedAspectObj;
 
-            return !SelectedAspectsFiltered?.Cast<ItemAffix>().Any(a => a.Id.Equals(itemAffix.Id)) ?? false;
+            // Show each aspect once, no matter how many slots carry it.
+            //
+            // Presets created before the ingest rework hold one entry per aspect per slot
+            // (ten identical rows), so this dedup still has to exist for them. It is
+            // deliberately evaluated against SelectedAspects, the backing collection, and
+            // NOT against SelectedAspectsFiltered: the previous version queried the very
+            // view this predicate filters, re-entering itself on every evaluation, which
+            // made the result depend on enumeration order.
+            ItemAffix? first = SelectedAspects.FirstOrDefault(aspect => aspect.Id.Equals(itemAffix.Id));
+
+            return ReferenceEquals(first, itemAffix);
         }
 
         private void InitAffixLanguages()
