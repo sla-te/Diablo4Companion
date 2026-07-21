@@ -43,5 +43,11 @@ namespace D4Companion.Entities.Canonical
         public bool IsGreater { get; set; } = false;
         public bool IsImplicit { get; set; } = false;
         public bool IsTempered { get; set; } = false;
+        /// <summary>
+        /// 1-based priority within the item's stat list, or 0 when the source does not rank
+        /// its affixes. Only explicits are ranked; implicits and tempers are not part of the
+        /// guide's priority list and keep 0.
+        /// </summary>
+        public int Rank { get; set; } = 0;
     }
 }

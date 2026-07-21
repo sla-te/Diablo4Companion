@@ -328,7 +328,12 @@ namespace D4Companion.Services
                             canonicalItem.Affixes.Add(new CanonicalAffix
                             {
                                 Id = affixInfo.IdName,
-                                IsGreater = explicitAffix.IsGreaterAffix
+                                IsGreater = explicitAffix.IsGreaterAffix,
+                                // The loop index, not a running counter over the affixes we
+                                // managed to resolve. An entry that resolves to nothing is
+                                // still numbered in the guide, so renumbering around it would
+                                // shift every later stat one rank up.
+                                Rank = i + 1
                             });
                         }
                     }

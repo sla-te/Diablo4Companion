@@ -133,6 +133,9 @@
   <data name="rsTooltipSetAffix" xml:space="preserve">
     <value>Set affix</value>
   </data>
+  <data name="rsTooltipStatPriority" xml:space="preserve">
+    <value>Stat priority in the imported build - 1 is the highest</value>
+  </data>
   <data name="rsTooltipSeasonal" xml:space="preserve">
     <value>Seasonal</value>
   </data>
