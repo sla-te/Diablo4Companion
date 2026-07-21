@@ -3,6 +3,7 @@ using D4Companion.Entities;
 using D4Companion.Helpers;
 using D4Companion.Interfaces;
 using D4Companion.Messages;
+using D4Companion.Services.BuildAdapters;
 using FuzzierSharp;
 using FuzzierSharp.SimilarityRatio;
 using FuzzierSharp.SimilarityRatio.Scorer.Composite;
@@ -11,12 +12,10 @@ using Microsoft.Extensions.Logging;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
-using System.Collections.Concurrent;
 using System.IO;
 using System.Reflection;
 using System.Text.Json;
 using System.Text.RegularExpressions;
-using System.Windows.Media;
 
 namespace D4Companion.Services
 {
@@ -24,7 +23,9 @@ namespace D4Companion.Services
     {
         private readonly ILogger _logger;
         private readonly IAffixManager _affixManager;
+        private readonly IBuildPresetProjector _projector;
         private readonly ISettingsManager _settingsManager;
+        private readonly D4BuildsBuildAdapter _d4BuildsBuildAdapter = new();
 
         private static readonly int _delayVariant = 100;
         private static readonly int _delayTab = 100;
@@ -50,11 +51,12 @@ namespace D4Companion.Services
 
         #region Constructors
 
-        public BuildsManagerD4Builds(ILogger<BuildsManagerD4Builds> logger, IAffixManager affixManager, ISettingsManager settingsManager)
+        public BuildsManagerD4Builds(ILogger<BuildsManagerD4Builds> logger, IAffixManager affixManager, IBuildPresetProjector projector, ISettingsManager settingsManager)
         {
             // Init services
             _affixManager = affixManager;
             _logger = logger;
+            _projector = projector;
             _settingsManager = settingsManager;
 
             // Init data
@@ -404,206 +406,59 @@ namespace D4Companion.Services
                     Status = $"Converting {variant.Name}."
                 }));
 
-                var affixPreset = new AffixPreset
-                {
-                    Name = variant.Name
-                };
+                var canonicalBuild = _d4BuildsBuildAdapter.ToCanonical(variant, d4BuildsBuild.Name);
+                var canonicalVariant = canonicalBuild.Variants[0];
 
-                // Prepare affixes
-                List<Tuple<string, D4buildsAffix>> affixesD4Builds = new List<Tuple<string, D4buildsAffix>>();
-
-                foreach (var affixD4Builds in variant.Helm)
+                foreach (var item in canonicalVariant.Items)
                 {
-                    affixesD4Builds.Add(new Tuple<string, D4buildsAffix>(Constants.ItemTypeConstants.Helm, affixD4Builds));
-                }
-                foreach (var affixD4Builds in variant.Chest)
-                {
-                    affixesD4Builds.Add(new Tuple<string, D4buildsAffix>(Constants.ItemTypeConstants.Chest, affixD4Builds));
-                }
-                foreach (var affixD4Builds in variant.Gloves)
-                {
-                    affixesD4Builds.Add(new Tuple<string, D4buildsAffix>(Constants.ItemTypeConstants.Gloves, affixD4Builds));
-                }
-                foreach (var affixD4Builds in variant.Pants)
-                {
-                    affixesD4Builds.Add(new Tuple<string, D4buildsAffix>(Constants.ItemTypeConstants.Pants, affixD4Builds));
-                }
-                foreach (var affixD4Builds in variant.Boots)
-                {
-                    affixesD4Builds.Add(new Tuple<string, D4buildsAffix>(Constants.ItemTypeConstants.Boots, affixD4Builds));
-                }
-                foreach (var affixD4Builds in variant.Amulet)
-                {
-                    affixesD4Builds.Add(new Tuple<string, D4buildsAffix>(Constants.ItemTypeConstants.Amulet, affixD4Builds));
-                }
-                foreach (var affixD4Builds in variant.Ring)
-                {
-                    affixesD4Builds.Add(new Tuple<string, D4buildsAffix>(Constants.ItemTypeConstants.Ring, affixD4Builds));
-                }
-                foreach (var affixD4Builds in variant.Weapon)
-                {
-                    affixesD4Builds.Add(new Tuple<string, D4buildsAffix>(Constants.ItemTypeConstants.Weapon, affixD4Builds));
-                }
-                foreach (var affixD4Builds in variant.Ranged)
-                {
-                    affixesD4Builds.Add(new Tuple<string, D4buildsAffix>(Constants.ItemTypeConstants.Ranged, affixD4Builds));
-                }
-                foreach (var affixD4Builds in variant.Offhand)
-                {
-                    affixesD4Builds.Add(new Tuple<string, D4buildsAffix>(Constants.ItemTypeConstants.Offhand, affixD4Builds));
-                }
-
-                // Find matching affix ids
-                ConcurrentBag<ItemAffix> itemAffixBag = new ConcurrentBag<ItemAffix>();
-                Parallel.ForEach(affixesD4Builds, affixD4Builds =>
-                {
-                    var itemAffixResult = ConvertItemAffix(affixD4Builds);
-                    itemAffixBag.Add(itemAffixResult);
-                });
-                affixPreset.ItemAffixes.AddRange(itemAffixBag);
-
-                // Sort affixes
-                affixPreset.ItemAffixes.Sort((x, y) =>
-                {
-                    if (x.Id == y.Id && x.IsImplicit == y.IsImplicit && x.IsTempered == y.IsTempered) return 0;
-
-                    int result = x.IsTempered && !y.IsTempered ? 1 : y.IsTempered && !x.IsTempered ? -1 : 0;
-                    if (result == 0)
+                    // Resolve affixes. The adapter can only stash the raw scraped affix text
+                    // on the CanonicalAffix because it has no fuzzy-matching dependency;
+                    // replace it with the matched AffixInfo.IdName here.
+                    foreach (var affix in item.Affixes)
                     {
-                        result = x.IsImplicit && !y.IsImplicit ? -1 : y.IsImplicit && !x.IsImplicit ? 1 : 0;
+                        var affixResult = Process.ExtractOne(affix.Id, _affixDescriptions, scorer: ScorerCache.Get<DefaultRatioScorer>());
+                        affix.Id = _affixMapDescriptionToId[affixResult.Value];
                     }
 
-                    return result;
-                });
-
-                // Remove duplicates
-                affixPreset.ItemAffixes = affixPreset.ItemAffixes.DistinctBy(a => new { a.Id, a.Type, a.IsImplicit, a.IsTempered }).ToList();
-
-                // Find matching aspect ids
-                ConcurrentBag<ItemAffix> itemAspectBag = new ConcurrentBag<ItemAffix>();
-                Parallel.ForEach(variant.Aspect, aspect =>
-                {
-                    var itemAspectResult = ConvertItemAspect(aspect);
-                    itemAspectBag.Add(itemAspectResult);
-                });
-                foreach (var aspect in itemAspectBag)
-                {
-                    affixPreset.ItemAspects.Add(new ItemAffix { Id = aspect.Id, Type = Constants.ItemTypeConstants.Helm });
-                    affixPreset.ItemAspects.Add(new ItemAffix { Id = aspect.Id, Type = Constants.ItemTypeConstants.Chest });
-                    affixPreset.ItemAspects.Add(new ItemAffix { Id = aspect.Id, Type = Constants.ItemTypeConstants.Gloves });
-                    affixPreset.ItemAspects.Add(new ItemAffix { Id = aspect.Id, Type = Constants.ItemTypeConstants.Pants });
-                    affixPreset.ItemAspects.Add(new ItemAffix { Id = aspect.Id, Type = Constants.ItemTypeConstants.Boots });
-                    affixPreset.ItemAspects.Add(new ItemAffix { Id = aspect.Id, Type = Constants.ItemTypeConstants.Amulet });
-                    affixPreset.ItemAspects.Add(new ItemAffix { Id = aspect.Id, Type = Constants.ItemTypeConstants.Ring });
-                    affixPreset.ItemAspects.Add(new ItemAffix { Id = aspect.Id, Type = Constants.ItemTypeConstants.Weapon });
-                    affixPreset.ItemAspects.Add(new ItemAffix { Id = aspect.Id, Type = Constants.ItemTypeConstants.Ranged });
-                    affixPreset.ItemAspects.Add(new ItemAffix { Id = aspect.Id, Type = Constants.ItemTypeConstants.Offhand });
-                }
-
-                // Find matching rune ids
-                ConcurrentBag<ItemAffix> itemRuneBag = new ConcurrentBag<ItemAffix>();
-                Parallel.ForEach(variant.Runes, rune =>
-                {
-                    var itemRuneResult = ConvertItemRune(rune);
-                    itemRuneBag.Add(itemRuneResult);
-                });
-                foreach (var rune in itemRuneBag)
-                {
-                    affixPreset.ItemRunes.Add(new ItemAffix { Id = rune.Id, Type = Constants.ItemTypeConstants.Rune });
-                }
-
-                // Find matching unique ids
-                ConcurrentBag<ItemAffix> itemUniqueBag = new ConcurrentBag<ItemAffix>();
-                Parallel.ForEach(variant.Uniques, unique =>
-                {
-                    var itemUniqueResult = ConvertItemUnique(unique);
-                    if (!string.IsNullOrWhiteSpace(itemUniqueResult.Id))
+                    // Resolve aspects.
+                    var resolvedAspectIds = new List<string>();
+                    foreach (var aspect in item.AspectIds)
                     {
-                        itemUniqueBag.Add(itemUniqueResult);
+                        var aspectResult = Process.ExtractOne(aspect.Replace("Aspect", string.Empty, StringComparison.OrdinalIgnoreCase), _aspectNames, scorer: ScorerCache.Get<WeightedRatioScorer>());
+                        resolvedAspectIds.Add(_aspectMapNameToId[aspectResult.Value]);
                     }
-                });
-                affixPreset.ItemUniques.AddRange(itemUniqueBag);
+                    item.AspectIds = resolvedAspectIds;
 
-                // Add paragon board
-                affixPreset.ParagonBoardsList.Add(variant.ParagonBoards);
+                    // Resolve runes.
+                    var resolvedRuneIds = new List<string>();
+                    foreach (var rune in item.RuneIds)
+                    {
+                        var runeResult = Process.ExtractOne(rune, _runeNames, scorer: ScorerCache.Get<WeightedRatioScorer>());
+                        resolvedRuneIds.Add(_runeMapNameToId[runeResult.Value]);
+                    }
+                    item.RuneIds = resolvedRuneIds;
 
+                    // Resolve uniques. Workaround to ignore empty item slots: a low score
+                    // means the scraped text was not actually a unique name.
+                    var resolvedUniqueIds = new List<string>();
+                    foreach (var unique in item.UniqueIds)
+                    {
+                        var uniqueResult = Process.ExtractOne(unique, _uniqueNames, scorer: ScorerCache.Get<WeightedRatioScorer>());
+                        if (uniqueResult.Score < 90) continue;
+                        resolvedUniqueIds.Add(_uniqueMapNameToId[uniqueResult.Value]);
+                    }
+                    item.UniqueIds = resolvedUniqueIds;
+                }
+
+                var affixPreset = _projector.Project(canonicalVariant, variant.Name);
                 variant.AffixPreset = affixPreset;
+
                 WeakReferenceMessenger.Default.Send(new D4BuildsStatusUpdateMessage(new D4BuildsStatusUpdateMessageParams
                 {
                     Build = d4BuildsBuild,
                     Status = $"Converted {variant.Name}."
                 }));
             }
-        }
-
-        private ItemAffix ConvertItemAffix(Tuple<string, D4buildsAffix> affixDescription)
-        {
-            string affixId = string.Empty;
-            string itemType = affixDescription.Item1;
-            D4buildsAffix d4buildsAffix = affixDescription.Item2;
-
-            var result = Process.ExtractOne(d4buildsAffix.AffixText, _affixDescriptions, scorer: ScorerCache.Get<DefaultRatioScorer>());
-            affixId = _affixMapDescriptionToId[result.Value];
-
-            Color color = d4buildsAffix.IsTempered ? _settingsManager.Settings.DefaultColorTempered :
-                d4buildsAffix.IsImplicit ? _settingsManager.Settings.DefaultColorImplicit : 
-                _settingsManager.Settings.DefaultColorNormal;
-            return new ItemAffix
-            {
-                Id = affixId,
-                Type = itemType,
-                Color = color,
-                IsGreater = d4buildsAffix.IsGreater,
-                IsImplicit = d4buildsAffix.IsImplicit,
-                IsTempered = d4buildsAffix.IsTempered
-            };
-        }
-
-        private ItemAffix ConvertItemAspect(string aspect)
-        {
-            string aspectId = string.Empty;
-
-            var result = Process.ExtractOne(aspect.Replace("Aspect", string.Empty, StringComparison.OrdinalIgnoreCase), _aspectNames, scorer: ScorerCache.Get<WeightedRatioScorer>());
-            aspectId = _aspectMapNameToId[result.Value];
-
-            return new ItemAffix
-            {
-                Id = aspectId,
-                Type = Constants.ItemTypeConstants.Helm,
-                Color = _settingsManager.Settings.DefaultColorAspects
-            };
-        }
-
-        private ItemAffix ConvertItemRune(string rune)
-        {
-            string runeId = string.Empty;
-
-            var result = Process.ExtractOne(rune, _runeNames, scorer: ScorerCache.Get<WeightedRatioScorer>());
-            runeId = _runeMapNameToId[result.Value];
-
-            return new ItemAffix
-            {
-                Id = runeId,
-                Type = Constants.ItemTypeConstants.Rune,
-                Color = _settingsManager.Settings.DefaultColorRunes
-            };
-        }
-
-        private ItemAffix ConvertItemUnique(string unique)
-        {
-            string uniqueId = string.Empty;
-
-            var result = Process.ExtractOne(unique, _uniqueNames, scorer: ScorerCache.Get<WeightedRatioScorer>());
-
-            // Workaround to ignore empty item slots.
-            uniqueId = result.Score < 90 ? string.Empty : _uniqueMapNameToId[result.Value];
-
-            return new ItemAffix
-            {
-                Id = uniqueId,
-                Type = string.Empty,
-                Color = _settingsManager.Settings.DefaultColorUniques
-            };
         }
 
         private void ExportBuildVariants(D4BuildsBuild d4BuildsBuild)

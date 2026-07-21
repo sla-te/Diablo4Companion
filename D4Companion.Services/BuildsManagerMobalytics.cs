@@ -3,6 +3,7 @@ using D4Companion.Entities;
 using D4Companion.Helpers;
 using D4Companion.Interfaces;
 using D4Companion.Messages;
+using D4Companion.Services.BuildAdapters;
 using FuzzierSharp;
 using FuzzierSharp.SimilarityRatio;
 using FuzzierSharp.SimilarityRatio.Scorer.Composite;
@@ -13,15 +14,12 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.DevTools;
 using OpenQA.Selenium.Support.UI;
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Text.Json;
-using System.Windows.Media;
-using System.Xml.Linq;
 
 namespace D4Companion.Services
 {
@@ -29,7 +27,9 @@ namespace D4Companion.Services
     {
         private readonly IAffixManager _affixManager;
         private readonly ILogger _logger;
+        private readonly IBuildPresetProjector _projector;
         private readonly ISettingsManager _settingsManager;
+        private readonly MobalyticsBuildAdapter _mobalyticsBuildAdapter = new();
 
         private List<AffixInfo> _affixes = new List<AffixInfo>();
         private List<string> _affixDescriptions = new List<string>();
@@ -57,11 +57,12 @@ namespace D4Companion.Services
 
         #region Constructors
 
-        public BuildsManagerMobalytics(ILogger<BuildsManagerMobalytics> logger, IAffixManager affixManager, ISettingsManager settingsManager)
+        public BuildsManagerMobalytics(ILogger<BuildsManagerMobalytics> logger, IAffixManager affixManager, IBuildPresetProjector projector, ISettingsManager settingsManager)
         {
             // Init services
             _affixManager = affixManager;
             _logger = logger;
+            _projector = projector;
             _settingsManager = settingsManager;
 
             // Init data
@@ -526,215 +527,73 @@ namespace D4Companion.Services
                     Status = $"Converting {variant.Name}."
                 }));
 
-                var affixPreset = new AffixPreset
-                {
-                    Name = variant.Name
-                };
+                var canonicalBuild = _mobalyticsBuildAdapter.ToCanonical(variant, mobalyticsBuild.Name);
+                var canonicalVariant = canonicalBuild.Variants[0];
 
-                // Prepare affixes
-                List<Tuple<string, MobalyticsAffix>> affixesMobalytics = new List<Tuple<string, MobalyticsAffix>>();
-
-                foreach (var affixMobalytics in variant.Helm)
+                foreach (var item in canonicalVariant.Items)
                 {
-                    affixesMobalytics.Add(new Tuple<string, MobalyticsAffix>(Constants.ItemTypeConstants.Helm, affixMobalytics));
-                }
-                foreach (var affixMobalytics in variant.Chest)
-                {
-                    affixesMobalytics.Add(new Tuple<string, MobalyticsAffix>(Constants.ItemTypeConstants.Chest, affixMobalytics));
-                }
-                foreach (var affixMobalytics in variant.Gloves)
-                {
-                    affixesMobalytics.Add(new Tuple<string, MobalyticsAffix>(Constants.ItemTypeConstants.Gloves, affixMobalytics));
-                }
-                foreach (var affixMobalytics in variant.Pants)
-                {
-                    affixesMobalytics.Add(new Tuple<string, MobalyticsAffix>(Constants.ItemTypeConstants.Pants, affixMobalytics));
-                }
-                foreach (var affixMobalytics in variant.Boots)
-                {
-                    affixesMobalytics.Add(new Tuple<string, MobalyticsAffix>(Constants.ItemTypeConstants.Boots, affixMobalytics));
-                }
-                foreach (var affixMobalytics in variant.Amulet)
-                {
-                    affixesMobalytics.Add(new Tuple<string, MobalyticsAffix>(Constants.ItemTypeConstants.Amulet, affixMobalytics));
-                }
-                foreach (var affixMobalytics in variant.Ring)
-                {
-                    affixesMobalytics.Add(new Tuple<string, MobalyticsAffix>(Constants.ItemTypeConstants.Ring, affixMobalytics));
-                }
-                foreach (var affixMobalytics in variant.Weapon)
-                {
-                    affixesMobalytics.Add(new Tuple<string, MobalyticsAffix>(Constants.ItemTypeConstants.Weapon, affixMobalytics));
-                }
-                foreach (var affixMobalytics in variant.Ranged)
-                {
-                    affixesMobalytics.Add(new Tuple<string, MobalyticsAffix>(Constants.ItemTypeConstants.Ranged, affixMobalytics));
-                }
-                foreach (var affixMobalytics in variant.Offhand)
-                {
-                    affixesMobalytics.Add(new Tuple<string, MobalyticsAffix>(Constants.ItemTypeConstants.Offhand, affixMobalytics));
-                }
-
-                // Find matching affix ids
-                ConcurrentBag<ItemAffix> itemAffixBag = new ConcurrentBag<ItemAffix>();
-                Parallel.ForEach(affixesMobalytics, affixMobalytics =>
-                {
-                    var itemAffixResult = ConvertItemAffix(affixMobalytics);
-                    itemAffixBag.Add(itemAffixResult);
-                });
-                affixPreset.ItemAffixes.AddRange(itemAffixBag);
-
-                // Sort affixes
-                affixPreset.ItemAffixes.Sort((x, y) =>
-                {
-                    if (x.Id == y.Id && x.IsImplicit == y.IsImplicit && x.IsTempered == y.IsTempered) return 0;
-
-                    int result = x.IsTempered && !y.IsTempered ? 1 : y.IsTempered && !x.IsTempered ? -1 : 0;
-                    if (result == 0)
+                    // Resolve affixes. The adapter can only stash the raw scraped affix slug
+                    // (hyphen-joined, e.g. "maximum-life") on the CanonicalAffix because it has
+                    // no fuzzy-matching dependency. Rebuild the same word-window list the
+                    // original AffixTextList held - it is the same string re-split on '-' - and
+                    // run the identical sliding-window match to find the real AffixInfo.IdName.
+                    foreach (var affix in item.Affixes)
                     {
-                        result = x.IsImplicit && !y.IsImplicit ? -1 : y.IsImplicit && !x.IsImplicit ? 1 : 0;
+                        var affixTextList = affix.Id.Split('-').ToList();
+                        var results = new List<(string affix, string affixMatch, int score)>();
+                        for (int i = 0; i < affixTextList.Count; i++)
+                        {
+                            string affixWindow = string.Join(" ", affixTextList.Skip(affixTextList.Count - (i + 1)).Take(i + 1));
+                            var fuzzyMatch = Process.ExtractOne(affixWindow, _affixDescriptions, scorer: ScorerCache.Get<DefaultRatioScorer>());
+                            results.Add((affixWindow, fuzzyMatch.Value, fuzzyMatch.Score));
+                        }
+
+                        var best = results
+                            .OrderByDescending(r => r.score)
+                            .ThenByDescending(r => r.affix.Length)
+                            .First();
+
+                        affix.Id = _affixMapDescriptionToId[best.affixMatch];
                     }
 
-                    return result;
-                });
+                    // Resolve aspects.
+                    var resolvedAspectIds = new List<string>();
+                    foreach (var aspect in item.AspectIds)
+                    {
+                        var aspectResult = Process.ExtractOne(aspect.Replace("Aspect", string.Empty, StringComparison.OrdinalIgnoreCase), _aspectNames, scorer: ScorerCache.Get<WeightedRatioScorer>());
+                        resolvedAspectIds.Add(_aspectMapNameToId[aspectResult.Value]);
+                    }
+                    item.AspectIds = resolvedAspectIds;
 
-                // Remove duplicates
-                affixPreset.ItemAffixes = affixPreset.ItemAffixes.DistinctBy(a => new { a.Id, a.Type, a.IsImplicit, a.IsTempered }).ToList();
+                    // Resolve runes.
+                    var resolvedRuneIds = new List<string>();
+                    foreach (var rune in item.RuneIds)
+                    {
+                        var runeResult = Process.ExtractOne(rune, _runeNames, scorer: ScorerCache.Get<WeightedRatioScorer>());
+                        resolvedRuneIds.Add(_runeMapNameToId[runeResult.Value]);
+                    }
+                    item.RuneIds = resolvedRuneIds;
 
-                // Find matching aspect ids
-                ConcurrentBag<ItemAffix> itemAspectBag = new ConcurrentBag<ItemAffix>();
-                Parallel.ForEach(variant.Aspect, aspect =>
-                {
-                    var itemAspectResult = ConvertItemAspect(aspect);
-                    itemAspectBag.Add(itemAspectResult);
-                });
-                foreach (var aspect in itemAspectBag)
-                {
-                    affixPreset.ItemAspects.Add(new ItemAffix { Id = aspect.Id, Type = Constants.ItemTypeConstants.Helm });
-                    affixPreset.ItemAspects.Add(new ItemAffix { Id = aspect.Id, Type = Constants.ItemTypeConstants.Chest });
-                    affixPreset.ItemAspects.Add(new ItemAffix { Id = aspect.Id, Type = Constants.ItemTypeConstants.Gloves });
-                    affixPreset.ItemAspects.Add(new ItemAffix { Id = aspect.Id, Type = Constants.ItemTypeConstants.Pants });
-                    affixPreset.ItemAspects.Add(new ItemAffix { Id = aspect.Id, Type = Constants.ItemTypeConstants.Boots });
-                    affixPreset.ItemAspects.Add(new ItemAffix { Id = aspect.Id, Type = Constants.ItemTypeConstants.Amulet });
-                    affixPreset.ItemAspects.Add(new ItemAffix { Id = aspect.Id, Type = Constants.ItemTypeConstants.Ring });
-                    affixPreset.ItemAspects.Add(new ItemAffix { Id = aspect.Id, Type = Constants.ItemTypeConstants.Weapon });
-                    affixPreset.ItemAspects.Add(new ItemAffix { Id = aspect.Id, Type = Constants.ItemTypeConstants.Ranged });
-                    affixPreset.ItemAspects.Add(new ItemAffix { Id = aspect.Id, Type = Constants.ItemTypeConstants.Offhand });
+                    // Resolve uniques. Note: unlike D4Builds, Mobalytics applies no score
+                    // threshold here - preserve that exactly, do not add the workaround.
+                    var resolvedUniqueIds = new List<string>();
+                    foreach (var unique in item.UniqueIds)
+                    {
+                        var uniqueResult = Process.ExtractOne(unique, _uniqueNames, scorer: ScorerCache.Get<WeightedRatioScorer>());
+                        resolvedUniqueIds.Add(_uniqueMapNameToId[uniqueResult.Value]);
+                    }
+                    item.UniqueIds = resolvedUniqueIds;
                 }
 
-                // Find matching rune ids
-                ConcurrentBag<ItemAffix> itemRuneBag = new ConcurrentBag<ItemAffix>();
-                Parallel.ForEach(variant.Runes, rune =>
-                {
-                    var itemRuneResult = ConvertItemRune(rune);
-                    itemRuneBag.Add(itemRuneResult);
-                });
-                foreach (var rune in itemRuneBag)
-                {
-                    affixPreset.ItemRunes.Add(new ItemAffix { Id = rune.Id, Type = Constants.ItemTypeConstants.Rune });
-                }
-
-                // Find matching unique ids
-                ConcurrentBag<ItemAffix> itemUniqueBag = new ConcurrentBag<ItemAffix>();
-                Parallel.ForEach(variant.Uniques, unique =>
-                {
-                    var itemUniqueResult = ConvertItemUnique(unique);
-                    itemUniqueBag.Add(itemUniqueResult);
-                });
-                affixPreset.ItemUniques.AddRange(itemUniqueBag);
-
-                // Add paragon board
-                affixPreset.ParagonBoardsList.Add(variant.ParagonBoards);
-
+                var affixPreset = _projector.Project(canonicalVariant, variant.Name);
                 variant.AffixPreset = affixPreset;
+
                 WeakReferenceMessenger.Default.Send(new MobalyticsStatusUpdateMessage(new MobalyticsStatusUpdateMessageParams
                 {
                     Build = mobalyticsBuild,
                     Status = $"Converted {variant.Name}."
                 }));
             }
-        }
-
-        private ItemAffix ConvertItemAffix(Tuple<string, MobalyticsAffix> affixDescription)
-        {
-            string affixId = string.Empty;
-            string itemType = affixDescription.Item1;
-            MobalyticsAffix mobalyticsAffix = affixDescription.Item2;
-
-            string affix = string.Empty;
-            var results = new List<(string affix, string affixMatch, int score)>();
-            for (int i = 0; i < mobalyticsAffix.AffixTextList.Count; i++)
-            {
-                affix = string.Join(" ", mobalyticsAffix.AffixTextList.Skip(mobalyticsAffix.AffixTextList.Count - (i + 1)).Take(i + 1));
-                var fuzzyMatch = Process.ExtractOne(affix, _affixDescriptions, scorer: ScorerCache.Get<DefaultRatioScorer>());
-                results.Add((affix, fuzzyMatch.Value, fuzzyMatch.Score));
-            }
-
-            var result = results
-                .OrderByDescending(r => r.score)
-                .ThenByDescending(r => r.affix.Length)
-                .First();
-
-            affixId = _affixMapDescriptionToId[result.affixMatch];
-
-            Color color = mobalyticsAffix.IsImplicit ? _settingsManager.Settings.DefaultColorImplicit :
-                mobalyticsAffix.IsGreater ? _settingsManager.Settings.DefaultColorGreater :
-                mobalyticsAffix.IsTempered ? _settingsManager.Settings.DefaultColorTempered :
-                _settingsManager.Settings.DefaultColorNormal;
-            return new ItemAffix
-            {
-                Id = affixId,
-                Type = itemType,
-                Color = color,
-                IsGreater = mobalyticsAffix.IsGreater,
-                IsImplicit = mobalyticsAffix.IsImplicit,
-                IsTempered = mobalyticsAffix.IsTempered
-            };
-        }
-
-        private ItemAffix ConvertItemAspect(string aspect)
-        {
-            string aspectId = string.Empty;
-
-            var result = Process.ExtractOne(aspect.Replace("Aspect", string.Empty, StringComparison.OrdinalIgnoreCase), _aspectNames, scorer: ScorerCache.Get<WeightedRatioScorer>());
-            aspectId = _aspectMapNameToId[result.Value];
-
-            return new ItemAffix
-            {
-                Id = aspectId,
-                Type = Constants.ItemTypeConstants.Helm,
-                Color = _settingsManager.Settings.DefaultColorAspects
-            };
-        }
-
-        private ItemAffix ConvertItemRune(string rune)
-        {
-            string runeId = string.Empty;
-
-            var result = Process.ExtractOne(rune, _runeNames, scorer: ScorerCache.Get<WeightedRatioScorer>());
-            runeId = _runeMapNameToId[result.Value];
-
-            return new ItemAffix
-            {
-                Id = runeId,
-                Type = Constants.ItemTypeConstants.Rune,
-                Color = _settingsManager.Settings.DefaultColorRunes
-            };
-        }
-
-        private ItemAffix ConvertItemUnique(string unique)
-        {
-            string uniqueId = string.Empty;
-
-            var result = Process.ExtractOne(unique, _uniqueNames, scorer: ScorerCache.Get<WeightedRatioScorer>());
-            uniqueId = _uniqueMapNameToId[result.Value];
-
-            return new ItemAffix
-            {
-                Id = uniqueId,
-                Type = string.Empty,
-                Color = _settingsManager.Settings.DefaultColorUniques
-            };
         }
 
         private void ExportBuildVariants(MobalyticsBuild mobalyticsBuild, MobalyticsBuildJson mobalyticsBuildJson)
