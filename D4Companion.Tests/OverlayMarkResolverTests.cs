@@ -73,9 +73,11 @@ namespace D4Companion.Tests
         [Test]
         public void Rank_DoesNotChangeTheShape()
         {
-            // Recorded deliberately: stat priority is imported and shown in the affix list,
-            // but the overlay has no representation for it yet. If that changes, this test
-            // is the one that should fail first.
+            // The two signals are deliberately separate. Shape says what kind of affix this
+            // is - ordinary, greater, or not tied to this slot - and the digit the overlay
+            // draws beside it says where the build ranks it. Folding rank into the shape
+            // would cost the greater-affix triangle its meaning, so a rank-1 ordinary affix
+            // and a rank-7 ordinary affix must still resolve to the same mark.
             Assert.That(Resolve(new ItemAffix { Rank = 1 }), Is.EqualTo(Resolve(new ItemAffix { Rank = 7 })));
         }
     }
