@@ -174,6 +174,7 @@ namespace D4Companion.Services
                         {
                             DrawGraphicsAffixes(sender, e, itemPowerLimitCheckOk);
                             DrawGraphicsAspects(sender, e, itemPowerLimitCheckOk);
+                            DrawGraphicsMissingAffixes(e);
                         }
 
                         // Trading
@@ -253,8 +254,8 @@ namespace D4Companion.Services
             if (_currentTooltip.ItemAffixLocations.Any())
             {
                 var gfx = e.Graphics;
-                int radius = 10;
-                int length = 20;
+                int radius = MarkerWidth / 2;
+                int length = MarkerWidth;
 
                 for (int i = 0; i < _currentTooltip.ItemAffixLocations.Count; i++)
                 {
@@ -333,8 +334,8 @@ namespace D4Companion.Services
             if (_currentTooltip.ItemAffixLocations.Any())
             {
                 var gfx = e.Graphics;
-                int radius = 10;
-                int length = 20;
+                int radius = MarkerWidth / 2;
+                int length = MarkerWidth;
 
                 for (int i = 0; i < _currentTooltip.ItemAffixLocations.Count; i++)
                 {
@@ -1119,16 +1120,101 @@ namespace D4Companion.Services
         /// every importer other than Maxroll, and any preset saved before ranks existed - so
         /// a zero would be a claim the source never made.
         /// </summary>
+        /// <summary>
+        /// Draws the missing stats as a panel under the tooltip, and draws nothing at all
+        /// when the item already carries everything the build wants - the absence of the
+        /// panel is itself the answer.
+        /// </summary>
+        private void DrawGraphicsMissingAffixes(DrawGraphicsEventArgs e)
+        {
+            // The same precondition the markers draw under. DrawGraphics rebuilds
+            // _currentTooltip empty on every unlocked frame and detection refills it from a
+            // background task, but ItemType carries over from the previous tooltip - so
+            // between the two there is a window where the item type is known and no affix has
+            // been matched yet. Judged on its own the panel would call every stat missing and
+            // flash at full height each time detection re-ran. It is a statement about a
+            // detected tooltip; without detected rows there is nothing to make it about.
+            if (!_currentTooltip.ItemAffixLocations.Any()) return;
+
+            var preset = _affixManager.AffixPresets.FirstOrDefault(preset => preset.Name.Equals(_settingsManager.Settings.SelectedAffixPreset));
+            var missing = MissingAffixResolver.Resolve(preset, _currentTooltip.ItemType,
+                _currentTooltip.ItemAffixes.Select(itemAffix => itemAffix.Item2.Id));
+            if (missing.Count == 0) return;
+
+            var gfx = e.Graphics;
+            float fontSize = _settingsManager.Settings.OverlayFontSize;
+            float padding = 6;
+
+            var shown = missing.Take(MissingAffixMaxLines).ToList();
+            var lines = shown
+                .Select(affix => (Text: $"{(affix.Rank > 0 ? affix.Rank.ToString() : "-")}  {_affixManager.GetAffixDescription(affix.Id)}", Color: affix.Color))
+                .ToList();
+
+            // Says so rather than truncating silently, so a short panel always means a short
+            // list of missing stats and never a clipped one.
+            if (missing.Count > shown.Count)
+            {
+                lines.Add(($"   and {missing.Count - shown.Count} more", _settingsManager.Settings.DefaultColorNormal));
+            }
+
+            float lineHeight = gfx.MeasureString(_fonts["consolasBold"], fontSize, "0").Y;
+            float width = lines.Max(line => gfx.MeasureString(_fonts["consolasBold"], fontSize, line.Text).X);
+            float headerWidth = gfx.MeasureString(_fonts["consolasBold"], fontSize, MissingAffixHeader).X;
+
+            float panelLeft = _currentTooltip.Location.X + _currentTooltip.OffsetX;
+            float panelTop = _currentTooltip.Location.Y + _currentTooltip.Location.Height;
+            float panelRight = panelLeft + Math.Max(width, headerWidth) + (padding * 2);
+            float panelBottom = panelTop + (lineHeight * (lines.Count + 1)) + (padding * 2);
+
+            gfx.FillRectangle(_brushes["background"], panelLeft, panelTop, panelRight, panelBottom);
+            gfx.DrawRectangle(_brushes["border"], panelLeft, panelTop, panelRight, panelBottom, stroke: 1);
+
+            float textLeft = panelLeft + padding;
+            float textTop = panelTop + padding;
+            gfx.DrawText(_fonts["consolasBold"], fontSize, _brushes["text"], textLeft, textTop, MissingAffixHeader);
+
+            for (int i = 0; i < lines.Count; i++)
+            {
+                gfx.DrawText(_fonts["consolasBold"], fontSize, _brushes[lines[i].Color.ToString()],
+                    textLeft, textTop + (lineHeight * (i + 1)), lines[i].Text);
+            }
+        }
+
+        private const string MissingAffixHeader = "Missing";
+
+        // A panel taller than the tooltip it hangs off stops being a hint and starts covering
+        // the game. An item short of more stats than this is not a close call anyway.
+        private const int MissingAffixMaxLines = 6;
+
+        /// <summary>
+        /// The box every affix marker is drawn inside, centred on the tooltip's marker
+        /// column. The square uses it whole, the triangle spans it, and the circle takes
+        /// half of it as its radius.
+        /// </summary>
+        private const int MarkerWidth = 20;
+
+        // Consolas 11 bold, measured rather than asked for at draw time: the digit is placed
+        // relative to the marker, so its box has to be known before it is drawn. Ranks stay
+        // single-digit in practice, and a hypothetical two-digit rank would only shift left
+        // into empty tooltip margin.
+        private const int RankDigitWidth = 9;
+        private const int RankDigitHeight = 11;
+
         private void DrawStatPriority(Graphics gfx, ItemAffix itemAffix, System.Windows.Media.Color affixColor, float left, float top, int affixHeight)
         {
             if (itemAffix.Rank <= 0) return;
 
-            // Reads against the marker it sits on, the same rule the dungeon tier uses.
+            // Inside the marker. Placed beside it instead, the digit read as a number floating
+            // in the tooltip margin rather than as a property of the mark it belongs to.
+            //
+            // The cost is that it fills the greater-affix triangle enough to blunt its apex,
+            // so a marked greater affix can read as a diamond. The shape stays the signal for
+            // what kind of affix this is; the digit only says where the build ranks it.
             var brush = (affixColor.R + affixColor.G + affixColor.B) / 3 <= 128 ? _brushes["text"] : _brushes["textdark"];
 
-            // Nudged off the marker centre because DrawText anchors at the top left rather
-            // than centring, and a rank never reaches two digits in practice.
-            gfx.DrawText(_fonts["consolasRank"], brush, left - 3, top + (affixHeight / 2) - 7, itemAffix.Rank.ToString());
+            gfx.DrawText(_fonts["consolasRank"], brush,
+                left - (RankDigitWidth / 2), top + (affixHeight / 2) - (RankDigitHeight / 2),
+                itemAffix.Rank.ToString());
         }
 
         private IEnumerable<KeyValuePair<string, System.Windows.Media.Color>> GetColors()
