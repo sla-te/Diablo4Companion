@@ -62,8 +62,10 @@ namespace D4Companion.Helpers
                 : ItemTypeConstants.Weapon;
         }
 
-        public static bool IsWeaponSubtype(string itemType)
+        public static bool IsWeaponSubtype(string? itemType)
         {
+            if (string.IsNullOrEmpty(itemType)) return false;
+
             return itemType.Equals(ItemTypeConstants.WeaponBludgeoning, StringComparison.Ordinal)
                 || itemType.Equals(ItemTypeConstants.WeaponSlicing, StringComparison.Ordinal)
                 || itemType.Equals(ItemTypeConstants.WeaponOneHand, StringComparison.Ordinal);

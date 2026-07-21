@@ -40,7 +40,9 @@ namespace D4Companion.Tests
         [TestCase(ItemTypeConstants.WeaponOneHand, true)]
         [TestCase(ItemTypeConstants.Weapon, false)]
         [TestCase(ItemTypeConstants.Helm, false)]
-        public void IsWeaponSubtype_IdentifiesSubtypesOnly(string itemType, bool expected)
+        [TestCase(null, false)]
+        [TestCase("", false)]
+        public void IsWeaponSubtype_IdentifiesSubtypesOnly(string? itemType, bool expected)
         {
             Assert.That(WeaponTypeResolver.IsWeaponSubtype(itemType), Is.EqualTo(expected));
         }
