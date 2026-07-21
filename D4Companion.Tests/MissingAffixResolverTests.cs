@@ -105,6 +105,32 @@ namespace D4Companion.Tests
         }
 
         [Test]
+        public void AStatMatchingTwoPresetEntries_IsListedOnce()
+        {
+            // A stat can satisfy more than one entry at a time: here an exact-slot entry and
+            // an any-type one. Each match used to produce its own identical line, so the
+            // overlay showed the same missing stat twice.
+            var preset = PresetOf(
+                Wanted("crit", ItemTypeConstants.Amulet, rank: 4),
+                new ItemAffix { Id = "crit", Type = ItemTypeConstants.Helm, IsAnyType = true, Rank = 2, Color = Colors.Green });
+
+            var missing = MissingAffixResolver.Resolve(preset, ItemTypeConstants.Amulet, Array.Empty<string>());
+
+            // The better rank survives, not whichever the preset happened to list first.
+            Assert.That(missing.Select(affix => (affix.Id, affix.Rank)), Is.EqualTo(new[] { ("crit", 2) }));
+        }
+
+        [Test]
+        public void AGenericWeaponStatAlsoListedForTheSubtype_IsListedOnce()
+        {
+            var preset = PresetOf(
+                Wanted("life", ItemTypeConstants.Weapon, rank: 3),
+                Wanted("life", ItemTypeConstants.WeaponSlicing, rank: 3));
+
+            Assert.That(MissingAffixResolver.Resolve(preset, ItemTypeConstants.WeaponSlicing, Array.Empty<string>()), Has.Count.EqualTo(1));
+        }
+
+        [Test]
         public void SigilsAndRunes_ReportNothing()
         {
             // Picked from a catalogue rather than rolled: a preset lists many and an item
