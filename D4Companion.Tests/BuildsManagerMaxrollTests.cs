@@ -64,7 +64,7 @@ namespace D4Companion.Tests
 
         public void AddAffix(AffixInfo affixInfo, string itemType) => throw new NotImplementedException();
         public void AddAffixPreset(AffixPreset affixPreset) => AddedPreset = affixPreset;
-        public void AddAspect(AspectInfo aspectInfo, string itemType) => throw new NotImplementedException();
+        public void AddAspect(AspectInfo aspectInfo, string itemType, bool isAnyType = false) => throw new NotImplementedException();
         public void AddSigil(SigilInfo sigilInfo, string itemType) => throw new NotImplementedException();
         public void AddUnique(UniqueInfo uniqueInfo) => throw new NotImplementedException();
         public void AddRune(RuneInfo runeInfo) => throw new NotImplementedException();

@@ -854,16 +854,13 @@ namespace D4Companion.ViewModels
         {
             if (aspectInfo != null)
             {
-                _affixManager.AddAspect(aspectInfo.Model, ItemTypeConstants.Helm);
-                _affixManager.AddAspect(aspectInfo.Model, ItemTypeConstants.Chest);
-                _affixManager.AddAspect(aspectInfo.Model, ItemTypeConstants.Gloves);
-                _affixManager.AddAspect(aspectInfo.Model, ItemTypeConstants.Pants);
-                _affixManager.AddAspect(aspectInfo.Model, ItemTypeConstants.Boots);
-                _affixManager.AddAspect(aspectInfo.Model, ItemTypeConstants.Amulet);
-                _affixManager.AddAspect(aspectInfo.Model, ItemTypeConstants.Ring);
-                _affixManager.AddAspect(aspectInfo.Model, ItemTypeConstants.Weapon);
-                _affixManager.AddAspect(aspectInfo.Model, ItemTypeConstants.Ranged);
-                _affixManager.AddAspect(aspectInfo.Model, ItemTypeConstants.Offhand);
+                // A manually added aspect has no slot provenance: the user picked an
+                // aspect, not an aspect-on-a-slot. That is exactly what IsAnyType models,
+                // so this adds one entry rather than fabricating one per equipment slot.
+                // The Type value itself is only used for the icon/tab display when
+                // IsAnyType is set, so Weapon is used here for the same reason the
+                // D4Builds and Mobalytics importers use it in BuildPresetProjector.
+                _affixManager.AddAspect(aspectInfo.Model, ItemTypeConstants.Weapon, isAnyType: true);
             }
         }
 
