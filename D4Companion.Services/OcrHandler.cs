@@ -738,8 +738,15 @@ namespace D4Companion.Services
             _itemTypesDescriptions = _itemTypes.Select(itemType => itemType.Name).ToList();
 
             // Create dictionary to map itemtype names with type id
+            // Data/ItemTypes.*.json collapses every weapon subtype to "weapon", but the
+            // matched Name still carries "(Bludgeoning)" or "(Slashing)". Preserve that
+            // distinction so the Barbarian Arsenal slots do not share one bucket.
             _itemTypeMapNameToId.Clear();
-            _itemTypeMapNameToId = _itemTypes.ToDictionary(itemType => itemType.Name, itemType => itemType.Type);
+            _itemTypeMapNameToId = _itemTypes.ToDictionary(
+                itemType => itemType.Name,
+                itemType => itemType.Type.Equals(Constants.ItemTypeConstants.Weapon)
+                    ? WeaponTypeResolver.FromItemTypeName(itemType.Name)
+                    : itemType.Type);
 
             // Create dictionary to map itemtype names with rarity
             _itemTypeMapNameToRarity.Clear();
