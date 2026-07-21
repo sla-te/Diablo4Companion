@@ -534,7 +534,7 @@ namespace D4Companion.Services
             bool isTempered = affixType.Equals(Constants.AffixTypeConstants.Tempered);
 
             // Since season 11 a tempered affix can become a greater affix.
-            var affix = preset.ItemAffixes.FirstOrDefault(a => a.Id.Equals(affixId) && a.Type.Equals(itemType) && a.IsImplicit == isImplicit && 
+            var affix = preset.ItemAffixes.FirstOrDefault(a => a.Id.Equals(affixId) && IsTypeMatch(a.Type, itemType) && a.IsImplicit == isImplicit &&
                 (a.IsTempered == isTempered || (a.IsTempered && isGreater)));
 
             // Check if the affix is set to accept any item type.
@@ -601,21 +601,62 @@ namespace D4Companion.Services
             return _minimalAffixValues.TryGetValue(idName, out var minimalValue) ? minimalValue : 0;
         }
 
+        /// <summary>
+        /// Decides whether a preset entry typed <paramref name="presetType"/> applies to a
+        /// detected item of <paramref name="itemType"/>.
+        ///
+        /// "weapon" is a supertype and matching across it is SYMMETRIC: plain "weapon"
+        /// matches any Arsenal subtype and vice versa. Only two DIFFERENT subtypes fail
+        /// to match, which is the entire point of the split.
+        ///
+        /// The symmetry is not cosmetic. The Arsenal damage-type suffix appears only on
+        /// Barbarian tooltips and only in English data, so non-Barbarian classes and all
+        /// 13 non-English locales resolve every weapon to plain "weapon". Were matching
+        /// one-directional, those users would lose weapon matching altogether.
+        /// </summary>
+        public static bool IsTypeMatch(string presetType, string itemType)
+        {
+            if (presetType.Equals(itemType, StringComparison.Ordinal)) return true;
+
+            bool presetIsWeapon = presetType.Equals(Constants.ItemTypeConstants.Weapon, StringComparison.Ordinal);
+            bool itemIsWeapon = itemType.Equals(Constants.ItemTypeConstants.Weapon, StringComparison.Ordinal);
+
+            if (presetIsWeapon) return WeaponTypeResolver.IsWeaponSubtype(itemType);
+            if (itemIsWeapon) return WeaponTypeResolver.IsWeaponSubtype(presetType);
+
+            return false;
+        }
+
         public ItemAffix GetAspect(string aspectId, string itemType)
         {
-            var affixDefault = new ItemAffix
-            {
-                Id = aspectId,
-                Type = itemType,
-                Color = Colors.Red
-            };
+            var affixDefault = new ItemAffix { Id = aspectId, Type = itemType, Color = Colors.Red };
 
-            var preset = _affixPresets.FirstOrDefault(preset => preset.Name.Equals(_settingsManager.Settings.SelectedAffixPreset));
+            var preset = _affixPresets.FirstOrDefault(preset =>
+                preset.Name.Equals(_settingsManager.Settings.SelectedAffixPreset));
             if (preset == null) return affixDefault;
 
-            var aspect = preset.ItemAspects.FirstOrDefault(a => a.Id.Equals(aspectId) && a.Type.Equals(itemType));
-            if (aspect == null) return affixDefault;
-            return aspect;
+            // 1. Exact slot, honouring the weapon supertype rule.
+            var aspect = preset.ItemAspects.FirstOrDefault(a =>
+                a.Id.Equals(aspectId) && IsTypeMatch(a.Type, itemType));
+            if (aspect != null) return aspect;
+
+            // 2. Source could not supply provenance. Mirrors the fallback in GetAffix.
+            var anyType = preset.ItemAspects.FirstOrDefault(a => a.Id.Equals(aspectId) && a.IsAnyType);
+            if (anyType != null) return anyType;
+
+            // 3. In the build, but on another slot: an extraction target, not an upgrade.
+            var offSlot = preset.ItemAspects.FirstOrDefault(a => a.Id.Equals(aspectId));
+            if (offSlot != null)
+            {
+                return new ItemAffix
+                {
+                    Id = aspectId,
+                    Type = itemType,
+                    Color = _settingsManager.Settings.DefaultColorAspectsOffSlot
+                };
+            }
+
+            return affixDefault;
         }
 
         public string GetAspectDescription(string aspectId)
