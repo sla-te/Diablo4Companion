@@ -15,7 +15,10 @@ namespace D4Companion.Entities
         public bool CheckForUpdates { get; set; } = true;
         public bool ControllerMode { get; set; } = false;
         public bool DebugMode { get; set; } = false;
-        public Color DefaultColorGreater { get; set; } = Colors.Green;
+        // Distinct from Normal on purpose. Every affix colour used to default to the same
+        // green, so the Greater flag imported from a build guide was invisible - the setting
+        // existed but could not be told apart from an ordinary affix without editing it.
+        public Color DefaultColorGreater { get; set; } = Colors.Gold;
         public Color DefaultColorImplicit { get; set; } = Colors.Green;
         public Color DefaultColorNormal { get; set; } = Colors.Green;
         public Color DefaultColorTempered { get; set; } = Colors.Green;
