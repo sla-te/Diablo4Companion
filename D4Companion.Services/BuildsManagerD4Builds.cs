@@ -545,9 +545,14 @@ namespace D4Companion.Services
                 d4BuildsBuildVariant.WeaponSlicing.AddRange(GetAllAffixes("SlashingWeapon"));
                 d4BuildsBuildVariant.WeaponSlicing = d4BuildsBuildVariant.WeaponSlicing.Distinct().ToList();
 
-                d4BuildsBuildVariant.WeaponOneHand.AddRange(GetAllAffixes("Dual-WieldWeapon1"));
-                d4BuildsBuildVariant.WeaponOneHand.AddRange(GetAllAffixes("Dual-WieldWeapon2"));
-                d4BuildsBuildVariant.WeaponOneHand = d4BuildsBuildVariant.WeaponOneHand.Distinct().ToList();
+                // Weapon1 is mainhand, Weapon2 offhand - the same ordering Maxroll uses for
+                // its slots 11 and 12. Keeping them apart is what lets the weapon panel show
+                // a per-hand breakdown; merging here would discard it irrecoverably.
+                d4BuildsBuildVariant.WeaponMainhand.AddRange(GetAllAffixes("Dual-WieldWeapon1"));
+                d4BuildsBuildVariant.WeaponMainhand = d4BuildsBuildVariant.WeaponMainhand.Distinct().ToList();
+
+                d4BuildsBuildVariant.WeaponOffhand.AddRange(GetAllAffixes("Dual-WieldWeapon2"));
+                d4BuildsBuildVariant.WeaponOffhand = d4BuildsBuildVariant.WeaponOffhand.Distinct().ToList();
 
                 d4BuildsBuildVariant.Ranged = GetAllAffixes("RangedWeapon");
                 d4BuildsBuildVariant.Offhand = GetAllAffixes("Offhand");

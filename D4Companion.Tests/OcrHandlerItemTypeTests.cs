@@ -7,9 +7,14 @@ namespace D4Companion.Tests
 {
     /// <summary>
     /// Exercises the name-to-type dictionary built by OcrHandler.InitItemTypeData against
-    /// the real Data/ItemTypes.enUS.json. OcrHandler itself cannot be constructed here
-    /// (it takes many injected dependencies), so this mirrors just the dictionary-building
-    /// statement and validates it against the shipped data instead of a hand-rolled sample.
+    /// the real Data/ItemTypes.enUS.json. This mirrors the dictionary-building statement
+    /// rather than calling into OcrHandler, so it stays a pure data check with no settings
+    /// file or Tesseract data on the path.
+    ///
+    /// Being a copy, it can drift from the real InitItemTypeData - which has since grown
+    /// locale index-alignment handling this does not model. For assertions that must track
+    /// the shipped classifier, use OcrHandlerTooltipClassificationTests, which drives the
+    /// actual OcrHandler.
     /// </summary>
     public class OcrHandlerItemTypeTests
     {

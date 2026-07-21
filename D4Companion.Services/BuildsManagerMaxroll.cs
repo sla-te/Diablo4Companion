@@ -103,8 +103,12 @@ namespace D4Companion.Services
                         case 7: // 1HAxe, 1HFlail
                         case 8: // 2HMace
                         case 9: // 2HAxe
-                        case 11: // 1HMace, 1HSword
-                        case 12: // 1HMace, 1HSword
+                        case 11: // 1HMace, 1HSword - mainhand
+                        case 12: // 1HMace, 1HSword - offhand
+                            // Coarser than what the preset ends up carrying, and that is
+                            // fine: itemType survives only as far as the Charm/Seal skip
+                            // below. The type actually written comes from CanonicalItem.Slot
+                            // via MaxrollBuildAdapter, which does separate the two hands.
                             itemType = Constants.ItemTypeConstants.Weapon;
                             break;
                         case 10: // 2HCrossbow

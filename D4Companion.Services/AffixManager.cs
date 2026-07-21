@@ -623,6 +623,16 @@ namespace D4Companion.Services
         /// Barbarian tooltips and only in English data, so non-Barbarian classes and all
         /// 13 non-English locales resolve every weapon to plain "weapon". Were matching
         /// one-directional, those users would lose weapon matching altogether.
+        ///
+        /// "weapon_onehand" is a second, narrower supertype over the two Arsenal hands.
+        /// The same symmetry argument applies with more force: a tooltip carries no
+        /// mainhand/offhand marker, so OCR resolves every one-hander to the parent. A
+        /// preset entry typed for either hand must therefore still match it, or imported
+        /// one-handed entries would never match anything at all.
+        ///
+        /// Mainhand and offhand do NOT match each other. Nothing can currently produce
+        /// that pair during scanning - both sides only ever meet via the parent - but the
+        /// UI counts entries per hand, and collapsing them there would double-count.
         /// </summary>
         public static bool IsTypeMatch(string presetType, string itemType)
         {
@@ -633,6 +643,12 @@ namespace D4Companion.Services
 
             if (presetIsWeapon) return WeaponTypeResolver.IsWeaponSubtype(itemType);
             if (itemIsWeapon) return WeaponTypeResolver.IsWeaponSubtype(presetType);
+
+            bool presetIsOneHand = presetType.Equals(Constants.ItemTypeConstants.WeaponOneHand, StringComparison.Ordinal);
+            bool itemIsOneHand = itemType.Equals(Constants.ItemTypeConstants.WeaponOneHand, StringComparison.Ordinal);
+
+            if (presetIsOneHand) return WeaponTypeResolver.IsOneHandedHand(itemType);
+            if (itemIsOneHand) return WeaponTypeResolver.IsOneHandedHand(presetType);
 
             return false;
         }

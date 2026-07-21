@@ -34,7 +34,11 @@ namespace D4Companion.Services.BuildAdapters
             AddSlot(variant, ItemTypeConstants.Weapon, sourceVariant.Weapon);
             AddSlot(variant, ItemTypeConstants.WeaponBludgeoning, sourceVariant.WeaponBludgeoning);
             AddSlot(variant, ItemTypeConstants.WeaponSlicing, sourceVariant.WeaponSlicing);
+            // WeaponOneHand is only ever populated by cache files predating the hand split;
+            // anything scraped since fills the two hand lists instead.
             AddSlot(variant, ItemTypeConstants.WeaponOneHand, sourceVariant.WeaponOneHand);
+            AddSlot(variant, ItemTypeConstants.WeaponMainhand, sourceVariant.WeaponMainhand);
+            AddSlot(variant, ItemTypeConstants.WeaponOffhand, sourceVariant.WeaponOffhand);
             AddSlot(variant, ItemTypeConstants.Ranged, sourceVariant.Ranged);
             AddSlot(variant, ItemTypeConstants.Offhand, sourceVariant.Offhand);
 

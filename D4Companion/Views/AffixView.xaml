@@ -29,6 +29,7 @@
         <converters:ColorToSolidBrushConverter x:Key="ColorToSolidBrushConverter"/>
         <converters:AffixTypeToBgSolidBrushConverter x:Key="AffixTypeToBgSolidBrushConverter"/>
         <converters:AffixTypeToFgSolidBrushConverter x:Key="AffixTypeToFgSolidBrushConverter"/>
+        <converters:WeaponTypeToGroupLabelConverter x:Key="WeaponTypeToGroupLabelConverter"/>
         <converters:FlagToImagePathConverter x:Key="FlagToImagePathConverter"/>
         <converters:MultiBooleanToVisibilityConverter x:Key="MultiBooleanToVisibilityConverter"/>
         <converters:MultiOrBooleanToVisibilityConverter x:Key="MultiOrBooleanToVisibilityConverter"/>
@@ -657,6 +658,18 @@
                 </Border>
                 <Border BorderThickness="1" BorderBrush="#333333" Visibility="{Binding Path=IsAffixesTabActive, Converter={x:Static converters:BooleanToVisibilityConverter.Instance}}">
                     <ItemsControl ItemsSource="{Binding SelectedAffixesFilteredWeapon}" >
+                        <!-- One section per Arsenal group. The view groups on the raw item
+                             type; the converter turns that into the caption. -->
+                        <ItemsControl.GroupStyle>
+                            <GroupStyle>
+                                <GroupStyle.HeaderTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Margin="6 4 0 0" FontSize="12" FontWeight="Bold" Opacity="0.7"
+                                                   Text="{Binding Name, Converter={StaticResource WeaponTypeToGroupLabelConverter}}"/>
+                                    </DataTemplate>
+                                </GroupStyle.HeaderTemplate>
+                            </GroupStyle>
+                        </ItemsControl.GroupStyle>
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
 

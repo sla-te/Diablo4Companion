@@ -62,13 +62,39 @@ namespace D4Companion.Helpers
                 : ItemTypeConstants.Weapon;
         }
 
+        /// <summary>
+        /// Refines a one-handed weapon to the Arsenal hand a build site assigned it.
+        /// Only <see cref="ItemTypeConstants.WeaponOneHand"/> is refined; two-handed
+        /// subtypes and non-weapons pass through untouched, so a build site that puts a
+        /// two-hander in a hand slot keeps its damage-type classification.
+        /// </summary>
+        public static string RefineOneHandToHand(string itemType, bool isMainhand)
+        {
+            if (!itemType.Equals(ItemTypeConstants.WeaponOneHand, StringComparison.Ordinal)) return itemType;
+
+            return isMainhand ? ItemTypeConstants.WeaponMainhand : ItemTypeConstants.WeaponOffhand;
+        }
+
+        /// <summary>
+        /// True for the two hand-specific one-handed types. These originate only from
+        /// build imports - OCR cannot produce them.
+        /// </summary>
+        public static bool IsOneHandedHand(string? itemType)
+        {
+            if (string.IsNullOrEmpty(itemType)) return false;
+
+            return itemType.Equals(ItemTypeConstants.WeaponMainhand, StringComparison.Ordinal)
+                || itemType.Equals(ItemTypeConstants.WeaponOffhand, StringComparison.Ordinal);
+        }
+
         public static bool IsWeaponSubtype(string? itemType)
         {
             if (string.IsNullOrEmpty(itemType)) return false;
 
             return itemType.Equals(ItemTypeConstants.WeaponBludgeoning, StringComparison.Ordinal)
                 || itemType.Equals(ItemTypeConstants.WeaponSlicing, StringComparison.Ordinal)
-                || itemType.Equals(ItemTypeConstants.WeaponOneHand, StringComparison.Ordinal);
+                || itemType.Equals(ItemTypeConstants.WeaponOneHand, StringComparison.Ordinal)
+                || IsOneHandedHand(itemType);
         }
 
         /// <summary>
