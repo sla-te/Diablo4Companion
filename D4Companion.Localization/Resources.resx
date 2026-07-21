@@ -160,6 +160,9 @@
   <data name="rsCapAspects" xml:space="preserve">
     <value>Aspects</value>
   </data>
+  <data name="rsCapAspectsOffSlot" xml:space="preserve">
+    <value>Aspects (off slot)</value>
+  </data>
   <data name="rsCapGearAffixPresets" xml:space="preserve">
     <value>Gear Affix Presets:</value>
   </data>
