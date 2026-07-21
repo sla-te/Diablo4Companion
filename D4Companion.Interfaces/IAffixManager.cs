@@ -15,7 +15,7 @@ namespace D4Companion.Interfaces
 
         void AddAffix(AffixInfo affixInfo, string itemType);
         void AddAffixPreset(AffixPreset affixPreset);
-        void AddAspect(AspectInfo aspectInfo, string itemType);
+        void AddAspect(AspectInfo aspectInfo, string itemType, bool isAnyType = false);
         void AddSigil(SigilInfo sigilInfo, string itemType);
         void AddUnique(UniqueInfo uniqueInfo);
         void AddRune(RuneInfo runeInfo);

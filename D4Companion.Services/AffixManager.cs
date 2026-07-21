@@ -171,18 +171,26 @@ namespace D4Companion.Services
             WeakReferenceMessenger.Default.Send(new SelectedAffixesChangedMessage());
         }
 
-        public void AddAspect(AspectInfo aspectInfo, string itemType)
+        public void AddAspect(AspectInfo aspectInfo, string itemType, bool isAnyType = false)
         {
             var preset = _affixPresets.FirstOrDefault(preset => preset.Name.Equals(_settingsManager.Settings.SelectedAffixPreset));
             if (preset == null) return;
 
-            if (!preset.ItemAspects.Any(a => a.Id.Equals(aspectInfo.IdName) && a.Type.Equals(itemType)))
+            // An IsAnyType entry has no slot provenance, so there is only ever one of it
+            // per aspect. Dedup on Id alone in that case, mirroring the exists-check the
+            // importers apply via BuildPresetProjector for the same reason.
+            bool exists = isAnyType
+                ? preset.ItemAspects.Any(a => a.Id.Equals(aspectInfo.IdName) && a.IsAnyType)
+                : preset.ItemAspects.Any(a => a.Id.Equals(aspectInfo.IdName) && a.Type.Equals(itemType));
+
+            if (!exists)
             {
                 preset.ItemAspects.Add(new ItemAffix
                 {
                     Id = aspectInfo.IdName,
                     Type = itemType,
-                    Color = _settingsManager.Settings.DefaultColorAspects
+                    Color = _settingsManager.Settings.DefaultColorAspects,
+                    IsAnyType = isAnyType
                 });
                 SaveAffixPresets();
             }
