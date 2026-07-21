@@ -67,13 +67,17 @@ namespace D4Companion.Services.BuildAdapters
                 case 16:
                 case 17: return ItemTypeConstants.Ring;
                 case 18: return ItemTypeConstants.Amulet;
-                case 20: return ItemTypeConstants.HoradricSeal;
+                // Slot 20 (HoradricSeal) and 21-26 (Charm) carry no resolvable aspects:
+                // BuildsManagerMaxroll skips these item types outright, so emitting a
+                // CanonicalItem for them here would only leak raw unresolved Nid strings
+                // into the projected preset. Return null so they are never emitted.
+                case 20:
                 case 21:
                 case 22:
                 case 23:
                 case 24:
                 case 25:
-                case 26: return ItemTypeConstants.Charm;
+                case 26: return null;
                 default: return null;
             }
         }

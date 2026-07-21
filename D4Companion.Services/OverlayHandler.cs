@@ -1003,6 +1003,7 @@ namespace D4Companion.Services
 
             var preset = _affixManager.AffixPresets.FirstOrDefault(preset => preset.Name.Equals(_settingsManager.Settings.SelectedAffixPreset));
             if (preset == null) return;
+            if (preset.ParagonBoardsList.Count == 0) return;
 
             _currentParagonBoardsListIndex = (_currentParagonBoardsListIndex + 1) % preset.ParagonBoardsList.Count;
         }

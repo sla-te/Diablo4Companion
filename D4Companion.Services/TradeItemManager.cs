@@ -61,11 +61,11 @@ namespace D4Companion.Services
                 {
                     if (affix.IsGreater)
                     {
-                        if (!affixes.Any(a => a.Item2.Id.Equals(affix.Id) && affixAreas[a.Item1].AffixType.Equals(Constants.AffixTypeConstants.Greater)) || !itemType.Equals(t.Type.Type)) return false;
+                        if (!affixes.Any(a => a.Item2.Id.Equals(affix.Id) && affixAreas[a.Item1].AffixType.Equals(Constants.AffixTypeConstants.Greater)) || !AffixManager.IsTypeMatch(t.Type.Type, itemType)) return false;
                     }
                     else
                     {
-                        if (!affixes.Any(a => a.Item2.Id.Equals(affix.Id)) || !itemType.Equals(t.Type.Type)) return false;
+                        if (!affixes.Any(a => a.Item2.Id.Equals(affix.Id)) || !AffixManager.IsTypeMatch(t.Type.Type, itemType)) return false;
                     }
                 }
                 return true;

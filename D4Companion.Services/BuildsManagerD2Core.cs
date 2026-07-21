@@ -356,6 +356,14 @@ namespace D4Companion.Services
                         continue;
                 }
 
+                // Invariant: the adapter and this manager must skip identical item types, so the
+                // surviving entries line up index-for-index with canonicalVariant.Items. If that
+                // invariant is ever violated, fail loudly instead of binding affixes to the wrong item.
+                if (canonicalItemIndex >= canonicalVariant.Items.Count)
+                {
+                    _logger.LogError($"{MethodBase.GetCurrentMethod()?.Name}: canonicalItemIndex {canonicalItemIndex} out of range for {canonicalVariant.Items.Count} canonical items. Adapter and manager item-type skip lists have diverged.");
+                    break;
+                }
                 var canonicalItem = canonicalVariant.Items[canonicalItemIndex++];
 
                 // Process runes
