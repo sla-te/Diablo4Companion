@@ -2,6 +2,7 @@ using CommunityToolkit.Mvvm.Messaging;
 using D4Companion.Entities;
 using D4Companion.Messages;
 using D4Companion.Services;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using System.Drawing;
 using System.Text;
@@ -89,17 +90,19 @@ namespace D4Companion.Tests
             }
         }
 
+        private static readonly List<string> _log = new();
+
         private static ItemTooltipDescriptor Replay(string screenshot, SettingsManager settingsManager)
         {
-            var affixManager = new AffixManager(NullLogger<AffixManager>.Instance, settingsManager);
+            var affixManager = new AffixManager(new CollectingLogger<AffixManager>(_log), settingsManager);
 
             var screenProcessHandler = new ScreenProcessHandler(
-                NullLogger<ScreenProcessHandler>.Instance,
+                new CollectingLogger<ScreenProcessHandler>(_log),
                 affixManager,
-                new OcrHandler(NullLogger<OcrHandler>.Instance, settingsManager),
+                new OcrHandler(new CollectingLogger<OcrHandler>(_log), settingsManager),
                 settingsManager,
-                new SystemPresetManager(NullLogger<SystemPresetManager>.Instance, new Services.HttpClientHandler(NullLogger<Services.HttpClientHandler>.Instance), settingsManager),
-                new TradeItemManager(NullLogger<TradeItemManager>.Instance, settingsManager))
+                new SystemPresetManager(new CollectingLogger<SystemPresetManager>(_log), new Services.HttpClientHandler(NullLogger<Services.HttpClientHandler>.Instance), settingsManager),
+                new TradeItemManager(new CollectingLogger<TradeItemManager>(_log), settingsManager))
             {
                 // Set directly rather than through ToggleOverlayMessage: the messenger is
                 // process-wide and a stray toggle would leak into other test classes.
@@ -175,7 +178,40 @@ namespace D4Companion.Tests
                 report.AppendLine($"{row,3}  {mark,-11} {affix.Color,-21} {rank,4}  {affix.IsGreater,-7}  {affix.Id}");
             }
 
+            if (_log.Count > 0)
+            {
+                report.AppendLine();
+                report.AppendLine("Pipeline log:");
+                foreach (string line in _log) report.AppendLine($"  {line}");
+            }
+
             return report.ToString();
+        }
+    }
+
+    /// <summary>
+    /// The pipeline reports why it gave up only through its logger, so a replay that finds
+    /// nothing is undiagnosable with NullLogger - which is how the first replay run wasted a
+    /// round trip. Collects into a list the report then prints.
+    /// </summary>
+    internal class CollectingLogger<T> : ILogger<T>
+    {
+        private readonly List<string> _sink;
+
+        public CollectingLogger(List<string> sink) => _sink = sink;
+
+        public IDisposable? BeginScope<TState>(TState state) where TState : notnull => null;
+
+        public bool IsEnabled(LogLevel logLevel) => logLevel >= LogLevel.Information;
+
+        public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception? exception, Func<TState, Exception?, string> formatter)
+        {
+            if (!IsEnabled(logLevel)) return;
+
+            string message = formatter(state, exception);
+            if (exception != null) message = $"{message} :: {exception.GetType().Name}: {exception.Message}";
+
+            _sink.Add($"[{logLevel}] {typeof(T).Name}: {message}");
         }
     }
 }

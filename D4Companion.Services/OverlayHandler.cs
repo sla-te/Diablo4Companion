@@ -309,6 +309,8 @@ namespace D4Companion.Services
                                         gfx.OutlineFillCircle(_brushes[Colors.Black.ToString()], _brushes[affixColor.ToString()], left, top + (itemAffixLocation.Location.Height / 2), radius, 2);
                                         break;
                                 }
+
+                                DrawStatPriority(gfx, itemAffix.Item2, affixColor, left, top, itemAffixLocation.Location.Height);
                             }
                         }
                     }
@@ -387,6 +389,8 @@ namespace D4Companion.Services
                                         gfx.OutlineFillCircle(_brushes[Colors.Black.ToString()], _brushes[affixColor.ToString()], left, top + (itemAffixLocation.Location.Height / 2), radius, 2);
                                         break;
                                 }
+
+                                DrawStatPriority(gfx, itemAffix.Item2, affixColor, left, top, itemAffixLocation.Location.Height);
                             }
                         }
                     }
@@ -840,6 +844,10 @@ namespace D4Companion.Services
                 //_fonts["arial"] = gfx.CreateFont("Arial", 12);
                 //_fonts["consolas"] = gfx.CreateFont("Consolas", 14);
                 _fonts["consolasBold"] = gfx.CreateFont("Consolas", fontSize, true);
+                // Fixed size, not OverlayFontSize: this digit has to fit inside a marker
+                // whose radius is fixed, so scaling it with the overlay font would push it
+                // outside the shape it labels.
+                _fonts["consolasRank"] = gfx.CreateFont("Consolas", 11, true);
             }
             catch (Exception exception)
             {
@@ -1099,6 +1107,28 @@ namespace D4Companion.Services
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// Writes the build's stat priority into the marker - 1 is what the guide wants
+        /// most. Colour and shape already say "wanted" and "wants a Greater Affix", but
+        /// neither separates the top-priority stat from the last one on the list, which is
+        /// the difference between an item worth equipping and one worth salvaging.
+        ///
+        /// Nothing is drawn for rank 0. That means the build source published no ranking -
+        /// every importer other than Maxroll, and any preset saved before ranks existed - so
+        /// a zero would be a claim the source never made.
+        /// </summary>
+        private void DrawStatPriority(Graphics gfx, ItemAffix itemAffix, System.Windows.Media.Color affixColor, float left, float top, int affixHeight)
+        {
+            if (itemAffix.Rank <= 0) return;
+
+            // Reads against the marker it sits on, the same rule the dungeon tier uses.
+            var brush = (affixColor.R + affixColor.G + affixColor.B) / 3 <= 128 ? _brushes["text"] : _brushes["textdark"];
+
+            // Nudged off the marker centre because DrawText anchors at the top left rather
+            // than centring, and a rank never reaches two digits in practice.
+            gfx.DrawText(_fonts["consolasRank"], brush, left - 3, top + (affixHeight / 2) - 7, itemAffix.Rank.ToString());
         }
 
         private IEnumerable<KeyValuePair<string, System.Windows.Media.Color>> GetColors()
