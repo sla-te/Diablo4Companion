@@ -1,0 +1,17 @@
+{
+  "name": "diablo4-companion",
+  "owner": {
+    "name": "sla-te"
+  },
+  "metadata": {
+    "description": "Local plugin marketplace bundled with the Diablo4Companion fork.",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "diablo4-helper",
+      "source": "./plugins/diablo4-helper",
+      "description": "Diablo 4 gameplay helper skill - verifies version-specific answers against live sources; understands the D4Companion overlay."
+    }
+  ]
+}

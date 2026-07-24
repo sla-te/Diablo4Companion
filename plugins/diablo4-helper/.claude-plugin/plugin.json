@@ -1,0 +1,14 @@
+{
+  "name": "diablo4-helper",
+  "description": "Diablo 4 gameplay helper - forces every version-specific answer (builds, items, crafting, seasonal mechanics, D4Companion overlay) to be verified against live sources instead of a stale training cutoff.",
+  "version": "0.1.0",
+  "author": {
+    "name": "sla-te"
+  },
+  "keywords": [
+    "diablo4",
+    "d4",
+    "d4companion",
+    "gameplay"
+  ]
+}
