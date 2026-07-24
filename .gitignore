@@ -364,3 +364,6 @@ FodyWeavers.xsd
 
 # Fork-local design docs (not for upstream)
 docs/superpowers/
+
+# Personal, local-only gameplay data (never pushed). See CLAUDE.md "Personal data".
+loadout/
