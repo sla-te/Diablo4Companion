@@ -17,6 +17,14 @@ Expressed as groups, "at least 3 of 4" is an AND over all six pairs - six groups
 clicked by hand, and it gets worse as M grows. Pulling the listings and filtering
 locally is both easier and more expressive.
 
+A match count alone still overstates an item, because it ignores what the enchant
+costs. `diablotrade enchant` prices that: it separates items with a junk affix to
+overwrite (free) from ones whose only spare roll is a **Greater Affix** (you
+destroy a GA to fix it) from ones carrying no junk affix at all, which are either
+a free Add Affix into an empty slot or permanently stuck. The listing payload has
+no slot count, so that last case is flagged for inspection rather than guessed at.
+Inherents count toward matches but are never enchantable.
+
 ## What the site actually exposes
 
 Established by watching the site's own network traffic and grepping its JS
@@ -45,6 +53,9 @@ diablotrade learn 3UcbpB --unique b11a2744-6331-4356-b608-b71e2a30f18d
 
 # Rank listings by how many wanted attributes they carry
 diablotrade filter 3UcbpB --attrs STR,LIFE,FURY,CRIT --min-matches 3
+
+# Same, but priced by what the Occultist enchant actually costs you
+diablotrade enchant 3UcbpB --attrs CDR,CRIT,VULN,CRITDMG
 
 # Same rule as OR-groups, if you would rather rebuild it in the site UI
 diablotrade groups --attrs STR,LIFE,FURY,CRIT --min-matches 3

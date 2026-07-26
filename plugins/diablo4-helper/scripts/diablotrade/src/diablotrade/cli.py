@@ -19,7 +19,7 @@ from collections.abc import Sequence
 from . import metadata
 from .actions import discover_action_ids
 from .client import Client, DiabloTradeError
-from .filters import as_or_groups, rank
+from .filters import as_or_groups, is_negotiable, plan_enchants, rank
 from .models import Listing
 
 
@@ -81,6 +81,45 @@ def _cmd_filter(args: argparse.Namespace) -> int:
         for attribute_id in sorted(match.matched):
             print(f"          + {attribute_id} = {item.value_of(attribute_id)}")
         print()
+    return 0
+
+
+def _cmd_enchant(args: argparse.Namespace) -> int:
+    """Rank listings by what they are worth AFTER one Occultist enchant.
+
+    Unlike `filter`, this refuses to count an item as buyable unless the last
+    missing affix has somewhere to go: inherents cannot be enchanted, so an item
+    with no spare rolled affix is a dead end no match count would reveal.
+    """
+    wanted = [a.strip() for a in args.attrs.split(",") if a.strip()]
+    client = Client(cookie=args.cookie)
+    listings = _load(client, args.search_id, args.unique)
+    plans = plan_enchants(listings, wanted, closable_only=not args.include_unfixable)
+
+    print(
+        f"{len(plans)} of {len(listings)} listings reach {len(wanted)} of "
+        f"{len(wanted)} within one enchant\n"
+    )
+    for plan in plans[: args.limit]:
+        listing = plan.listing
+        if plan.gap == 0:
+            note = "complete, no enchant needed"
+        elif plan.slot_state_unknown:
+            note = "CHECK BY HAND: no junk affix - free slot, or stuck"
+        elif plan.costs_a_greater_affix:
+            note = "enchant costs a GREATER AFFIX"
+        else:
+            note = f"enchant away one of {len(plan.sacrifice)} junk affixes"
+        price = "negotiable" if is_negotiable(listing) else (listing.price or "?")
+        print(
+            f"[{plan.score}/{len(wanted)}] {price:>12}  "
+            f"ga={listing.item.greater_affix_count}  {note}"
+        )
+        for attribute_id in sorted(plan.missing):
+            print(
+                f"          needs {metadata.KNOWN_ATTRIBUTES.get(attribute_id, attribute_id)}"
+            )
+        print(f"          https://diablo.trade/listings/{listing.id}")
     return 0
 
 
@@ -194,7 +233,23 @@ def build_parser() -> argparse.ArgumentParser:
     filter_cmd.add_argument("--min-matches", type=int, default=3)
     filter_cmd.set_defaults(func=_cmd_filter)
 
-    groups = sub.add_parser("groups", help="print the rule as OR-groups for the site UI")
+    enchant = sub.add_parser(
+        "enchant", help="rank listings by their value after one enchant"
+    )
+    enchant.add_argument("search_id")
+    enchant.add_argument("--unique", help="restrict to this uniqueEquipmentId")
+    enchant.add_argument("--attrs", required=True, help="comma-separated UUIDs")
+    enchant.add_argument(
+        "--include-unfixable",
+        action="store_true",
+        help="also show listings one enchant cannot complete",
+    )
+    enchant.add_argument("--limit", type=int, default=15)
+    enchant.set_defaults(func=_cmd_enchant)
+
+    groups = sub.add_parser(
+        "groups", help="print the rule as OR-groups for the site UI"
+    )
     groups.add_argument("--attrs", required=True, help="comma-separated UUIDs or names")
     groups.add_argument("--min-matches", type=int, required=True)
     groups.set_defaults(func=_cmd_groups)
