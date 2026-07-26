@@ -10,6 +10,12 @@ do feature work on `feat/*` branches.
 - Build: `dotnet build -c Release` (or Visual Studio). Output: `D4Companion/bin/Release/net10.0-windows/D4Companion.exe`.
 - Test: `dotnet test` (NUnit). Run from a Windows shell.
 
+### C# tooling / navigation
+
+- Full C# intelligence (LSP, build, refactor) needs the **Windows .NET SDK**. A Roslyn/OmniSharp LSP run from WSL/Linux cannot load the WPF project - `net10.0-windows` requires the Windows Desktop SDK, which does not exist on Linux.
+- On Windows: a Roslyn LSP + a C# best-practices agent are available - use them for analysis and refactoring.
+- On WSL/Linux: no working C# LSP. Navigate with `ast-grep` (structural, e.g. `ast-grep -l cs -p '...'`) and `rg` (text); edit, then build/verify on the Windows side.
+
 ## Architecture
 
 Detection pipeline: screen capture -> OCR -> affix matching -> overlay render.
