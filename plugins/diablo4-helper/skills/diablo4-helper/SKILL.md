@@ -105,6 +105,17 @@ season may not have been updated.
 - **Grading gear ("is this an upgrade?")** - pull the exact build guide and
   variant (e.g. Midgame vs Endgame) live, score each item's stat-priority match,
   rank by gap, and state that stat-match is not a DPS simulation. See traps.md #4.
+  **Always run the Horadric Cube checklist at the end of
+  `references/horadric-cube.md` before answering.** An item is not judged only on
+  what it is - it may be crafting fodder, three-of-a-kind input, or one recipe
+  away from the item actually wanted, and a wanted item the player does not own
+  may be craftable rather than farmable.
+  **Assume the Occultist is always available.** Grade the item BODY - base
+  DPS/armour, affix lines, temper count, sockets, item power, slot - never the
+  aspect it happened to drop with, since imprinting replaces that at will. Before
+  recommending a body swap, check whether an **enchant on the currently equipped
+  item** closes the same gap while keeping its investment (masterwork rank,
+  sockets, tempers). A great aspect on a bad body is Codex fodder, not an item.
 - **D4Companion overlay** - the user runs a fork whose overlay marks affixes
   against an imported Maxroll build. Key trap: a **red mark means "not a tracked
   stat priority," not "the build does not want this item"** - confirm against the
@@ -118,4 +129,7 @@ season may not have been updated.
 - **`references/traps.md`** - specific, durable failure modes (stale season
   number, overlay red-mark misread, random-damage-unique + high-hit-rate
   synergy, damage-bucket confusion) with the correct reasoning for each.
+- **`references/horadric-cube.md`** - every Cube recipe, cost, Tuning Prism, and
+  outcome table, plus the checklist to run on any gear-grading question. Snapshot
+  taken 2026-07-26 against Maxroll; re-verify the `(Seasonal)` recipes each season.
 - **`scripts/d4_search.py`** - D4-scoped tavily-dynamic-search helper.
