@@ -59,6 +59,31 @@ class Affix:
         )
 
 
+# How much each slot inflates a Legendary Aspect's roll range.
+#
+# Derived empirically, not from documentation: two searches (one Crushing with a
+# [45-65] base range, one Heavenly Strength with [30-40]) were grouped by
+# equipmentType, and every slot below reproduced its base range times this
+# factor across hundreds of listings.
+SLOT_ASPECT_SCALE: dict[str, float] = {
+    "AMULET": 1.5,
+    "BOW": 2.0,
+    "CROSSBOW": 2.0,
+    "POLEARM": 2.0,
+    "STAFF": 2.0,
+    "TWO_HANDED_AXE": 2.0,
+    "TWO_HANDED_MACE": 2.0,
+    "TWO_HANDED_SWORD": 2.0,
+}
+
+# Slots whose label covers BOTH a one-handed and a two-handed weapon, so the
+# scale cannot be read off equipmentType alone - the same "SWORD" label carries
+# rolls at 1x and at 2x. Anything here gets no base roll rather than a guess.
+AMBIGUOUS_ASPECT_SLOTS: frozenset[str] = frozenset(
+    {"SWORD", "MACE", "AXE", "SCYTHE"}
+)
+
+
 @dataclass(frozen=True, slots=True)
 class Item:
     power: int | None = None
@@ -69,6 +94,7 @@ class Item:
     unique_equipment_id: str | None = None
     affixes: tuple[Affix, ...] = ()
     inherents: tuple[Affix, ...] = ()
+    effect_affix: Affix | None = None
 
     @classmethod
     def parse(cls, raw: object) -> Item:
@@ -82,7 +108,45 @@ class Item:
             unique_equipment_id=_as_str(data.get("uniqueEquipmentId")),
             affixes=tuple(a for a in map(Affix.parse, _as_list(data.get("affixes"))) if a),
             inherents=tuple(a for a in map(Affix.parse, _as_list(data.get("inherents"))) if a),
+            effect_affix=Affix.parse(data.get("effectAffix")),
         )
+
+    @property
+    def aspect_roll(self) -> float | None:
+        """The item's Legendary Aspect roll, as displayed on the item.
+
+        This is NOT comparable across slots. Amulets scale an aspect's range by
+        1.5x and two-handed weapons by 2x, so a 54 on an amulet is a worse base
+        roll than a 40 on a chest. Use `base_aspect_roll` to compare.
+        """
+        if self.effect_affix is None or not self.effect_affix.values:
+            return None
+        return self.effect_affix.values[0]
+
+    @property
+    def aspect_scale(self) -> float | None:
+        """How much this slot inflates an aspect's roll range, or None.
+
+        None means the slot is one of AMBIGUOUS_ASPECT_SLOTS and the scale is
+        genuinely not knowable from the payload.
+        """
+        slot = self.equipment_type or ""
+        if slot in AMBIGUOUS_ASPECT_SLOTS:
+            return None
+        return SLOT_ASPECT_SCALE.get(slot, 1.0)
+
+    @property
+    def base_aspect_roll(self) -> float | None:
+        """The aspect roll normalised back to its base (1x) range.
+
+        The Codex of Power stores the base roll, so this is the number that
+        decides whether salvaging an item improves your Codex entry. Comparing
+        raw `aspect_roll` across slots silently ranks a mediocre amulet above a
+        perfect chest.
+        """
+        roll = self.aspect_roll
+        scale = self.aspect_scale
+        return None if roll is None or scale is None else roll / scale
 
     @property
     def attribute_ids(self) -> frozenset[str]:

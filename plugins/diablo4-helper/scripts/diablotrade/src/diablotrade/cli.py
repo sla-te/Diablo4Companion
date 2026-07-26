@@ -97,6 +97,50 @@ def _cmd_groups(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_aspects(args: argparse.Namespace) -> int:
+    """Rank aspect carriers by BASE roll, so slots stay comparable.
+
+    Buying an aspect is a Codex play: you salvage the item, the Codex keeps the
+    best base roll it has seen, and you re-imprint from it. So the only number
+    that matters is the base roll, not the inflated one the item displays.
+    """
+    client = Client(cookie=args.cookie)
+    listings = client.search_listings(args.search_id)
+    priced = [x for x in listings if x.raw_price and x.raw_price > 0]
+    if args.max_price:
+        priced = [x for x in priced if (x.raw_price or 0) <= args.max_price]
+
+    ranked: list[tuple[float, Listing]] = []
+    skipped = 0
+    for listing in priced:
+        base = listing.item.base_aspect_roll
+        if base is None:
+            skipped += 1
+            continue
+        if args.min_roll is None or base >= args.min_roll:
+            ranked.append((base, listing))
+    ranked.sort(key=lambda pair: (-pair[0], pair[1].raw_price or 0))
+
+    print(f"{len(listings)} listings, {len(priced)} priced, {len(ranked)} ranked")
+    if skipped:
+        print(
+            f"{skipped} skipped: slot is one- OR two-handed under a single label, "
+            "so the base roll cannot be derived. Not guessed at."
+        )
+    print()
+    for base, listing in ranked[: args.limit]:
+        item = listing.item
+        raw = item.aspect_roll
+        scale = item.aspect_scale or 1.0
+        shown = f"{raw:g} shown /{scale:g}x" if scale != 1.0 else f"{raw:g}"
+        print(
+            f"  base {base:>6.1f}  {listing.price or 'n/a':>8}  "
+            f"{item.equipment_type or '?':16} ({shown})"
+        )
+        print(f"      https://diablo.trade/listings/{listing.id}")
+    return 0
+
+
 def _normalize_page_path(value: str) -> str:
     """Accept "/listings/create", "listings/create" or a full URL.
 
@@ -154,6 +198,13 @@ def build_parser() -> argparse.ArgumentParser:
     groups.add_argument("--attrs", required=True, help="comma-separated UUIDs or names")
     groups.add_argument("--min-matches", type=int, required=True)
     groups.set_defaults(func=_cmd_groups)
+
+    aspects = sub.add_parser("aspects", help="rank aspect carriers by base roll")
+    aspects.add_argument("search_id")
+    aspects.add_argument("--min-roll", type=float, help="base roll floor")
+    aspects.add_argument("--max-price", type=int, help="raw gold ceiling")
+    aspects.add_argument("--limit", type=int, default=10)
+    aspects.set_defaults(func=_cmd_aspects)
 
     actions_cmd = sub.add_parser("actions", help="list a page's Server Action ids")
     actions_cmd.add_argument("page_path", help="e.g. /listings/create")
