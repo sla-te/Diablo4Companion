@@ -7,26 +7,27 @@ diablo.trade has no REST route for creating a search - `/api/search/<id>` only
 The exact call was captured by patching `window.fetch` in the page and pressing
 Search once:
 
-    POST /listings/items[/<previousShortId>]
+    POST /listings/items
     Accept: text/x-component
     Next-Action: <42-hex action id>
     x-deployment-id: <deploy hash>
-    multipart/form-data with a single field "_1_input" holding the filter JSON
+    multipart/form-data with three fields: "_1_input", "_1_requestId" and "0"
 
 The response is RSC wire format containing `/listings/items/<newShortId>`, which
 is the id `Client.get_search` then reads. So one capture buys a permanent Python
 path: build filters here, get a short id back, hydrate with the normal client.
 
 Unlike listing creation this action is safe to call - it only mints a saved
-search, and it works unauthenticated.
+search - but it does require a logged-in session. Anonymous callers get a 303 to
+`/session-expired`, and `/api/session` confirms the site mints no anonymous
+session at all. Pass `Client(cookie=...)`; never persist that cookie to disk.
 
-STATUS: NOT WORKING YET. `create_search` currently gets HTTP 500 back. The
-filter payload and the action id are both verified against a real capture, and
-adding the router state tree changed nothing, so the remaining difference is in
-the request envelope, not the arguments. `docs/searching.md` records exactly
-what was captured and what has already been ruled out - read it before changing
-anything here. Everything else in this module (DEFAULT_FILTERS, stat_group,
-build_filters) is capture-verified and useful on its own.
+STATUS: working, against a capture re-taken 2026-07-26. The earlier HTTP 500 was
+a malformed argument list, not a bad envelope: the first capture read the
+FormData `entries()` and recorded only "_1_input", missing the sibling
+"_1_requestId" and - critically - field "0", which is the argument array React's
+server-side decoder needs. With no field "0" the action was invoked with no
+arguments and threw. `docs/searching.md` has the full capture.
 """
 
 from __future__ import annotations
@@ -36,7 +37,7 @@ import re
 from urllib.parse import quote
 
 from .actions import ServerAction, encode_multipart, extract_short_id
-from .client import BASE_URL, Client, DiabloTradeError
+from .client import BASE_URL, AuthRequiredError, Client, DiabloTradeError
 
 SEARCH_PAGE = "/listings/items"
 
@@ -154,6 +155,31 @@ DEFAULT_FILTERS: dict[str, object] = {
     "sortAttributeDirection": "desc",
 }
 
+# React encodes Server Action arguments as form fields, and field "0" holds the
+# argument array. This action is a `useActionState` handler, so it takes
+# (previousState, formData): the first element is the previous state and "$K1"
+# is React's reference to a FormData argument, whose own entries are flattened
+# into sibling fields named "_1_<key>".
+#
+# Sending only "_1_input" - which is what an earlier capture recorded, because
+# it read the entries and not the whole request - left the server with no
+# argument array at all, so the action threw and returned HTTP 500.
+_ACTION_ARGS = json.dumps([{"error": ""}, "$K1"], separators=(",", ":"))
+
+# The site increments this per search to discard responses from superseded
+# requests. Nothing reads it back, so a constant is fine for a one-shot call.
+_REQUEST_ID = "1"
+
+_NEEDS_SESSION = (
+    "creating a search needs a logged-in session: pass Client(cookie=...). "
+    "The site mints no anonymous session. See docs/searching.md."
+)
+
+_NO_SHORT_ID = (
+    "search creation returned no short id - the Server Action id has most "
+    "likely rotated with a site deploy. Re-capture it; see docs/searching.md."
+)
+
 # UNVERIFIED. Only `""` (no age limit) has actually been observed in a captured
 # payload; the rest are what the "RECENT LISTINGS" dropdown plausibly sends and
 # have NOT been confirmed. Open the dropdown, pick each option, and read the
@@ -219,15 +245,31 @@ def create_search(
 ) -> str:
     """Create a saved search and return its short id.
 
+    Needs an authenticated client: the site mints no anonymous session, so a
+    cookie-less call is answered with a 303 to `/session-expired` rather than
+    anything that looks like a permission error.
+
     Raises DiabloTradeError if the response carries no short id - which almost
     always means the action id rotated with a deploy.
     """
-    body, content_type = encode_multipart({"_1_input": json.dumps(filters)})
+    if not client.cookie:
+        raise AuthRequiredError(_NEEDS_SESSION)
+    # Field order mirrors the browser's. React's decoder builds a map, so this
+    # is not known to matter, but there is no reason to differ from the capture.
+    body, content_type = encode_multipart(
+        {
+            "_1_input": json.dumps(filters),
+            "_1_requestId": _REQUEST_ID,
+            "0": _ACTION_ARGS,
+        }
+    )
     headers = {
         "Next-Action": action_id,
         "Content-Type": content_type,
         "Accept": "text/x-component",
-        "Next-Router-State-Tree": quote(json.dumps(_ROUTER_STATE_TREE, separators=(",", ":"))),
+        "Next-Router-State-Tree": quote(
+            json.dumps(_ROUTER_STATE_TREE, separators=(",", ":"))
+        ),
         "Origin": BASE_URL,
         "Referer": BASE_URL + SEARCH_PAGE,
     }
@@ -239,9 +281,5 @@ def create_search(
     response = client.post_raw(action.page_path, body, headers)
     short_id = extract_short_id(response)
     if short_id is None:
-        raise DiabloTradeError(
-            "search creation returned no short id - the Server Action id has "
-            "most likely rotated with a site deploy. Re-capture it; "
-            "see docs/searching.md."
-        )
+        raise DiabloTradeError(_NO_SHORT_ID)
     return short_id

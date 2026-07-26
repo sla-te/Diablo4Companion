@@ -82,11 +82,13 @@ works in UUIDs. Two ways to attach names:
 ## Searching without the browser
 
 `diablotrade.search` builds the site's exact filter payload from Python
-(`build_filters`, `stat_group`) and holds the captured Server Action contract for
-creating a search. **`create_search` does not work yet - it returns HTTP 500.**
-See [docs/searching.md](docs/searching.md) for what was captured, what has been
-ruled out, and what to try next. Until it works, create searches in the site UI
-and drive everything after that from here.
+(`build_filters`, `stat_group`) and calls the site's Server Action to mint a
+saved search, returning its short id for `Client.get_search` to hydrate.
+
+**`create_search` needs a logged-in session.** The site issues no anonymous
+session, so pass `Client(cookie=...)` with a browser session cookie; an
+anonymous call is refused up front. Never persist that cookie to disk.
+See [docs/searching.md](docs/searching.md) for the captured contract.
 
 ## Posting
 
