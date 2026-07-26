@@ -2,7 +2,9 @@
 
     diablotrade learn   <SEARCH_ID> [--unique UUID]
     diablotrade filter  <SEARCH_ID> --attrs A,B,C,D [--min-matches N]
+    diablotrade enchant <SEARCH_ID> --attrs A,B,C,D
     diablotrade groups  --attrs A,B,C,D --min-matches N
+    diablotrade aspects <SEARCH_ID> [--min-roll R] [--max-price G]
     diablotrade actions <PAGE_PATH>
 
 `SEARCH_ID` is the trailing segment of a diablo.trade/listings/items/<id> URL.
@@ -20,11 +22,24 @@ from . import metadata
 from .actions import discover_action_ids
 from .client import Client, DiabloTradeError
 from .filters import as_or_groups, is_negotiable, plan_enchants, rank
-from .models import Listing
+from .models import SEARCH_ID_CAP, Listing
 
 
-def _load(client: Client, search_id: str, unique: str | None) -> list[Listing]:
-    listings = client.search_listings(search_id)
+def _load(client: Client, search_id: str, unique: str | None = None) -> list[Listing]:
+    """Hydrate a saved search, warning loudly if it came back truncated.
+
+    A capped search under-reports without saying so, and every ranking built on
+    it inherits that silence - the cheapest match may simply not be in the 500.
+    """
+    search = client.get_search(search_id)
+    if search.is_truncated:
+        print(
+            f"warning: search {search_id} returned the {SEARCH_ID_CAP}-id cap, "
+            + "so results are TRUNCATED and totals are a floor, not a count. "
+            + "The endpoint has no pagination; narrow the filter instead.",
+            file=sys.stderr,
+        )
+    listings = list(client.get_listings(search.listing_ids))
     if unique:
         listings = [x for x in listings if x.unique_equipment_id == unique]
     return listings
@@ -45,12 +60,12 @@ def _cmd_learn(args: argparse.Namespace) -> int:
         values = ",".join(str(v) for v in stat.example_values)
         print(
             f"{stat.attribute_id:38} {stat.count:>5} {stat.pct:>4.0f}%  "
-            f"{values:<8} {name}{flag}"
+            + f"{values:<8} {name}{flag}"
         )
     if len(listings) < 20:
         print(
             f"\nNote: only {len(listings)} listings sampled. "
-            "'guaranteed' is suggestive at this size, not proof."
+            + "'guaranteed' is suggestive at this size, not proof."
         )
     return 0
 
@@ -68,14 +83,14 @@ def _cmd_filter(args: argparse.Namespace) -> int:
     matches = rank(listings, wanted, minimum=args.min_matches)
     print(
         f"{len(matches)} of {len(listings)} listings carry at least "
-        f"{args.min_matches} of {len(wanted)} attributes\n"
+        + f"{args.min_matches} of {len(wanted)} attributes\n"
     )
     for match in matches:
         listing = match.listing
         item = listing.item
         print(
             f"[{match.score}/{len(wanted)}] {listing.name}  "
-            f"power={item.power} ga={item.greater_affix_count} price={listing.price}"
+            + f"power={item.power} ga={item.greater_affix_count} price={listing.price}"
         )
         print(f"          id {listing.id}")
         for attribute_id in sorted(match.matched):
@@ -87,9 +102,11 @@ def _cmd_filter(args: argparse.Namespace) -> int:
 def _cmd_enchant(args: argparse.Namespace) -> int:
     """Rank listings by what they are worth AFTER one Occultist enchant.
 
-    Unlike `filter`, this refuses to count an item as buyable unless the last
-    missing affix has somewhere to go: inherents cannot be enchanted, so an item
-    with no spare rolled affix is a dead end no match count would reveal.
+    Unlike `filter`, this prices the enchant rather than assuming it is free:
+    overwriting a junk affix costs nothing, overwriting the only spare roll when
+    it is a Greater Affix costs that GA, and an item with no junk affix at all
+    gets flagged for inspection because the payload cannot say whether it has a
+    free slot or is full.
     """
     wanted = [a.strip() for a in args.attrs.split(",") if a.strip()]
     client = Client(cookie=args.cookie)
@@ -98,7 +115,7 @@ def _cmd_enchant(args: argparse.Namespace) -> int:
 
     print(
         f"{len(plans)} of {len(listings)} listings reach {len(wanted)} of "
-        f"{len(wanted)} within one enchant\n"
+        + f"{len(wanted)} within one enchant\n"
     )
     for plan in plans[: args.limit]:
         listing = plan.listing
@@ -113,7 +130,7 @@ def _cmd_enchant(args: argparse.Namespace) -> int:
         price = "negotiable" if is_negotiable(listing) else (listing.price or "?")
         print(
             f"[{plan.score}/{len(wanted)}] {price:>12}  "
-            f"ga={listing.item.greater_affix_count}  {note}"
+            + f"ga={listing.item.greater_affix_count}  {note}"
         )
         for attribute_id in sorted(plan.missing):
             print(
@@ -129,7 +146,7 @@ def _cmd_groups(args: argparse.Namespace) -> int:
     groups = as_or_groups(args.min_matches, wanted)
     print(
         f"'at least {args.min_matches} of {len(wanted)}' as AND-of-OR groups "
-        f"({len(groups)} groups, all must hold):\n"
+        + f"({len(groups)} groups, all must hold):\n"
     )
     for index, group in enumerate(groups, start=1):
         print(f"  {index}. " + "  OR  ".join(group))
@@ -144,7 +161,7 @@ def _cmd_aspects(args: argparse.Namespace) -> int:
     that matters is the base roll, not the inflated one the item displays.
     """
     client = Client(cookie=args.cookie)
-    listings = client.search_listings(args.search_id)
+    listings = _load(client, args.search_id)
     priced = [x for x in listings if x.raw_price and x.raw_price > 0]
     if args.max_price:
         priced = [x for x in priced if (x.raw_price or 0) <= args.max_price]
@@ -164,7 +181,7 @@ def _cmd_aspects(args: argparse.Namespace) -> int:
     if skipped:
         print(
             f"{skipped} skipped: slot is one- OR two-handed under a single label, "
-            "so the base roll cannot be derived. Not guessed at."
+            + "so the base roll cannot be derived. Not guessed at."
         )
     print()
     for base, listing in ranked[: args.limit]:
@@ -174,7 +191,7 @@ def _cmd_aspects(args: argparse.Namespace) -> int:
         shown = f"{raw:g} shown /{scale:g}x" if scale != 1.0 else f"{raw:g}"
         print(
             f"  base {base:>6.1f}  {listing.price or 'n/a':>8}  "
-            f"{item.equipment_type or '?':16} ({shown})"
+            + f"{item.equipment_type or '?':16} ({shown})"
         )
         print(f"      https://diablo.trade/listings/{listing.id}")
     return 0
@@ -206,8 +223,8 @@ def _cmd_actions(args: argparse.Namespace) -> int:
         print(f"  {action_id}")
     print(
         "\nThese are build-specific and unlabelled. Which one posts a listing "
-        "cannot be determined statically - capture one real submission in "
-        "devtools to find out. See docs/posting.md."
+        + "cannot be determined statically - capture one real submission in "
+        + "devtools to find out. See docs/posting.md."
     )
     return 0
 

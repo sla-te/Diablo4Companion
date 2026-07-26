@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import json
-from typing import final
+from typing import final, override
 
 import pytest
 
@@ -23,11 +23,13 @@ class StubClient(Client):
         self.posted_to = ""
         self.fetched: list[str] = []
 
+    @override
     def fetch_text(self, path: str) -> str:
         # Only ever called to scrape the deploy hash off the search page.
         self.fetched.append(path)
         return '<html data-dpl-id="0123456789abcdef0123456789abcdef01234567">'
 
+    @override
     def post_raw(self, path: str, body: bytes, headers: dict[str, str]) -> str:
         self.posted_to = path
         self.body = body
@@ -105,3 +107,24 @@ class TestBuildFilters:
 
     def test_defaults_are_left_intact_by_an_override(self) -> None:
         assert search.build_filters(priceMax="100")["priceMin"] == ""
+
+
+class TestStatGroup:
+    def test_or_group_carries_the_site_s_own_min_matches(self) -> None:
+        group = search.stat_group(["a", "b", "c"], mode="or", min_matches="2")
+        assert group["type"] == "or"
+        assert group["minMatches"] == "2"
+        assert group["maxMatches"] == ""
+
+    def test_min_matches_is_rejected_on_a_non_or_group(self) -> None:
+        # The site only ever attaches it to an "or" group; an "and" group with
+        # minMatches would be silently ignored, which reads as "no results".
+        with pytest.raises(ValueError, match="only apply to an 'or' group"):
+            search.stat_group(["a", "b"], mode="and", min_matches="1")
+
+
+class TestDefaultFilters:
+    def test_exclude_generic_class_is_present(self) -> None:
+        # Read out of the site's zod schema, not the capture - the capture was
+        # taken with the control untouched so the key never appeared.
+        assert search.DEFAULT_FILTERS["excludeGenericClass"] is False

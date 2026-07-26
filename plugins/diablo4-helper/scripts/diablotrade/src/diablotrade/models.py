@@ -51,7 +51,9 @@ class Affix:
         attribute_id = _as_str(data.get("attributeId"))
         if attribute_id is None:
             return None
-        values = tuple(v for v in _as_list(data.get("values")) if isinstance(v, (int, float)))
+        values = tuple(
+            v for v in _as_list(data.get("values")) if isinstance(v, (int, float))
+        )
         return cls(
             attribute_id=attribute_id,
             values=values,
@@ -79,9 +81,7 @@ SLOT_ASPECT_SCALE: dict[str, float] = {
 # Slots whose label covers BOTH a one-handed and a two-handed weapon, so the
 # scale cannot be read off equipmentType alone - the same "SWORD" label carries
 # rolls at 1x and at 2x. Anything here gets no base roll rather than a guess.
-AMBIGUOUS_ASPECT_SLOTS: frozenset[str] = frozenset(
-    {"SWORD", "MACE", "AXE", "SCYTHE"}
-)
+AMBIGUOUS_ASPECT_SLOTS: frozenset[str] = frozenset({"SWORD", "MACE", "AXE", "SCYTHE"})
 
 
 @dataclass(frozen=True, slots=True)
@@ -106,8 +106,12 @@ class Item:
             greater_affix_count=_as_int(data.get("greaterAffixes")),
             equipment_type=_as_str(data.get("equipmentType")),
             unique_equipment_id=_as_str(data.get("uniqueEquipmentId")),
-            affixes=tuple(a for a in map(Affix.parse, _as_list(data.get("affixes"))) if a),
-            inherents=tuple(a for a in map(Affix.parse, _as_list(data.get("inherents"))) if a),
+            affixes=tuple(
+                a for a in map(Affix.parse, _as_list(data.get("affixes"))) if a
+            ),
+            inherents=tuple(
+                a for a in map(Affix.parse, _as_list(data.get("inherents"))) if a
+            ),
             effect_affix=Affix.parse(data.get("effectAffix")),
         )
 
@@ -197,6 +201,13 @@ class Listing:
         )
 
 
+# /api/search/<id> never returns more than this many listing ids. Verified by
+# probing: ?page, ?offset, ?limit, ?skip and ?cursor are all ignored and return
+# the identical 500, and the only nextCursor in the site's bundles belongs to
+# the notifications feed. There is no pagination to reach past it.
+SEARCH_ID_CAP = 500
+
+
 @dataclass(frozen=True, slots=True)
 class SavedSearch:
     """A search created in the site UI and addressed by its short id."""
@@ -205,11 +216,23 @@ class SavedSearch:
     filters: Json
     listing_ids: tuple[str, ...]
 
+    @property
+    def is_truncated(self) -> bool:
+        """The result hit the hard cap, so the real match count is unknown.
+
+        A truncated search silently under-reports: the cheapest item matching
+        your filter may simply not be in the 500 you were given. Narrow the
+        filter rather than trusting the total.
+        """
+        return len(self.listing_ids) >= SEARCH_ID_CAP
+
     @classmethod
     def parse(cls, raw: object) -> SavedSearch:
         data = _as_dict(raw)
         return cls(
             id=_as_str(data.get("id")) or "",
             filters=_as_dict(data.get("filters")),
-            listing_ids=tuple(i for i in _as_list(data.get("listings")) if isinstance(i, str)),
+            listing_ids=tuple(
+                i for i in _as_list(data.get("listings")) if isinstance(i, str)
+            ),
         )

@@ -135,9 +135,17 @@ DEFAULT_FILTERS: dict[str, object] = {
     "greaterAffixesMin": "",
     "greaterAffixesMax": "",
     "classType": "",
+    # Read out of the site's own zod schema, which types it as a boolean next to
+    # classType. Absent from the captured payload because the capture was taken
+    # with the control untouched.
+    "excludeGenericClass": False,
     "auctionType": "",
-    # How recently a listing was posted. The site's own control is the
-    # "RECENT LISTINGS" dropdown; empty means no age limit.
+    # How recently a listing was posted, from the "RECENT LISTINGS" dropdown.
+    # The site's schema types this as a free-form optional string, NOT an enum,
+    # so there is no value set to enumerate - only "" (no age limit) has been
+    # observed. An unrecognised value is ignored silently, which reads as "no
+    # results" rather than as an error, so confirm any value from a real payload
+    # before trusting it.
     "listPeriod": "",
     "priceMin": "",
     "priceMax": "",
@@ -180,28 +188,32 @@ _NO_SHORT_ID = (
     "likely rotated with a site deploy. Re-capture it; see docs/searching.md."
 )
 
-# UNVERIFIED. Only `""` (no age limit) has actually been observed in a captured
-# payload; the rest are what the "RECENT LISTINGS" dropdown plausibly sends and
-# have NOT been confirmed. Open the dropdown, pick each option, and read the
-# resulting payload before relying on these - the server ignores an unrecognised
-# value silently, so a wrong one reads as "no results" rather than as an error.
-LIST_PERIODS: tuple[str, ...] = ("", "1", "3", "7", "14", "30")
-
 
 def stat_group(
     attribute_ids: list[str],
     *,
     mode: str = "and",
     group_id: str = "00000000-0000-4000-8000-000000000001",
+    min_matches: str = "",
+    max_matches: str = "",
 ) -> dict[str, object]:
     """One affix group: AND / OR / NOT over a set of attribute ids.
 
-    `as_or_groups` in `filters` turns an "at least N of M" rule into the list of
-    OR groups that expresses it; feed each one through here with mode="or".
+    An "or" group also accepts `min_matches` / `max_matches`, which is the
+    site's own "at least N of these" support - its UI creates OR groups as
+    `{type:"or", minMatches:"1", maxMatches:""}`. That makes a 3-of-4 rule ONE
+    group server side, not the six pairs `filters.as_or_groups` builds for the
+    manual route. Both are kept: this one needs a session to create a search,
+    the local route needs nothing.
     """
     if mode not in {"and", "or", "not"}:
         raise ValueError(f"mode must be and/or/not, got {mode!r}")
+    if (min_matches or max_matches) and mode != "or":
+        raise ValueError("min_matches/max_matches only apply to an 'or' group")
     return {
+        "minMatches": min_matches,
+        "maxMatches": max_matches,
+        "disabled": False,
         "id": group_id,
         "type": mode,
         "affixes": [

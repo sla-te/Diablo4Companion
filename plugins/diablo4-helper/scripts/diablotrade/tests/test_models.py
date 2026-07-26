@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from diablotrade.models import Item
+from diablotrade.models import SEARCH_ID_CAP, Item, SavedSearch
 
 
 def make(equipment_type: str, roll: float | None) -> Item:
@@ -43,3 +43,15 @@ class TestAspectRoll:
 
     def test_unknown_slot_falls_back_to_unscaled(self) -> None:
         assert make("SOMETHING_NEW", 55.0).base_aspect_roll == 55.0
+
+
+class TestSearchTruncation:
+    def test_a_short_result_is_not_truncated(self) -> None:
+        search = SavedSearch.parse({"id": "abc", "listings": ["a", "b"]})
+        assert not search.is_truncated
+
+    def test_hitting_the_cap_is_reported_as_truncated(self) -> None:
+        # The endpoint has no pagination, so a capped result is a floor rather
+        # than a count - silently treating it as a total is the bug this guards.
+        ids = [str(n) for n in range(SEARCH_ID_CAP)]
+        assert SavedSearch.parse({"id": "abc", "listings": ids}).is_truncated

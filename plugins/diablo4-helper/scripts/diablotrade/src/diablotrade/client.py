@@ -31,7 +31,7 @@ import time
 import urllib.parse
 from collections.abc import Iterable, Iterator
 from dataclasses import dataclass, field
-from typing import Self, cast
+from typing import Protocol, Self, cast
 
 from curl_cffi import CurlError
 from curl_cffi.requests import BrowserTypeLiteral, Response, Session
@@ -52,6 +52,27 @@ IMPERSONATE: BrowserTypeLiteral = "chrome"
 # Error bodies are for a human reading a traceback, not for parsing. Long
 # enough to hold a Next.js stack frame, short enough not to flood a terminal.
 _ERROR_BODY_LIMIT = 2000
+
+
+class _SessionRequester(Protocol):
+    """The slice of curl_cffi's Session this client actually depends on.
+
+    curl_cffi ships no type stubs, so `Session.request` is only partially known
+    and every call site inherits that. Declaring the four arguments we pass
+    keeps the gap in one cast, and documents the dependency: if curl_cffi ever
+    changes this shape, one place fails rather than nothing failing.
+    """
+
+    def request(
+        self,
+        method: HttpMethod,
+        url: str,
+        *,
+        data: bytes | None,
+        headers: dict[str, str] | None,
+        timeout: float,
+        allow_redirects: bool,
+    ) -> Response | None: ...
 
 
 class DiabloTradeError(RuntimeError):
@@ -123,7 +144,8 @@ class Client:
         if urllib.parse.urlsplit(url).scheme not in ("http", "https"):
             raise DiabloTradeError(f"refusing non-HTTP URL {url!r}")
         try:
-            response = self._ensure_session().request(
+            requester = cast(_SessionRequester, self._ensure_session())
+            response = requester.request(
                 method,
                 url,
                 data=body,
@@ -200,7 +222,9 @@ class Client:
     def session(self) -> Json:
         """Current session. Useful to verify a cookie is actually valid."""
         raw = self.get_json("/api/session")
-        return raw if isinstance(raw, dict) else {}
+        # isinstance narrows only to dict[Unknown, Unknown]; the cast records
+        # what the endpoint returns rather than silencing the diagnostic.
+        return cast(Json, raw) if isinstance(raw, dict) else {}
 
 
 def _failure(method: str, path: str, response: Response) -> DiabloTradeError:

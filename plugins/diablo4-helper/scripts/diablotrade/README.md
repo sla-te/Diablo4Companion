@@ -8,14 +8,21 @@ three matter for the Server Action path - see `src/diablotrade/client.py`.
 
 ## Why this exists
 
-diablo.trade's affix filter is built from AND / OR / NOT groups. That cannot
-express **"at least N of these M affixes"** in a single group, which is the query
-you actually want when hunting gear: an item missing exactly one wanted affix is
-still worth buying, because the Occultist can enchant one affix per item.
+The query you actually want when hunting gear is **"at least N of these M
+affixes"**: an item missing exactly one wanted affix is still worth buying,
+because the Occultist can enchant one affix per item.
 
-Expressed as groups, "at least 3 of 4" is an AND over all six pairs - six groups
-clicked by hand, and it gets worse as M grows. Pulling the listings and filtering
-locally is both easier and more expressive.
+The site *can* express that - reading its bundles shows OR groups carry
+`minMatches` / `maxMatches`, so 3-of-4 is one group server side. Two reasons to
+filter locally anyway:
+
+1. **Creating a search needs a logged-in session.** Reading one does not. The
+   local route works anonymously against any short id.
+2. **A match count is not the answer.** It ignores what the enchant costs, and
+   the site cannot rank by that at all. See below.
+
+`diablotrade groups` still prints the rule as the six OR pairs, for rebuilding
+it by hand in the UI without touching `minMatches`.
 
 A match count alone still overstates an item, because it ignores what the enchant
 costs. `diablotrade enchant` prices that: it separates items with a junk affix to
@@ -32,8 +39,14 @@ bundles, not from documentation - diablo.trade publishes none.
 
 | Operation | Mechanism | Usable from a script |
 |---|---|---|
-| Read a saved search | `GET /api/search/<shortId>` | yes, anonymously |
+| Read a saved search | `GET /api/search/<shortId>` | yes, anonymously, **capped at 500 ids** |
 | Hydrate listings | `GET /api/listing/get?ids=a,b,c` | yes, anonymously, batches of 50 |
+
+The 500 cap has no way past it. `?page`, `?offset`, `?limit`, `?skip` and
+`?cursor` are all ignored and return the identical 500, and the only `nextCursor`
+in the site's bundles belongs to the notifications feed. A capped search is a
+floor, not a count, so `SavedSearch.is_truncated` says so and the CLI warns.
+Narrow the filter instead.
 | Create a search | Next.js Server Action | awkward, see below |
 | Post a listing | Next.js Server Action | awkward, see below |
 

@@ -7,7 +7,7 @@ name = "diablotrade"
 version = "0.1.0"
 description = "Programmatic search, filtering and listing tools for diablo.trade"
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.12"
 dependencies = ["curl_cffi>=0.13"]
 
 [project.scripts]

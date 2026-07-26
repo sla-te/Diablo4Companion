@@ -112,17 +112,31 @@ is no `X-Action-Redirect` on the success path - that header only appears on the
 Identical filters appear to resolve to the same short id rather than minting a
 new one each time, so repeated calls are cheap.
 
-## The pagination question, unanswered
+## Pagination: there is none
 
-`/api/search/<shortId>` returns at most **500** listing ids. Whether the site
-can reach past that, and how it pages, has not been established - the results
-page has not been scrolled to the bottom to watch what it requests. Until that
-is checked, treat 500 as a possible truncation, not a known total.
+`/api/search/<shortId>` returns at most **500** listing ids and there is no way
+past it. Probed directly: `?page=2`, `?offset=500`, `?limit=1000`, `?skip=500`
+and `?cursor=500` are all ignored and return the identical 500 ids. The only
+`nextCursor` anywhere in the site's bundles belongs to the "what's new"
+notifications feed, not to search.
 
-## listPeriod, unconfirmed
+So a search that comes back with exactly 500 is truncated, and its total is a
+floor rather than a count. `SavedSearch.is_truncated` reports it and the CLI
+warns on stderr. The fix is a narrower filter, not a second request.
 
-Only `""` (no age limit) has been observed in a captured payload. The other
-values in `search.LIST_PERIODS` are guesses. Open the "RECENT LISTINGS"
-dropdown, pick each option, and read the resulting `_1_input` before relying on
-them: the server ignores an unrecognised value silently, so a wrong one reads as
-"no results" rather than as an error.
+## listPeriod is a free-form string
+
+The site's own zod schema types it `z.string().optional()` - there is no enum to
+enumerate, so the value set cannot be recovered from the bundle. Only `""` (no
+age limit) has been observed in a real payload. An unrecognised value is ignored
+silently, which reads as "no results" rather than as an error, so confirm any
+value against a real capture before trusting it.
+
+## The site supports "at least N of M" natively
+
+An OR group carries `minMatches` / `maxMatches`; the UI builds them as
+`{type:"or", minMatches:"1", maxMatches:"", affixes:[]}`, and the group
+normaliser round-trips `{id, type, minMatches, maxMatches, affixes, disabled}`.
+`search.stat_group(..., mode="or", min_matches="3")` emits that shape, so a
+3-of-4 rule is one group server side rather than the six pairs
+`filters.as_or_groups` builds for the click-it-by-hand route.

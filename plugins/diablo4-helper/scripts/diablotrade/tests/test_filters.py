@@ -23,7 +23,9 @@ CRIT = "80def26f-6fb5-4dd3-ae16-47b6bedcbefb"
 GUARANTEED = "fe7b8970-7858-4c3d-8a0e-71f106b07863"
 
 
-def make(attrs: dict[str, float], *, greater: set[str] | None = None, price: int = 0) -> Listing:
+def make(
+    attrs: dict[str, float], *, greater: set[str] | None = None, price: int = 0
+) -> Listing:
     greater = greater or set()
     listing = Listing.parse(
         {
