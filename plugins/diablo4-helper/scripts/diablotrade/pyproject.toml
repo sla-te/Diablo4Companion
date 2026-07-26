@@ -1,0 +1,23 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "diablotrade"
+version = "0.1.0"
+description = "Programmatic search, filtering and listing tools for diablo.trade"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.scripts]
+diablotrade = "diablotrade.cli:main"
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/diablotrade"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
