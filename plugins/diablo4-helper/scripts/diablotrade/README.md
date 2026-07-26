@@ -45,6 +45,9 @@ diablotrade filter 3UcbpB --attrs STR,LIFE,FURY,CRIT --min-matches 3
 
 # Same rule as OR-groups, if you would rather rebuild it in the site UI
 diablotrade groups --attrs STR,LIFE,FURY,CRIT --min-matches 3
+
+# Rank aspect carriers by BASE roll, so an amulet's 1.5x range does not win
+diablotrade aspects 2H96O4 --max-price 100000000
 ```
 
 As a library:
@@ -75,6 +78,15 @@ works in UUIDs. Two ways to attach names:
    frequency. Since Patch 3.1.0 every Unique has exactly 2 guaranteed affixes and
    randomises the rest, so attributes at 100% are the guaranteed pair. That
    identifies the slots without naming them, which is usually enough.
+
+## Searching without the browser
+
+`diablotrade.search` builds the site's exact filter payload from Python
+(`build_filters`, `stat_group`) and holds the captured Server Action contract for
+creating a search. **`create_search` does not work yet - it returns HTTP 500.**
+See [docs/searching.md](docs/searching.md) for what was captured, what has been
+ruled out, and what to try next. Until it works, create searches in the site UI
+and drive everything after that from here.
 
 ## Posting
 
