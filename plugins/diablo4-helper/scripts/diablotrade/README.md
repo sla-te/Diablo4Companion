@@ -1,7 +1,10 @@
 # diablotrade
 
 Programmatic search, filtering and listing tools for [diablo.trade](https://diablo.trade).
-Stdlib only, `src` layout, no runtime dependencies.
+`src` layout. One runtime dependency: `curl_cffi`, which replays a real
+browser's TLS fingerprint, lets non-2xx bodies and redirect headers be
+inspected instead of raised away, and keeps a cookie jar across requests. All
+three matter for the Server Action path - see `src/diablotrade/client.py`.
 
 ## Why this exists
 

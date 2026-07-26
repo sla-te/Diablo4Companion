@@ -1,7 +1,5 @@
 """HTTP layer for diablo.trade.
 
-Stdlib only, so the package runs under a bare `uv run` with no install step.
-
 What is and is not available, established by watching the site's own traffic:
 
 * Reading is clean REST and works anonymously:
@@ -10,18 +8,34 @@ What is and is not available, established by watching the site's own traffic:
 * Writing (creating a search, creating a listing) is NOT REST. Next.js Server
   Actions handle it: a POST to the page URL carrying a `Next-Action` header
   whose value is a build-specific 40-hex id. See `diablotrade.actions`.
+
+Transport is `curl_cffi` rather than `urllib`, for four reasons that all came
+out of debugging the Server Action path:
+
+1. It replays a real browser's TLS/JA3 and HTTP2 fingerprint (`impersonate`).
+   The site is behind a CDN that is entitled to start refusing clients that
+   announce Chrome in the User-Agent while handshaking like Python.
+2. Non-2xx responses carry their body instead of being raised away. Next.js
+   puts the cause of a Server Action failure in that body.
+3. Redirects can be inspected rather than followed. The action signals an
+   unauthenticated caller with a 303 plus an `X-Action-Redirect` header, which
+   is invisible if the client chases the redirect.
+4. One session keeps a cookie jar, so cookies the site sets survive across the
+   page GET and the action POST.
 """
 
 from __future__ import annotations
 
 import json
 import time
-import urllib.error
 import urllib.parse
-import urllib.request
 from collections.abc import Iterable, Iterator
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import cast
+
+from curl_cffi import CurlError
+from curl_cffi.requests import BrowserTypeLiteral, Response, Session
+from curl_cffi.requests.session import HttpMethod
 
 from .models import Json, Listing, SavedSearch
 
@@ -31,8 +45,13 @@ BASE_URL = "https://diablo.trade"
 # risks a URL longer than the CDN will accept.
 BATCH_SIZE = 50
 
-# A browser-like UA is required; the CDN refuses urllib's default.
-USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) diablotrade/0.1"
+# curl_cffi resolves the bare name to its newest Chrome profile, which is what
+# we want: pinning a version means the fingerprint ages into being distinctive.
+IMPERSONATE: BrowserTypeLiteral = "chrome"
+
+# Error bodies are for a human reading a traceback, not for parsing. Long
+# enough to hold a Next.js stack frame, short enough not to flood a terminal.
+_ERROR_BODY_LIMIT = 2000
 
 
 class DiabloTradeError(RuntimeError):
@@ -47,8 +66,12 @@ class AuthRequiredError(DiabloTradeError):
 class Client:
     """Talks to diablo.trade.
 
-    `cookie` is only needed for authenticated operations (posting, own
-    listings). Search and listing reads work without it.
+    `cookie` is a raw Cookie header string, only needed for authenticated
+    operations (creating a search, posting, own listings). Search and listing
+    reads work without it.
+
+    Holds a connection pool, so reuse one client rather than making them per
+    call, and close it when done - or use it as a context manager.
     """
 
     cookie: str | None = None
@@ -57,43 +80,74 @@ class Client:
     # Be a polite client: the read endpoints are not rate-limit documented, and
     # a full 500-listing pull is 10 requests.
     delay_between_requests: float = 0.2
+    impersonate: BrowserTypeLiteral = IMPERSONATE
+    _session: Session[Response] | None = field(
+        default=None, init=False, repr=False, compare=False
+    )
+
+    def _ensure_session(self) -> Session[Response]:
+        """Build the session on first use, so constructing a Client is cheap."""
+        if self._session is None:
+            session: Session[Response] = Session(impersonate=self.impersonate)
+            # Seeding the jar rather than pinning a Cookie header lets the site
+            # update its own cookies without us sending a stale duplicate.
+            for part in (self.cookie or "").split(";"):
+                name, _, value = part.strip().partition("=")
+                if name:
+                    session.cookies.set(name, value)
+            self._session = session
+        return self._session
+
+    def close(self) -> None:
+        if self._session is not None:
+            self._session.close()
+            self._session = None
+
+    def __enter__(self) -> Client:
+        return self
+
+    def __exit__(self, *_exc: object) -> None:
+        self.close()
 
     def _request(
         self,
         path: str,
         *,
-        method: str = "GET",
+        method: HttpMethod = "GET",
         body: bytes | None = None,
         headers: dict[str, str] | None = None,
     ) -> bytes:
         url = path if path.startswith("http") else self.base_url + path
-        request = urllib.request.Request(url, data=body, method=method)
-        request.add_header("User-Agent", USER_AGENT)
-        request.add_header("Accept", "*/*")
-        for key, value in (headers or {}).items():
-            request.add_header(key, value)
-        if self.cookie:
-            request.add_header("Cookie", self.cookie)
+        # `fetch_text` is handed URLs scraped out of page HTML, so the scheme is
+        # attacker-influenced: pin it rather than trusting whatever comes back.
+        if urllib.parse.urlsplit(url).scheme not in ("http", "https"):
+            raise DiabloTradeError(f"refusing non-HTTP URL {url!r}")
         try:
-            with urllib.request.urlopen(request, timeout=self.timeout) as response:
-                payload: bytes = response.read()
-                return payload
-        except urllib.error.HTTPError as exc:
-            if exc.code in (401, 403):
-                raise AuthRequiredError(
-                    f"{method} {path} returned {exc.code}. Pass a session cookie."
-                ) from exc
-            raise DiabloTradeError(f"{method} {path} returned HTTP {exc.code}") from exc
-        except urllib.error.URLError as exc:
-            raise DiabloTradeError(f"{method} {path} failed: {exc.reason}") from exc
+            response = self._ensure_session().request(
+                method,
+                url,
+                data=body,
+                headers=headers,
+                timeout=self.timeout,
+                # Following a redirect would swallow the response that says why
+                # the request was redirected. See the module docstring.
+                allow_redirects=False,
+            )
+        except CurlError as exc:
+            raise DiabloTradeError(f"{method} {path} failed: {exc}") from exc
+        if response is None:
+            # Only reachable via the streaming/callback modes, which we never use.
+            raise DiabloTradeError(f"{method} {path} returned no response")
+        if response.status_code >= 300:
+            raise _failure(method, path, response)
+        content: bytes = response.content
+        return content
 
     def fetch_text(self, path: str) -> str:
         """GET a page or asset as text. Used for Server Action id discovery."""
         return self._request(path).decode("utf-8", errors="replace")
 
-    def post_raw(
-        self, path: str, body: bytes, headers: dict[str, str]
-    ) -> str:
+    def post_raw(self, path: str, body: bytes, headers: dict[str, str]) -> str:
         """POST arbitrary bytes and return the response as text.
 
         Exists for the Server Action transport in `diablotrade.actions`, which
@@ -147,6 +201,36 @@ class Client:
         """Current session. Useful to verify a cookie is actually valid."""
         raw = self.get_json("/api/session")
         return raw if isinstance(raw, dict) else {}
+
+
+def _failure(method: str, path: str, response: Response) -> DiabloTradeError:
+    """Turn a non-2xx response into the most specific error we can name."""
+    status = response.status_code
+    # Server Actions signal "log in" as a 303 to /session-expired rather than
+    # as a 401, so the redirect target is the only thing that says what is wrong.
+    redirect = response.headers.get("x-action-redirect", "")
+    if status in (401, 403) or "session-expired" in redirect:
+        detail = _detail(response, redirect)
+        return AuthRequiredError(
+            f"{method} {path} returned {status}{detail}. Pass a session cookie."
+        )
+    return DiabloTradeError(
+        f"{method} {path} returned HTTP {status}{_detail(response, redirect)}"
+    )
+
+
+def _detail(response: Response, redirect: str) -> str:
+    """Render a failure response compactly for an exception message."""
+    # A redirect target names the cause precisely, and the body that comes with
+    # it is a whole rendered page. Prefer the one-liner.
+    if redirect:
+        return f": redirect to {redirect}"
+    text = response.text.strip()
+    if not text:
+        return ""
+    if len(text) > _ERROR_BODY_LIMIT:
+        text = text[:_ERROR_BODY_LIMIT] + " ...[truncated]"
+    return f": {text}"
 
 
 def _unwrap_listings(payload: object) -> list[object]:
