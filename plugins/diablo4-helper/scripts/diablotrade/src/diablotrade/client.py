@@ -31,7 +31,7 @@ import time
 import urllib.parse
 from collections.abc import Iterable, Iterator
 from dataclasses import dataclass, field
-from typing import cast
+from typing import Self, cast
 
 from curl_cffi import CurlError
 from curl_cffi.requests import BrowserTypeLiteral, Response, Session
@@ -103,7 +103,7 @@ class Client:
             self._session.close()
             self._session = None
 
-    def __enter__(self) -> Client:
+    def __enter__(self) -> Self:
         return self
 
     def __exit__(self, *_exc: object) -> None:
