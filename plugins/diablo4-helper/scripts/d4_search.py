@@ -27,6 +27,7 @@ Requires the `tvly` CLI on PATH (Tavily). Prints nothing sensitive.
 
 import argparse
 import json
+import os
 import subprocess
 import sys
 
@@ -76,14 +77,30 @@ D4_KEYWORDS = [
 
 
 def run_tvly(args: list[str], timeout: int) -> bytes | None:
+    # tvly is a Python CLI whose stdout inherits the Windows console codepage (cp1252) and
+    # dies with UnicodeEncodeError on emoji or smart quotes present in real page content.
+    # That killed every --include-raw-content call. Force UTF-8 on the child process.
+    env = {**os.environ, "PYTHONIOENCODING": "utf-8"}
     try:
-        return subprocess.check_output(["tvly", *args], stderr=subprocess.DEVNULL, timeout=timeout)
+        return subprocess.check_output(["tvly", *args], stderr=subprocess.DEVNULL, timeout=timeout, env=env)
     except FileNotFoundError:
         sys.exit("tvly CLI not found. Install: curl -fsSL https://cli.tavily.com/install.sh | bash && tvly login")
     except subprocess.TimeoutExpired:
         return None
     except subprocess.CalledProcessError:
         return None
+
+
+def _decode(raw: bytes) -> str:
+    # The tvly CLI writes in the host console encoding, which is cp1252 on Windows, not
+    # UTF-8. json.loads() on raw bytes assumes UTF-8 and raises UnicodeDecodeError on
+    # bytes like 0x92 (curly apostrophe) that appear in ordinary D4 guide titles.
+    for codec in ("utf-8", "cp1252"):
+        try:
+            return raw.decode(codec)
+        except UnicodeDecodeError:
+            continue
+    return raw.decode("utf-8", errors="replace")
 
 
 def search(query: str, domains: list[str], max_results: int, with_raw: bool) -> list[Result]:
@@ -94,7 +111,7 @@ def search(query: str, domains: list[str], max_results: int, with_raw: bool) -> 
     if not raw:
         return []
     try:
-        parsed: object = json.loads(raw)
+        parsed: object = json.loads(_decode(raw))
     except json.JSONDecodeError:
         return []
     results = parsed.get("results", []) if isinstance(parsed, dict) else []
@@ -130,7 +147,7 @@ def extract_and_filter(results: list[Result], top: int) -> None:
             raw = run_tvly(["extract", url, "--json"], timeout=45)
             if raw:
                 try:
-                    parsed: object = json.loads(raw)
+                    parsed: object = json.loads(_decode(raw))
                 except json.JSONDecodeError:
                     parsed = None
                 res = parsed.get("results", []) if isinstance(parsed, dict) else []
@@ -149,6 +166,11 @@ def extract_and_filter(results: list[Result], top: int) -> None:
 
 
 def main() -> None:
+    # Same cp1252 issue as in run_tvly, but on our own stdout. D4 guide text routinely
+    # contains star glyphs (U+2605) and emoji; without this the script dies mid-print
+    # on Windows after having already done the expensive fetch.
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+
     ap = argparse.ArgumentParser(description="D4-scoped tavily search helper")
     ap.add_argument("query")
     ap.add_argument("--extract", action="store_true")
