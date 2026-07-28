@@ -281,8 +281,9 @@ Every Legendary Rune has a recipe, all of the form
 1. Is the item a **crafting input** rather than an upgrade? (850+ Unique = Mythic fodder
    for its slot; Common = Upgrade to Unique; Rare = Upgrade to Legendary; 3 duplicates =
    3-to-1 / Recycle Uniques; 5 of a thing = Amalgamation.)
-2. Does the player already own the target slot's Mythic **as a drop**? If yes, the
-   crafted-Mythic slot is still free.
+2. Does the player already own the target slot's Mythic? Crafting a second one for the
+   same slot is still wasted materials, but **not** because of an equip limit - that was
+   removed in 3.1.1a. Any number of crafted Mythics may be worn at once.
 3. Is a wanted item on the **Craft Unique Charm** list? That converts a dead equipment
    Unique into a charm.
 4. Is the item finished (sockets, masterwork, aspect) and therefore ready to

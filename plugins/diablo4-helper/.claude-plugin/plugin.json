@@ -1,6 +1,6 @@
 {
   "name": "diablo4-helper",
-  "description": "Diablo 4 gameplay helper - forces every version-specific answer (builds, items, crafting, seasonal mechanics, D4Companion overlay) to be verified against live sources instead of a stale training cutoff. Carries researched references for itemization, the damage model, Horadric Cube recipes, Tuning Prisms and per-slot affix pools, a goal-driven crafting decision tree, and Barbarian/Whirlwind build data. Bundles a diablo.trade client that ranks listings by what the one available enchant would cost to fix them.",
+  "description": "Diablo 4 crafting, itemization and gear-grading advisor. Verifies every patch-specific answer live. Build data is Barbarian/Whirlwind only.",
   "version": "0.2.0",
   "author": {
     "name": "sla-te"

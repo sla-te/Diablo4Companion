@@ -1,18 +1,14 @@
 ---
 name: diablo4-helper
 description: >-
-  Use for any Diablo 4 (D4) gameplay question - builds, uniques, mythics,
-  aspects, tempering, masterworking, enchanting, the Horadric Cube, Tuning
-  Prisms, charms/talismans, the Pit, glyphs, seasonal mechanics, farming routes,
-  loot filters, boss ladders, gear/item comparisons, "which crafting recipe do I
-  use to get stat X", or buying gear on diablo.trade. D4 patches roughly every
-  three months, so training knowledge is stale and wrong: this skill forces every
-  version-specific answer to be verified against live online sources before it is
-  stated. Triggers include "Diablo 4", "D4", "what season is it", "best build
-  for", "how do I craft", "should I reroll", "which prism", "is this item an
-  upgrade", "how to get <unique/mythic>", "current season mechanic", "loot
-  filter", "diablo.trade", "D4Companion". Do NOT use for other ARPGs (Path of
-  Exile, Last Epoch) or non-game Diablo lore questions.
+  This skill should be used for Diablo 4 (D4) gameplay questions - "best build
+  for", "is this item an upgrade", "should I reroll", "which prism", "how do I
+  craft X", "what season is it", "how to get <unique/mythic>" - covering builds,
+  items, aspects, the Horadric Cube, tempering, masterworking, enchanting,
+  charms, glyphs, the Pit, farming routes, loot filters, diablo.trade, and
+  D4Companion. D4 patches quarterly, so every version-specific fact must be
+  verified against live sources before it is stated. Not for other ARPGs (Path of
+  Exile, Last Epoch) or Diablo lore.
 version: 0.2.0
 ---
 
@@ -51,11 +47,19 @@ answer about a patched mechanic is the failure this skill exists to prevent.
 
 ## Confidence tagging is mandatory
 
-Every reference file in this skill tags claims `[Certain]`, `[Likely]` or
-`[Unverified]`. Carry those tags through into answers. A `[Likely]` fact must not
-be presented to the player as settled, because they spend irreversible
-materials on what you tell them. See "Known contradictions" below for the live
-disputes.
+The five researched references - `itemization.md`, `damage-model.md`,
+`affix-pools.md`, `crafting-decisions.md`, `barbarian-whirlwind.md` - tag every
+claim `[Certain]`, `[Likely]` or `[Unverified]`, and each ends with a `Sources`
+and a `Gaps` section. Carry those tags through into answers. A `[Likely]` fact
+must not be presented to the player as settled, because they spend irreversible
+materials on what you tell them.
+
+`horadric-cube.md`, `traps.md` and `sources.md` are **untagged** - they are a
+dated recipe snapshot, a procedural guardrail list and a source index
+respectively. Treat the recipe snapshot's costs and seasonal recipes as
+`[Likely]` and re-verify before a player spends on them.
+
+See "Known contradictions" below for the live disputes.
 
 ## Question routing - open the right reference first
 
@@ -138,25 +142,20 @@ season may not have been updated.
 
 ## Known contradictions - do not silently pick a side
 
-These are live disputes as of the 2026-07-28 research pass. When one of these
-comes up, say it is disputed and give the player the cheap experiment.
+Never silently pick a side of a dispute. Say it is disputed, then give the player
+the cheapest in-game experiment that settles it. The evidence lives in the
+reference that owns each one - open it, do not answer from this index:
 
-- **Which side a Tuning Prism names on Chaotic Reroll.** Icy Veins says the
-  prism sets the category of the **outcome**; a Reddit field report says it sets
-  the **victim**. `[Likely]` the outcome. Full evidence in `references/affix-pools.md`
-  and the warning block in `references/horadric-cube.md`. **Settle it with one
-  cheap roll on a junk Legendary before advising a geared item.**
-- **The crafted-Mythic equip limit is GONE** - removed in patch 3.1.1a per a
-  quoted Blizzard blue post, and confirmed in the field with three crafted
-  Mythics equipped at once. Not actually disputed, but listed here because a
-  large fraction of guides and season-launch articles still state the old
-  one-at-a-time limit. If a source repeats it, the source is stale.
-- **Damage Over Time affixes on a 2H Sword Barbarian.** Two-Handed Slashing
-  Weapon Mastery splits roughly 40% direct / 240% Bleed, so a DoT multiplier is
-  not dead weight on a Grandfather build. Guides that call DoT a "direct damage
-  build" dead stat are wrong for this specific case.
-- **Ancestral / Mythic Item Power ceiling.** Sources give 800, 900 and 925
-  depending on page age. Unresolved.
+- Which side a Tuning Prism names on Chaotic Reroll, victim or replacement -
+  `horadric-cube.md` warning block, `affix-pools.md`
+- Ancestral / Mythic Item Power ceiling, 800 vs 900 vs 925 - `itemization.md`
+- Whether Damage Over Time is a dead stat on a 2H Sword Barbarian -
+  `damage-model.md`, `barbarian-whirlwind.md`
+
+One entry is **not** disputed but is listed because most sources are stale on it:
+the **crafted-Mythic equip limit was removed in patch 3.1.1a**. Any number may be
+worn at once. If a guide states the old one-at-a-time limit, the guide is out of
+date - that alone is a reason to distrust the rest of the page.
 
 ## Recurring tasks
 
@@ -196,10 +195,23 @@ do things in". Always state:
 
 ### Buying gear (diablo.trade)
 
-The plugin bundles a full diablo.trade client at `scripts/diablotrade`. Read
-`scripts/diablotrade/README.md` and `scripts/diablotrade/docs/searching.md`
-before using it. The commands are `learn`, `filter`, `enchant`, `groups`,
-`aspects`, `market` and `actions`.
+The plugin bundles a full diablo.trade client at
+`${CLAUDE_PLUGIN_ROOT}/scripts/diablotrade`. It is a self-contained uv project,
+not a loose script, so it must be invoked through `uv run --project`. It is never
+on `PATH`:
+
+```bash
+uv run --project "${CLAUDE_PLUGIN_ROOT}/scripts/diablotrade" \
+    diablotrade <subcommand> [args]
+```
+
+The first such call resolves and installs its one runtime dependency
+(`curl_cffi`) automatically; no separate `uv sync` step is needed. The
+subcommands are `learn`, `filter`, `enchant`, `groups`, `aspects`, `market` and
+`actions`; run it with `--help` for the full usage block. Read
+`${CLAUDE_PLUGIN_ROOT}/scripts/diablotrade/README.md` and
+`${CLAUDE_PLUGIN_ROOT}/scripts/diablotrade/docs/searching.md` before a first
+real search.
 
 The key idea is already baked into that tool and matches the repair-budget frame
 above: the query you want is **"at least N of these M affixes"**, because an item
@@ -235,6 +247,12 @@ real-life personal details out of it regardless.
 
 ## Additional resources
 
-- **`scripts/d4_search.py`** - D4-scoped tavily-dynamic-search helper.
-- **`scripts/diablotrade/`** - diablo.trade search, filtering, enchant-cost
-  pricing and market analysis. Has its own README, docs and test suite.
+Both live under `${CLAUDE_PLUGIN_ROOT}/scripts/`, which is the **plugin** root -
+one level above this skill directory, so a bare relative `scripts/...` path from
+here will not resolve. Always use `${CLAUDE_PLUGIN_ROOT}`.
+
+- **`${CLAUDE_PLUGIN_ROOT}/scripts/d4_search.py`** - D4-scoped
+  tavily-dynamic-search helper. Run with `uv run python3`.
+- **`${CLAUDE_PLUGIN_ROOT}/scripts/diablotrade/`** - diablo.trade search,
+  filtering, enchant-cost pricing and market analysis. A uv project; run with
+  `uv run --project`. Has its own README, docs and test suite.
