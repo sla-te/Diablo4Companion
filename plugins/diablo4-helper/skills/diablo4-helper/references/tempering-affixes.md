@@ -39,7 +39,7 @@ stats inconsistently in prose but agree on these keys.
 ## All classes (55)
 
 | Affix | Stat key |
-|---|---|
+| --- | --- |
 | #% Block Chance | `Block_Chance` |
 | #% Cooldown Reduction | `Power_Cooldown_Reduction_Percent_All` |
 | #% Dodge Chance | `Dodge_Chance_Bonus` |
@@ -99,7 +99,7 @@ stats inconsistently in prose but agree on these keys.
 ## Sorcerer (35)
 
 | Affix | Stat key |
-|---|---|
+| --- | --- |
 | #% Deep Freeze Cooldown Reduction | `Power_Cooldown_Reduction_Percent` |
 | #% Frost Nova Cooldown Reduction | `Power_Cooldown_Reduction_Percent` |
 | #% Hydra Resource Cost Reduction | `Power_Resource_Cost_Reduction_Percent` |
@@ -139,7 +139,7 @@ stats inconsistently in prose but agree on these keys.
 ## Druid (43)
 
 | Affix | Stat key |
-|---|---|
+| --- | --- |
 | #% Blood Howl Cooldown Reduction | `Power_Cooldown_Reduction_Percent` |
 | #% Boulder Cooldown Reduction | `Power_Cooldown_Reduction_Percent` |
 | #% Cataclysm Cooldown Reduction | `Power_Cooldown_Reduction_Percent` |
@@ -187,7 +187,7 @@ stats inconsistently in prose but agree on these keys.
 ## Barbarian (43)
 
 | Affix | Stat key |
-|---|---|
+| --- | --- |
 | #% Brawling Cooldown Reduction | `Skill_Tag_Cooldown_Reduction_Percent` |
 | #% Call of the Ancients Cooldown Reduction | `Power_Cooldown_Reduction_Percent` |
 | #% Challenging Shout Cooldown Reduction | `Power_Cooldown_Reduction_Percent` |
@@ -235,7 +235,7 @@ stats inconsistently in prose but agree on these keys.
 ## Rogue (41)
 
 | Affix | Stat key |
-|---|---|
+| --- | --- |
 | #% Agility Cooldown Reduction | `Skill_Tag_Cooldown_Reduction_Percent` |
 | #% Caltrops Cooldown Reduction | `Power_Cooldown_Reduction_Percent` |
 | #% Concealment Cooldown Reduction | `Power_Cooldown_Reduction_Percent` |
@@ -281,7 +281,7 @@ stats inconsistently in prose but agree on these keys.
 ## Necromancer (38)
 
 | Affix | Stat key |
-|---|---|
+| --- | --- |
 | # All Stats | `Plus_All_Stats` |
 | #% Blood Mist Cooldown Reduction | `Power_Cooldown_Reduction_Percent` |
 | #% Bone Spirit Cooldown Reduction | `Power_Cooldown_Reduction_Percent` |
@@ -317,14 +317,14 @@ stats inconsistently in prose but agree on these keys.
 | Blood Orbs Restore +# Essence | `Percent_Bonus_Projectiles_Per_Power#Necromancer_BloodOrb_Pickup` |
 | Casting Macabre Skills Restores +# Primary Resource | `Primary_Resource_On_Cast_Per_Skill_Tag` |
 | Golems Inherit +#% of Your Thorns | `NecroArmy_Pet_Type_Inherit_Thorns_Bonus_Pct` |
-| Minions Inherit +#% of Your Thorns  | `NecroArmy_All_Pet_Types_Inherit_Thorns_Bonus_Pct` |
+| Minions Inherit +#% of Your Thorns | `NecroArmy_All_Pet_Types_Inherit_Thorns_Bonus_Pct` |
 | Skeletal Mages Inherit +#% of Your Thorns | `NecroArmy_Pet_Type_Inherit_Thorns_Bonus_Pct` |
 | Skeletal Warriors Inherit +#% of Your Thorns | `NecroArmy_Pet_Type_Inherit_Thorns_Bonus_Pct` |
 
 ## Spiritborn (50)
 
 | Affix | Stat key |
-|---|---|
+| --- | --- |
 | #% Defensive Cooldown Reduction | `Skill_Tag_Cooldown_Reduction_Percent` |
 | #% Focus Cooldown Reduction | `Skill_Tag_Cooldown_Reduction_Percent` |
 | #% Incarnate Cooldown Reduction | `Skill_Tag_Cooldown_Reduction_Percent` |
@@ -379,7 +379,7 @@ stats inconsistently in prose but agree on these keys.
 ## Paladin (44)
 
 | Affix | Stat key |
-|---|---|
+| --- | --- |
 | #% Advance Resource Generation | `Resource_Gain_Bonus_Percent_Per_Power` |
 | #% Aegis Cooldown Reduction | `Power_Cooldown_Reduction_Percent` |
 | #% Arbiter of Justice Cooldown Reduction | `Power_Cooldown_Reduction_Percent` |
@@ -428,7 +428,7 @@ stats inconsistently in prose but agree on these keys.
 ## Warlock (10)
 
 | Affix | Stat key |
-|---|---|
+| --- | --- |
 | #% Core Resource Cost Reduction | `Skill_Tag_Resource_Cost_Reduction_Percent` |
 | +#% Abyss Damage | `Damage_Percent_Bonus_Per_Skill_Tag` |
 | +#% Archfiend Damage | `Damage_Percent_Bonus_Per_Skill_Tag` |
@@ -443,13 +443,13 @@ stats inconsistently in prose but agree on these keys.
 ## Class mask empty in the data - verify in game (1)
 
 | Affix | Internal id | Stat key |
-|---|---|---|
+| --- | --- | --- |
 | +#% Damage to Knocked-Down Enemies | `Damage_to_Knockdown;Tempered_Damage_Spiritborn_Type_KnockDown_Tier1;Tempered_Damage_Spiritborn_Type_KnockDown_Tier2;Tempered_Damage_Spiritborn_Type_KnockDown_Tier3` | `Damage_Percent_Bonus_Vs_CC_Target` |
 
 ## Two or more classes (not all) (17)
 
 | Affix | Classes | Stat key |
-|---|---|---|
+| --- | --- | --- |
 | #% Basic Resource Generation | Barbarian / Necromancer | `Resource_Gain_Bonus_Percent_Per_Skill_Tag` |
 | +#% Cold Damage | Sorcerer / Rogue / Necromancer | `Damage_Type_Percent_Bonus` |
 | +#% Damage to Distant Enemies | Sorcerer / Druid / Rogue / Necromancer | `Damage_Bonus_To_Far` |

@@ -200,7 +200,9 @@ def render(affixes: list[Affix], source: Path) -> str:
         out.append("")
         header = ["Affix", *([extra[0]] if extra else []), "Stat key"]
         out.append("| " + " | ".join(header) + " |")
-        out.append("|" + "---|" * len(header))
+        # Spaces around the dashes: a bare `|---|` delimiter is not a valid
+        # compact-style table row and trips markdownlint MD060.
+        out.append("|" + " --- |" * len(header))
         for affix in rows:
             cells = [
                 affix.get("Description") or "",
@@ -208,8 +210,10 @@ def render(affixes: list[Affix], source: Path) -> str:
                 stat_keys(affix),
             ]
             # Escape every cell, not just the description - a future stat key or
-            # id containing a pipe would otherwise shift the whole row.
-            out.append("| " + " | ".join(c.replace("|", "\\|") for c in cells) + " |")
+            # id containing a pipe would otherwise shift the whole row. Strip
+            # too: some descriptions carry trailing spaces in the source data,
+            # which break compact table style (MD060).
+            out.append("| " + " | ".join(c.strip().replace("|", "\\|") for c in cells) + " |")
         out.append("")
 
     return "\n".join(out)
