@@ -59,6 +59,11 @@ dated recipe snapshot, a procedural guardrail list and a source index
 respectively. Treat the recipe snapshot's costs and seasonal recipes as
 `[Likely]` and re-verify before a player spends on them.
 
+`tempering-affixes.md` is **generated from the game's own data files** and is
+uniformly `[Certain]` for what it covers. It outranks any guide on whether an
+affix is temperable. Do not hand-edit it; regenerate it with
+`scripts/gen_temper_reference.py`.
+
 See "Known contradictions" below for the live disputes.
 
 ## Question routing - open the right reference first
@@ -69,6 +74,7 @@ See "Known contradictions" below for the live disputes.
 | Damage buckets, `[x]` vs `[+]`, stat scaling, crit/vulnerable/DoT, armour, resistances, Toughness, Maximum Life interactions | `references/damage-model.md` |
 | Every Horadric Cube recipe and its cost | `references/horadric-cube.md` |
 | Tuning Prism categories, which prism does what, per-slot affix pools, what a slot can legally roll | `references/affix-pools.md` |
+| "Can this affix be tempered at all", "what can my class temper", exact in-game affix wording, internal stat keys | `references/tempering-affixes.md` |
 | "Which crafting system do I use to achieve X", order of operations, what bricks an item | `references/crafting-decisions.md` |
 | Barbarian, Arsenal, weapon expertise, Whirlwind stat priority, Mythic build variants | `references/barbarian-whirlwind.md` |
 | Where to look something up, query templates | `references/sources.md` |

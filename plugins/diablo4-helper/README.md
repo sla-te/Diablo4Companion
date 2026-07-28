@@ -19,13 +19,27 @@ A single skill, `diablo4-helper`, with eight reference files and two scripts.
 | `horadric-cube.md` | Every Cube recipe with its cost, plus the gear-grading checklist |
 | `crafting-decisions.md` | "Which system do I use to get stat X", order of operations, what bricks an item |
 | `barbarian-whirlwind.md` | Arsenal, weapon expertise, Whirlwind stat priority, Mythic variants |
+| `tempering-affixes.md` | **Generated** - every temperable affix, grouped by class, with internal stat keys |
 | `sources.md` | Source hierarchy and query templates |
 | `traps.md` | Durable reasoning failures with the correct reasoning for each |
 
 The five researched references tag every claim `[Certain]`, `[Likely]` or
-`[Unverified]` and end with `Sources` and `Gaps` sections. The other three are a
+`[Unverified]` and end with `Sources` and `Gaps` sections. Three others are a
 dated recipe snapshot, a source index and a guardrail list, and are untagged by
 design.
+
+`tempering-affixes.md` is different from all of them: it is **generated from the
+game's own data files** rather than written. D4Companion ships
+`D4Companion/Data/Affixes.<locale>.json`, built from the extracted client data in
+[DiabloTools/d4data](https://github.com/DiabloTools/d4data) (MIT), and
+`scripts/gen_temper_reference.py` renders the temperable subset from it. That
+makes it authoritative where scraped guide text is not - if a guide disagrees
+about whether an affix can be tempered, the generated file wins. Regenerate it
+after a D4Companion data update:
+
+```bash
+uv run python3 plugins/diablo4-helper/scripts/gen_temper_reference.py
+```
 
 Build coverage is currently **Barbarian / Whirlwind only**. Everything else -
 itemization, the damage model, crafting - is class-agnostic.
