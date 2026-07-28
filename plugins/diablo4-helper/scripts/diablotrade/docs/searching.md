@@ -124,6 +124,52 @@ So a search that comes back with exactly 500 is truncated, and its total is a
 floor rather than a count. `SavedSearch.is_truncated` reports it and the CLI
 warns on stderr. The fix is a narrower filter, not a second request.
 
+## `isAncestral: false` empties every search
+
+Measured 2026-07-28 by bisecting the filter object against a browser-made
+search: the identical payload returned **182 hits without the key and 0 with
+it**. It is not a tri-state - sending `false` does not mean "don't care", it
+means "no results". Every other key tested (`excludeGenericClass`,
+`favoritesOnly`, `itemRarityExclude`, `sortAttributeDirection`, `listPeriod`,
+`itemCategory`) was harmless.
+
+This sat in `DEFAULT_FILTERS` and silently zeroed every programmatic search,
+which is exactly the failure mode the module docstring warns about: an empty
+result set is indistinguishable from a filter that matched nothing. It now lives
+in `OPTIONAL_FILTERS`, is never sent by default, and `build_filters` raises on
+`isAncestral=False` rather than letting it travel.
+
+Corollary worth keeping: identical filters resolve to the same short id, so a
+Python-built payload that reproduces a browser search returns that search's id -
+which is a free way to prove the two payloads are equivalent.
+
+## Sold listings: `statusFilters: ["sold"]`
+
+Completed sales are readable, and they are the only honest price signal - an ask
+is an opinion. `statusFilters: ["sold"]` returns them; the value is
+case-sensitive (`"SOLD"` is rejected outright, minting no search at all), and
+`["online", "offline", "sold"]` returns live and sold together.
+
+Each sold listing carries:
+
+| Field | Meaning |
+|---|---|
+| `soldPrice` | scalar sale amount |
+| `soldOption.items[]` | what was actually handed over, itemised, with `isGold` |
+| `createdAt` / `relistedAt` | when it was LISTED - there is no sold-at timestamp |
+
+Two traps in that data, both handled in `diablotrade.prices`:
+
+1. **The tail is enormous.** Observed IGNI sales ran 125M to 5B in one week, so
+   a mean is meaningless. Summaries are median-first with an IQR-trimmed mean.
+2. **`soldPrice` is not always the whole price.** A sale settled as "200M + 1
+   Jah" reports `soldPrice: 200000000` and puts the rune in `soldOption.items`.
+   Averaging that in understates the clearing price, so mixed settlements are
+   reported separately rather than counted as gold sales.
+
+Recency is therefore "how recently was it listed", not "how recently did it
+sell" - a proxy, and labelled as one.
+
 ## listPeriod is a free-form string
 
 The site's own zod schema types it `z.string().optional()` - there is no enum to

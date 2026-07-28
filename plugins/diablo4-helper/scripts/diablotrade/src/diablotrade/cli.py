@@ -5,24 +5,37 @@
     diablotrade enchant <SEARCH_ID> --attrs A,B,C,D
     diablotrade groups  --attrs A,B,C,D --min-matches N
     diablotrade aspects <SEARCH_ID> [--min-roll R] [--max-price G]
+    diablotrade market  <NAME[:QTY],...> [--limit N]
     diablotrade actions <PAGE_PATH>
 
 `SEARCH_ID` is the trailing segment of a diablo.trade/listings/items/<id> URL.
 Build the search once in the site UI (broad: just the item, no affix filter),
 then let these commands do the filtering.
+
+`market` is the exception: it needs no SEARCH_ID and no browser at all. It mints
+its own searches over the API from a material name, prices the material off
+COMPLETED sales rather than asking prices, and ranks the live asks against that.
 """
 
 from __future__ import annotations
 
 import argparse
+import os
 import sys
 from collections.abc import Sequence
+
+# A cookie passed as --cookie is visible to every process on the box via the
+# process list, so the environment is the default and the flag is the override.
+COOKIE_ENV = "DIABLO_COOKIE"
 
 from . import metadata
 from .actions import discover_action_ids
 from .client import Client, DiabloTradeError
 from .filters import as_or_groups, is_negotiable, plan_enchants, rank
+from .market import MarketReport, report
+from .materials import KNOWN_MATERIALS, material_id
 from .models import SEARCH_ID_CAP, Listing
+from .prices import PriceStats, utcnow
 
 
 def _load(client: Client, search_id: str, unique: str | None = None) -> list[Listing]:
@@ -197,6 +210,126 @@ def _cmd_aspects(args: argparse.Namespace) -> int:
     return 0
 
 
+def _gold(amount: int) -> str:
+    """Render gold the way the site does, so numbers are comparable at a glance."""
+    if amount >= 1_000_000_000:
+        return f"{amount / 1_000_000_000:.3g}B"
+    if amount >= 1_000_000:
+        return f"{amount / 1_000_000:.3g}M"
+    return f"{amount:,}"
+
+
+# Only the two ends of the scale say anything a buyer cannot read off the price
+# itself, so "good" and "fair" stay silent.
+_ASK_FLAGS = {
+    "suspicious": " <- far under normal, verify before buying",
+    "bargain": " <- below normal range",
+}
+
+
+def _print_stats(label: str, stats: PriceStats | None) -> None:
+    if stats is None:
+        print(f"  {label:16} no completed gold sales")
+        return
+    print(
+        f"  {label:16} median {_gold(stats.median):>8}   "
+        f"trimmed mean {_gold(stats.trimmed_mean):>8}   "
+        f"p25-p75 {_gold(stats.p25)}-{_gold(stats.p75)}   "
+        f"n={stats.count}"
+    )
+
+
+def _print_report(rep: MarketReport, want: int, limit: int) -> int:
+    """Render one material's market. Returns the cost of the cheapest `want`."""
+    print(f"=== {rep.name}  (want {want})")
+    _print_stats("raw (untrimmed)", rep.raw)
+
+    model = rep.model
+    if model is None:
+        print("  no completed gold sales - nothing to price against\n")
+        return sum(sorted(a.gold for a in rep.asks)[:want])
+
+    print(
+        f"  {'robust':16} fair {_gold(model.fair):>8}   "
+        f"median {_gold(model.median):>8}   "
+        f"normal {_gold(model.low)}-{_gold(model.high)}   "
+        f"n={model.used}/{model.total} (eff {model.effective:.1f})"
+    )
+    if model.rejected:
+        shown = ", ".join(_gold(x) for x in model.rejected[:4])
+        extra = len(model.rejected) - 4
+        more = f" (+{extra} more)" if extra > 0 else ""
+        print(f"  {'rejected':16} {len(model.rejected)} outlier(s): {shown}{more}")
+    if rep.target_is_thin:
+        print(
+            f"  NOTE effective sample is only {model.effective:.1f} sales "
+            f"(of {model.used} kept) - the target rests on very few trades, "
+            "treat it as a rough guide"
+        )
+    if model.ratio_spread > 2:
+        print(
+            f"  NOTE prices still vary {model.ratio_spread:.1f}x around the centre "
+            "after trimming - no real consensus"
+        )
+    print(f"  TARGET           {_gold(model.fair)} each (recency-weighted, trimmed)")
+
+    if rep.mixed_sales:
+        print(
+            f"  {len(rep.mixed_sales)} sale(s) settled as gold PLUS an item, so "
+            "those clearing prices are understated:"
+        )
+        for sale in rep.mixed_sales[:3]:
+            print(f"      {_gold(sale.gold)} + {', '.join(sale.extras)}")
+
+    under = rep.bargains()
+    print(
+        f"  {len(rep.asks)} live gold asks, {len(under)} at or below target"
+        f"  (newest first among those)"
+    )
+    # Recent listings first: a fresh ask is likelier to still be honoured, and
+    # the user asked to prioritise them. Undated listings sort last.
+    ordered = sorted(
+        under[:limit],
+        key=lambda a: (
+            a.listed_at is None,
+            -(a.listed_at.timestamp() if a.listed_at else 0),
+        ),
+    )
+    for ask in ordered:
+        when = ask.listed_at.strftime("%m-%d %H:%M") if ask.listed_at else "  ?  "
+        # Merely cheap is the point of the list, so only the far tail is called
+        # out: down there a stale ad, a mispriced stack or bait is likelier than
+        # a generous seller.
+        flag = _ASK_FLAGS.get(model.classify(ask.gold), "")
+        print(f"      {_gold(ask.gold):>8}  {when}  {ask.seller:16} {ask.url}{flag}")
+
+    cheapest = sorted(a.gold for a in rep.asks)[:want]
+    if len(cheapest) < want:
+        print(f"  only {len(cheapest)} gold asks for {want} wanted")
+    print()
+    return sum(cheapest)
+
+
+def _cmd_market(args: argparse.Namespace) -> int:
+    """Price materials from completed sales and rank the live asks against it."""
+    wants: dict[str, int] = {}
+    for chunk in args.items.split(","):
+        name, _, qty = chunk.strip().partition(":")
+        if not name:
+            continue
+        wants[name.strip()] = int(qty) if qty else 1
+
+    client = Client(cookie=args.cookie)
+    now = utcnow()
+    total = 0
+    for name, want in wants.items():
+        rep = report(client, name.upper(), material_id(name), now=now)
+        total += _print_report(rep, want, args.limit)
+    if len(wants) > 1:
+        print(f"TOTAL cheapest asks across {len(wants)} materials: {_gold(total)}")
+    return 0
+
+
 def _normalize_page_path(value: str) -> str:
     """Accept "/listings/create", "listings/create" or a full URL.
 
@@ -235,7 +368,15 @@ def build_parser() -> argparse.ArgumentParser:
         description=__doc__,
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
-    parser.add_argument("--cookie", help="session cookie, only needed for writes")
+    parser.add_argument(
+        "--cookie",
+        default=os.environ.get(COOKIE_ENV),
+        help=(
+            "session cookie, only needed for writes. Defaults to $"
+            + COOKIE_ENV
+            + ", which keeps it out of the process list."
+        ),
+    )
     sub = parser.add_subparsers(dest="command", required=True)
 
     learn = sub.add_parser("learn", help="report attribute frequency for a search")
@@ -277,6 +418,21 @@ def build_parser() -> argparse.ArgumentParser:
     aspects.add_argument("--max-price", type=int, help="raw gold ceiling")
     aspects.add_argument("--limit", type=int, default=10)
     aspects.set_defaults(func=_cmd_aspects)
+
+    market_cmd = sub.add_parser(
+        "market",
+        help="price materials from COMPLETED sales, then rank live asks",
+        description=(
+            "Builds both searches over the API - no browser step. "
+            "Known materials: " + ", ".join(sorted(KNOWN_MATERIALS))
+        ),
+    )
+    market_cmd.add_argument(
+        "items",
+        help='comma-separated NAME[:QTY], e.g. "ZAN:4,TEB:2,IGNI:6"',
+    )
+    market_cmd.add_argument("--limit", type=int, default=10)
+    market_cmd.set_defaults(func=_cmd_market)
 
     actions_cmd = sub.add_parser("actions", help="list a page's Server Action ids")
     actions_cmd.add_argument("page_path", help="e.g. /listings/create")

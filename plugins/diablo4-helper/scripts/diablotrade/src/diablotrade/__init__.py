@@ -15,7 +15,7 @@ goes through Next.js Server Actions - see `diablotrade.actions`.
 
 from __future__ import annotations
 
-from . import actions, filters, metadata
+from . import actions, filters, market, materials, metadata, prices, search
 from .client import (
     AuthRequiredError,
     Client,
@@ -33,7 +33,11 @@ __all__ = [
     "SavedSearch",
     "actions",
     "filters",
+    "market",
+    "materials",
     "metadata",
+    "prices",
+    "search",
 ]
 
 __version__ = "0.1.0"

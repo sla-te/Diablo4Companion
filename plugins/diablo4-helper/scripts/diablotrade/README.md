@@ -75,7 +75,33 @@ diablotrade groups --attrs STR,LIFE,FURY,CRIT --min-matches 3
 
 # Rank aspect carriers by BASE roll, so an amulet's 1.5x range does not win
 diablotrade aspects 2H96O4 --max-price 100000000
+
+# Price runes off COMPLETED sales, then rank the live asks against that.
+# No search id and no browser: it mints both searches itself from the name.
+export DIABLO_COOKIE='...'          # session cookie; never pass it as --cookie
+diablotrade market "ZAN:4,TEB:2,IGNI:6"
 ```
+
+`market` is the one command that needs no browser step at all. It prices off
+completed sales and lists the live asks at or below that target, newest first.
+
+The target is deliberately hard to move:
+
+- **Outliers are rejected in log space.** Rune prices are multiplicative - the
+  step from 70M to 140M is the same size of move as 700M to 1.4B - so a linear
+  fence is wrong at both ends, waving through cheap bait while calling every
+  large sale extreme. Rejection runs on the log-space MAD instead, which is
+  scale-free. On real TEB data that drops 800M/900M/2.2B/3.2B and keeps the
+  ordinary 15M-66M band.
+- **Recent sales weigh more, without a cliff.** Weight halves every 14 days
+  rather than a hard "last 7 days" window, which is what stopped a quiet week
+  from resting the target on three sales.
+- **The reported sample size is Kish's effective one**, not the raw count.
+  Decay weighting means a long history can still hang off a handful of recent
+  trades; `n=168 (eff 77.1)` says so where `n=168` alone would not.
+
+Cheap is not treated as suspicious - a listing is only flagged for verification
+below two robust sigmas, where a stale ad or bait is likelier than a bargain.
 
 As a library:
 
@@ -91,6 +117,15 @@ for attribute_id in metadata.guaranteed(listings):
 
 hits = filters.rank(listings, wanted_uuids, minimum=3)
 ```
+
+## Runes and other materials
+
+A rune is not an item name to the site - it is a `materialId` uuid, and the uuid
+is not derivable from the rune's name. `diablotrade.materials` holds the ones
+captured so far, so `market ZAN` works without a browser. Unlike affix ids,
+material ids ARE recoverable from traffic: every priceGroup and soldOption entry
+embeds the full `material` record, so `materials.harvest(rows)` grows the table
+from real payloads rather than by hand-transcription.
 
 ## Attribute names
 
