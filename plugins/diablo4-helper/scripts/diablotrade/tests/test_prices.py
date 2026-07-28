@@ -7,7 +7,7 @@ from datetime import datetime, timedelta
 
 import pytest
 
-from diablotrade.market import Ask, MarketReport
+from diablotrade.market import Ask, MarketReport, parse_asks
 from diablotrade.materials import GOLD_ID, harvest, material_id
 from diablotrade.prices import (
     MIN_REAL_GOLD,
@@ -368,8 +368,8 @@ class TestTarget:
         assert not rep.target_is_thin
 
     def test_bargains_filters_by_target(self) -> None:
-        cheap = Ask("c", 10_000_000, "seller", None)
-        dear = Ask("d", 90_000_000, "seller", None)
+        cheap = Ask("c", 10_000_000, "seller", None, online=True)
+        dear = Ask("d", 90_000_000, "seller", None, online=True)
         rep = MarketReport(
             name="X",
             model=fit(sales_at([30_000_000] * 20), now=NOW),
@@ -380,6 +380,53 @@ class TestTarget:
             live_search_id="b",
         )
         assert [a.listing_id for a in rep.bargains()] == ["c"]
+
+
+class TestOnlineSellers:
+    """Seller presence lives on the user record, not on the listing's status."""
+
+    @staticmethod
+    def row(
+        listing_id: str, price: int, *, online: bool, status: str = "ACTIVE"
+    ) -> dict[str, object]:
+        return {
+            "id": listing_id,
+            "rawPrice": price,
+            "status": status,
+            "sold": False,
+            "expired": False,
+            "createdAt": "2026-07-27T10:00:00.000Z",
+            "user": {"name": "seller", "online": online},
+        }
+
+    def test_presence_is_read_from_the_user_record(self) -> None:
+        asks = parse_asks(
+            [
+                self.row("a", 10_000_000, online=True),
+                self.row("b", 20_000_000, online=False),
+            ]
+        )
+        assert {a.listing_id: a.online for a in asks} == {"a": True, "b": False}
+
+    def test_listing_status_does_not_imply_presence(self) -> None:
+        """Both rows are ACTIVE; only the user record distinguishes them."""
+        asks = parse_asks(
+            [
+                self.row("a", 10_000_000, online=False),
+                self.row("b", 20_000_000, online=True),
+            ]
+        )
+        assert [a.online for a in asks] == [False, True]
+
+    def test_a_missing_user_record_is_not_online(self) -> None:
+        row = self.row("a", 10_000_000, online=True)
+        del row["user"]
+        assert [a.online for a in parse_asks([row])] == [False]
+
+    def test_online_is_not_guessed_from_a_non_bool(self) -> None:
+        row = self.row("a", 10_000_000, online=True)
+        row["user"] = {"name": "seller", "online": "yes"}
+        assert [a.online for a in parse_asks([row])] == [False]
 
 
 class TestWeightedMedian:

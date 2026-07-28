@@ -282,10 +282,20 @@ def _print_report(rep: MarketReport, want: int, limit: int) -> int:
             print(f"      {_gold(sale.gold)} + {', '.join(sale.extras)}")
 
     under = rep.bargains()
-    print(
-        f"  {len(rep.asks)} live gold asks, {len(under)} at or below target"
-        f"  (newest first among those)"
+    scope = (
+        "live gold asks from online sellers" if rep.online_only else "live gold asks"
     )
+    dropped = (
+        f", {rep.dropped_offline} dropped as offline since the search was made"
+        if rep.dropped_offline
+        else ""
+    )
+    print(
+        f"  {len(rep.asks)} {scope}, {len(under)} at or below target"
+        f"  (newest first among those){dropped}"
+    )
+    if rep.online_only and not rep.asks:
+        print("  nobody selling this is online right now - retry without --online")
     # Recent listings first: a fresh ask is likelier to still be honoured, and
     # the user asked to prioritise them. Undated listings sort last.
     ordered = sorted(
@@ -301,7 +311,11 @@ def _print_report(rep: MarketReport, want: int, limit: int) -> int:
         # out: down there a stale ad, a mispriced stack or bait is likelier than
         # a generous seller.
         flag = _ASK_FLAGS.get(model.classify(ask.gold), "")
-        print(f"      {_gold(ask.gold):>8}  {when}  {ask.seller:16} {ask.url}{flag}")
+        # Redundant once --online has filtered, so it is only shown when mixed.
+        here = "" if rep.online_only else ("* " if ask.online else "  ")
+        print(
+            f"      {_gold(ask.gold):>8}  {when}  {here}{ask.seller:16} {ask.url}{flag}"
+        )
 
     cheapest = sorted(a.gold for a in rep.asks)[:want]
     if len(cheapest) < want:
@@ -323,7 +337,13 @@ def _cmd_market(args: argparse.Namespace) -> int:
     now = utcnow()
     total = 0
     for name, want in wants.items():
-        rep = report(client, name.upper(), material_id(name), now=now)
+        rep = report(
+            client,
+            name.upper(),
+            material_id(name),
+            now=now,
+            online_only=args.online,
+        )
         total += _print_report(rep, want, args.limit)
     if len(wants) > 1:
         print(f"TOTAL cheapest asks across {len(wants)} materials: {_gold(total)}")
@@ -432,6 +452,11 @@ def build_parser() -> argparse.ArgumentParser:
         help='comma-separated NAME[:QTY], e.g. "ZAN:4,TEB:2,IGNI:6"',
     )
     market_cmd.add_argument("--limit", type=int, default=10)
+    market_cmd.add_argument(
+        "--online",
+        action="store_true",
+        help="only show asks whose seller is online right now",
+    )
     market_cmd.set_defaults(func=_cmd_market)
 
     actions_cmd = sub.add_parser("actions", help="list a page's Server Action ids")

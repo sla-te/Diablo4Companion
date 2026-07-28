@@ -103,6 +103,17 @@ The target is deliberately hard to move:
 Cheap is not treated as suspicious - a listing is only flagged for verification
 below two robust sigmas, where a stale ad or bait is likelier than a bargain.
 
+`--online` restricts the asks to sellers who are online, which is what makes a
+listing tradeable now rather than eventually. Presence is `user.online` on the
+listing's user record - the row's own `status` is `ACTIVE` either way and says
+nothing about it. The filter runs at both ends deliberately: the search is minted
+with `statusFilters=["online"]` so the server narrows it, and the hydrated
+`user.online` is checked again, because the server snapshots presence when the
+search is created and it drifts within the minute (an offline-only search was
+observed returning a seller who had already come back). Sold listings are never
+filtered this way - a completed sale is evidence whatever its seller is doing
+now. Asks from online sellers are marked `*` when the list is unfiltered.
+
 As a library:
 
 ```python
