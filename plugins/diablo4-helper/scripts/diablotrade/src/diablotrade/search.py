@@ -115,8 +115,10 @@ _ROUTER_STATE_TREE = [
     0,
 ]
 
-# Every key the site sends. Sending a subset works until it does not, so the
-# full shape is kept and overridden selectively.
+# Every key the site sends WITH THE CONTROL UNTOUCHED. Sending a subset works
+# until it does not, so the full shape is kept and overridden selectively.
+#
+# `isAncestral` is deliberately NOT here - see OPTIONAL_FILTERS below.
 DEFAULT_FILTERS: dict[str, object] = {
     "listingType": "ITEM",
     "uniqueEquipmentId": "",
@@ -135,10 +137,6 @@ DEFAULT_FILTERS: dict[str, object] = {
     "greaterAffixesMin": "",
     "greaterAffixesMax": "",
     "classType": "",
-    # Read out of the site's own zod schema, which types it as a boolean next to
-    # classType. Absent from the captured payload because the capture was taken
-    # with the control untouched.
-    "excludeGenericClass": False,
     "auctionType": "",
     # How recently a listing was posted, from the "RECENT LISTINGS" dropdown.
     # The site's schema types this as a free-form optional string, NOT an enum,
@@ -156,12 +154,23 @@ DEFAULT_FILTERS: dict[str, object] = {
     "itemPowerMax": "",
     "levelRequirementMin": "",
     "levelRequirementMax": "",
-    "isAncestral": False,
     "favoritesOnly": False,
     "statFilters": [],
     "priceVisibility": "ANY",
     "sortAttributeDirection": "desc",
 }
+
+# Keys the site accepts but does NOT send unless the control is actually used.
+# They are settable through `build_filters` but never sent by default.
+#
+# `isAncestral: false` is the one that matters, and it is a trap: sending it
+# returns ZERO results for every search, rather than meaning "ancestral: don't
+# care". Measured 2026-07-28 by bisecting the filter object against a
+# browser-made search - the identical payload scored 182 hits without the key
+# and 0 with it. An empty result set is indistinguishable from a filter that
+# matched nothing, which is exactly how this stayed hidden. Send it only as
+# `True`, to mean "ancestral only".
+OPTIONAL_FILTERS: frozenset[str] = frozenset({"isAncestral", "excludeGenericClass"})
 
 # React encodes Server Action arguments as form fields, and field "0" holds the
 # argument array. This action is a `useActionState` handler, so it takes
@@ -181,6 +190,11 @@ _REQUEST_ID = "1"
 _NEEDS_SESSION = (
     "creating a search needs a logged-in session: pass Client(cookie=...). "
     "The site mints no anonymous session. See docs/searching.md."
+)
+
+_ANCESTRAL_TRAP = (
+    "isAncestral=False returns zero results for every search - omit the key to "
+    "mean 'don't care', or pass True for ancestral-only."
 )
 
 _NO_SHORT_ID = (
@@ -236,10 +250,16 @@ def build_filters(**overrides: object) -> dict[str, object]:
 
     Unknown keys are an error rather than a silent no-op: a typo'd filter that
     the server ignores looks exactly like a filter that found nothing.
+
+    Keys in OPTIONAL_FILTERS are accepted but only travel when passed - the
+    defaults never carry them, because `isAncestral: false` silently empties
+    every search.
     """
-    unknown = set(overrides) - set(DEFAULT_FILTERS)
+    unknown = set(overrides) - set(DEFAULT_FILTERS) - OPTIONAL_FILTERS
     if unknown:
         raise ValueError(f"unknown filter keys: {sorted(unknown)}")
+    if overrides.get("isAncestral") is False:
+        raise ValueError(_ANCESTRAL_TRAP)
     return {**DEFAULT_FILTERS, **overrides}
 
 

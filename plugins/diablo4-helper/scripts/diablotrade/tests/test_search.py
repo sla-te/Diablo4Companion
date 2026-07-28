@@ -124,7 +124,14 @@ class TestStatGroup:
 
 
 class TestDefaultFilters:
-    def test_exclude_generic_class_is_present(self) -> None:
-        # Read out of the site's zod schema, not the capture - the capture was
-        # taken with the control untouched so the key never appeared.
-        assert search.DEFAULT_FILTERS["excludeGenericClass"] is False
+    def test_exclude_generic_class_is_optional_not_default(self) -> None:
+        # Read out of the site's zod schema, but the capture was taken with the
+        # control untouched, so the browser never actually sends it. Measured
+        # 2026-07-28: sending it is harmless (182 hits either way), but the
+        # defaults now mirror the browser and only send what it sends.
+        assert "excludeGenericClass" not in search.DEFAULT_FILTERS
+        assert "excludeGenericClass" in search.OPTIONAL_FILTERS
+        assert (
+            search.build_filters(excludeGenericClass=True)["excludeGenericClass"]
+            is True
+        )
