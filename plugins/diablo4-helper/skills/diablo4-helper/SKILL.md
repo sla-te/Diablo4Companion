@@ -2,16 +2,18 @@
 name: diablo4-helper
 description: >-
   Use for any Diablo 4 (D4) gameplay question - builds, uniques, mythics,
-  aspects, tempering, masterworking, the Horadric Cube, charms/talismans, the
-  Pit, glyphs, seasonal mechanics, farming routes, loot filters, boss ladders,
-  or gear/item comparisons. D4 patches roughly every three months, so training
-  knowledge is stale and wrong: this skill forces every version-specific answer
-  to be verified against live online sources before it is stated. Triggers
-  include "Diablo 4", "D4", "what season is it", "best build for", "how do I
-  craft", "is this item an upgrade", "how to get <unique/mythic>", "current
-  season mechanic", "loot filter", "D4Companion". Do NOT use for other ARPGs
-  (Path of Exile, Last Epoch) or non-game Diablo lore questions.
-version: 0.1.0
+  aspects, tempering, masterworking, enchanting, the Horadric Cube, Tuning
+  Prisms, charms/talismans, the Pit, glyphs, seasonal mechanics, farming routes,
+  loot filters, boss ladders, gear/item comparisons, "which crafting recipe do I
+  use to get stat X", or buying gear on diablo.trade. D4 patches roughly every
+  three months, so training knowledge is stale and wrong: this skill forces every
+  version-specific answer to be verified against live online sources before it is
+  stated. Triggers include "Diablo 4", "D4", "what season is it", "best build
+  for", "how do I craft", "should I reroll", "which prism", "is this item an
+  upgrade", "how to get <unique/mythic>", "current season mechanic", "loot
+  filter", "diablo.trade", "D4Companion". Do NOT use for other ARPGs (Path of
+  Exile, Last Epoch) or non-game Diablo lore questions.
+version: 0.2.0
 ---
 
 # Diablo 4 Helper
@@ -38,8 +40,7 @@ answer from training memory:
 
 - The current season number, name, or theme
 - Any item's affixes, unique effect, power roll, or item power
-- Any crafting recipe or its material cost (Horadric Cube, tempering,
-  masterworking, charm conversion)
+- Any crafting recipe, material cost, or which Tuning Prism to use
 - Any build's skill/stat/gear priority or "is X an upgrade" verdict
 - Any farming route, boss ladder, drop source, or loot-filter recommendation
 - Whether a mechanic still works the way a prior patch described
@@ -47,6 +48,31 @@ answer from training memory:
 If a fast lookup cannot confirm it, say so plainly - "I couldn't verify this for
 the current patch" - rather than filling the gap from memory. A confident wrong
 answer about a patched mechanic is the failure this skill exists to prevent.
+
+## Confidence tagging is mandatory
+
+Every reference file in this skill tags claims `[Certain]`, `[Likely]` or
+`[Unverified]`. Carry those tags through into answers. A `[Likely]` fact must not
+be presented to the player as settled, because they spend irreversible
+materials on what you tell them. See "Known contradictions" below for the live
+disputes.
+
+## Question routing - open the right reference first
+
+| The question is about | Open |
+|---|---|
+| Item quality, Ancestral, Item Power, Greater Affixes, masterworking, tempering counts, enchant rules, Mythics 3.0 | `references/itemization.md` |
+| Damage buckets, `[x]` vs `[+]`, stat scaling, crit/vulnerable/DoT, armour, resistances, Toughness, Maximum Life interactions | `references/damage-model.md` |
+| Every Horadric Cube recipe and its cost | `references/horadric-cube.md` |
+| Tuning Prism categories, which prism does what, per-slot affix pools, what a slot can legally roll | `references/affix-pools.md` |
+| "Which crafting system do I use to achieve X", order of operations, what bricks an item | `references/crafting-decisions.md` |
+| Barbarian, Arsenal, weapon expertise, Whirlwind stat priority, Mythic build variants | `references/barbarian-whirlwind.md` |
+| Where to look something up, query templates | `references/sources.md` |
+| Recurring reasoning failures to avoid | `references/traps.md` |
+
+Read the reference **before** searching the web. It may already answer the
+question, and it tells you what is disputed so the web lookup can target the gap
+rather than re-covering settled ground.
 
 ## How to research (routing)
 
@@ -79,10 +105,20 @@ Without `--extract` it returns triaged titles + snippets (cheap); with
 Blizzard news/forums. See the script header for all flags. For anything outside
 this D4-scoped pattern, let `research` pick the tool per `references/sources.md`.
 
-**Always confirm the current season first** when a question is season-scoped and
-the season has not already been established this session - use the `--official`
-flag for this one lookup, since Blizzard news is the only authority for what
-patch is live. Everything else (mechanics, drop sources, balance) hangs off it.
+**Always confirm the current season and patch first** when a question is
+season-scoped and the patch has not already been established this session - use
+`--official` for that one lookup, since Blizzard news is the only authority for
+what is live. Everything else hangs off it.
+
+**Known limitation of the script:** its line filter drops short generic table
+rows, which is why per-slot affix tables ("+X% Attack Speed | All") extract
+poorly. When you need a dense reference table, fetch the page and read it rather
+than relying on the filtered output, and say so.
+
+**Two site-specific warnings.** Icy Veins build pages frequently extract as walls
+of image URLs; prefer maxroll.gg and mobalytics for build data. Blizzard's
+`news.blizzard.com` has failed extraction through this script before - fall back
+to `tavily-extract` on the article URL directly.
 
 ## Source hierarchy (what to trust for what)
 
@@ -100,36 +136,105 @@ build/gear." Cross-check a single-source claim against a second source before
 stating it as fact. Note the source's date - a guide written for an earlier
 season may not have been updated.
 
-## Two recurring tasks (full reasoning in `references/traps.md`)
+## Known contradictions - do not silently pick a side
 
-- **Grading gear ("is this an upgrade?")** - pull the exact build guide and
-  variant (e.g. Midgame vs Endgame) live, score each item's stat-priority match,
-  rank by gap, and state that stat-match is not a DPS simulation. See traps.md #4.
-  **Always run the Horadric Cube checklist at the end of
-  `references/horadric-cube.md` before answering.** An item is not judged only on
-  what it is - it may be crafting fodder, three-of-a-kind input, or one recipe
-  away from the item actually wanted, and a wanted item the player does not own
-  may be craftable rather than farmable.
-  **Assume the Occultist is always available.** Grade the item BODY - base
-  DPS/armour, affix lines, temper count, sockets, item power, slot - never the
-  aspect it happened to drop with, since imprinting replaces that at will. Before
-  recommending a body swap, check whether an **enchant on the currently equipped
-  item** closes the same gap while keeping its investment (masterwork rank,
-  sockets, tempers). A great aspect on a bad body is Codex fodder, not an item.
-- **D4Companion overlay** - the user runs a fork whose overlay marks affixes
-  against an imported Maxroll build. Key trap: a **red mark means "not a tracked
-  stat priority," not "the build does not want this item"** - confirm against the
-  guide, not the colour. See traps.md #2 and the memory note
-  `project-d4companion-overlay-capture-feedback`.
+These are live disputes as of the 2026-07-28 research pass. When one of these
+comes up, say it is disputed and give the player the cheap experiment.
+
+- **Which side a Tuning Prism names on Chaotic Reroll.** Icy Veins says the
+  prism sets the category of the **outcome**; a Reddit field report says it sets
+  the **victim**. `[Likely]` the outcome. Full evidence in `references/affix-pools.md`
+  and the warning block in `references/horadric-cube.md`. **Settle it with one
+  cheap roll on a junk Legendary before advising a geared item.**
+- **The crafted-Mythic equip limit is GONE** - removed in patch 3.1.1a per a
+  quoted Blizzard blue post, and confirmed in the field with three crafted
+  Mythics equipped at once. Not actually disputed, but listed here because a
+  large fraction of guides and season-launch articles still state the old
+  one-at-a-time limit. If a source repeats it, the source is stale.
+- **Damage Over Time affixes on a 2H Sword Barbarian.** Two-Handed Slashing
+  Weapon Mastery splits roughly 40% direct / 240% Bleed, so a DoT multiplier is
+  not dead weight on a Grandfather build. Guides that call DoT a "direct damage
+  build" dead stat are wrong for this specific case.
+- **Ancestral / Mythic Item Power ceiling.** Sources give 800, 900 and 925
+  depending on page age. Unresolved.
+
+## Recurring tasks
+
+### Grading gear ("is this an upgrade?")
+
+Pull the exact build guide and variant (e.g. Midgame vs Endgame) live, score each
+item's stat-priority match, rank by gap, and state plainly that stat-match is not
+a DPS simulation. See `references/traps.md` #4.
+
+Then run the crafting layer, because an item is not judged only on what it is:
+
+1. Run the checklist at the end of `references/horadric-cube.md`. The item may be
+   crafting fodder, a three-of-a-kind input, or one recipe away from the item
+   actually wanted. A wanted item the player does not own may be craftable rather
+   than farmable.
+2. **Assume the Occultist is always available.** Grade the item BODY - base
+   DPS/armour, affix lines, temper budget, sockets, item power, slot - never the
+   aspect it happened to drop with, since imprinting replaces that at will.
+3. **Count the repair budget before recommending anything.** Per item the player
+   gets exactly **one** enchanted affix, **one** tempering affix, and Cube
+   rerolls whose output they cannot choose. An item must arrive with nearly
+   everything right; you fix one thing. This is the single most useful frame for
+   "is it worth buying/keeping".
+4. Before recommending a body swap, check whether an **enchant on the currently
+   equipped item** closes the same gap while keeping its investment (masterwork
+   rank, sockets, temper).
+
+### Planning a craft
+
+Go to `references/crafting-decisions.md` first, not to the recipe table. The
+question "which recipe" is downstream of "what is the goal, and what order do I
+do things in". Always state:
+
+- Which step is **irreversible** and what it forecloses.
+- What the player is **spending** (the bottleneck resource, not just the gold).
+- The **stop condition** - the point at which further rolling can only lose value.
+
+### Buying gear (diablo.trade)
+
+The plugin bundles a full diablo.trade client at `scripts/diablotrade`. Read
+`scripts/diablotrade/README.md` and `scripts/diablotrade/docs/searching.md`
+before using it. The commands are `learn`, `filter`, `enchant`, `groups`,
+`aspects`, `market` and `actions`.
+
+The key idea is already baked into that tool and matches the repair-budget frame
+above: the query you want is **"at least N of these M affixes"**, because an item
+missing exactly one wanted affix is still worth buying - the Occultist fixes one.
+`diablotrade enchant` prices that fix, separating items with a junk affix to
+overwrite (free) from items whose only spare roll is a Greater Affix (you destroy
+a Greater Affix to fix it) from items with no spare roll at all.
+
+Workflow: define the wanted affix set from the build guide, search, filter by
+match count, then rank by enchant cost - never by match count alone.
+
+`DIABLO_COOKIE` must be exported for session-authenticated operations. Never pass
+a cookie on the command line.
+
+### D4Companion overlay
+
+The user runs a fork whose overlay marks affixes against an imported Maxroll
+build. Key trap: a **red mark means "not a tracked stat priority," not "the build
+does not want this item"** - confirm against the guide, not the colour. See
+`references/traps.md` #2.
+
+The overlay preset may also be **mislabelled**: check whether the imported
+profile matches its display name before trusting its marks, and check whether the
+player is running a Mythic build variant that was never imported.
+
+### The player's gear journal
+
+`loadout/STATE.md` at the repo root is a hand-maintained, gitignored snapshot of
+the player's current gear, stash and open decisions. Read it before answering a
+gearing question, and update it when gear changes. `loadout/README.md` has the
+record template. It is gitignored on purpose - never commit it, and keep
+real-life personal details out of it regardless.
 
 ## Additional resources
 
-- **`references/sources.md`** - full source list, what each covers, and ready
-  query templates for common D4 question shapes.
-- **`references/traps.md`** - specific, durable failure modes (stale season
-  number, overlay red-mark misread, random-damage-unique + high-hit-rate
-  synergy, damage-bucket confusion) with the correct reasoning for each.
-- **`references/horadric-cube.md`** - every Cube recipe, cost, Tuning Prism, and
-  outcome table, plus the checklist to run on any gear-grading question. Snapshot
-  taken 2026-07-26 against Maxroll; re-verify the `(Seasonal)` recipes each season.
 - **`scripts/d4_search.py`** - D4-scoped tavily-dynamic-search helper.
+- **`scripts/diablotrade/`** - diablo.trade search, filtering, enchant-cost
+  pricing and market analysis. Has its own README, docs and test suite.

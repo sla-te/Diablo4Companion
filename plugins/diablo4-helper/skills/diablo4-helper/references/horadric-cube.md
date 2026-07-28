@@ -195,9 +195,11 @@ Practical consequences, and these are the ones that get misremembered:
   discarded. Feed the worst 850+ Unique you own for the target slot.
 - Feeding a specific Unique **does not** raise the chance of getting that Unique's
   Mythic form.
-- **You may only equip ONE Mythic Unique that you crafted.** Mythic Uniques that
-  *dropped* (boss, cache) are unlimited - a found Mythic does not consume the crafted
-  slot.
+- ~~You may only equip ONE Mythic Unique that you crafted.~~ **OBSOLETE.** The
+  crafted-Mythic equip limit was removed in patch 3.1.1a ("removing equip limits for
+  Mythic Uniques", Blizzard blue post - verbatim quote in `itemization.md`). Verified
+  in the field 2026-07-28 with three `Crafted` Mythics equipped at once. Many guides
+  still repeat the old limit; they are stale. Craft and equip freely.
 
 ### Reroll Set Charm
 

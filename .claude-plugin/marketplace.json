@@ -5,13 +5,13 @@
   },
   "metadata": {
     "description": "Local plugin marketplace bundled with the Diablo4Companion fork.",
-    "version": "0.1.0"
+    "version": "0.2.0"
   },
   "plugins": [
     {
       "name": "diablo4-helper",
       "source": "./plugins/diablo4-helper",
-      "description": "Diablo 4 gameplay helper skill - verifies version-specific answers against live sources; understands the D4Companion overlay."
+      "description": "Diablo 4 gameplay helper - verifies every version-specific answer against live sources instead of a stale training cutoff. Ships researched references for itemization, the damage model, Horadric Cube recipes, Tuning Prisms and per-slot affix pools, a goal-driven crafting decision tree, and Barbarian/Whirlwind data; plus a diablo.trade client that ranks listings by enchant cost. Understands the D4Companion overlay."
     }
   ]
 }
