@@ -43,6 +43,28 @@ Prisms steer random recipes toward a deterministic result. Two families.
 Normal affix rules still apply: you cannot add a second Maximum Life to an item that
 already has it, and some affixes are mutually exclusive.
 
+### WARNING - which side the Prism names on Chaotic Reroll is UNRESOLVED
+
+Two readings exist and they give opposite advice. Do not spend materials on a good item
+until this is settled in-game.
+
+- **(a) Prism names the VICTIM.** It selects which existing affix gets destroyed; the
+  replacement is a random affix from some other Category. Maxroll's wording supports this:
+  "Use a Tuning Prism to determine the Category of the random chosen Affix."
+- **(b) Prism names the REPLACEMENT.** It selects the Category you receive; the victim is
+  drawn from affixes outside that Category. rpgstash's wording supports this: "Rerolls a
+  random affix to a different category. You can influence what that category is."
+
+Field observations 2026-07-28 conflict. A Protector's roll produced Life on Hit, which fits
+(b). A later Aggressive roll on a ring destroyed Strength and Critical Strike Chance (both
+Aggressive) and returned Fury On Kill and Lucky Hit Chance (neither Aggressive), which fits
+(a) and refutes (b).
+
+**Resolve it with a controlled test, not by re-reading guide prose.** Take a junk
+Legendary, write down every affix and its Category, run ONE Chaotic Reroll with ONE prism,
+and record which side of the swap matched the prism. One test costs a single Refined Dust,
+15 Raw Dust and one Prism, which is far cheaper than being wrong on a geared item.
+
 **Transfiguration prisms:** Entropic, Kullean (see Transfigure Item below).
 
 ## Recipes
@@ -52,7 +74,7 @@ already has it, and some affixes are mutually exclusive.
 | Recipe | Effect | Cost |
 |---|---|---|
 | **Add Affix** | Adds a random Affix to an item. Prism narrows the category. | 1x Common/Magic/Rare/Legendary + 1x Coarse Primordial Dust + 5x Raw + optional Prism |
-| **Chaotic Reroll** | Changes a random affix to one of **another** Category. Prism determines the Category of the randomly chosen affix. | 1x Magic/Rare/Legendary + 1x Refined + 15x Raw + optional Prism |
+| **Chaotic Reroll** | Changes a random affix to one of **another** Category. **Which side the Prism names is DISPUTED - see the warning below.** | 1x Magic/Rare/Legendary + 1x Refined + 15x Raw + optional Prism |
 | **Focused Reroll** | Changes an affix to one of the **same** Category. **Prism required.** | 1x Magic/Rare/Legendary + 1x Refined + 15x Raw + Prism |
 | **Remove Affix** | Removes a random Affix. Prism narrows the category. **Magic or Rare only.** | 1x Magic/Rare + 1x Refined + 15x Raw + optional Prism |
 
@@ -187,8 +209,8 @@ Cost: 1x Set Charm + 25x Raw Primordial Dust + 50x Infused Horadric Resin.
 
 Transmutes an Ancestral Unique **equipment** item into a Unique **Charm**. Some Uniques
 are excluded.
-Cost: 1x Ancestral Unique + 3x any Unique Charms + 1x Enhanced Primordial Dust + 50x Raw
-+ 100x Infused Horadric Resin.
+Cost: 1x Ancestral Unique, 3x any Unique Charms, 1x Enhanced Primordial Dust,
+50x Raw Primordial Dust, 100x Infused Horadric Resin.
 
 Eligible **shared** Uniques: Azurewrath, Banished Lord's Talisman, Blood-Mad Idol, Crown
 of Lucion, Endurant Faith, Fists of Fate, Flickerstep, Frostburn, Godslayer Crown,
