@@ -367,3 +367,4 @@ docs/superpowers/
 
 # Personal, local-only gameplay data (never pushed). See CLAUDE.md "Personal data".
 loadout/
+graphify-out/*/
