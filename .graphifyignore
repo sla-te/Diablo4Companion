@@ -1,0 +1,6 @@
+# graphify exclusions. Merged with .gitignore, which is already honoured;
+# patterns here are evaluated last. This file can only exclude, never re-include.
+graphify-out/
+*.min.js
+*.min.css
+*.map

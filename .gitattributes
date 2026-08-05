@@ -29,3 +29,4 @@
 *.Designer.cs              linguist-generated=true
 D4Companion/Data/**        linguist-generated=true
 downloads/systempresets/** linguist-vendored=true
+graphify-out/graph.json merge=graphify
