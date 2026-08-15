@@ -1121,7 +1121,7 @@ namespace D4Companion.Services
         /// a zero would be a claim the source never made.
         /// </summary>
         /// <summary>
-        /// Draws the missing stats as a panel under the tooltip, and draws nothing at all
+        /// Draws the missing stats in the bottom right of the game window, and draws nothing at all
         /// when the item already carries everything the build wants - the absence of the
         /// panel is itself the answer.
         /// </summary>
@@ -1135,6 +1135,7 @@ namespace D4Companion.Services
             // flash at full height each time detection re-ran. It is a statement about a
             // detected tooltip; without detected rows there is nothing to make it about.
             if (!_currentTooltip.ItemAffixLocations.Any()) return;
+            if (_window == null) return;
 
             var preset = _affixManager.AffixPresets.FirstOrDefault(preset => preset.Name.Equals(_settingsManager.Settings.SelectedAffixPreset));
             var missing = MissingAffixResolver.Resolve(preset, _currentTooltip.ItemType,
@@ -1170,8 +1171,17 @@ namespace D4Companion.Services
             // Every marker upstream draws sits in the thin left margin beside the tooltip.
             // That is not a style choice, it is this constraint, and a block of text has to
             // stay out of the tooltip's neighbourhood entirely to respect it.
-            float textLeft = MissingAffixMargin;
-            float textTop = MissingAffixMargin;
+            //
+            // The block is flush with the bottom right corner but its lines stay left
+            // aligned against a common edge, so the rank column still reads as a column.
+            float blockWidth = lines
+                .Select(line => gfx.MeasureString(_fonts["consolasBold"], fontSize, line.Text).X)
+                .Append(gfx.MeasureString(_fonts["consolasBold"], fontSize, MissingAffixHeader).X)
+                .Max();
+            float blockHeight = lineHeight * (lines.Count + 1);
+
+            float textLeft = _window.Width - MissingAffixMargin - blockWidth;
+            float textTop = _window.Height - MissingAffixMargin - blockHeight;
             gfx.DrawText(_fonts["consolasBold"], fontSize, _brushes["text"], textLeft, textTop, MissingAffixHeader);
 
             for (int i = 0; i < lines.Count; i++)
@@ -1183,9 +1193,9 @@ namespace D4Companion.Services
 
         private const string MissingAffixHeader = "Missing";
 
-        // Top left of the game window. The tooltip follows the cursor and the inventory grid
-        // sits right, so this is the corner least likely to have anything under it - and,
-        // more to the point, the furthest from where detection looks.
+        // Inset from the bottom right of the game window, the corner the panel is anchored
+        // to. What matters is that it is a window corner and not the tooltip's own column -
+        // see the capture note in DrawGraphicsMissingAffixes.
         private const int MissingAffixMargin = 24;
 
         // A panel taller than the tooltip it hangs off stops being a hint and starts covering
