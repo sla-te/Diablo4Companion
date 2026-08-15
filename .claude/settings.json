@@ -9,7 +9,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/home/toor/.local/bin/graphify hook-guard search"
+            "command": "g=$(command -v graphify || echo \"$HOME/.local/bin/graphify\"); if [ -x \"$g\" ]; then exec \"$g\" hook-guard search; fi; exit 0"
           }
         ]
       },
@@ -18,7 +18,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/home/toor/.local/bin/graphify hook-guard read"
+            "command": "g=$(command -v graphify || echo \"$HOME/.local/bin/graphify\"); if [ -x \"$g\" ]; then exec \"$g\" hook-guard read; fi; exit 0"
           }
         ]
       }
