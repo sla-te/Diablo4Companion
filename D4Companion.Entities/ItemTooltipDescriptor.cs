@@ -17,6 +17,12 @@ namespace D4Companion.Entities
         public bool HasTooltipTopSplitter { get; set; } = false;
         public bool IsUniqueItem { get; set; } = false;
         /// <summary>
+        /// Narrows IsUniqueItem, which is true for uniques and mythics alike because both
+        /// take the same detection path. Comes from which aspect marker icon matched, so
+        /// unlike the tooltip text it is not language dependent.
+        /// </summary>
+        public bool IsMythicItem { get; set; } = false;
+        /// <summary>
         /// List of detected affixes.
         /// </summary>
         public List<Tuple<int,ItemAffix>> ItemAffixes { get; set; } = new List<Tuple<int, ItemAffix>>();

@@ -416,6 +416,17 @@ namespace D4Companion.Services
                         result = !string.IsNullOrWhiteSpace(_currentTooltip.ItemType);
                     }
 
+                    // The tooltip text cannot name this rarity. The game writes "Ancestral
+                    // Mythic Unique <slot>" while ItemTypes.*.json only carries "Ancestral
+                    // Mythic <slot>", so the fuzzy match always prefers the Unique entry and
+                    // every mythic reads back as Unique. Which aspect marker icon matched -
+                    // dot-aspects_mythic against dot-aspects_unique - does distinguish them,
+                    // and being an image match it holds in every language.
+                    if (_currentTooltip.IsUniqueItem)
+                    {
+                        _currentTooltip.ItemRarity = _currentTooltip.IsMythicItem ? ItemRarityConstants.Mythic : ItemRarityConstants.Unique;
+                    }
+
                     // Clear affix/aspect locations when itemtype is not found.
                     if (!result)
                     {
@@ -1262,8 +1273,9 @@ namespace D4Companion.Services
                 if (itemAspectLocation.Location.IsEmpty) continue;
 
                 _currentTooltip.ItemAspectLocation = itemAspectLocation.Location;
-                _currentTooltip.IsUniqueItem = itemAspectLocation.Name.Contains("_unique", StringComparison.OrdinalIgnoreCase) ||
-                    itemAspectLocation.Name.Contains("_mythic", StringComparison.OrdinalIgnoreCase);
+                _currentTooltip.IsMythicItem = itemAspectLocation.Name.Contains("_mythic", StringComparison.OrdinalIgnoreCase);
+                _currentTooltip.IsUniqueItem = _currentTooltip.IsMythicItem ||
+                    itemAspectLocation.Name.Contains("_unique", StringComparison.OrdinalIgnoreCase);
 
                 if (IsDebugInfoEnabled)
                 {

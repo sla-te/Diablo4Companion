@@ -101,14 +101,15 @@ namespace D4Companion.Tests
             });
         }
 
-        // The rarity comes out as Unique, not Mythic: the game labels these "Ancestral Mythic
-        // Unique <slot>" while ItemTypes.*.json only carries "Ancestral Mythic <slot>", so the
-        // fuzzy match lands on the Unique entry instead. Pinned rather than fixed - ItemRarity
-        // has no functional consumer today, and correcting it means touching 14 locale files.
+        // The OCR layer cannot get the rarity right and is not asked to: the game labels these
+        // "Ancestral Mythic Unique <slot>" while ItemTypes.*.json only carries "Ancestral
+        // Mythic <slot>", so the fuzzy match always prefers the Unique entry. Pinned here so
+        // the reason ScreenProcessHandler overrides ItemRarity from the aspect marker icon
+        // stays visible - if this ever starts returning Mythic, the override is redundant.
         [TestCase("tooltip-mythic-ring.png", 392)]
         [TestCase("tooltip-mythic-amulet.png", 380)]
         [TestCase("tooltip-mythic-helm.png", 446)]
-        public void RetryWindow_ReportsMythicsAsUniqueRarity(string fixture, int splitterY)
+        public void RetryWindow_CannotTellMythicFromUniqueRarity(string fixture, int splitterY)
         {
             using var filtered = Load(fixture);
             int maxHeight = _settingsManager.Settings.TooltipMaxHeight * TallHeaderRetryFactor;
