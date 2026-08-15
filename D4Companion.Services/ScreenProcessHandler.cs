@@ -24,6 +24,15 @@ namespace D4Companion.Services
         private readonly ISystemPresetManager _systemPresetManager;
         private readonly ITradeItemManager _tradeItemManager;
 
+        /// <summary>
+        /// How much taller the item-type search window gets on the retry pass. Measured
+        /// against real mythic captures at 1440p: with TooltipMaxHeight at its default 200
+        /// the item-type line sits outside the window on every one of them and 260 is enough
+        /// for the tallest (a three line item name). Doubling keeps that margin at any
+        /// resolution, since the setting is what the user scales.
+        /// </summary>
+        private const int TallHeaderRetryFactor = 2;
+
         private int _mouseCoordsX;
         private int _mouseCoordsY;
         private Image<Bgr, byte>? _currentScreenTooltip;
@@ -690,28 +699,28 @@ namespace D4Companion.Services
 
             bool IsDebugInfoEnabled = _settingsManager.Settings.IsDebugInfoEnabled;
 
-            int offsetLeft = _settingsManager.Settings.TypeAreaOffsetLeft;
-            int offsetRight = _settingsManager.Settings.TypeAreaOffsetRight;
-            int startY = Math.Max(0, _currentTooltip.ItemSplitterLocations[0].Location.Y - _settingsManager.Settings.TooltipMaxHeight);
-            int height = Math.Min(_currentTooltip.ItemSplitterLocations[0].Location.Y, _settingsManager.Settings.TooltipMaxHeight);
-            int width = (_currentScreenTooltip!.Width - offsetLeft - offsetRight) <= 0 ? _currentScreenTooltip!.Width - offsetLeft : (_currentScreenTooltip!.Width - offsetLeft - offsetRight);
-            //var area = _currentTooltip.ItemSplitterLocations.Count > 0 ?
-            //    _currentScreenTooltipFilter!.Copy(new Rectangle(0 + offset, startY, _currentScreenTooltip!.Width - offset, height)) :
-            //    _currentScreenTooltipFilter!;
-
-            Image<Gray, byte> area;
-            if (_currentTooltip.ItemSplitterLocations.Count > 0)
-            {
-                var rect = new Rectangle(offsetLeft, startY, width, height);
-                area = _currentScreenTooltipFilter!.GetSubRect(rect);
-            }
-            else
-            {
-                area = _currentScreenTooltipFilter!;
-            }
+            Image<Gray, byte> area = GetItemTypeArea(_settingsManager.Settings.TooltipMaxHeight);
 
             FindItemTypePower(area);
-            
+
+            // Retry with a taller window when nothing classified. The search area is
+            // TooltipMaxHeight pixels above the first splitter, which is not enough room for
+            // a mythic: its name wraps onto two or three lines, "Ancestral Mythic Unique
+            // <slot>" wraps onto two more, and it carries Armory Loadout and Transfigured
+            // rows that ordinary items do not. That pushes the item-type line out of the
+            // window, leaving only the wrapped slot word ("Ring", "Helm") to match on, which
+            // scores too low - so the tooltip was discarded and no overlay was drawn at all.
+            //
+            // Retrying beats raising the default: only tooltips that already failed pay for
+            // the second OCR pass, and the taller window stays proportional to the value the
+            // user configured for their resolution.
+            if (string.IsNullOrWhiteSpace(_currentTooltip.OcrResultItemType.TypeId))
+            {
+                area = GetItemTypeArea(_settingsManager.Settings.TooltipMaxHeight * TallHeaderRetryFactor);
+
+                FindItemTypePower(area);
+            }
+
             if (IsDebugInfoEnabled)
             {
                 WeakReferenceMessenger.Default.Send(new ScreenProcessItemTypePowerOcrReadyMessage(new ScreenProcessItemTypePowerOcrReadyMessageParams
@@ -741,6 +750,26 @@ namespace D4Companion.Services
 
             return result;
         }        
+
+        /// <summary>
+        /// The strip above the first splitter that holds the item name, type and power,
+        /// bounded to <paramref name="maxHeight"/> pixels so the search does not run up the
+        /// whole screen column - the tooltip rectangle starts at y=0 and the game background
+        /// above the tooltip is part of it.
+        /// </summary>
+        private Image<Gray, byte> GetItemTypeArea(int maxHeight)
+        {
+            if (_currentTooltip.ItemSplitterLocations.Count == 0) return _currentScreenTooltipFilter!;
+
+            int offsetLeft = _settingsManager.Settings.TypeAreaOffsetLeft;
+            int offsetRight = _settingsManager.Settings.TypeAreaOffsetRight;
+            int splitterY = _currentTooltip.ItemSplitterLocations[0].Location.Y;
+            int startY = Math.Max(0, splitterY - maxHeight);
+            int height = Math.Min(splitterY, maxHeight);
+            int width = (_currentScreenTooltip!.Width - offsetLeft - offsetRight) <= 0 ? _currentScreenTooltip!.Width - offsetLeft : (_currentScreenTooltip!.Width - offsetLeft - offsetRight);
+
+            return _currentScreenTooltipFilter!.GetSubRect(new Rectangle(offsetLeft, startY, width, height));
+        }
 
         private void FindItemTypePower(Image<Gray, byte> areaImageSource)
         {
