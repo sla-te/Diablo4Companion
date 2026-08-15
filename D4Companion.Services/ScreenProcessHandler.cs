@@ -47,8 +47,9 @@ namespace D4Companion.Services
         private object _lockCloneImage = new object();
         private object _lockOcrDebugInfo = new object();
         private string _previousItemRarity = string.Empty;
-        private string _previousItemType = string.Empty;        
+        private string _previousItemType = string.Empty;
         private int _previousItemPower = 0;
+        private Rectangle _previousTooltipLocation = Rectangle.Empty;
         private Task? _processTask = null;
         private bool _updateAvailableImages = false;
         private bool _updateBrightnessThreshold = false;
@@ -346,6 +347,7 @@ namespace D4Companion.Services
                 _previousItemPower = _currentTooltip.ItemPower;
                 _previousItemType = _currentTooltip.ItemType;
                 _previousItemRarity = _currentTooltip.ItemRarity;
+                _previousTooltipLocation = _currentTooltip.Location;
 
                 _currentTooltip = new ItemTooltipDescriptor();
 
@@ -367,6 +369,20 @@ namespace D4Companion.Services
                 // Those are used to set the affix areas and limit the search area for the item types.
                 if (result)
                 {
+                    // The restore paths further down reuse the item type read on an earlier
+                    // frame, which is what lets a tooltip survive being scrolled. Only the
+                    // SAME tooltip may do that. Moving the mouse from one item to the next
+                    // keeps a tooltip on screen the whole way, so the "no tooltip" reset
+                    // below never fires and an item whose header cannot be read silently
+                    // inherits the previous item's type - its affixes then get marked
+                    // against the wrong slot, which reads as the overlay working.
+                    if (!IsSameTooltipAsPreviousFrame())
+                    {
+                        _previousItemPower = 0;
+                        _previousItemType = string.Empty;
+                        _previousItemRarity = string.Empty;
+                    }
+
                     FindItemAffixLocations();
                     FindItemAspectLocations();
                     if (_settingsManager.Settings.IsSocketDetectionEnabled)
@@ -761,6 +777,26 @@ namespace D4Companion.Services
 
             return result;
         }        
+
+        /// <summary>
+        /// Whether the tooltip on screen is the one the previous frame saw, and may
+        /// therefore reuse the item type read then.
+        ///
+        /// Identity is the tooltip rectangle, which comes from template-matching the action
+        /// icons below the tooltip: scrolling one item's tooltip leaves those icons where
+        /// they are, while a different item almost always produces a different tooltip
+        /// height. Compared with a small tolerance so capture jitter between frames does not
+        /// read as a new item and defeat the restore entirely.
+        /// </summary>
+        private bool IsSameTooltipAsPreviousFrame()
+        {
+            if (_previousTooltipLocation.IsEmpty || _currentTooltip.Location.IsEmpty) return false;
+
+            const int toleranceInPixels = 4;
+
+            return Math.Abs(_currentTooltip.Location.X - _previousTooltipLocation.X) <= toleranceInPixels
+                && Math.Abs(_currentTooltip.Location.Height - _previousTooltipLocation.Height) <= toleranceInPixels;
+        }
 
         /// <summary>
         /// The strip above the first splitter that holds the item name, type and power,
