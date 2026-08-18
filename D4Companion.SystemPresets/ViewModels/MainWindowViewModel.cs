@@ -6,10 +6,12 @@ using D4Companion.SystemPresets.Entities;
 using D4Companion.SystemPresets.Interfaces;
 using D4Companion.SystemPresets.Messages;
 using D4Companion.SystemPresets.ViewModels.Entities;
+using D4Companion.SystemPresets.Views;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Diagnostics.Metrics;
 using System.IO;
 using System.Reflection;
@@ -31,6 +33,7 @@ namespace D4Companion.SystemPresets.ViewModels
         private ObservableCollection<SystemPreset> _systemPresets = [];
 
         private string _coordinates = string.Empty;
+        private BitmapSource? _iconPreview = null;
         private BitmapSource? _iconTypeScreenshot = null;
         private BitmapSource? _iconTypeScreenshotCached = null;
         private bool _isLiveModeActive = true;
@@ -38,6 +41,7 @@ namespace D4Companion.SystemPresets.ViewModels
         private IconTypeVM? _selectedIconTypeEdit = null;
         private SystemPreset _selectedSystemPreset = new SystemPreset();
         private string _systemPresetName = string.Empty;
+        private int _takeScreenshotDelay = 10;
         private string _windowTitle = $"Diablo IV Companion - System Presets v{Assembly.GetExecutingAssembly().GetName().Version}";        
 
         // Start of Constructors region
@@ -60,6 +64,7 @@ namespace D4Companion.SystemPresets.ViewModels
             WeakReferenceMessenger.Default.Register<SystemPresetsUpdatedMessage>(this, HandleSystemPresetsUpdatedMessage);
 
             // Init view commands
+            ApplicationClosingCommand = new RelayCommand(ApplicationClosingExecute);
             ApplicationLoadedCommand = new RelayCommand(ApplicationLoadedExecute);
             AddSelectedIconTypeCommand = new RelayCommand(AddSelectedIconTypeExecute, CanAddSelectedIconTypeExecute);
             AddSystemPresetCommand = new RelayCommand(AddSystemPresetExecute, CanAddSystemPresetExecute);
@@ -70,8 +75,10 @@ namespace D4Companion.SystemPresets.ViewModels
             RemoveSystemPresetCommand = new RelayCommand(RemoveSystemPresetExecute, CanRemoveSystemPresetExecute);
             SaveIconTypeROIsCommand = new RelayCommand(SaveIconTypeROIsExecute, CanSaveIconTypeROIsExecute);
             SetSelectedIconTypeEditCommand = new RelayCommand<IconType>(SetSelectedIconTypeEditExecute);
+            ShowIconPreviewCommand = new RelayCommand(ShowIconPreviewExecute);
             SwitchImageModeCommand = new RelayCommand(SwitchImageModeExecute, CanSwitchImageModeExecute);
             TakeScreenshotCommand = new AsyncRelayCommand(TakeScreenshotExecute, CanTakeScreenshotExecute);
+            UpdateScreenshotCommand = new AsyncRelayCommand(UpdateScreenshotExecute, CanUpdateScreenshotExecute);
 
             // Init
             InitIconTypes();
@@ -94,7 +101,8 @@ namespace D4Companion.SystemPresets.ViewModels
         public ObservableCollection<SystemPreset> SystemPresets { get => _systemPresets; set => _systemPresets = value; }
 
         public ICommand AddSelectedIconTypeCommand { get; }
-        public ICommand ApplicationLoadedCommand { get; }
+        public ICommand ApplicationClosingCommand { get; }
+        public ICommand ApplicationLoadedCommand { get; }        
         public ICommand AddSystemPresetCommand { get; }
         public ICommand ApplySelectedIconTypeChangesCommand { get; }
         public ICommand RemoveIconTypeCommand { get; }
@@ -103,8 +111,10 @@ namespace D4Companion.SystemPresets.ViewModels
         public ICommand RemoveSystemPresetCommand { get; }
         public ICommand SaveIconTypeROIsCommand { get; }
         public ICommand SetSelectedIconTypeEditCommand { get; }
+        public ICommand ShowIconPreviewCommand {  get; }
         public ICommand SwitchImageModeCommand { get; }
         public ICommand TakeScreenshotCommand { get; }
+        public ICommand UpdateScreenshotCommand { get; }
 
         public string Coordinates
         {
@@ -116,6 +126,16 @@ namespace D4Companion.SystemPresets.ViewModels
             {
                 _coordinates = value;
                 OnPropertyChanged(nameof(Coordinates));
+            }
+        }
+
+        public BitmapSource? IconPreview
+        {
+            get => _iconPreview;
+            set
+            {
+                _iconPreview = value;
+                OnPropertyChanged(nameof(IconPreview));
             }
         }
 
@@ -231,6 +251,7 @@ namespace D4Companion.SystemPresets.ViewModels
                 ((RelayCommand)SaveIconTypeROIsCommand).NotifyCanExecuteChanged();
                 ((RelayCommand)SwitchImageModeCommand).NotifyCanExecuteChanged();
                 ((AsyncRelayCommand)TakeScreenshotCommand).NotifyCanExecuteChanged();
+                ((AsyncRelayCommand)UpdateScreenshotCommand).NotifyCanExecuteChanged();
             }
         }
 
@@ -253,6 +274,7 @@ namespace D4Companion.SystemPresets.ViewModels
                 {
                     ((RelayCommand)RemoveScreenshotCommand).NotifyCanExecuteChanged();
                     ((RelayCommand)RemoveScreenshotAllCommand).NotifyCanExecuteChanged();
+                    ((AsyncRelayCommand)UpdateScreenshotCommand).NotifyCanExecuteChanged();
                 });
 
                 LoadSelectedScreenshot();
@@ -308,11 +330,26 @@ namespace D4Companion.SystemPresets.ViewModels
             }
         }
 
+        public int TakeScreenshotDelay
+        {
+            get => _takeScreenshotDelay;
+            set
+            {
+                _takeScreenshotDelay = value;
+                OnPropertyChanged(nameof(TakeScreenshotDelay));
+            }
+        }
+
         #endregion
 
         // Start of Event handlers region
 
         #region Event handlers
+
+        private void ApplicationClosingExecute()
+        {
+            WeakReferenceMessenger.Default.Send(new ApplicationClosingMessage());
+        }
 
         private void ApplicationLoadedExecute()
         {
@@ -346,8 +383,8 @@ namespace D4Companion.SystemPresets.ViewModels
 
         private void HandleIconTypeROIUpdatedMessage(object recipient, IconTypeROIUpdatedMessage message)
         {
-            IconTypeScreenshot = DrawROIsOnBitmap(IconTypeScreenshotCached);
-        }
+            IconTypeScreenshot = DrawROIsOnBitmap(IconTypeScreenshotCached);            
+        }        
 
         private void HandleScreenAddedMessage(object recipient, ScreenAddedMessage message)
         {
@@ -421,11 +458,20 @@ namespace D4Companion.SystemPresets.ViewModels
 
         private void RemoveIconTypeExecute(IconType? type)
         {
-            if (type == null) return;
+            var result = MessageBox.Show(
+                $"Are you sure you want to delete icon '{type?.DisplayName ?? string.Empty}'?",
+                "Confirm deletion",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Warning);
 
-            SelectedSystemPreset.IconTypes.Remove(type);
-            _systemPresetManager.Save(SelectedSystemPreset);
-            UpdateSystemPresets();
+            if (result == MessageBoxResult.Yes)
+            {
+                if (type == null) return;
+
+                SelectedSystemPreset.IconTypes.Remove(type);
+                _systemPresetManager.Save(SelectedSystemPreset);
+                UpdateSystemPresets();
+            }            
         }
 
         private bool CanRemoveScreenshotExecute()
@@ -435,11 +481,20 @@ namespace D4Companion.SystemPresets.ViewModels
 
         private void RemoveScreenshotExecute()
         {
-            if(File.Exists(SelectedScreenshot))
+            var result = MessageBox.Show(
+                $"Are you sure you want to delete screenshot '{SelectedScreenshot}'?",
+                "Confirm deletion",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Warning);
+
+            if (result == MessageBoxResult.Yes)
             {
-                File.Delete(SelectedScreenshot);
-                OnPropertyChanged(nameof(Screenshots));
-            }            
+                if (File.Exists(SelectedScreenshot))
+                {
+                    File.Delete(SelectedScreenshot);
+                    OnPropertyChanged(nameof(Screenshots));
+                }
+            }
         }
 
         private bool CanRemoveScreenshotAllExecute()
@@ -449,16 +504,25 @@ namespace D4Companion.SystemPresets.ViewModels
 
         private void RemoveScreenshotAllExecute()
         {
-            foreach (var screenshot in Screenshots)
-            {
-                bool inUse = SelectedSystemPreset.IconTypes.Any(iconType => iconType.SelectedScreenshot.Equals(screenshot));
+            var result = MessageBox.Show(
+                $"Are you sure you want to delete all screenshots that are not being used?",
+                "Confirm deletion",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Warning);
 
-                if (File.Exists(screenshot) && !inUse)
+            if (result == MessageBoxResult.Yes)
+            {
+                foreach (var screenshot in Screenshots)
                 {
-                    File.Delete(screenshot);
+                    bool inUse = SelectedSystemPreset.IconTypes.Any(iconType => iconType.SelectedScreenshot.Equals(screenshot));
+
+                    if (File.Exists(screenshot) && !inUse)
+                    {
+                        File.Delete(screenshot);
+                    }
                 }
+                OnPropertyChanged(nameof(Screenshots));
             }
-            OnPropertyChanged(nameof(Screenshots));
         }
 
         private bool CanRemoveSystemPresetExecute()
@@ -468,7 +532,16 @@ namespace D4Companion.SystemPresets.ViewModels
 
         private void RemoveSystemPresetExecute()
         {
-            _systemPresetManager.RemoveSystemPreset(SelectedSystemPreset.Name);
+            var result = MessageBox.Show(
+                $"Are you sure you want to delete preset '{SelectedSystemPreset.Name}'?",
+                "Confirm deletion",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Warning);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                _systemPresetManager.RemoveSystemPreset(SelectedSystemPreset.Name);
+            }
         }
 
         private bool CanSaveIconTypeROIsExecute()
@@ -497,6 +570,10 @@ namespace D4Companion.SystemPresets.ViewModels
                     encoder.Frames.Add(BitmapFrame.Create(cropped));
 
                     string outputDir = Path.Combine(".", "SystemPresets", SelectedSystemPreset.Name, "Images");
+                    if (iconType.Name.StartsWith("tooltip"))
+                    {
+                        outputDir = Path.Combine(".", "SystemPresets", SelectedSystemPreset.Name, "Images", "Tooltips");
+                    }                    
                     Directory.CreateDirectory(outputDir);
 
                     string fileName = iconType.Count > 1
@@ -520,6 +597,18 @@ namespace D4Companion.SystemPresets.ViewModels
             }
         }
 
+        private void ShowIconPreviewExecute()
+        {
+            if (IconPreview == null) return;
+
+            var iconPreview = new IconPreviewWindow
+            {
+                DataContext = this,
+                WindowStartupLocation = WindowStartupLocation.CenterOwner,
+            };
+            iconPreview.Show();
+        }
+
         private bool CanSwitchImageModeExecute()
         {
             return !string.IsNullOrWhiteSpace(SelectedSystemPreset?.Name);
@@ -537,12 +626,41 @@ namespace D4Companion.SystemPresets.ViewModels
 
         private async Task TakeScreenshotExecute()
         {
-            await Task.Delay(TimeSpan.FromSeconds(5));
+            await Task.Delay(TimeSpan.FromSeconds(TakeScreenshotDelay));
             
             if (IconTypeScreenCapture != null)
             {
                 _systemPresetManager.SaveScreenshot(IconTypeScreenCapture, SelectedSystemPreset.Name);
                 OnPropertyChanged(nameof(Screenshots));
+            }
+        }
+
+        private bool CanUpdateScreenshotExecute()
+        {
+            return !string.IsNullOrWhiteSpace(SelectedScreenshot);
+        }
+
+        private async Task UpdateScreenshotExecute()
+        {
+            await Task.Delay(TimeSpan.FromSeconds(TakeScreenshotDelay));
+
+            if (IconTypeScreenCapture != null)
+            {
+                string oldScreenshot = SelectedScreenshot;
+                string updatedScreenshot = _systemPresetManager.UpdateScreenshot(IconTypeScreenCapture, SelectedSystemPreset.Name, SelectedScreenshot);
+
+                // Update icons to use the new screenshot
+                foreach (var iconType in SelectedSystemPreset.IconTypes)
+                {
+                    if (iconType.SelectedScreenshot.Equals(oldScreenshot))
+                    {
+                        iconType.SelectedScreenshot = updatedScreenshot;
+                    }
+                }
+                _systemPresetManager.Save(SelectedSystemPreset);
+                OnPropertyChanged(nameof(Screenshots));
+                OnPropertyChanged(nameof(SelectedScreenshot));
+                LoadSelectedScreenshot();
             }
         }
 
@@ -574,6 +692,8 @@ namespace D4Companion.SystemPresets.ViewModels
                     var pen = new Pen(new SolidColorBrush(strokeColor), strokeThickness);
                     drawingContext.DrawRectangle(null, pen, rect);
                 }
+
+                UpdateIconPreview();
             }
 
             var renderTargetBitmap = new RenderTargetBitmap(
@@ -623,6 +743,18 @@ namespace D4Companion.SystemPresets.ViewModels
             catch (Exception ex)
             {
                 _logger.LogError(ex, $"Failed to load screenshot: {SelectedScreenshot}");
+            }
+        }
+
+        private void UpdateIconPreview()
+        {
+            if (IconTypeScreenshotCached != null && SelectedIconTypeEdit != null)
+            {
+                var region = new Int32Rect(SelectedIconTypeEdit.PositionX, SelectedIconTypeEdit.PositionY, SelectedIconTypeEdit.Width, SelectedIconTypeEdit.Height);
+
+                BitmapSource cropped = new CroppedBitmap(IconTypeScreenshotCached, region);
+                cropped.Freeze();
+                IconPreview = cropped;
             }
         }
 
