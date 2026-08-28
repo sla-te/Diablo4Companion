@@ -627,10 +627,21 @@ namespace D4Companion.SystemPresets.ViewModels
         private async Task TakeScreenshotExecute()
         {
             await Task.Delay(TimeSpan.FromSeconds(TakeScreenshotDelay));
-            
+
             if (IconTypeScreenCapture != null)
             {
-                _systemPresetManager.SaveScreenshot(IconTypeScreenCapture, SelectedSystemPreset.Name);
+                string oldScreenshot = SelectedScreenshot;
+                string updatedScreenshot = _systemPresetManager.UpdateScreenshot(IconTypeScreenCapture, SelectedSystemPreset.Name, SelectedScreenshot);
+
+                // Update icons to use the new screenshot
+                foreach (var iconType in SelectedSystemPreset.IconTypes)
+                {
+                    if (iconType.SelectedScreenshot.Equals(oldScreenshot))
+                    {
+                        iconType.SelectedScreenshot = updatedScreenshot;
+                    }
+                }
+                _systemPresetManager.Save(SelectedSystemPreset);
                 OnPropertyChanged(nameof(Screenshots));
             }
         }

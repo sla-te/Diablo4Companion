@@ -242,6 +242,40 @@
                             <Button Content="Apply" Command="{Binding ApplySelectedIconTypeChangesCommand}"/>
                             <Label Content="{Binding Coordinates}"/>
                         </StackPanel>
+
+                        <StackPanel Orientation="Horizontal"
+                                    Visibility="{Binding Path=IsLiveModeActive, Converter={x:Static converters:InverseBooleanToVisibilityConverter.Instance}}">
+                            <Label Content="X:" Width="28"/>
+                            <mah:NumericUpDown Width="85"
+                                               Minimum="0"
+                                               Maximum="9999"
+                                               Interval="1"
+                                               Value="{Binding SelectedIconTypeEdit.PositionX, UpdateSourceTrigger=PropertyChanged}"/>
+                            <Label Content="Y:"/>
+                            <mah:NumericUpDown Width="85"
+                                               Minimum="0"
+                                               Maximum="9999"
+                                               Interval="1"
+                                               Value="{Binding SelectedIconTypeEdit.PositionY, UpdateSourceTrigger=PropertyChanged}"/>
+                            <Label Content="W:"/>
+                            <mah:NumericUpDown Width="85"
+                                               Minimum="5"
+                                               Maximum="9999"
+                                               Interval="1"
+                                               Value="{Binding SelectedIconTypeEdit.Width, UpdateSourceTrigger=PropertyChanged}"/>
+                            <Label Content="H:"/>
+                            <mah:NumericUpDown Width="85"
+                                               Minimum="5"
+                                               Maximum="9999"
+                                               Interval="1"
+                                               Value="{Binding SelectedIconTypeEdit.Height, UpdateSourceTrigger=PropertyChanged}"/>
+                            <Button Command="{Binding ShowIconPreviewCommand}" ToolTip="Show icon preview."
+                                    Visibility="{Binding Path=IsLiveModeActive, Converter={x:Static converters:InverseBooleanToVisibilityConverter.Instance}}">
+                                <iconPacks:PackIconMaterial Kind="Loupe" />
+                            </Button>
+                            <Button Content="Apply" Command="{Binding ApplySelectedIconTypeChangesCommand}"/>
+                            <Label Content="{Binding Coordinates}"/>
+                        </StackPanel>
                     </StackPanel>
 
                     <Image Grid.Column="1" Grid.Row="1" Source="{Binding IconTypeScreenCapture}"
