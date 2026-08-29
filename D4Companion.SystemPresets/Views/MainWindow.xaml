@@ -242,40 +242,6 @@
                             <Button Content="Apply" Command="{Binding ApplySelectedIconTypeChangesCommand}"/>
                             <Label Content="{Binding Coordinates}"/>
                         </StackPanel>
-
-                        <StackPanel Orientation="Horizontal"
-                                    Visibility="{Binding Path=IsLiveModeActive, Converter={x:Static converters:InverseBooleanToVisibilityConverter.Instance}}">
-                            <Label Content="X:" Width="28"/>
-                            <mah:NumericUpDown Width="85"
-                                               Minimum="0"
-                                               Maximum="9999"
-                                               Interval="1"
-                                               Value="{Binding SelectedIconTypeEdit.PositionX, UpdateSourceTrigger=PropertyChanged}"/>
-                            <Label Content="Y:"/>
-                            <mah:NumericUpDown Width="85"
-                                               Minimum="0"
-                                               Maximum="9999"
-                                               Interval="1"
-                                               Value="{Binding SelectedIconTypeEdit.PositionY, UpdateSourceTrigger=PropertyChanged}"/>
-                            <Label Content="W:"/>
-                            <mah:NumericUpDown Width="85"
-                                               Minimum="5"
-                                               Maximum="9999"
-                                               Interval="1"
-                                               Value="{Binding SelectedIconTypeEdit.Width, UpdateSourceTrigger=PropertyChanged}"/>
-                            <Label Content="H:"/>
-                            <mah:NumericUpDown Width="85"
-                                               Minimum="5"
-                                               Maximum="9999"
-                                               Interval="1"
-                                               Value="{Binding SelectedIconTypeEdit.Height, UpdateSourceTrigger=PropertyChanged}"/>
-                            <Button Command="{Binding ShowIconPreviewCommand}" ToolTip="Show icon preview."
-                                    Visibility="{Binding Path=IsLiveModeActive, Converter={x:Static converters:InverseBooleanToVisibilityConverter.Instance}}">
-                                <iconPacks:PackIconMaterial Kind="Loupe" />
-                            </Button>
-                            <Button Content="Apply" Command="{Binding ApplySelectedIconTypeChangesCommand}"/>
-                            <Label Content="{Binding Coordinates}"/>
-                        </StackPanel>
                     </StackPanel>
 
                     <Image Grid.Column="1" Grid.Row="1" Source="{Binding IconTypeScreenCapture}"
@@ -286,6 +252,37 @@
 
                 </Grid>
 
+            </TabItem>
+            <TabItem Header="Config">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Width="300" Text="{Binding LocalPrefsPath}"/>
+                    <StackPanel Grid.Row="1" Orientation="Horizontal">
+                        <TextBlock Text="Font Scale: " VerticalAlignment="Center"/>
+                        <TextBox Text="{Binding LocalPrefsFontScale}" Width="50" IsReadOnly="True" VerticalContentAlignment="Center"/>
+                        <ComboBox Width="50" SelectedValue="{Binding LocalPrefsFontScaleSelected}" SelectedValuePath="Content" VerticalContentAlignment="Center">
+                            <ComboBoxItem Content="0"/>
+                            <ComboBoxItem Content="1" IsSelected="True"/>
+                            <ComboBoxItem Content="2"/>
+                        </ComboBox>
+                        <Button Command="{Binding LocalPrefsRefreshCommand}" ToolTip="Refresh LocalPrefs">
+                            <iconPacks:PackIconMaterial Kind="Refresh" />
+                        </Button>
+                        <Button Command="{Binding LocalPrefsSaveCommand}" ToolTip="Save LocalPrefs">
+                            <iconPacks:PackIconMaterial Kind="ContentSaveOutline" />
+                        </Button>
+                    </StackPanel>
+                </Grid>
             </TabItem>
         </TabControl>
     </Grid>

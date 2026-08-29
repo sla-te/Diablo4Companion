@@ -37,6 +37,9 @@ namespace D4Companion.SystemPresets.ViewModels
         private BitmapSource? _iconTypeScreenshot = null;
         private BitmapSource? _iconTypeScreenshotCached = null;
         private bool _isLiveModeActive = true;
+        private List<string> _localPrefsContent = [];
+        private string _localPrefsFontScale = string.Empty;
+        private string _localPrefsFontScaleSelected = string.Empty;
         private IconType _selectedIconType = new IconType();
         private IconTypeVM? _selectedIconTypeEdit = null;
         private SystemPreset _selectedSystemPreset = new SystemPreset();
@@ -69,6 +72,8 @@ namespace D4Companion.SystemPresets.ViewModels
             AddSelectedIconTypeCommand = new RelayCommand(AddSelectedIconTypeExecute, CanAddSelectedIconTypeExecute);
             AddSystemPresetCommand = new RelayCommand(AddSystemPresetExecute, CanAddSystemPresetExecute);
             ApplySelectedIconTypeChangesCommand = new RelayCommand(ApplySelectedIconTypeChangesExecute, CanApplySelectedIconTypeChangesExecute);
+            LocalPrefsRefreshCommand = new RelayCommand(LocalPrefsRefreshExecute, CanLocalPrefsRefreshExecute);
+            LocalPrefsSaveCommand = new RelayCommand(LocalPrefsSaveExecute, CanLocalPrefsSaveExecute);
             RemoveIconTypeCommand = new RelayCommand<IconType>(RemoveIconTypeExecute);
             RemoveScreenshotCommand = new RelayCommand(RemoveScreenshotExecute, CanRemoveScreenshotExecute);
             RemoveScreenshotAllCommand = new RelayCommand(RemoveScreenshotAllExecute, CanRemoveScreenshotAllExecute);
@@ -82,7 +87,7 @@ namespace D4Companion.SystemPresets.ViewModels
 
             // Init
             InitIconTypes();
-        }        
+        }      
 
         #endregion
 
@@ -105,6 +110,8 @@ namespace D4Companion.SystemPresets.ViewModels
         public ICommand ApplicationLoadedCommand { get; }        
         public ICommand AddSystemPresetCommand { get; }
         public ICommand ApplySelectedIconTypeChangesCommand { get; }
+        public ICommand LocalPrefsRefreshCommand { get; }
+        public ICommand LocalPrefsSaveCommand { get; }
         public ICommand RemoveIconTypeCommand { get; }
         public ICommand RemoveScreenshotCommand { get; }
         public ICommand RemoveScreenshotAllCommand { get; }
@@ -114,7 +121,7 @@ namespace D4Companion.SystemPresets.ViewModels
         public ICommand ShowIconPreviewCommand {  get; }
         public ICommand SwitchImageModeCommand { get; }
         public ICommand TakeScreenshotCommand { get; }
-        public ICommand UpdateScreenshotCommand { get; }
+        public ICommand UpdateScreenshotCommand { get; }        
 
         public string Coordinates
         {
@@ -180,9 +187,40 @@ namespace D4Companion.SystemPresets.ViewModels
             set
             {
                 _isLiveModeActive = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(IsLiveModeActive));
             }
         }
+
+        public string LocalPrefsFontScale
+        {
+            get => _localPrefsFontScale;
+            set
+            {
+                _localPrefsFontScale = value;
+                OnPropertyChanged(nameof(LocalPrefsFontScale));
+
+            }
+        }
+
+        public string LocalPrefsFontScaleSelected
+        {
+            get => _localPrefsFontScaleSelected;
+            set
+            {
+                _localPrefsFontScaleSelected = value;
+                OnPropertyChanged(LocalPrefsFontScaleSelected);
+            }
+        }
+
+        public string LocalPrefsPath
+        {
+            get
+            {
+                string myDocuments = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                string localPrefsPath = Path.Combine(myDocuments, "Diablo IV", "LocalPrefs.txt");               
+                return localPrefsPath;
+            }
+        }        
 
         public List<string> Screenshots
         {
@@ -338,7 +376,7 @@ namespace D4Companion.SystemPresets.ViewModels
                 _takeScreenshotDelay = value;
                 OnPropertyChanged(nameof(TakeScreenshotDelay));
             }
-        }
+        }        
 
         #endregion
 
@@ -456,6 +494,44 @@ namespace D4Companion.SystemPresets.ViewModels
             _systemPresetManager.Save(SelectedSystemPreset);
         }
 
+        private bool CanLocalPrefsRefreshExecute()
+        {
+            return Path.Exists(LocalPrefsPath);
+        }
+
+        private void LocalPrefsRefreshExecute()
+        {
+            _localPrefsContent.Clear();
+            _localPrefsContent = File.ReadAllLines(LocalPrefsPath).ToList();
+
+            var line = _localPrefsContent.FirstOrDefault(l => l.StartsWith("FontScale \"")) ?? string.Empty;
+            var value = line.Split("\"")[1];
+
+            LocalPrefsFontScale = value;
+
+            ((RelayCommand)LocalPrefsSaveCommand).NotifyCanExecuteChanged();
+        }
+
+        private bool CanLocalPrefsSaveExecute()
+        {
+            return Path.Exists(LocalPrefsPath) &&
+                _localPrefsContent.Any();
+        }
+
+        private void LocalPrefsSaveExecute()
+        {
+            _localPrefsContent.Clear();
+            _localPrefsContent = File.ReadAllLines(LocalPrefsPath).ToList();
+
+            // FontScale
+            int lineIndex = _localPrefsContent.FindIndex(l => l.StartsWith("FontScale \""));
+            _localPrefsContent[lineIndex] = $"FontScale \"{LocalPrefsFontScaleSelected}\"";
+
+            File.WriteAllLines(LocalPrefsPath, _localPrefsContent);
+
+            LocalPrefsRefreshExecute();
+        }
+
         private void RemoveIconTypeExecute(IconType? type)
         {
             var result = MessageBox.Show(
@@ -471,7 +547,7 @@ namespace D4Companion.SystemPresets.ViewModels
                 SelectedSystemPreset.IconTypes.Remove(type);
                 _systemPresetManager.Save(SelectedSystemPreset);
                 UpdateSystemPresets();
-            }            
+            }
         }
 
         private bool CanRemoveScreenshotExecute()
@@ -630,18 +706,7 @@ namespace D4Companion.SystemPresets.ViewModels
 
             if (IconTypeScreenCapture != null)
             {
-                string oldScreenshot = SelectedScreenshot;
-                string updatedScreenshot = _systemPresetManager.UpdateScreenshot(IconTypeScreenCapture, SelectedSystemPreset.Name, SelectedScreenshot);
-
-                // Update icons to use the new screenshot
-                foreach (var iconType in SelectedSystemPreset.IconTypes)
-                {
-                    if (iconType.SelectedScreenshot.Equals(oldScreenshot))
-                    {
-                        iconType.SelectedScreenshot = updatedScreenshot;
-                    }
-                }
-                _systemPresetManager.Save(SelectedSystemPreset);
+                _systemPresetManager.SaveScreenshot(IconTypeScreenCapture, SelectedSystemPreset.Name);
                 OnPropertyChanged(nameof(Screenshots));
             }
         }
