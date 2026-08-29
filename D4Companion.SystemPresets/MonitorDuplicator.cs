@@ -23,7 +23,10 @@ namespace D4Companion.SystemPresets
         private readonly uint _outputIndex;
         private readonly ID3D11Device? _device;
         private readonly ID3D11DeviceContext? _context;
-        private readonly IDXGIOutputDuplication _duplication;        
+        private readonly IDXGIOutputDuplication _duplication;
+
+        private int _previousCursorX = 0;
+        private int _previousCursorY = 0;
 
         // Start of Constructors region
 
@@ -116,8 +119,17 @@ namespace D4Companion.SystemPresets
 
             var pointerInfo = frameInfo.PointerPosition;
             bool cursorVisible = pointerInfo.Visible;
-            int cursorX = pointerInfo.Position.X;
-            int cursorY = pointerInfo.Position.Y;
+            int cursorX = _previousCursorX;
+            int cursorY = _previousCursorY;
+
+            if (pointerInfo.Position.X != 0 || pointerInfo.Position.Y != 0)
+            {
+                cursorX = pointerInfo.Position.X;
+                cursorY = pointerInfo.Position.Y;
+            }
+
+            _previousCursorX = cursorX;
+            _previousCursorY = cursorY;
 
             var desktopLeft = _output.Description.DesktopCoordinates.Left;
             var desktopTop = _output.Description.DesktopCoordinates.Top;
@@ -197,7 +209,7 @@ namespace D4Companion.SystemPresets
                         CultureInfo.InvariantCulture,
                         FlowDirection.LeftToRight,
                         new Typeface("Arial"),
-                        16,
+                        20,
                         Brushes.Red,
                         pixelsPerDip);
 

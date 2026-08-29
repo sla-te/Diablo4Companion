@@ -718,6 +718,8 @@ namespace D4Companion.SystemPresets.ViewModels
 
         private async Task UpdateScreenshotExecute()
         {
+            IsLiveModeActive = true;
+
             await Task.Delay(TimeSpan.FromSeconds(TakeScreenshotDelay));
 
             if (IconTypeScreenCapture != null)
@@ -738,6 +740,8 @@ namespace D4Companion.SystemPresets.ViewModels
                 OnPropertyChanged(nameof(SelectedScreenshot));
                 LoadSelectedScreenshot();
             }
+
+            IsLiveModeActive = false;
         }
 
         #endregion
