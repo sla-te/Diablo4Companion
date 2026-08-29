@@ -262,7 +262,7 @@ namespace D4Companion.Services
             LoadTemplateMatchingImageDirectory(string.Empty, _imageListItemAffixLocations, fileName => fileName.Contains("dot-affixes_"), null, true);
             LoadTemplateMatchingImageDirectory(string.Empty, _imageListItemAspectLocations, fileName => fileName.Contains("dot-aspects_"), null, true);
             LoadTemplateMatchingImageDirectory(string.Empty, _imageListItemSocketLocations, fileName => fileName.Contains("dot-socket_"), null, true);
-            LoadTemplateMatchingImageDirectory(string.Empty, _imageListItemSplitterLocations, fileName => fileName.Contains("dot-splitter_"), null, true);
+            LoadTemplateMatchingImageDirectory(string.Empty, _imageListItemSplitterLocations, fileName => fileName.Contains("dot-splitter"), null, true);
 
             // Verify image list
             VerifyImageList();
@@ -298,8 +298,8 @@ namespace D4Companion.Services
                 if (!files.Any(f => f.Contains("dot-socket_invocation_mask", StringComparison.OrdinalIgnoreCase))) SendMissingPresetImageMessage("dot-socket_invocation_mask.png");
                 if (!files.Any(f => f.Contains("dot-socket_ritual", StringComparison.OrdinalIgnoreCase))) SendMissingPresetImageMessage("dot-socket_ritual.png");
                 if (!files.Any(f => f.Contains("dot-socket_ritual_mask", StringComparison.OrdinalIgnoreCase))) SendMissingPresetImageMessage("dot-socket_ritual_mask.png");
-                if (!files.Any(f => f.Contains("dot-splitter_1", StringComparison.OrdinalIgnoreCase))) SendMissingPresetImageMessage("dot-splitter_1.png");
-                if (!files.Any(f => f.Contains("dot-splitter_top_1", StringComparison.OrdinalIgnoreCase))) SendMissingPresetImageMessage("dot-splitter_top_1.png");
+                if (!files.Any(f => f.Contains("dot-splitter", StringComparison.OrdinalIgnoreCase))) SendMissingPresetImageMessage("dot-splitter.png");
+                if (!files.Any(f => f.Contains("dot-splitter_top", StringComparison.OrdinalIgnoreCase))) SendMissingPresetImageMessage("dot-splitter_top.png");
 
                 directory = $"Images\\{systemPreset}\\Tooltips\\";
                 files = Directory.GetFiles(directory);
