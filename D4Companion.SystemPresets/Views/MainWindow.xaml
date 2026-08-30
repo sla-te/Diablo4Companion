@@ -181,6 +181,9 @@
                             <ComboBox Width="454" ItemsSource="{Binding Screenshots}"
                                       SelectedItem="{Binding SelectedScreenshot, UpdateSourceTrigger=PropertyChanged}"
                                       Visibility="{Binding Path=IsLiveModeActive, Converter={x:Static converters:InverseBooleanToVisibilityConverter.Instance}}"/>
+                            <TextBox Width="50" Text="{Binding ScreenshotFileNameIndex, UpdateSourceTrigger=PropertyChanged}"
+                                     VerticalContentAlignment="Center"
+                                       Visibility="{Binding Path=IsLiveModeActive, Converter={x:Static converters:InverseBooleanToVisibilityConverter.Instance}}"/>
                             <Button Command="{Binding RemoveScreenshotCommand}" ToolTip="Remove"
                                     Visibility="{Binding Path=IsLiveModeActive, Converter={x:Static converters:InverseBooleanToVisibilityConverter.Instance}}">
                                 <iconPacks:PackIconMaterial Kind="DeleteOutline" />

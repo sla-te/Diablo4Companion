@@ -18,6 +18,7 @@ namespace D4Companion.SystemPresets.Services
     {
         private readonly ILogger _logger;
 
+        private string _activeDevice = string.Empty;
         private double _delayUpdateScreen = 50;
         private List<MonitorDuplicator> _duplicators = [];
         private readonly List<ScreenCapture> _screenCaptures = [];        
@@ -49,7 +50,9 @@ namespace D4Companion.SystemPresets.Services
 
         #region Properties
 
-        public List<ScreenCapture> ScreenCaptures { get => _screenCaptures; }
+        public string ActiveDevice { get => _activeDevice; set => _activeDevice = value; }
+
+        public List<ScreenCapture> ScreenCaptures { get => _screenCaptures; }        
 
         #endregion
 
@@ -94,6 +97,8 @@ namespace D4Companion.SystemPresets.Services
                 {
                     foreach (var duplicator in _duplicators)
                     {
+                        if (!string.IsNullOrWhiteSpace(ActiveDevice) && !duplicator.DeviceName.Equals(ActiveDevice)) continue;
+
                         var (bitmapSource, cursorX, cursorY) = duplicator.TryGetScreen();                        
 
                         if (bitmapSource != null)

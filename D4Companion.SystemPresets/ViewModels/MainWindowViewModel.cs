@@ -40,6 +40,7 @@ namespace D4Companion.SystemPresets.ViewModels
         private List<string> _localPrefsContent = [];
         private string _localPrefsFontScale = string.Empty;
         private string _localPrefsFontScaleSelected = string.Empty;
+        private string _screenshotFileNameIndex = string.Empty;
         private IconType _selectedIconType = new IconType();
         private IconTypeVM? _selectedIconTypeEdit = null;
         private SystemPreset _selectedSystemPreset = new SystemPreset();
@@ -246,6 +247,19 @@ namespace D4Companion.SystemPresets.ViewModels
             }
         }
 
+        public string ScreenshotFileNameIndex
+        {
+            get
+            {                
+                return _screenshotFileNameIndex;
+            }
+            set
+            {
+                _screenshotFileNameIndex = value;
+                OnPropertyChanged(nameof(ScreenshotFileNameIndex));
+            }
+        }
+
         public IconType SelectedIconType
         {
             get => _selectedIconType;
@@ -281,7 +295,7 @@ namespace D4Companion.SystemPresets.ViewModels
 
                 OnPropertyChanged(nameof(IconTypeScreenCapture));
                 OnPropertyChanged(nameof(SelectedScreenshot));                
-                OnPropertyChanged(nameof(Screenshots));                
+                OnPropertyChanged(nameof(Screenshots));
 
                 ((RelayCommand)ApplySelectedIconTypeChangesCommand).NotifyCanExecuteChanged();
                 ((RelayCommand)RemoveScreenshotCommand).NotifyCanExecuteChanged();
@@ -306,13 +320,17 @@ namespace D4Companion.SystemPresets.ViewModels
             }
             set
             {
-                SelectedIconTypeEdit?.SelectedScreenshot = value;
+                if (value != null)
+                {
+                    SelectedIconTypeEdit?.SelectedScreenshot = value;
+                    OnPropertyChanged(nameof(SelectedScreenshot));
+                }                
 
                 Application.Current?.Dispatcher.Invoke(() =>
                 {
                     ((RelayCommand)RemoveScreenshotCommand).NotifyCanExecuteChanged();
                     ((RelayCommand)RemoveScreenshotAllCommand).NotifyCanExecuteChanged();
-                    ((AsyncRelayCommand)UpdateScreenshotCommand).NotifyCanExecuteChanged();
+                    ((AsyncRelayCommand)UpdateScreenshotCommand).NotifyCanExecuteChanged();                    
                 });
 
                 LoadSelectedScreenshot();
@@ -407,6 +425,18 @@ namespace D4Companion.SystemPresets.ViewModels
 
                 screenCapture.IsActive = false;
             }
+
+            // Config ScreenManager
+            // - Capture all devices when none is set to active
+            // - Capture only one device when there is an active one
+            if (ScreenCaptures.Any(s => s.IsActive))
+            {
+                _screenManager.ActiveDevice = ScreenCaptures.FirstOrDefault(s => s.IsActive)?.DeviceName ?? string.Empty;
+            }
+            else
+            {
+                _screenManager.ActiveDevice = string.Empty;
+            }
         }
 
         private void HandleCursorUpdatedMessage(object recipient, CursorUpdatedMessage message)
@@ -491,7 +521,28 @@ namespace D4Companion.SystemPresets.ViewModels
 
         private void ApplySelectedIconTypeChangesExecute()
         {
+            // Update ScreenshotFileNameIndex
+            string currentFileNameIndex = Path.GetFileName(SelectedScreenshot).Split("_")[2];
+            if (!currentFileNameIndex.Equals(ScreenshotFileNameIndex))
+            {
+                string oldScreenshot = SelectedScreenshot;
+                string updatedScreenshot = @$".\SystemPresets\{SelectedSystemPreset.Name}\{SelectedSystemPreset.Name}_{ScreenshotFileNameIndex}_{DateTime.Now.Ticks}.png";                
+
+                // Update icons to use the new screenshot
+                foreach (var iconType in SelectedSystemPreset.IconTypes)
+                {
+                    if (iconType.SelectedScreenshot.Equals(oldScreenshot))
+                    {
+                        iconType.SelectedScreenshot = updatedScreenshot;
+                    }
+                }
+
+                // Rename file on disk
+                File.Move(oldScreenshot, updatedScreenshot);
+            }
+
             _systemPresetManager.Save(SelectedSystemPreset);
+            SelectedIconTypeEdit = SelectedIconTypeEdit;
         }
 
         private bool CanLocalPrefsRefreshExecute()
@@ -807,6 +858,8 @@ namespace D4Companion.SystemPresets.ViewModels
             }
             try
             {
+                ScreenshotFileNameIndex = Path.GetFileName(SelectedScreenshot).Split("_")[2];
+
                 using (var stream = new FileStream(SelectedScreenshot, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
                 {
                     var bitmap = new BitmapImage();
