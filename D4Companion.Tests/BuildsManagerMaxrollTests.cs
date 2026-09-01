@@ -426,6 +426,7 @@ namespace D4Companion.Tests
         public void RemoveSigil(ItemAffix itemAffix) => throw new NotImplementedException();
         public void RemoveUnique(ItemAffix itemAffix) => throw new NotImplementedException();
         public void RemoveRune(ItemAffix itemAffix) => throw new NotImplementedException();
+        public void RemoveTransfiguration(ItemAffix itemAffix) => throw new NotImplementedException();
         public void RemoveAffixPreset(AffixPreset affixPreset) => throw new NotImplementedException();
         public void RenamePreset(string oldName, string newName) => throw new NotImplementedException();
         public void ResetMinimalAffixValues() => throw new NotImplementedException();

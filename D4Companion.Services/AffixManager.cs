@@ -305,6 +305,19 @@ namespace D4Companion.Services
             WeakReferenceMessenger.Default.Send(new SelectedRunesChangedMessage());
         }
 
+        public void RemoveTransfiguration(ItemAffix itemAffix)
+        {
+            var preset = _affixPresets.FirstOrDefault(preset => preset.Name.Equals(_settingsManager.Settings.SelectedAffixPreset));
+            if (preset == null) return;
+
+            if (preset.ItemTransfigurations.RemoveAll(a => a.Id.Equals(itemAffix.Id)) > 0)
+            {
+                SaveAffixPresets();
+            }
+
+            WeakReferenceMessenger.Default.Send(new SelectedTransfigurationsChangedMessage());
+        }
+
         private void InitAffixData()
         {
             string language = _settingsManager.Settings.SelectedAffixLanguage;

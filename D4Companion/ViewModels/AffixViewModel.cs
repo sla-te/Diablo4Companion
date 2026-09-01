@@ -88,6 +88,7 @@ namespace D4Companion.ViewModels
             WeakReferenceMessenger.Default.Register<SelectedSigilsChangedMessage>(this, HandleSelectedSigilsChangedMessage);
             WeakReferenceMessenger.Default.Register<SelectedUniquesChangedMessage>(this, HandleSelectedUniquesChangedMessage);
             WeakReferenceMessenger.Default.Register<SelectedRunesChangedMessage>(this, HandleSelectedRunesChangedMessage);
+            WeakReferenceMessenger.Default.Register<SelectedTransfigurationsChangedMessage>(this, HandleSelectedTransfigurationsChangedMessage);
             WeakReferenceMessenger.Default.Register<SwitchPresetKeyBindingMessage>(this, HandleSwitchPresetKeyBindingMessage);
             WeakReferenceMessenger.Default.Register<ToggleOverlayMessage>(this, HandleToggleOverlayMessage);
             WeakReferenceMessenger.Default.Register<ToggleOverlayKeyBindingMessage>(this, HandleToggleOverlayKeyBindingMessage);
@@ -105,6 +106,7 @@ namespace D4Companion.ViewModels
             RemoveSigilCommand = new RelayCommand<ItemAffix>(RemoveSigilExecute);
             RemoveUniqueCommand = new RelayCommand<ItemAffix>(RemoveUniqueExecute);
             RemoveRuneCommand = new RelayCommand<ItemAffix>(RemoveRuneExecute);
+            RemoveTransfigurationCommand = new RelayCommand<ItemAffix>(RemoveTransfigurationExecute);
             SetAffixCommand = new RelayCommand<AffixInfoWanted>(SetAffixExecute);
             SetAffixColorCommand = new RelayCommand<ItemAffix>(SetAffixColorExecute);
             SetAspectCommand = new RelayCommand<AspectInfoWanted>(SetAspectExecute);
@@ -210,6 +212,7 @@ namespace D4Companion.ViewModels
         public ICommand RemoveSigilCommand { get; }
         public ICommand RemoveUniqueCommand { get; }
         public ICommand RemoveRuneCommand { get; }
+        public ICommand RemoveTransfigurationCommand { get; }
         public ICommand SetAffixCommand { get; }
         public ICommand SetAffixColorCommand { get; }
         public ICommand SetAspectCommand { get; }
@@ -752,6 +755,11 @@ namespace D4Companion.ViewModels
             UpdateSelectedRunes();
         }
 
+        private void HandleSelectedTransfigurationsChangedMessage(object recipient, SelectedTransfigurationsChangedMessage message)
+        {
+            UpdateSelectedTransfigurations();
+        }
+
         private void HandleSwitchPresetKeyBindingMessage(object recipient, SwitchPresetKeyBindingMessage message)
         {
             if (SelectedAffixPreset != null)
@@ -819,6 +827,14 @@ namespace D4Companion.ViewModels
             if (itemAffix != null)
             {
                 _affixManager.RemoveRune(itemAffix);
+            }
+        }
+
+        private void RemoveTransfigurationExecute(ItemAffix? itemAffix)
+        {
+            if (itemAffix != null)
+            {
+                _affixManager.RemoveTransfiguration(itemAffix);
             }
         }
 

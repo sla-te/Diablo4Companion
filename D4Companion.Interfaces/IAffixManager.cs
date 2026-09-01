@@ -53,6 +53,7 @@ namespace D4Companion.Interfaces
         void RemoveSigil(ItemAffix itemAffix);
         void RemoveUnique(ItemAffix itemAffix);
         void RemoveRune(ItemAffix itemAffix);
+        void RemoveTransfiguration(ItemAffix itemAffix);
         void RemoveAffixPreset(AffixPreset affixPreset);
         void RenamePreset(string oldName, string newName);
         void ResetMinimalAffixValues();
