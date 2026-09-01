@@ -102,9 +102,22 @@ namespace D4Companion.Services
             SaveControllerConfig();
         }
 
+        /// <summary>
+        /// Repository the system presets are served from. This fork's, not upstream's, because
+        /// 1440p_SMF here carries dot-affixes_greater_large.png - the second Greater Affix star
+        /// the game draws, which upstream's preset has no template for. Downloading upstream's
+        /// zip would overwrite it and silently stop nine items in twelve from having their
+        /// greater rows detected at all.
+        ///
+        /// Not a divergence that needs maintaining: presets live in this same repo, so syncing
+        /// master with upstream brings their preset changes along with everything else. Point
+        /// this back at josdemmers/Diablo4Companion once the template is upstream.
+        /// </summary>
+        private const string SystemPresetRepository = "sla-te/Diablo4Companion";
+
         public async void DownloadSystemPreset(string fileName)
         {
-            string uri = $"https://github.com/josdemmers/Diablo4Companion/raw/master/downloads/systempresets/{fileName}";
+            string uri = $"https://github.com/{SystemPresetRepository}/raw/master/downloads/systempresets/{fileName}";
 
             await _httpClientHandler.DownloadZipSystemPreset(uri);
         }
@@ -233,7 +246,7 @@ namespace D4Companion.Services
         {
             try
             {
-                string uri = $"https://raw.githubusercontent.com/josdemmers/Diablo4Companion/master/downloads/systempresets/systempresets.json";
+                string uri = $"https://raw.githubusercontent.com/{SystemPresetRepository}/master/downloads/systempresets/systempresets.json";
                 string json = await _httpClientHandler.GetRequest(uri);
 
                 if (!string.IsNullOrWhiteSpace(json))
