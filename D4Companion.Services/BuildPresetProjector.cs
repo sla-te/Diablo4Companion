@@ -117,8 +117,14 @@ namespace D4Companion.Services
 
         private void AddTransfigurations(AffixPreset preset, CanonicalVariant variant)
         {
-            foreach (var transfiguration in variant.Transfigurations)
+            // Index, not a counter over what was added: the guide prints the stats in
+            // priority order and that position IS the ranking, so a skipped duplicate must
+            // not shift the numbers of the entries below it. Ranks are 1-based, because
+            // DrawStatPriority treats 0 as "unranked" and draws nothing.
+            for (int index = 0; index < variant.Transfigurations.Count; index++)
             {
+                var transfiguration = variant.Transfigurations[index];
+
                 bool exists = preset.ItemTransfigurations.Any(t =>
                     t.Id.Equals(transfiguration.Id) && t.Type.Equals(transfiguration.Slot));
                 if (exists) continue;
@@ -129,7 +135,8 @@ namespace D4Companion.Services
                     Type = transfiguration.Slot,
                     Color = _settingsManager.Settings.DefaultColorTransfigured,
                     IsAnyType = string.IsNullOrEmpty(transfiguration.Slot),
-                    IsTransfigured = true
+                    IsTransfigured = true,
+                    Rank = index + 1
                 });
             }
         }

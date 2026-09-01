@@ -278,6 +278,54 @@ namespace D4Companion.Tests
         }
 
         [Test]
+        public void TransfigurationRank_IsTheGuideListPosition()
+        {
+            // The guide prints its transfigurations in priority order and that position is
+            // the number drawn inside the overlay mark. Ranks are 1-based because
+            // DrawStatPriority treats 0 as unranked and draws nothing.
+            var variant = new CanonicalVariant
+            {
+                Name = "test",
+                Transfigurations =
+                {
+                    new CanonicalTransfiguration { Id = "Damage_Type_Bonus_Physical", Slot = string.Empty },
+                    new CanonicalTransfiguration { Id = "CooldownReductionCDR", Slot = ItemTypeConstants.WeaponBludgeoning },
+                    new CanonicalTransfiguration { Id = "CoreStat_Strength", Slot = string.Empty }
+                }
+            };
+
+            var ranks = _projector.Project(variant, "test").ItemTransfigurations.Select(t => t.Rank);
+
+            Assert.That(ranks, Is.EqualTo(new[] { 1, 2, 3 }));
+        }
+
+        [Test]
+        public void DuplicateTransfiguration_DoesNotShiftTheRanksBelowIt()
+        {
+            // Rank comes from the position in the guide's list, not from a counter over what
+            // was added. A skipped duplicate must leave the entries below it where they are,
+            // or every number after the first repeat is wrong.
+            var variant = new CanonicalVariant
+            {
+                Name = "test",
+                Transfigurations =
+                {
+                    new CanonicalTransfiguration { Id = "CoreStat_Strength", Slot = string.Empty },
+                    new CanonicalTransfiguration { Id = "CoreStat_Strength", Slot = string.Empty },
+                    new CanonicalTransfiguration { Id = "CoreStats_All", Slot = string.Empty }
+                }
+            };
+
+            var projected = _projector.Project(variant, "test").ItemTransfigurations;
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(projected, Has.Count.EqualTo(2));
+                Assert.That(projected.Single(t => t.Id.Equals("CoreStats_All")).Rank, Is.EqualTo(3));
+            });
+        }
+
+        [Test]
         public void DuplicateTransfiguration_IsAddedOnce()
         {
             var variant = new CanonicalVariant

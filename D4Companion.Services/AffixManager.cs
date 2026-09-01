@@ -550,11 +550,31 @@ namespace D4Companion.Services
             var preset = _affixPresets.FirstOrDefault(preset => preset.Name.Equals(_settingsManager.Settings.SelectedAffixPreset));
             if (preset == null) return affixDefault;
 
-            // A transfigured area is still an ordinary affix the build may want in this
-            // slot, so a miss here falls through to the ItemAffixes lookup below unchanged.
-            // A hit outranks it: the transfiguration list is the more specific statement.
-            var transfiguration = FindTransfiguration(preset, affixId, affixType, itemType);
-            if (transfiguration != null) return transfiguration;
+            return ResolveAffix(preset, affixId, affixType, itemType) ?? affixDefault;
+        }
+
+        /// <summary>
+        /// Which preset entry, if any, an OCR'd affix matches. Static and preset-taking so
+        /// the three-step precedence can be asserted without standing up an AffixManager:
+        ///
+        /// 1. A tooltip area the marker classified as transfigured, matched against the
+        ///    transfiguration list. That is confirmation, and it outranks the slot.
+        /// 2. The slot's own ItemAffixes entry, exact type then any-type.
+        /// 3. The transfiguration list again, as the fallback.
+        ///
+        /// Step 3 comes LAST on purpose. A guide's transfiguration list covers broad stats -
+        /// Strength, All Stats, Critical Strike Chance - that most slots already rank. Put
+        /// first, it would repaint those with its own build-wide colour and overwrite every
+        /// per-slot 1-N ranking. Put last, it only speaks for stats the slot does not list,
+        /// which is exactly where an untransfigured wanted stat read as unwanted red.
+        /// </summary>
+        public static ItemAffix? ResolveAffix(AffixPreset preset, string affixId, string affixType, string itemType)
+        {
+            if (affixType.Equals(Constants.AffixTypeConstants.Transfigured))
+            {
+                var confirmed = FindTransfiguration(preset, affixId, itemType);
+                if (confirmed != null) return confirmed;
+            }
 
             bool isGreater = affixType.Equals(Constants.AffixTypeConstants.Greater);
             bool isImplicit = affixType.Equals(Constants.AffixTypeConstants.Implicit);
@@ -573,50 +593,26 @@ namespace D4Companion.Services
                 affix = preset.ItemAffixes.FirstOrDefault(a => a.Id.Equals(affixId) && a.IsAnyType);
             }
 
-            if (affix == null) return affixDefault;
-            return affix;
+            return affix ?? FindTransfiguration(preset, affixId, itemType);
         }
 
         /// <summary>
-        /// The preset's transfiguration entry for an affix, or null when the build does not
-        /// want this affix transfigured - or when the tooltip did not mark it as one.
+        /// The preset's transfiguration entry for an affix, or null when the build's guide
+        /// does not list it. The tooltip's own affix type is deliberately NOT consulted:
+        /// the list is a shopping list of stats to transfigure, so it has to match a stat
+        /// that has not been transfigured yet - that is the case worth telling you about.
         ///
         /// Static and preset-taking so both readers share it: GetAffix, and the multi-build
         /// overlay pass in ScreenProcessHandler, which carries its own copy of the ordinary
         /// affix ladder and would otherwise drift out of step with it.
         /// </summary>
-        public static ItemAffix? FindTransfiguration(AffixPreset preset, string affixId, string affixType, string itemType)
+        public static ItemAffix? FindTransfiguration(AffixPreset preset, string affixId, string itemType)
         {
-            if (!affixType.Equals(Constants.AffixTypeConstants.Transfigured)) return null;
-
             // Filter on IsAnyType inside the second predicate rather than testing it after
             // the fact, so an earlier slot-scoped entry with the same id cannot mask a later
             // build-wide one. GetAffix and GetAspect resolve this the same way.
-            var transfiguration =
-                preset.ItemTransfigurations.FirstOrDefault(t => t.Id.Equals(affixId) && IsTypeMatch(t.Type, itemType)) ??
-                preset.ItemTransfigurations.FirstOrDefault(t => t.Id.Equals(affixId) && t.IsAnyType);
-
-            if (transfiguration == null) return null;
-
-            // Guide prose carries no ranking, but the same stat is usually ALSO ranked as an
-            // ordinary affix for this slot. Returning the bare entry would leave Rank at 0,
-            // and DrawStatPriority draws nothing at 0 - blanking the priority digit on
-            // exactly the stat the build cares most about. Carry the best rank over.
-            var ranks = preset.ItemAffixes
-                .Where(a => a.Id.Equals(affixId) && a.Rank > 0 && (IsTypeMatch(a.Type, itemType) || a.IsAnyType))
-                .Select(a => a.Rank);
-
-            // A copy, never the stored entry: the rank belongs to the ordinary affix and
-            // must not be written back into the preset the user saves.
-            return new ItemAffix
-            {
-                Id = transfiguration.Id,
-                Type = transfiguration.Type,
-                Color = transfiguration.Color,
-                IsAnyType = transfiguration.IsAnyType,
-                IsTransfigured = true,
-                Rank = ranks.Any() ? ranks.Min() : 0
-            };
+            return preset.ItemTransfigurations.FirstOrDefault(t => t.Id.Equals(affixId) && IsTypeMatch(t.Type, itemType)) ??
+                   preset.ItemTransfigurations.FirstOrDefault(t => t.Id.Equals(affixId) && t.IsAnyType);
         }
 
         public string GetAffixDescription(string affixId)
