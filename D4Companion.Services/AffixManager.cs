@@ -550,6 +550,12 @@ namespace D4Companion.Services
             var preset = _affixPresets.FirstOrDefault(preset => preset.Name.Equals(_settingsManager.Settings.SelectedAffixPreset));
             if (preset == null) return affixDefault;
 
+            // A transfigured area is still an ordinary affix the build may want in this
+            // slot, so a miss here falls through to the ItemAffixes lookup below unchanged.
+            // A hit outranks it: the transfiguration list is the more specific statement.
+            var transfiguration = FindTransfiguration(preset, affixId, affixType, itemType);
+            if (transfiguration != null) return transfiguration;
+
             bool isGreater = affixType.Equals(Constants.AffixTypeConstants.Greater);
             bool isImplicit = affixType.Equals(Constants.AffixTypeConstants.Implicit);
             bool isTempered = affixType.Equals(Constants.AffixTypeConstants.Tempered);
@@ -569,6 +575,26 @@ namespace D4Companion.Services
 
             if (affix == null) return affixDefault;
             return affix;
+        }
+
+        /// <summary>
+        /// The preset's transfiguration entry for an affix, or null when the build does not
+        /// want this affix transfigured - or when the tooltip did not mark it as one.
+        ///
+        /// Static and preset-taking so both readers share it: GetAffix, and the multi-build
+        /// overlay pass in ScreenProcessHandler, which carries its own copy of the ordinary
+        /// affix ladder and would otherwise drift out of step with it.
+        /// </summary>
+        public static ItemAffix? FindTransfiguration(AffixPreset preset, string affixId, string affixType, string itemType)
+        {
+            if (!affixType.Equals(Constants.AffixTypeConstants.Transfigured)) return null;
+
+            var transfiguration = preset.ItemTransfigurations.FirstOrDefault(t => t.Id.Equals(affixId) && IsTypeMatch(t.Type, itemType));
+
+            // Filter on IsAnyType inside the predicate rather than testing it after the
+            // fact, so an earlier slot-scoped entry with the same id cannot mask a later
+            // build-wide one. GetAffix and GetAspect resolve this the same way.
+            return transfiguration ?? preset.ItemTransfigurations.FirstOrDefault(t => t.Id.Equals(affixId) && t.IsAnyType);
         }
 
         public string GetAffixDescription(string affixId)

@@ -71,6 +71,43 @@ namespace D4Companion.Tests
         }
 
         [Test]
+        public void TransfiguredAffix_IsAnInvertedTriangle()
+        {
+            Assert.That(Resolve(new ItemAffix { IsTransfigured = true }), Is.EqualTo(OverlayMarkKind.TriangleDown));
+        }
+
+        [Test]
+        public void TransfiguredAffix_OutranksTheAnyTypeRectangle()
+        {
+            // This ordering is the whole reason the check sits above IsAnyType. Most guide
+            // entries carry no slot qualifier and so import with IsAnyType set; leaving the
+            // rectangle to win would draw every one of them as a plain wildcard mark and
+            // lose the distinction the category exists for.
+            var affix = new ItemAffix { IsTransfigured = true, IsAnyType = true };
+
+            Assert.That(Resolve(affix), Is.EqualTo(OverlayMarkKind.TriangleDown));
+        }
+
+        [Test]
+        public void TransfiguredAffix_OutranksTheMinimalValueRectangle()
+        {
+            var affix = new ItemAffix { IsTransfigured = true };
+
+            Assert.That(Resolve(affix, minimalValueFilterEnabled: true, isBelowMinimalValue: true),
+                Is.EqualTo(OverlayMarkKind.TriangleDown));
+        }
+
+        [Test]
+        public void DungeonSigil_OutranksATransfiguredAffix()
+        {
+            // A sigil tooltip has no transfigured affixes, so the pairing is nonsense in
+            // game - but the sigil branch stays first so the tier digit can never be lost.
+            var affix = new ItemAffix { IsTransfigured = true };
+
+            Assert.That(Resolve(affix, isDungeonSigil: true), Is.EqualTo(OverlayMarkKind.SigilDungeon));
+        }
+
+        [Test]
         public void Rank_DoesNotChangeTheShape()
         {
             // The two signals are deliberately separate. Shape says what kind of affix this

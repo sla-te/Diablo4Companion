@@ -306,6 +306,15 @@ namespace D4Companion.Services
                                         gfx.DrawTriangle(_brushes[Colors.Black.ToString()], triangle, 2);
                                         break;
 
+                                    case OverlayMarkKind.TriangleDown:
+                                        // The greater-affix triangle flipped: base along the
+                                        // top, apex below. Shape alone has to separate the two
+                                        // even when a user recolours one of them.
+                                        Triangle triangleDown = new Triangle(left - (length / 2), top, left + (length / 2), top, left, top + length);
+                                        gfx.FillTriangle(_brushes[affixColor.ToString()], triangleDown);
+                                        gfx.DrawTriangle(_brushes[Colors.Black.ToString()], triangleDown, 2);
+                                        break;
+
                                     default:
                                         gfx.OutlineFillCircle(_brushes[Colors.Black.ToString()], _brushes[affixColor.ToString()], left, top + (itemAffixLocation.Location.Height / 2), radius, 2);
                                         break;
@@ -384,6 +393,15 @@ namespace D4Companion.Services
                                         Triangle triangle = new Triangle(left - (length / 2), top + length, left + (length / 2), top + length, left, top);
                                         gfx.FillTriangle(_brushes[affixColor.ToString()], triangle);
                                         gfx.DrawTriangle(_brushes[Colors.Black.ToString()], triangle, 2);
+                                        break;
+
+                                    case OverlayMarkKind.TriangleDown:
+                                        // The greater-affix triangle flipped: base along the
+                                        // top, apex below. Shape alone has to separate the two
+                                        // even when a user recolours one of them.
+                                        Triangle triangleDown = new Triangle(left - (length / 2), top, left + (length / 2), top, left, top + length);
+                                        gfx.FillTriangle(_brushes[affixColor.ToString()], triangleDown);
+                                        gfx.DrawTriangle(_brushes[Colors.Black.ToString()], triangleDown, 2);
                                         break;
 
                                     default:

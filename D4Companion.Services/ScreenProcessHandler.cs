@@ -1850,6 +1850,7 @@ namespace D4Companion.Services
                     bool isGreater = false;
                     bool isImplicit = false;
                     bool isTempered = false;
+                    bool isTransfigured = false;
                     if (currentItemAffix.Item2.Type.Equals(ItemTypeConstants.Sigil))
                     {
                         var affix = preset.ItemSigils.FirstOrDefault(a => a.Id.Equals(currentItemAffix.Item2.Id) && a.Type.Equals(currentItemAffix.Item2.Type));
@@ -1868,12 +1869,16 @@ namespace D4Companion.Services
                     }
                     else
                     {
-                        bool isImplicitArea = _currentTooltip.ItemAffixAreas[currentItemAffix.Item1].AffixType.Equals(Constants.AffixTypeConstants.Implicit);
-                        bool isTemperedArea = _currentTooltip.ItemAffixAreas[currentItemAffix.Item1].AffixType.Equals(Constants.AffixTypeConstants.Tempered);
+                        string affixTypeArea = _currentTooltip.ItemAffixAreas[currentItemAffix.Item1].AffixType;
+                        bool isImplicitArea = affixTypeArea.Equals(Constants.AffixTypeConstants.Implicit);
+                        bool isTemperedArea = affixTypeArea.Equals(Constants.AffixTypeConstants.Tempered);
                         // IsTypeMatch, not Type.Equals: a Barbarian Arsenal weapon is detected as
                         // a subtype (weapon_bludgeoning and friends) while an existing preset
                         // entry is typed plain "weapon". Exact equality would never match those.
-                        var affix = preset.ItemAffixes.FirstOrDefault(a => a.Id.Equals(currentItemAffix.Item2.Id) && AffixManager.IsTypeMatch(a.Type, _currentTooltip.ItemType) && a.IsImplicit == isImplicitArea && a.IsTempered == isTemperedArea);
+                        // Same order as GetAffix: a wanted transfiguration outranks an
+                        // ordinary match, and a miss falls through to the ladder below.
+                        var affix = AffixManager.FindTransfiguration(preset, currentItemAffix.Item2.Id, affixTypeArea, _currentTooltip.ItemType);
+                        affix ??= preset.ItemAffixes.FirstOrDefault(a => a.Id.Equals(currentItemAffix.Item2.Id) && AffixManager.IsTypeMatch(a.Type, _currentTooltip.ItemType) && a.IsImplicit == isImplicitArea && a.IsTempered == isTemperedArea);
                         if (affix == null)
                         {
                             // Check if the affix is set to accept any item type. Filter on
@@ -1890,6 +1895,7 @@ namespace D4Companion.Services
                             isGreater = affix.IsGreater;
                             isImplicit = affix.IsImplicit;
                             isTempered = affix.IsTempered;
+                            isTransfigured = affix.IsTransfigured;
                         }
                     }
 
@@ -1901,7 +1907,8 @@ namespace D4Companion.Services
                         IsAnyType = isAnyType,
                         IsGreater = isGreater,
                         IsImplicit = isImplicit,
-                        IsTempered = isTempered
+                        IsTempered = isTempered,
+                        IsTransfigured = isTransfigured
                     }));
                 }
 

@@ -14,7 +14,9 @@ namespace D4Companion.Entities
         /// <summary>Set to ignore the item type, or below the minimal affix value.</summary>
         Rectangle,
         /// <summary>The build wants a Greater Affix in this slot.</summary>
-        Triangle
+        Triangle,
+        /// <summary>The build wants this affix transfigured, and it is.</summary>
+        TriangleDown
     }
 
     public static class OverlayMarkResolver
@@ -28,6 +30,10 @@ namespace D4Companion.Entities
         public static OverlayMarkKind Resolve(ItemAffix affix, bool isDungeonSigil, bool minimalValueFilterEnabled, bool isBelowMinimalValue)
         {
             if (isDungeonSigil) return OverlayMarkKind.SigilDungeon;
+            // Above IsAnyType on purpose. Guide transfiguration entries usually carry no
+            // slot qualifier and so import with IsAnyType set; letting the rectangle win
+            // would draw every one of them as a plain wildcard and lose the distinction.
+            if (affix.IsTransfigured) return OverlayMarkKind.TriangleDown;
             if (affix.IsAnyType) return OverlayMarkKind.Rectangle;
             if (affix.IsGreater) return OverlayMarkKind.Triangle;
             if (minimalValueFilterEnabled && isBelowMinimalValue) return OverlayMarkKind.Rectangle;
