@@ -299,6 +299,7 @@ namespace D4Companion.Services
                 if (!files.Any(f => f.Contains("dot-affixes_reroll", StringComparison.OrdinalIgnoreCase))) SendMissingPresetImageMessage("dot-affixes_reroll.png");
                 if (!files.Any(f => f.Contains("dot-affixes_temper_", StringComparison.OrdinalIgnoreCase))) SendMissingPresetImageMessage("dot-affixes_temper_*.png");
                 if (!files.Any(f => f.Contains("dot-affixes_rune_", StringComparison.OrdinalIgnoreCase))) SendMissingPresetImageMessage("dot-affixes_rune_*.png");
+                if (!files.Any(f => f.Contains("dot-affixes_transfiguring", StringComparison.OrdinalIgnoreCase))) SendMissingPresetImageMessage("dot-affixes_transfiguring.png");
                 if (!files.Any(f => f.Contains("dot-aspects_legendary", StringComparison.OrdinalIgnoreCase))) SendMissingPresetImageMessage("dot-aspects_legendary.png");
                 if (!files.Any(f => f.Contains("dot-aspects_unique", StringComparison.OrdinalIgnoreCase))) SendMissingPresetImageMessage("dot-aspects_unique.png");
                 if (!files.Any(f => f.Contains("dot-aspects_mythic", StringComparison.OrdinalIgnoreCase))) SendMissingPresetImageMessage("dot-aspects_mythic.png");
@@ -1033,7 +1034,8 @@ namespace D4Companion.Services
                         affixLocation.Location.Y - _settingsManager.Settings.AffixAreaHeightOffsetTop,
                         _currentTooltip.Location.Width - affixLocation.Location.X - offsetAffixMarker - _settingsManager.Settings.AffixAspectAreaWidthOffset,
                         yCoordsNextPoint - (affixLocation.Location.Y - _settingsManager.Settings.AffixAreaHeightOffsetTop)),
-                    AffixType = affixLocation.Name.StartsWith("dot-affixes_normal") || affixLocation.Name.StartsWith("dot-affixes_reroll") ? Constants.AffixTypeConstants.Normal :
+                    AffixType = affixLocation.Name.StartsWith("dot-affixes_transfiguring") ? Constants.AffixTypeConstants.Transfigured :
+                    affixLocation.Name.StartsWith("dot-affixes_normal") || affixLocation.Name.StartsWith("dot-affixes_reroll") ? Constants.AffixTypeConstants.Normal :
                     affixLocation.Name.StartsWith("dot-affixes_greater") ? Constants.AffixTypeConstants.Greater :
                     affixLocation.Name.StartsWith("dot-affixes_temper") ? Constants.AffixTypeConstants.Tempered :
                     affixLocation.Name.StartsWith("dot-affixes_rune") ? Constants.AffixTypeConstants.Rune : Constants.AffixTypeConstants.Normal
