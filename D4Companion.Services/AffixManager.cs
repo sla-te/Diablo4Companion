@@ -589,12 +589,34 @@ namespace D4Companion.Services
         {
             if (!affixType.Equals(Constants.AffixTypeConstants.Transfigured)) return null;
 
-            var transfiguration = preset.ItemTransfigurations.FirstOrDefault(t => t.Id.Equals(affixId) && IsTypeMatch(t.Type, itemType));
-
-            // Filter on IsAnyType inside the predicate rather than testing it after the
-            // fact, so an earlier slot-scoped entry with the same id cannot mask a later
+            // Filter on IsAnyType inside the second predicate rather than testing it after
+            // the fact, so an earlier slot-scoped entry with the same id cannot mask a later
             // build-wide one. GetAffix and GetAspect resolve this the same way.
-            return transfiguration ?? preset.ItemTransfigurations.FirstOrDefault(t => t.Id.Equals(affixId) && t.IsAnyType);
+            var transfiguration =
+                preset.ItemTransfigurations.FirstOrDefault(t => t.Id.Equals(affixId) && IsTypeMatch(t.Type, itemType)) ??
+                preset.ItemTransfigurations.FirstOrDefault(t => t.Id.Equals(affixId) && t.IsAnyType);
+
+            if (transfiguration == null) return null;
+
+            // Guide prose carries no ranking, but the same stat is usually ALSO ranked as an
+            // ordinary affix for this slot. Returning the bare entry would leave Rank at 0,
+            // and DrawStatPriority draws nothing at 0 - blanking the priority digit on
+            // exactly the stat the build cares most about. Carry the best rank over.
+            var ranks = preset.ItemAffixes
+                .Where(a => a.Id.Equals(affixId) && a.Rank > 0 && (IsTypeMatch(a.Type, itemType) || a.IsAnyType))
+                .Select(a => a.Rank);
+
+            // A copy, never the stored entry: the rank belongs to the ordinary affix and
+            // must not be written back into the preset the user saves.
+            return new ItemAffix
+            {
+                Id = transfiguration.Id,
+                Type = transfiguration.Type,
+                Color = transfiguration.Color,
+                IsAnyType = transfiguration.IsAnyType,
+                IsTransfigured = true,
+                Rank = ranks.Any() ? ranks.Min() : 0
+            };
         }
 
         public string GetAffixDescription(string affixId)

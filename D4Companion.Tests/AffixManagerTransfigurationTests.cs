@@ -117,6 +117,68 @@ namespace D4Companion.Tests
         }
 
         [Test]
+        public void Match_CarriesTheRankOfTheOrdinaryAffix()
+        {
+            // Guide prose carries no ranking, so a transfiguration entry is always rank 0.
+            // Returning it bare would blank the priority digit - DrawStatPriority draws
+            // nothing at 0 - on exactly the stat the build ranks first.
+            var preset = PresetWith(BuildWide("critical-strike-chance"));
+            preset.ItemAffixes.Add(new ItemAffix
+            {
+                Id = "critical-strike-chance",
+                Type = ItemTypeConstants.Amulet,
+                Rank = 1
+            });
+
+            var match = AffixManager.FindTransfiguration(preset, "critical-strike-chance",
+                AffixTypeConstants.Transfigured, ItemTypeConstants.Amulet);
+
+            Assert.That(match!.Rank, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void Match_TakesTheBestRankWhenSeveralEntriesShareTheId()
+        {
+            // Rank 1 is the highest priority, so the lowest positive rank wins.
+            var preset = PresetWith(BuildWide("strength"));
+            preset.ItemAffixes.Add(new ItemAffix { Id = "strength", Type = ItemTypeConstants.Amulet, Rank = 6 });
+            preset.ItemAffixes.Add(new ItemAffix { Id = "strength", Type = ItemTypeConstants.Amulet, Rank = 2 });
+
+            var match = AffixManager.FindTransfiguration(preset, "strength",
+                AffixTypeConstants.Transfigured, ItemTypeConstants.Amulet);
+
+            Assert.That(match!.Rank, Is.EqualTo(2));
+        }
+
+        [Test]
+        public void Match_DoesNotWriteTheRankBackIntoThePreset()
+        {
+            // The rank belongs to the ordinary affix. Writing it onto the stored entry would
+            // persist it into the preset file the user saves.
+            var preset = PresetWith(BuildWide("strength"));
+            preset.ItemAffixes.Add(new ItemAffix { Id = "strength", Type = ItemTypeConstants.Amulet, Rank = 3 });
+
+            AffixManager.FindTransfiguration(preset, "strength",
+                AffixTypeConstants.Transfigured, ItemTypeConstants.Amulet);
+
+            Assert.That(preset.ItemTransfigurations[0].Rank, Is.EqualTo(0));
+        }
+
+        [Test]
+        public void Match_WithNoOrdinaryEntry_HasNoRank()
+        {
+            // Five of the six guide entries are not ranked anywhere - they are build-wide
+            // prose with no matching slot entry - and must still resolve.
+            var preset = PresetWith(BuildWide("all-stats"));
+
+            var match = AffixManager.FindTransfiguration(preset, "all-stats",
+                AffixTypeConstants.Transfigured, ItemTypeConstants.Amulet);
+
+            Assert.That(match, Is.Not.Null);
+            Assert.That(match!.Rank, Is.EqualTo(0));
+        }
+
+        [Test]
         public void EmptyList_DoesNotMatch()
         {
             // Every preset saved before transfigurations existed deserialises to this.

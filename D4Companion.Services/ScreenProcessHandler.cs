@@ -1107,12 +1107,14 @@ namespace D4Companion.Services
                 // Validate implicit area
                 // - No greater affixes
                 // - No tempered affixes
+                // - No transfigured affixes
                 foreach (var itemAffixArea in _currentTooltip.ItemAffixAreas)
                 {
                     if (implicitBeginY <= itemAffixArea.Location.Y && itemAffixArea.Location.Y <= implicitEndY)
                     {
                         if (itemAffixArea.AffixType.Equals(AffixTypeConstants.Greater) ||
-                            itemAffixArea.AffixType.Equals(AffixTypeConstants.Tempered))
+                            itemAffixArea.AffixType.Equals(AffixTypeConstants.Tempered) ||
+                            itemAffixArea.AffixType.Equals(AffixTypeConstants.Transfigured))
                         {
                             //_logger.LogDebug($"{MethodBase.GetCurrentMethod()?.Name}: Invalid implicit area. Type {itemAffixArea.AffixType} found.");
 
@@ -1851,6 +1853,7 @@ namespace D4Companion.Services
                     bool isImplicit = false;
                     bool isTempered = false;
                     bool isTransfigured = false;
+                    int rank = 0;
                     if (currentItemAffix.Item2.Type.Equals(ItemTypeConstants.Sigil))
                     {
                         var affix = preset.ItemSigils.FirstOrDefault(a => a.Id.Equals(currentItemAffix.Item2.Id) && a.Type.Equals(currentItemAffix.Item2.Type));
@@ -1896,6 +1899,7 @@ namespace D4Companion.Services
                             isImplicit = affix.IsImplicit;
                             isTempered = affix.IsTempered;
                             isTransfigured = affix.IsTransfigured;
+                            rank = affix.Rank;
                         }
                     }
 
@@ -1908,7 +1912,11 @@ namespace D4Companion.Services
                         IsGreater = isGreater,
                         IsImplicit = isImplicit,
                         IsTempered = isTempered,
-                        IsTransfigured = isTransfigured
+                        IsTransfigured = isTransfigured,
+                        // DrawGraphicsAffixesMulti calls DrawStatPriority just like the
+                        // primary pass does, and it draws nothing at rank 0 - so leaving
+                        // this out silently cost every multi-build mark its rank digit.
+                        Rank = rank
                     }));
                 }
 

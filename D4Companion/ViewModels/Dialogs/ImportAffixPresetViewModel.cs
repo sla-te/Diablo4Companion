@@ -1066,6 +1066,17 @@ namespace D4Companion.ViewModels.Dialogs
                     Color = ChangeColorBuild1 ? ColorBuild1 : s.Color
                 };
             }));
+            affixPreset.ItemTransfigurations.AddRange(SelectedAffixPresetBuild1.ItemTransfigurations.Select(t =>
+            {
+                return new ItemAffix
+                {
+                    Id = t.Id,
+                    Type = t.Type,
+                    IsAnyType = t.IsAnyType,
+                    IsTransfigured = true,
+                    Color = ChangeColorBuild1 ? ColorBuild1 : t.Color
+                };
+            }));
 
             // Build 2
             foreach (var itemAffixBuild2 in SelectedAffixPresetBuild2.ItemAffixes)
@@ -1127,6 +1138,30 @@ namespace D4Companion.ViewModels.Dialogs
                 else
                 {
                     itemSigil.Color = ChangeColorBuild12 ? ColorBuild12 : itemSigil.Color;
+                }
+            }
+            foreach (var itemTransfigurationBuild2 in SelectedAffixPresetBuild2.ItemTransfigurations)
+            {
+                var itemTransfiguration = affixPreset.ItemTransfigurations.FirstOrDefault(t => t.Id.Equals(itemTransfigurationBuild2.Id) && t.Type.Equals(itemTransfigurationBuild2.Type));
+                if (itemTransfiguration == null)
+                {
+                    affixPreset.ItemTransfigurations.Add(new ItemAffix
+                    {
+                        Id = itemTransfigurationBuild2.Id,
+                        Type = itemTransfigurationBuild2.Type,
+                        IsAnyType = itemTransfigurationBuild2.IsAnyType,
+                        IsTransfigured = true,
+                        Color = ChangeColorBuild2 ? ColorBuild2 : itemTransfigurationBuild2.Color
+                    });
+                }
+                else
+                {
+                    itemTransfiguration.Color = ChangeColorBuild12 ? ColorBuild12 : itemTransfiguration.Color;
+
+                    // Same permissiveness rule as aspects above: one build listing the stat
+                    // build-wide and the other scoping it to a slot must merge to build-wide,
+                    // or the merged preset silently narrows to that one slot.
+                    itemTransfiguration.IsAnyType = itemTransfiguration.IsAnyType || itemTransfigurationBuild2.IsAnyType;
                 }
             }
 
