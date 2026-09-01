@@ -1021,6 +1021,7 @@ namespace D4Companion.Services
             WeakReferenceMessenger.Default.Send(new SelectedSigilsChangedMessage());
             WeakReferenceMessenger.Default.Send(new SelectedUniquesChangedMessage());
             WeakReferenceMessenger.Default.Send(new SelectedRunesChangedMessage());
+            WeakReferenceMessenger.Default.Send(new SelectedTransfigurationsChangedMessage());
         }
 
         private void LoadAffixPresets()
