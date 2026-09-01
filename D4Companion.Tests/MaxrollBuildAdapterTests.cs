@@ -13,13 +13,18 @@ namespace D4Companion.Tests
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
+            _midgame = ToCanonicalVariant("Midgame");
+        }
+
+        private static CanonicalVariant ToCanonicalVariant(string profileName)
+        {
             string json = File.ReadAllText(@".\Fixtures\ce9zox0y.json");
             var outer = JsonSerializer.Deserialize<MaxrollBuildJson>(json)!;
             var data = JsonSerializer.Deserialize<MaxrollBuildDataJson>(outer.Data)!;
             var build = new MaxrollBuild { Id = outer.Id, Name = outer.Name, Data = data };
 
             var adapter = new MaxrollBuildAdapter();
-            _midgame = adapter.ToCanonical(build).Variants.Single(v => v.Name.Equals("Midgame"));
+            return adapter.ToCanonical(build).Variants.Single(v => v.Name.Equals(profileName));
         }
 
         [Test]
@@ -87,6 +92,27 @@ namespace D4Companion.Tests
             var aspectIds = _midgame.Items.SelectMany(i => i.AspectIds).Distinct().ToList();
 
             Assert.That(aspectIds, Has.Count.EqualTo(8));
+        }
+
+        [Test]
+        public void Endgame_StashesRawTransfigurationProse()
+        {
+            var variant = ToCanonicalVariant("Endgame");
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(variant.Transfigurations, Has.Count.EqualTo(6));
+                Assert.That(variant.Transfigurations.Select(t => t.Id),
+                    Does.Contain("Critical Strike Chance"));
+                Assert.That(variant.Transfigurations.Single(t => t.Id.Equals("Cooldown")).Slot,
+                    Is.EqualTo("2-Handed Weapons"));
+            });
+        }
+
+        [Test]
+        public void ProfileWithoutNotes_StashesNoTransfigurations()
+        {
+            Assert.That(ToCanonicalVariant("Starter").Transfigurations, Is.Empty);
         }
     }
 }

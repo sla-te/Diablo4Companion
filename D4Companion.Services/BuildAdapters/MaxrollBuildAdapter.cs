@@ -37,6 +37,18 @@ namespace D4Companion.Services.BuildAdapters
                     variant.Items.Add(item);
                 }
 
+                // Raw prose only. The adapter has no fuzzy-matching dependency, so
+                // BuildsManagerMaxroll resolves both fields afterwards - the same split the
+                // D4Builds importer uses for scraped affix text.
+                foreach (var entry in MaxrollTransfigurationParser.Parse(profile.WidgetNotes?.Equipment))
+                {
+                    variant.Transfigurations.Add(new CanonicalTransfiguration
+                    {
+                        Id = entry.Stat,
+                        Slot = entry.Scope
+                    });
+                }
+
                 canonical.Variants.Add(variant);
             }
 
