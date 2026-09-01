@@ -116,31 +116,6 @@ namespace D4Companion.Entities
             }
         }
 
-        public bool IsGreater
-        {
-            get => _itemAffix.IsGreater;
-            set
-            {
-                _itemAffix.IsGreater = value;
-                OnPropertyChanged(nameof(IsGreater));
-                OnPropertyChanged(nameof(IsDuplicate));
-
-                if (IsGreater)
-                {
-                    IsImplicit = false;
-                    IsTempered = false;
-                    Color = _settingsManager.Settings.DefaultColorGreater;
-                }
-                else if (!IsImplicit && !IsGreater && !IsTempered)
-                {
-                    Color = _settingsManager.Settings.DefaultColorNormal;
-                }
-
-                _affixManager.SaveAffixPresets();
-                WeakReferenceMessenger.Default.Send(new SelectedAffixesChangedMessage());
-            }
-        }
-
         public bool IsImplicit
         {
             get => _itemAffix.IsImplicit;
@@ -154,9 +129,62 @@ namespace D4Companion.Entities
                 {
                     IsGreater = false;
                     IsTempered = false;
+                    IsTransfigured = false;
                     Color = _settingsManager.Settings.DefaultColorImplicit;
                 }
-                else if (!IsImplicit && !IsGreater && !IsTempered)
+                else if (!IsImplicit && !IsGreater && !IsTempered && !IsTransfigured)
+                {
+                    Color = _settingsManager.Settings.DefaultColorNormal;
+                }
+
+                _affixManager.SaveAffixPresets();
+                WeakReferenceMessenger.Default.Send(new SelectedAffixesChangedMessage());
+            }
+        }
+
+        public bool IsTransfigured
+        {
+            get => _itemAffix.IsTransfigured;
+            set
+            {
+                _itemAffix.IsTransfigured = value;
+                OnPropertyChanged(nameof(IsTransfigured));
+                OnPropertyChanged(nameof(IsDuplicate));
+
+                if (IsTransfigured)
+                {
+                    IsGreater = false;
+                    IsImplicit = false;
+                    IsTempered = false;
+                    Color = _settingsManager.Settings.DefaultColorTransfigured;
+                }
+                else if (!IsImplicit && !IsGreater && !IsTempered && !IsTransfigured)
+                {
+                    Color = _settingsManager.Settings.DefaultColorNormal;
+                }
+
+                _affixManager.SaveAffixPresets();
+                WeakReferenceMessenger.Default.Send(new SelectedAffixesChangedMessage());
+            }
+        }
+
+        public bool IsGreater
+        {
+            get => _itemAffix.IsGreater;
+            set
+            {
+                _itemAffix.IsGreater = value;
+                OnPropertyChanged(nameof(IsGreater));
+                OnPropertyChanged(nameof(IsDuplicate));
+
+                if (IsGreater)
+                {
+                    IsImplicit = false;
+                    IsTempered = false;
+                    IsTransfigured = false;
+                    Color = _settingsManager.Settings.DefaultColorGreater;
+                }
+                else if (!IsImplicit && !IsGreater && !IsTempered && !IsTransfigured)
                 {
                     Color = _settingsManager.Settings.DefaultColorNormal;
                 }
@@ -179,9 +207,10 @@ namespace D4Companion.Entities
                 {
                     IsGreater = false;
                     IsImplicit = false;
+                    IsTransfigured = false;
                     Color = _settingsManager.Settings.DefaultColorTempered;
                 }
-                else if (!IsImplicit && !IsGreater && !IsTempered)
+                else if (!IsImplicit && !IsGreater && !IsTempered && !IsTransfigured)
                 {
                     Color = _settingsManager.Settings.DefaultColorNormal;
                 }

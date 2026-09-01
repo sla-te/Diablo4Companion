@@ -44,6 +44,7 @@ namespace D4Companion.ViewModels
         private ObservableCollection<ItemAffix> _selectedSigils = [];
         private ObservableCollection<ItemAffix> _selectedUniques = [];
         private ObservableCollection<ItemAffix> _selectedRunes = [];
+        private ObservableCollection<ItemAffix> _selectedTransfigurations = [];
         private ObservableCollection<SigilInfoBase> _sigils = [];
         private ObservableCollection<UniqueInfoBase> _uniques = [];
         private ObservableCollection<RuneInfoBase> _runes = [];
@@ -176,6 +177,7 @@ namespace D4Companion.ViewModels
         public ObservableCollection<ItemAffix> SelectedSigils { get => _selectedSigils; set => _selectedSigils = value; }
         public ObservableCollection<ItemAffix> SelectedUniques { get => _selectedUniques; set => _selectedUniques = value; }
         public ObservableCollection<ItemAffix> SelectedRunes { get => _selectedRunes; set => _selectedRunes = value; }
+        public ObservableCollection<ItemAffix> SelectedTransfigurations { get => _selectedTransfigurations; set => _selectedTransfigurations = value; }
         public ObservableCollection<SigilInfoBase> Sigils { get => _sigils; set => _sigils = value; }
         public ObservableCollection<UniqueInfoBase> Uniques { get => _uniques; set => _uniques = value; }
         public ObservableCollection<RuneInfoBase> Runes { get => _runes; set => _runes = value; }
@@ -348,6 +350,7 @@ namespace D4Companion.ViewModels
                     UpdateSelectedSigils();
                     UpdateSelectedUniques();
                     UpdateSelectedRunes();
+                    UpdateSelectedTransfigurations();
                 }
             }
         }
@@ -381,6 +384,7 @@ namespace D4Companion.ViewModels
                 UpdateSelectedSigils();
                 UpdateSelectedUniques();
                 UpdateSelectedRunes();
+                UpdateSelectedTransfigurations();
             }
         }
 
@@ -1765,6 +1769,18 @@ namespace D4Companion.ViewModels
                 if (SelectedAffixPreset != null)
                 {
                     SelectedRunes.AddRange(SelectedAffixPreset.ItemRunes);
+                }
+            });
+        }
+
+        private void UpdateSelectedTransfigurations()
+        {
+            Application.Current?.Dispatcher.Invoke(() =>
+            {
+                SelectedTransfigurations.Clear();
+                if (SelectedAffixPreset != null)
+                {
+                    SelectedTransfigurations.AddRange(SelectedAffixPreset.ItemTransfigurations);
                 }
             });
         }

@@ -95,6 +95,18 @@ namespace D4Companion.ViewModels.Dialogs
             }
         }
 
+        public Color DefaultColorTransfigured
+        {
+            get => _settingsManager.Settings.DefaultColorTransfigured;
+            set
+            {
+                _settingsManager.Settings.DefaultColorTransfigured = value;
+                OnPropertyChanged(nameof(DefaultColorTransfigured));
+
+                _settingsManager.SaveSettings();
+            }
+        }
+
         public Color DefaultColorAspects
         {
             get => _settingsManager.Settings.DefaultColorAspects;
@@ -161,6 +173,7 @@ namespace D4Companion.ViewModels.Dialogs
                 affixType.Equals("Normal") ? DefaultColorNormal :
                 affixType.Equals("Greater") ? DefaultColorGreater :
                 affixType.Equals("Tempered") ? DefaultColorTempered :
+                affixType.Equals("Transfigured") ? DefaultColorTransfigured :
                 affixType.Equals("Aspects") ? DefaultColorAspects :
                 affixType.Equals("AspectsOffSlot") ? DefaultColorAspectsOffSlot :
                 affixType.Equals("Uniques") ? DefaultColorUniques :
@@ -188,6 +201,9 @@ namespace D4Companion.ViewModels.Dialogs
                     break;
                 case "Tempered":
                     DefaultColorTempered = dataContext.SelectedColor.Value;
+                    break;
+                case "Transfigured":
+                    DefaultColorTransfigured = dataContext.SelectedColor.Value;
                     break;
                 case "Aspects":
                     DefaultColorAspects = dataContext.SelectedColor.Value;

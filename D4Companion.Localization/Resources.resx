@@ -718,6 +718,12 @@
   <data name="rsCapRunes" xml:space="preserve">
     <value>Runes</value>
   </data>
+  <data name="rsCapTransfigured" xml:space="preserve">
+    <value>Transfigured</value>
+  </data>
+  <data name="rsCapTransfigurations" xml:space="preserve">
+    <value>Transfigurations</value>
+  </data>
   <data name="rsTooltipSetRune" xml:space="preserve">
     <value>Set Rune</value>
   </data>
