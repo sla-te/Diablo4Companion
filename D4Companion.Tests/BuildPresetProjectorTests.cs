@@ -228,6 +228,71 @@ namespace D4Companion.Tests
             Assert.That(preset.ItemAffixes.Select(a => a.Id),
                 Is.EqualTo(new[] { "Implicit", "Rank1", "Rank2", "Temper" }));
         }
+        [Test]
+        public void BuildWideTransfiguration_IsProjectedAsAnyType()
+        {
+            var variant = new CanonicalVariant
+            {
+                Name = "Endgame",
+                Transfigurations =
+                {
+                    new CanonicalTransfiguration { Id = "CoreStat_Strength", Slot = string.Empty }
+                }
+            };
+
+            var preset = _projector.Project(variant, "test");
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(preset.ItemTransfigurations, Has.Count.EqualTo(1));
+                Assert.That(preset.ItemTransfigurations[0].IsAnyType, Is.True);
+                Assert.That(preset.ItemTransfigurations[0].IsTransfigured, Is.True);
+                Assert.That(preset.ItemTransfigurations[0].Type, Is.Empty);
+            });
+        }
+
+        [Test]
+        public void ScopedTransfiguration_KeepsItsSlot()
+        {
+            var variant = new CanonicalVariant
+            {
+                Name = "Endgame",
+                Transfigurations =
+                {
+                    new CanonicalTransfiguration
+                    {
+                        Id = "CooldownReductionCDR",
+                        Slot = ItemTypeConstants.WeaponBludgeoning
+                    }
+                }
+            };
+
+            var preset = _projector.Project(variant, "test");
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(preset.ItemTransfigurations[0].IsAnyType, Is.False);
+                Assert.That(preset.ItemTransfigurations[0].Type,
+                    Is.EqualTo(ItemTypeConstants.WeaponBludgeoning));
+            });
+        }
+
+        [Test]
+        public void DuplicateTransfiguration_IsAddedOnce()
+        {
+            var variant = new CanonicalVariant
+            {
+                Name = "Endgame",
+                Transfigurations =
+                {
+                    new CanonicalTransfiguration { Id = "CoreStat_Strength", Slot = string.Empty },
+                    new CanonicalTransfiguration { Id = "CoreStat_Strength", Slot = string.Empty }
+                }
+            };
+
+            Assert.That(_projector.Project(variant, "test").ItemTransfigurations,
+                Has.Count.EqualTo(1));
+        }
     }
 
     /// <summary>

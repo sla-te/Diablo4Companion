@@ -31,5 +31,6 @@ namespace D4Companion.Entities
         public bool IsGreater { get; set; } = false;
         public bool IsImplicit { get; set; } = false;
         public bool IsTempered { get; set; } = false;
+        public bool IsTransfigured { get; set; } = false;
     }
 }

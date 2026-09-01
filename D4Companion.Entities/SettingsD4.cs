@@ -22,6 +22,7 @@ namespace D4Companion.Entities
         public Color DefaultColorImplicit { get; set; } = Colors.Green;
         public Color DefaultColorNormal { get; set; } = Colors.Green;
         public Color DefaultColorTempered { get; set; } = Colors.Green;
+        public Color DefaultColorTransfigured { get; set; } = Colors.Green;
         public Color DefaultColorAspects { get; set; } = Colors.Green;
         // Shown when a build aspect appears on a slot the build does not use. Such an
         // item is still worth picking up to extract at the Occultist, so it highlights,

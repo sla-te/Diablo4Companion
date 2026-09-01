@@ -17,6 +17,27 @@ namespace D4Companion.Entities.Canonical
         public string Name { get; set; } = string.Empty;
         public List<CanonicalItem> Items { get; set; } = new List<CanonicalItem>();
         public List<ParagonBoard> ParagonBoards { get; set; } = new List<ParagonBoard>();
+
+        /// <summary>
+        /// Transfigurations hang off the VARIANT, not off items - the opposite of aspects.
+        /// The guide states them once for the whole build ("Optimal Tranfigurations"), and
+        /// only some carry a slot qualifier. Putting them on items would force the
+        /// all-slots fan-out that CanonicalItem exists to prevent.
+        /// </summary>
+        public List<CanonicalTransfiguration> Transfigurations { get; set; } = new List<CanonicalTransfiguration>();
+    }
+
+    public class CanonicalTransfiguration
+    {
+        /// <summary>
+        /// An AffixInfo IdName once resolved. The Maxroll adapter has no fuzzy-matching
+        /// dependency, so it stashes the raw guide prose here and BuildsManagerMaxroll
+        /// replaces it - the same two-step the D4Builds importer uses for affixes.
+        /// </summary>
+        public string Id { get; set; } = string.Empty;
+
+        /// <summary>An ItemTypeConstants value, or empty when the guide states no slot.</summary>
+        public string Slot { get; set; } = string.Empty;
     }
 
     public class CanonicalItem

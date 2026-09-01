@@ -7,5 +7,6 @@
         public const string Greater = "greater";
         public const string Tempered = "tempered";
         public const string Rune = "rune";
+        public const string Transfigured = "transfigured";
     }
 }

@@ -27,6 +27,8 @@ namespace D4Companion.Services
                 AddRunes(preset, item);
             }
 
+            AddTransfigurations(preset, variant);
+
             SortAffixes(preset);
 
             if (variant.ParagonBoards.Count > 0)
@@ -109,6 +111,25 @@ namespace D4Companion.Services
                     Id = runeId,
                     Type = ItemTypeConstants.Rune,
                     Color = _settingsManager.Settings.DefaultColorRunes
+                });
+            }
+        }
+
+        private void AddTransfigurations(AffixPreset preset, CanonicalVariant variant)
+        {
+            foreach (var transfiguration in variant.Transfigurations)
+            {
+                bool exists = preset.ItemTransfigurations.Any(t =>
+                    t.Id.Equals(transfiguration.Id) && t.Type.Equals(transfiguration.Slot));
+                if (exists) continue;
+
+                preset.ItemTransfigurations.Add(new ItemAffix
+                {
+                    Id = transfiguration.Id,
+                    Type = transfiguration.Slot,
+                    Color = _settingsManager.Settings.DefaultColorTransfigured,
+                    IsAnyType = string.IsNullOrEmpty(transfiguration.Slot),
+                    IsTransfigured = true
                 });
             }
         }
