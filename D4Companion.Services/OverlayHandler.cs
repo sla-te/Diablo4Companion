@@ -254,8 +254,6 @@ namespace D4Companion.Services
             if (_currentTooltip.ItemAffixLocations.Any())
             {
                 var gfx = e.Graphics;
-                int radius = MarkerWidth / 2;
-                int length = MarkerWidth;
 
                 for (int i = 0; i < _currentTooltip.ItemAffixLocations.Count; i++)
                 {
@@ -280,47 +278,8 @@ namespace D4Companion.Services
                                 bool isDungeonSigil = _currentTooltip.ItemType.Contains(ItemTypeConstants.Sigil) && _affixManager.GetSigilType(itemAffix.Item2.Id).Equals("Dungeon");
                                 bool isBelowMinimalValue = _currentTooltip.ItemAffixAreas[i].AffixValue < _currentTooltip.ItemAffixAreas[i].AffixThresholdValue;
 
-                                switch (OverlayMarkResolver.Resolve(itemAffix.Item2, isDungeonSigil, _settingsManager.Settings.IsMinimalAffixValueFilterEnabled, isBelowMinimalValue))
-                                {
-                                    case OverlayMarkKind.SigilDungeon:
-                                        gfx.OutlineFillRectangle(_brushes[Colors.Black.ToString()], _brushes[affixColor.ToString()], left - length / 2, top, left - length / 2 + length, top + length, 2);
-
-                                        if (_settingsManager.Settings.DungeonTiers)
-                                        {
-                                            string tier = _affixManager.GetSigilDungeonTier(itemAffix.Item2.Id);
-                                            SolidBrush GetContrastColor(System.Windows.Media.Color backgroundColor)
-                                            {
-                                                return (backgroundColor.R + backgroundColor.G + backgroundColor.B) / 3 <= 128 ? _brushes["text"] : _brushes["textdark"];
-                                            }
-                                            gfx.DrawText(_fonts["consolasBold"], GetContrastColor(_currentTooltip.ItemAspect.Color), left - length / 4, top, tier);
-                                        }
-                                        break;
-
-                                    case OverlayMarkKind.Rectangle:
-                                        gfx.OutlineFillRectangle(_brushes[Colors.Black.ToString()], _brushes[affixColor.ToString()], left - length / 2, top, left - length / 2 + length, top + length, 1);
-                                        break;
-
-                                    case OverlayMarkKind.Triangle:
-                                        Triangle triangle = new Triangle(left - (length / 2), top + length, left + (length / 2), top + length, left, top);
-                                        gfx.FillTriangle(_brushes[affixColor.ToString()], triangle);
-                                        gfx.DrawTriangle(_brushes[Colors.Black.ToString()], triangle, 2);
-                                        break;
-
-                                    case OverlayMarkKind.TriangleDown:
-                                        // The greater-affix triangle flipped: base along the
-                                        // top, apex below. Shape alone has to separate the two
-                                        // even when a user recolours one of them.
-                                        Triangle triangleDown = new Triangle(left - (length / 2), top, left + (length / 2), top, left, top + length);
-                                        gfx.FillTriangle(_brushes[affixColor.ToString()], triangleDown);
-                                        gfx.DrawTriangle(_brushes[Colors.Black.ToString()], triangleDown, 2);
-                                        break;
-
-                                    default:
-                                        gfx.OutlineFillCircle(_brushes[Colors.Black.ToString()], _brushes[affixColor.ToString()], left, top + (itemAffixLocation.Location.Height / 2), radius, 2);
-                                        break;
-                                }
-
-                                DrawStatPriority(gfx, itemAffix.Item2, affixColor, left, top, itemAffixLocation.Location.Height);
+                                DrawAffixMark(gfx, itemAffix.Item2, affixColor, left, top,
+                                    itemAffixLocation.Location.Height, isDungeonSigil, isBelowMinimalValue);
                             }
                         }
                     }
@@ -343,8 +302,6 @@ namespace D4Companion.Services
             if (_currentTooltip.ItemAffixLocations.Any())
             {
                 var gfx = e.Graphics;
-                int radius = MarkerWidth / 2;
-                int length = MarkerWidth;
 
                 for (int i = 0; i < _currentTooltip.ItemAffixLocations.Count; i++)
                 {
@@ -369,47 +326,8 @@ namespace D4Companion.Services
                                 bool isDungeonSigil = _currentTooltip.ItemType.Contains(ItemTypeConstants.Sigil) && _affixManager.GetSigilType(itemAffix.Item2.Id).Equals("Dungeon");
                                 bool isBelowMinimalValue = _currentTooltip.ItemAffixAreas[i].AffixValue < _currentTooltip.ItemAffixAreas[i].AffixThresholdValue;
 
-                                switch (OverlayMarkResolver.Resolve(itemAffix.Item2, isDungeonSigil, _settingsManager.Settings.IsMinimalAffixValueFilterEnabled, isBelowMinimalValue))
-                                {
-                                    case OverlayMarkKind.SigilDungeon:
-                                        gfx.OutlineFillRectangle(_brushes[Colors.Black.ToString()], _brushes[affixColor.ToString()], left - length / 2, top, left - length / 2 + length, top + length, 2);
-
-                                        if (_settingsManager.Settings.DungeonTiers)
-                                        {
-                                            string tier = _affixManager.GetSigilDungeonTier(itemAffix.Item2.Id);
-                                            SolidBrush GetContrastColor(System.Windows.Media.Color backgroundColor)
-                                            {
-                                                return (backgroundColor.R + backgroundColor.G + backgroundColor.B) / 3 <= 128 ? _brushes["text"] : _brushes["textdark"];
-                                            }
-                                            gfx.DrawText(_fonts["consolasBold"], GetContrastColor(affixColor), left - length / 4, top, tier);
-                                        }
-                                        break;
-
-                                    case OverlayMarkKind.Rectangle:
-                                        gfx.OutlineFillRectangle(_brushes[Colors.Black.ToString()], _brushes[affixColor.ToString()], left - length / 2, top, left - length / 2 + length, top + length, 1);
-                                        break;
-
-                                    case OverlayMarkKind.Triangle:
-                                        Triangle triangle = new Triangle(left - (length / 2), top + length, left + (length / 2), top + length, left, top);
-                                        gfx.FillTriangle(_brushes[affixColor.ToString()], triangle);
-                                        gfx.DrawTriangle(_brushes[Colors.Black.ToString()], triangle, 2);
-                                        break;
-
-                                    case OverlayMarkKind.TriangleDown:
-                                        // The greater-affix triangle flipped: base along the
-                                        // top, apex below. Shape alone has to separate the two
-                                        // even when a user recolours one of them.
-                                        Triangle triangleDown = new Triangle(left - (length / 2), top, left + (length / 2), top, left, top + length);
-                                        gfx.FillTriangle(_brushes[affixColor.ToString()], triangleDown);
-                                        gfx.DrawTriangle(_brushes[Colors.Black.ToString()], triangleDown, 2);
-                                        break;
-
-                                    default:
-                                        gfx.OutlineFillCircle(_brushes[Colors.Black.ToString()], _brushes[affixColor.ToString()], left, top + (itemAffixLocation.Location.Height / 2), radius, 2);
-                                        break;
-                                }
-
-                                DrawStatPriority(gfx, itemAffix.Item2, affixColor, left, top, itemAffixLocation.Location.Height);
+                                DrawAffixMark(gfx, itemAffix.Item2, affixColor, left, top,
+                                    itemAffixLocation.Location.Height, isDungeonSigil, isBelowMinimalValue);
                             }
                         }
                     }
@@ -1233,6 +1151,62 @@ namespace D4Companion.Services
         // into empty tooltip margin.
         private const int RankDigitWidth = 9;
         private const int RankDigitHeight = 11;
+
+        /// <summary>
+        /// One affix mark, drawn identically by both overlay passes.
+        ///
+        /// OverlayMarkResolver already shares the DECISION about which shape to draw. The
+        /// drawing itself stayed duplicated across DrawGraphicsAffixes and its Multi twin,
+        /// and had already drifted: the primary pass computed the dungeon-tier digit's
+        /// contrast from the item's ASPECT colour rather than the mark the digit sits in,
+        /// so the digit could come out black on black. This keeps them in step by
+        /// construction, the way OverlayMarkKind's own comment asks for.
+        /// </summary>
+        private void DrawAffixMark(Graphics gfx, ItemAffix itemAffix, System.Windows.Media.Color affixColor,
+            float left, float top, int affixHeight, bool isDungeonSigil, bool isBelowMinimalValue)
+        {
+            int length = MarkerWidth;
+            int radius = MarkerWidth / 2;
+
+            switch (OverlayMarkResolver.Resolve(itemAffix, isDungeonSigil,
+                _settingsManager.Settings.IsMinimalAffixValueFilterEnabled, isBelowMinimalValue))
+            {
+                case OverlayMarkKind.SigilDungeon:
+                    gfx.OutlineFillRectangle(_brushes[Colors.Black.ToString()], _brushes[affixColor.ToString()], left - length / 2, top, left - length / 2 + length, top + length, 2);
+
+                    if (_settingsManager.Settings.DungeonTiers)
+                    {
+                        string tier = _affixManager.GetSigilDungeonTier(itemAffix.Id);
+                        var tierBrush = (affixColor.R + affixColor.G + affixColor.B) / 3 <= 128 ? _brushes["text"] : _brushes["textdark"];
+                        gfx.DrawText(_fonts["consolasBold"], tierBrush, left - length / 4, top, tier);
+                    }
+                    break;
+
+                case OverlayMarkKind.Rectangle:
+                    gfx.OutlineFillRectangle(_brushes[Colors.Black.ToString()], _brushes[affixColor.ToString()], left - length / 2, top, left - length / 2 + length, top + length, 1);
+                    break;
+
+                case OverlayMarkKind.Triangle:
+                    Triangle triangle = new Triangle(left - (length / 2), top + length, left + (length / 2), top + length, left, top);
+                    gfx.FillTriangle(_brushes[affixColor.ToString()], triangle);
+                    gfx.DrawTriangle(_brushes[Colors.Black.ToString()], triangle, 2);
+                    break;
+
+                case OverlayMarkKind.TriangleDown:
+                    // The greater-affix triangle flipped: base along the top, apex below.
+                    // Shape alone has to separate the two even when a user recolours one.
+                    Triangle triangleDown = new Triangle(left - (length / 2), top, left + (length / 2), top, left, top + length);
+                    gfx.FillTriangle(_brushes[affixColor.ToString()], triangleDown);
+                    gfx.DrawTriangle(_brushes[Colors.Black.ToString()], triangleDown, 2);
+                    break;
+
+                default:
+                    gfx.OutlineFillCircle(_brushes[Colors.Black.ToString()], _brushes[affixColor.ToString()], left, top + (affixHeight / 2), radius, 2);
+                    break;
+            }
+
+            DrawStatPriority(gfx, itemAffix, affixColor, left, top, affixHeight);
+        }
 
         private void DrawStatPriority(Graphics gfx, ItemAffix itemAffix, System.Windows.Media.Color affixColor, float left, float top, int affixHeight)
         {
