@@ -1878,11 +1878,8 @@ namespace D4Companion.Services
                         // IsTypeMatch, not Type.Equals: a Barbarian Arsenal weapon is detected as
                         // a subtype (weapon_bludgeoning and friends) while an existing preset
                         // entry is typed plain "weapon". Exact equality would never match those.
-                        // Same order as GetAffix: a confirmed transfigured area first, then
-                        // the slot ladder, then the transfiguration list as the fallback.
-                        var affix = affixTypeArea.Equals(Constants.AffixTypeConstants.Transfigured)
-                            ? AffixManager.FindTransfiguration(preset, currentItemAffix.Item2.Id, _currentTooltip.ItemType)
-                            : null;
+                        // Same order as ResolveAffix: transfiguration list, then the slot.
+                        var affix = AffixManager.FindTransfiguration(preset, currentItemAffix.Item2.Id, _currentTooltip.ItemType);
                         affix ??= preset.ItemAffixes.FirstOrDefault(a => a.Id.Equals(currentItemAffix.Item2.Id) && AffixManager.IsTypeMatch(a.Type, _currentTooltip.ItemType) && a.IsImplicit == isImplicitArea && a.IsTempered == isTemperedArea);
                         if (affix == null)
                         {
@@ -1892,8 +1889,6 @@ namespace D4Companion.Services
                             // mask a later any-type one.
                             affix = preset.ItemAffixes.FirstOrDefault(a => a.Id.Equals(currentItemAffix.Item2.Id) && a.IsAnyType);
                         }
-
-                        affix ??= AffixManager.FindTransfiguration(preset, currentItemAffix.Item2.Id, _currentTooltip.ItemType);
 
                         if (affix != null)
                         {

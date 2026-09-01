@@ -555,26 +555,27 @@ namespace D4Companion.Services
 
         /// <summary>
         /// Which preset entry, if any, an OCR'd affix matches. Static and preset-taking so
-        /// the three-step precedence can be asserted without standing up an AffixManager:
+        /// the precedence can be asserted without standing up an AffixManager:
         ///
-        /// 1. A tooltip area the marker classified as transfigured, matched against the
-        ///    transfiguration list. That is confirmation, and it outranks the slot.
+        /// 1. The transfiguration list.
         /// 2. The slot's own ItemAffixes entry, exact type then any-type.
-        /// 3. The transfiguration list again, as the fallback.
         ///
-        /// Step 3 comes LAST on purpose. A guide's transfiguration list covers broad stats -
-        /// Strength, All Stats, Critical Strike Chance - that most slots already rank. Put
-        /// first, it would repaint those with its own build-wide colour and overwrite every
-        /// per-slot 1-N ranking. Put last, it only speaks for stats the slot does not list,
-        /// which is exactly where an untransfigured wanted stat read as unwanted red.
+        /// The transfiguration list comes FIRST and deliberately ignores the tooltip's own
+        /// affix type. Two narrower orderings were tried in game and both left the list
+        /// invisible. Gating on the transfigured marker hid it on the item most worth
+        /// flagging, the one carrying the stat UNtransfigured. Checking the slot first hid
+        /// it everywhere else: the stats a guide lists for transfiguring are broad ones -
+        /// Strength, All Stats, Critical Strike Chance - that the slot list already ranks,
+        /// so the slot entry answered every time and the mark came out gold.
+        ///
+        /// The cost is accepted rather than overlooked. Where a stat sits on both lists the
+        /// mark shows the transfiguration and its guide-order number instead of the slot's
+        /// own ranking; removing that entry in the preset editor is the per-stat opt out.
         /// </summary>
         public static ItemAffix? ResolveAffix(AffixPreset preset, string affixId, string affixType, string itemType)
         {
-            if (affixType.Equals(Constants.AffixTypeConstants.Transfigured))
-            {
-                var confirmed = FindTransfiguration(preset, affixId, itemType);
-                if (confirmed != null) return confirmed;
-            }
+            var transfiguration = FindTransfiguration(preset, affixId, itemType);
+            if (transfiguration != null) return transfiguration;
 
             bool isGreater = affixType.Equals(Constants.AffixTypeConstants.Greater);
             bool isImplicit = affixType.Equals(Constants.AffixTypeConstants.Implicit);
@@ -593,7 +594,7 @@ namespace D4Companion.Services
                 affix = preset.ItemAffixes.FirstOrDefault(a => a.Id.Equals(affixId) && a.IsAnyType);
             }
 
-            return affix ?? FindTransfiguration(preset, affixId, itemType);
+            return affix;
         }
 
         /// <summary>

@@ -117,17 +117,42 @@ namespace D4Companion.Tests
             Assert.That(match!.Rank, Is.EqualTo(7));
         }
 
-        [Test]
-        public void SlotEntry_OutranksTheTransfigurationList()
+        [TestCase(AffixTypeConstants.Normal)]
+        [TestCase(AffixTypeConstants.Greater)]
+        [TestCase(AffixTypeConstants.Transfigured)]
+        public void TransfigurationList_OutranksTheSlotEntry(string affixType)
         {
-            // Broad stats like Strength are both slot-ranked and transfiguration-listed.
-            // If the list won, it would repaint them with its build-wide colour and replace
-            // the slot's own ranking - here, showing 7 where the amulet says 2.
+            // Regression guard for the ordering that shipped broken. Broad stats like
+            // Strength sit on BOTH lists, so checking the slot first meant the slot answered
+            // every time: in game the mark came out as a gold greater-affix triangle and the
+            // transfiguration was never visible on any item that had one.
             var preset = PresetWith(BuildWide("strength"));
             preset.ItemTransfigurations[0].Rank = 7;
-            preset.ItemAffixes.Add(new ItemAffix { Id = "strength", Type = ItemTypeConstants.Amulet, Rank = 2 });
+            preset.ItemAffixes.Add(new ItemAffix
+            {
+                Id = "strength",
+                Type = ItemTypeConstants.Amulet,
+                Rank = 2,
+                IsGreater = true
+            });
 
-            var match = AffixManager.ResolveAffix(preset, "strength",
+            var match = AffixManager.ResolveAffix(preset, "strength", affixType, ItemTypeConstants.Amulet);
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(match!.IsTransfigured, Is.True);
+                Assert.That(match!.Rank, Is.EqualTo(7));
+                Assert.That(match!.IsGreater, Is.False, "the gold greater triangle must not win");
+            });
+        }
+
+        [Test]
+        public void SlotEntry_StillAnswersForAStatNotOnTheList()
+        {
+            var preset = PresetWith(BuildWide("strength"));
+            preset.ItemAffixes.Add(new ItemAffix { Id = "maximum-life", Type = ItemTypeConstants.Amulet, Rank = 2 });
+
+            var match = AffixManager.ResolveAffix(preset, "maximum-life",
                 AffixTypeConstants.Normal, ItemTypeConstants.Amulet);
 
             Assert.Multiple(() =>
@@ -135,20 +160,6 @@ namespace D4Companion.Tests
                 Assert.That(match!.Rank, Is.EqualTo(2));
                 Assert.That(match!.IsTransfigured, Is.False);
             });
-        }
-
-        [Test]
-        public void ConfirmedTransfiguredArea_OutranksTheSlotEntry()
-        {
-            // The one case where the list wins: the marker says this affix IS transfigured,
-            // which is a fact about the item that the slot list cannot express.
-            var preset = PresetWith(BuildWide("strength"));
-            preset.ItemAffixes.Add(new ItemAffix { Id = "strength", Type = ItemTypeConstants.Amulet, Rank = 2 });
-
-            var match = AffixManager.ResolveAffix(preset, "strength",
-                AffixTypeConstants.Transfigured, ItemTypeConstants.Amulet);
-
-            Assert.That(match!.IsTransfigured, Is.True);
         }
 
         [Test]
