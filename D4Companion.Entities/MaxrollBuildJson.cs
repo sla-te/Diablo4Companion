@@ -44,38 +44,38 @@ namespace D4Companion.Entities
 
         [JsonPropertyName("widgetNotes")]
         public MaxrollWidgetNotesJson? WidgetNotes { get; set; }
+    }
 
-        /// <summary>
-        /// Per-profile guide prose. Only "equipment" is modelled; the other sections
-        /// (skills, paragon, mercenary, warPlans) carry no importable data.
-        /// </summary>
-        public class MaxrollWidgetNotesJson
-        {
-            [JsonPropertyName("equipment")]
-            public MaxrollLexicalNodeJson? Equipment { get; set; }
-        }
+    /// <summary>
+    /// Per-profile guide prose. Only "equipment" is modelled; the other sections
+    /// (skills, paragon, mercenary, warPlans) carry no importable data.
+    /// </summary>
+    public class MaxrollWidgetNotesJson
+    {
+        [JsonPropertyName("equipment")]
+        public MaxrollLexicalNodeJson? Equipment { get; set; }
+    }
 
-        /// <summary>
-        /// The subset of Lexical's node schema this importer reads. Everything else in the
-        /// document (formatting, direction, indent, version, embeds) is ignored.
-        /// </summary>
-        public class MaxrollLexicalNodeJson
-        {
-            [JsonPropertyName("root")]
-            public MaxrollLexicalNodeJson? Root { get; set; }
+    /// <summary>
+    /// The subset of Lexical's node schema this importer reads. Everything else in the
+    /// document (formatting, direction, indent, version, embeds) is ignored.
+    /// </summary>
+    public class MaxrollLexicalNodeJson
+    {
+        [JsonPropertyName("root")]
+        public MaxrollLexicalNodeJson? Root { get; set; }
 
-            [JsonPropertyName("type")]
-            public string Type { get; set; } = string.Empty;
+        [JsonPropertyName("type")]
+        public string Type { get; set; } = string.Empty;
 
-            [JsonPropertyName("tag")]
-            public string Tag { get; set; } = string.Empty;
+        [JsonPropertyName("tag")]
+        public string Tag { get; set; } = string.Empty;
 
-            [JsonPropertyName("text")]
-            public string Text { get; set; } = string.Empty;
+        [JsonPropertyName("text")]
+        public string Text { get; set; } = string.Empty;
 
-            [JsonPropertyName("children")]
-            public List<MaxrollLexicalNodeJson> Children { get; set; } = [];
-        }
+        [JsonPropertyName("children")]
+        public List<MaxrollLexicalNodeJson> Children { get; set; } = [];
     }
 
     public class MaxrollBuildDataItemJson
