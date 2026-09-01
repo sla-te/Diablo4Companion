@@ -6,6 +6,8 @@ using D4Companion.Interfaces;
 using D4Companion.Services;
 using FuzzierSharp;
 using FuzzierSharp.SimilarityRatio;
+using FuzzierSharp.SimilarityRatio.Scorer;
+using FuzzierSharp.SimilarityRatio.Scorer.Composite;
 using FuzzierSharp.SimilarityRatio.Scorer.StrategySensitive;
 using Microsoft.Extensions.Logging.Abstractions;
 
@@ -85,19 +87,13 @@ namespace D4Companion.Tests
     }
 
     /// <summary>
-    /// Pins where BuildsManagerMaxroll.TransfigurationMatchFloor has to sit. The floor is the
-    /// one deliberate divergence from the D4Builds importer, which takes ExtractOne's best
-    /// match unconditionally, so it needs a guard of its own: this reruns the same corpus and
-    /// scorer the resolver uses and pins both ends of the gap the floor lives in.
+    /// Pins where BuildsManagerMaxroll.TransfigurationMatchFloor has to sit, and why the
+    /// resolver keeps DefaultRatioScorer. The floor is the one deliberate divergence from the
+    /// D4Builds importer, which takes ExtractOne's best match unconditionally, so it gets a
+    /// guard of its own rather than being covered only indirectly by the fixture.
     ///
-    /// The gap is narrow because the guide names the stat, not the affix. DefaultRatioScorer
-    /// is a plain length-sensitive ratio, so "Cooldown" against "Cooldown Reduction" - the
-    /// correct answer - scores 62, against 94 to 100 for the stats that hit an affix
-    /// description verbatim. Any floor tight enough to look comfortable drops it.
-    ///
-    /// The floor is a filter, not a proof. A short phrase can tie 62 by accident ("Any of the
-    /// below" does), and no threshold separates a tie. What the floor buys is that sentences,
-    /// which is what non-stat guide prose actually looks like, score 56 and below.
+    /// Every number in the TransfigurationMatchFloor comment is asserted here. Change either
+    /// place and this class fails.
     /// </summary>
     public class TransfigurationMatchFloorTests
     {
@@ -114,7 +110,7 @@ namespace D4Companion.Tests
             "All Stats"
         ];
 
-        // Prose a guide's transfiguration section can plausibly carry that names no affix.
+        // Sentence-shaped prose - what a guide note that names no affix actually looks like.
         private static readonly string[] NonAffixProse =
         [
             "See the video guide linked above",
@@ -124,6 +120,17 @@ namespace D4Companion.Tests
             "Note: prioritise Greater Affixes",
             "Check the Maxroll planner",
             "Aspect of the Umbral"
+        ];
+
+        // Short phrases that name no affix and that the floor does NOT reject. Kept as a
+        // test, not a bug: the point is that this limit is measured and known, so the next
+        // reader does not mistake the floor for a proof of affix-hood.
+        private static readonly string[] ShortPhrasesTheFloorCannotReject =
+        [
+            "Two-Handed",
+            "Skills",
+            "Any of the below",
+            "Endgame"
         ];
 
         private List<string> _affixDescriptions = null!;
@@ -146,6 +153,9 @@ namespace D4Companion.Tests
         private int BestScore(string prose)
             => Process.ExtractOne(prose, _affixDescriptions, scorer: ScorerCache.Get<DefaultRatioScorer>()).Score;
 
+        private string BestMatch<TScorer>(string prose) where TScorer : IRatioScorer, new()
+            => Process.ExtractOne(prose, _affixDescriptions, scorer: ScorerCache.Get<TScorer>()).Value;
+
         [Test]
         public void EveryFixtureStat_ScoresAtOrAboveTheFloor()
         {
@@ -156,12 +166,57 @@ namespace D4Companion.Tests
         }
 
         [Test]
-        public void NonAffixProse_ScoresBelowTheFloor()
+        public void SentenceShapedProse_ScoresBelowTheFloor()
         {
             foreach (string prose in NonAffixProse)
             {
                 Assert.That(BestScore(prose), Is.LessThan(Floor), $"prose: {prose}");
             }
+        }
+
+        [Test]
+        public void TheGapIsSixPointsWide_MeasuredNotAssumed()
+        {
+            // Worst real stat and best sentence-shaped junk. The floor sits between them, and
+            // both ends are only 6 points apart, which is the whole reason the floor is 60
+            // rather than anything that looks safer.
+            Assert.Multiple(() =>
+            {
+                Assert.That(FixtureStats.Min(BestScore), Is.EqualTo(62), "worst real stat");
+                Assert.That(NonAffixProse.Max(BestScore), Is.EqualTo(56), "best sentence-shaped junk");
+            });
+        }
+
+        [Test]
+        public void ShortNonStatPhrases_ClearTheFloor_WhichIsTheKnownLimit()
+        {
+            // These score at or above the correct "Cooldown" match, so no threshold separates
+            // them. Rejecting them needs a different mechanism than a score floor.
+            foreach (string prose in ShortPhrasesTheFloorCannotReject)
+            {
+                Assert.That(BestScore(prose), Is.GreaterThanOrEqualTo(Floor), $"prose: {prose}");
+            }
+        }
+
+        [Test]
+        public void SubstringTolerantScorers_ResolveCooldownToTheWrongAffix()
+        {
+            // The reason the resolver keeps DefaultRatioScorer despite the narrow gap. Every
+            // substring-tolerant scorer scores a skill-prefixed variant perfectly, because it
+            // contains the whole search string - a confident wrong match, which is exactly
+            // what the floor exists to prevent. Higher scores, worse answers.
+            Assert.Multiple(() =>
+            {
+                Assert.That(BestMatch<DefaultRatioScorer>("Cooldown"), Is.EqualTo("Cooldown Reduction"));
+                Assert.That(BestMatch<WeightedRatioScorer>("Cooldown"), Is.Not.EqualTo("Cooldown Reduction"));
+                Assert.That(BestMatch<TokenSetScorer>("Cooldown"), Is.Not.EqualTo("Cooldown Reduction"));
+                Assert.That(BestMatch<PartialRatioScorer>("Cooldown"), Is.Not.EqualTo("Cooldown Reduction"));
+
+                // And they degrade the other abbreviated entry too.
+                Assert.That(BestMatch<DefaultRatioScorer>("% Physical Damage"), Is.EqualTo("Physical Damage"));
+                Assert.That(BestMatch<WeightedRatioScorer>("% Physical Damage"), Is.EqualTo("Non-Physical Damage"));
+                Assert.That(BestMatch<TokenSetScorer>("% Physical Damage"), Is.EqualTo("Damage"));
+            });
         }
     }
 

@@ -53,12 +53,35 @@ namespace D4Companion.Services
         // guaranteed to name an affix at all. So unlike BuildsManagerD4Builds, which takes
         // ExtractOne's best match unconditionally, an entry below this score is dropped.
         //
-        // 60, not something more comfortable, because the guide names the stat and not the
-        // affix. DefaultRatioScorer is a plain length-sensitive ratio, so the correct answer
-        // for "Cooldown" - the affix "Cooldown Reduction" - scores only 62, while a stat that
-        // happens to be an affix description verbatim scores 100. 60 is the widest rejection
-        // margin that still keeps the abbreviated case. Non-stat guide prose measures 56 and
-        // below. TransfigurationMatchFloorTests pins both ends of that gap.
+        // The floor is low because the guide names the stat while the corpus holds a
+        // description: "Cooldown" against the affix "Cooldown Reduction". DefaultRatioScorer
+        // charges a length penalty for the missing word, so the CORRECT answer scores 62,
+        // against 94-100 for the five fixture stats that hit a description verbatim.
+        //
+        // The obvious response is to swap in a substring-tolerant scorer. Measured against
+        // this corpus, every one of them resolves "Cooldown" to the WRONG affix, because a
+        // skill-prefixed variant contains the whole search string and therefore scores
+        // perfectly too:
+        //
+        //   scorer                   "Cooldown" resolves to        "% Physical Damage" -> to
+        //   DefaultRatioScorer       Cooldown Reduction      62    Physical Damage       94
+        //   TokenSortScorer          Cooldown Reduction      62    Physical Damage      100
+        //   WeightedRatioScorer      Imbuement Cooldown Red. 90    Non-Physical Damage   95
+        //   TokenSetScorer           Imbuement Cooldown Red. 100   Damage               100
+        //   PartialRatioScorer       Imbuement Cooldown Red. 100   Damage               100
+        //   TokenAbbreviationScorer  Imbuement Cooldown Red. 100   Damage               100
+        //
+        // So the higher scores buy nothing: they raise junk and real stats together while
+        // destroying the match itself. DefaultRatioScorer stays, which is also what the other
+        // importers use for affix text (BuildsManagerD4Builds.cs:419).
+        //
+        // Measured gap at 60, and it is not a clean one. Sentence-shaped prose - what a guide
+        // note actually looks like - tops out at 56 ("Use whatever you have available"), so
+        // the floor clears that by 4 and clears the correct "Cooldown" by 2. Short phrases do
+        // NOT separate: "Two-Handed" scores 67 and "Any of the below" 62, at or above the
+        // real stat. No threshold splits those, under any scorer above. The floor is a filter
+        // against prose, not a proof of affix-hood. TransfigurationMatchFloorTests pins every
+        // number in this comment.
         private const int TransfigurationMatchFloor = 60;
 
         // Start of Constructors region
