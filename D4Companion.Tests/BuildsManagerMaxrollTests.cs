@@ -1,7 +1,12 @@
 using System.Text.Json;
+using D4Companion.Constants;
 using D4Companion.Entities;
+using D4Companion.Helpers;
 using D4Companion.Interfaces;
 using D4Companion.Services;
+using FuzzierSharp;
+using FuzzierSharp.SimilarityRatio;
+using FuzzierSharp.SimilarityRatio.Scorer.StrategySensitive;
 using Microsoft.Extensions.Logging.Abstractions;
 
 namespace D4Companion.Tests
@@ -15,8 +20,7 @@ namespace D4Companion.Tests
     /// </summary>
     public class BuildsManagerMaxrollTests
     {
-        [Test]
-        public void CreatePresetFromMaxrollBuild_MidgameVariant_ProducesEightAspectsNotEighty()
+        private static AffixPreset CreatePreset(string profileName)
         {
             string json = File.ReadAllText(@".\Fixtures\ce9zox0y.json");
             var outer = JsonSerializer.Deserialize<MaxrollBuildJson>(json)!;
@@ -35,10 +39,129 @@ namespace D4Companion.Tests
                 new HttpClientHandlerStub(),
                 settingsManager);
 
-            buildsManager.CreatePresetFromMaxrollBuild(maxrollBuild, "Midgame", "Midgame");
+            buildsManager.CreatePresetFromMaxrollBuild(maxrollBuild, profileName, profileName);
 
             Assert.That(affixManager.AddedPreset, Is.Not.Null);
-            Assert.That(affixManager.AddedPreset!.ItemAspects, Has.Count.EqualTo(8));
+            return affixManager.AddedPreset!;
+        }
+
+        [Test]
+        public void CreatePresetFromMaxrollBuild_MidgameVariant_ProducesEightAspectsNotEighty()
+        {
+            Assert.That(CreatePreset("Midgame").ItemAspects, Has.Count.EqualTo(8));
+        }
+
+        [Test]
+        public void EndgamePreset_ContainsResolvedTransfigurations()
+        {
+            var preset = CreatePreset("Endgame");
+
+            Assert.That(preset.ItemTransfigurations, Is.Not.Empty);
+            Assert.That(preset.ItemTransfigurations.Select(t => t.Id),
+                Has.No.Member("Critical Strike Chance"),
+                "raw prose must be replaced by an affix IdName");
+        }
+
+        [Test]
+        public void CooldownTransfiguration_IsScopedToTwoHandedWeapons()
+        {
+            var scoped = CreatePreset("Endgame").ItemTransfigurations
+                .Where(t => !t.IsAnyType)
+                .Select(t => t.Type)
+                .ToList();
+
+            Assert.That(scoped, Is.EquivalentTo(new[]
+            {
+                ItemTypeConstants.WeaponBludgeoning,
+                ItemTypeConstants.WeaponSlicing
+            }));
+        }
+
+        [Test]
+        public void StarterPreset_HasNoTransfigurations()
+        {
+            Assert.That(CreatePreset("Starter").ItemTransfigurations, Is.Empty);
+        }
+    }
+
+    /// <summary>
+    /// Pins where BuildsManagerMaxroll.TransfigurationMatchFloor has to sit. The floor is the
+    /// one deliberate divergence from the D4Builds importer, which takes ExtractOne's best
+    /// match unconditionally, so it needs a guard of its own: this reruns the same corpus and
+    /// scorer the resolver uses and pins both ends of the gap the floor lives in.
+    ///
+    /// The gap is narrow because the guide names the stat, not the affix. DefaultRatioScorer
+    /// is a plain length-sensitive ratio, so "Cooldown" against "Cooldown Reduction" - the
+    /// correct answer - scores 62, against 94 to 100 for the stats that hit an affix
+    /// description verbatim. Any floor tight enough to look comfortable drops it.
+    ///
+    /// The floor is a filter, not a proof. A short phrase can tie 62 by accident ("Any of the
+    /// below" does), and no threshold separates a tie. What the floor buys is that sentences,
+    /// which is what non-stat guide prose actually looks like, score 56 and below.
+    /// </summary>
+    public class TransfigurationMatchFloorTests
+    {
+        // Keep in sync with BuildsManagerMaxroll.TransfigurationMatchFloor.
+        private const int Floor = 60;
+
+        private static readonly string[] FixtureStats =
+        [
+            "% Physical Damage",
+            "Cooldown",
+            "Critical Strike Chance",
+            "Attack Speed",
+            "Strength",
+            "All Stats"
+        ];
+
+        // Prose a guide's transfiguration section can plausibly carry that names no affix.
+        private static readonly string[] NonAffixProse =
+        [
+            "See the video guide linked above",
+            "Use whatever you have available",
+            "Optimal Tranfigurations",
+            "Watch the video for more details",
+            "Note: prioritise Greater Affixes",
+            "Check the Maxroll planner",
+            "Aspect of the Umbral"
+        ];
+
+        private List<string> _affixDescriptions = null!;
+
+        [OneTimeSetUp]
+        public void OneTimeSetUp()
+        {
+            var options = new JsonSerializerOptions { WriteIndented = true };
+            options.Converters.Add(new BoolConverter());
+            options.Converters.Add(new IntConverter());
+
+            using FileStream stream = File.OpenRead(@".\Data\Affixes.enUS.json");
+            var affixes = JsonSerializer.Deserialize<List<AffixInfo>>(stream, options)!;
+
+            _affixDescriptions = affixes.Select(affix => affix.DescriptionClean.Contains(")")
+                ? affix.DescriptionClean.Split(['(', ')'], StringSplitOptions.RemoveEmptyEntries)[0]
+                : affix.DescriptionClean).ToList();
+        }
+
+        private int BestScore(string prose)
+            => Process.ExtractOne(prose, _affixDescriptions, scorer: ScorerCache.Get<DefaultRatioScorer>()).Score;
+
+        [Test]
+        public void EveryFixtureStat_ScoresAtOrAboveTheFloor()
+        {
+            foreach (string stat in FixtureStats)
+            {
+                Assert.That(BestScore(stat), Is.GreaterThanOrEqualTo(Floor), $"stat: {stat}");
+            }
+        }
+
+        [Test]
+        public void NonAffixProse_ScoresBelowTheFloor()
+        {
+            foreach (string prose in NonAffixProse)
+            {
+                Assert.That(BestScore(prose), Is.LessThan(Floor), $"prose: {prose}");
+            }
         }
     }
 

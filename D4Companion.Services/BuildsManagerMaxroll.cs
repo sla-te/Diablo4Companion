@@ -1,9 +1,13 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
 using D4Companion.Entities;
 using D4Companion.Entities.Canonical;
+using D4Companion.Helpers;
 using D4Companion.Interfaces;
 using D4Companion.Messages;
 using D4Companion.Services.BuildAdapters;
+using FuzzierSharp;
+using FuzzierSharp.SimilarityRatio;
+using FuzzierSharp.SimilarityRatio.Scorer.StrategySensitive;
 using Microsoft.Extensions.Logging;
 using System.IO;
 using System.Reflection;
@@ -23,6 +27,40 @@ namespace D4Companion.Services
         private List<MaxrollBuild> _maxrollBuilds = new();
         private Dictionary<int, int> _maxrollMappingsAspects = new();
 
+        private List<string> _affixDescriptions = new List<string>();
+        private Dictionary<string, string> _affixMapDescriptionToId = new Dictionary<string, string>();
+
+        // Guide scope phrases to item types. Deliberately explicit: an unrecognised phrase
+        // degrades to build-wide and warns rather than guessing a slot.
+        //
+        // "2-Handed Weapons" maps to both Arsenal two-handers. A scanned tooltip carries no
+        // Arsenal suffix outside English Barbarian data, and AffixManager.IsTypeMatch is
+        // what bridges a plain "weapon" tooltip to these subtypes - do not try to fix that
+        // here by also emitting ItemTypeConstants.Weapon.
+        private static readonly Dictionary<string, string[]> TransfigurationScopes =
+            new(StringComparer.OrdinalIgnoreCase)
+            {
+                ["2-Handed Weapons"] = [Constants.ItemTypeConstants.WeaponBludgeoning, Constants.ItemTypeConstants.WeaponSlicing],
+                ["2-Handed Weapon"] = [Constants.ItemTypeConstants.WeaponBludgeoning, Constants.ItemTypeConstants.WeaponSlicing],
+                ["Amulet"] = [Constants.ItemTypeConstants.Amulet],
+                ["Boots"] = [Constants.ItemTypeConstants.Boots],
+                ["Rings"] = [Constants.ItemTypeConstants.Ring],
+                ["Ring"] = [Constants.ItemTypeConstants.Ring]
+            };
+
+        // A confident wrong match is worse than no match: these are a handful of prose strings
+        // run against the whole affix corpus, and unlike scraped affix text they are not
+        // guaranteed to name an affix at all. So unlike BuildsManagerD4Builds, which takes
+        // ExtractOne's best match unconditionally, an entry below this score is dropped.
+        //
+        // 60, not something more comfortable, because the guide names the stat and not the
+        // affix. DefaultRatioScorer is a plain length-sensitive ratio, so the correct answer
+        // for "Cooldown" - the affix "Cooldown Reduction" - scores only 62, while a stat that
+        // happens to be an affix description verbatim scores 100. 60 is the widest rejection
+        // margin that still keeps the abbreviated case. Non-stat guide prose measures 56 and
+        // below. TransfigurationMatchFloorTests pins both ends of that gap.
+        private const int TransfigurationMatchFloor = 60;
+
         // Start of Constructors region
 
         #region Constructors
@@ -35,6 +73,9 @@ namespace D4Companion.Services
             _httpClientHandler = httpClientHandler;
             _logger = logger;
             _settingsManager = settingsManager;
+
+            // Init data
+            InitAffixData();
 
             // Load available Maxroll builds.
             Task.Factory.StartNew(() =>
@@ -68,6 +109,96 @@ namespace D4Companion.Services
         // Start of Methods region
 
         #region Methods
+
+        /// <summary>
+        /// Loads the affix corpus and the two lookups FuzzierSharp needs to turn guide prose
+        /// into an AffixInfo.IdName. Everything else in this class resolves affixes by sno,
+        /// which the transfiguration list cannot use: it is written prose, not planner data.
+        /// </summary>
+        private void InitAffixData()
+        {
+            var affixes = new List<AffixInfo>();
+            string resourcePath = @".\Data\Affixes.enUS.json";
+            using (FileStream? stream = File.OpenRead(resourcePath))
+            {
+                if (stream != null)
+                {
+                    // create the options
+                    var options = new JsonSerializerOptions()
+                    {
+                        WriteIndented = true
+                    };
+                    // register the converter
+                    options.Converters.Add(new BoolConverter());
+                    options.Converters.Add(new IntConverter());
+
+                    affixes = JsonSerializer.Deserialize<List<AffixInfo>>(stream, options) ?? new List<AffixInfo>();
+                }
+            }
+
+            // Remove class restrictions from the description. The guide prose does not carry them.
+            static string MatchKey(AffixInfo affix) => affix.DescriptionClean.Contains(")")
+                ? affix.DescriptionClean.Split(new char[] { '(', ')' }, StringSplitOptions.RemoveEmptyEntries)[0]
+                : affix.DescriptionClean;
+
+            // Create affix description list for FuzzierSharp
+            _affixDescriptions = affixes.Select(MatchKey).ToList();
+
+            // Create dictionary to map affix description with affix id
+            _affixMapDescriptionToId = affixes.ToDictionary(MatchKey, affix => affix.IdName);
+        }
+
+        /// <summary>
+        /// Replaces the raw guide prose the adapter stashed on each transfiguration with a
+        /// real AffixInfo.IdName and a real item type. An entry that matches no affix well
+        /// enough is dropped and warned about; an entry with an unrecognised scope phrase
+        /// stays but goes build-wide.
+        /// </summary>
+        private void ResolveTransfigurations(CanonicalVariant variant)
+        {
+            var resolved = new List<CanonicalTransfiguration>();
+
+            foreach (var transfiguration in variant.Transfigurations)
+            {
+                var match = Process.ExtractOne(transfiguration.Id, _affixDescriptions, scorer: ScorerCache.Get<DefaultRatioScorer>());
+
+                if (match is null || match.Score < TransfigurationMatchFloor)
+                {
+                    _logger.LogWarning($"{MethodBase.GetCurrentMethod()?.Name}: Unmatched transfiguration: {transfiguration.Id}");
+                    WeakReferenceMessenger.Default.Send(new WarningOccurredMessage(new WarningOccurredMessageParams
+                    {
+                        Message = $"Imported Maxroll build lists a transfiguration that matched no affix: {transfiguration.Id}."
+                    }));
+                    continue;
+                }
+
+                string affixId = _affixMapDescriptionToId[match.Value];
+
+                if (string.IsNullOrEmpty(transfiguration.Slot))
+                {
+                    resolved.Add(new CanonicalTransfiguration { Id = affixId, Slot = string.Empty });
+                    continue;
+                }
+
+                if (!TransfigurationScopes.TryGetValue(transfiguration.Slot, out var slots))
+                {
+                    _logger.LogWarning($"{MethodBase.GetCurrentMethod()?.Name}: Unknown transfiguration scope: {transfiguration.Slot}");
+                    WeakReferenceMessenger.Default.Send(new WarningOccurredMessage(new WarningOccurredMessageParams
+                    {
+                        Message = $"Imported Maxroll build uses an unrecognised transfiguration scope: {transfiguration.Slot}. Treating it as build-wide."
+                    }));
+                    resolved.Add(new CanonicalTransfiguration { Id = affixId, Slot = string.Empty });
+                    continue;
+                }
+
+                foreach (string slot in slots)
+                {
+                    resolved.Add(new CanonicalTransfiguration { Id = affixId, Slot = slot });
+                }
+            }
+
+            variant.Transfigurations = resolved;
+        }
 
         public void CreatePresetFromMaxrollBuild(MaxrollBuild maxrollBuild, string profile, string name)
         {
@@ -384,6 +515,11 @@ namespace D4Companion.Services
                     }
                     canonicalItem.AspectIds = resolvedAspectIds;
                 }
+
+                // Resolve transfigurations. Like aspects, the adapter can only stash raw values
+                // on the canonical variant, so turn the prose into affix ids and item types
+                // before the projector reads it.
+                ResolveTransfigurations(canonicalVariant);
 
                 var affixPreset = _projector.Project(canonicalVariant, name);
 
