@@ -33,6 +33,12 @@ namespace D4Companion.Services
         /// </summary>
         private const int TallHeaderRetryFactor = 2;
 
+        /// <summary>
+        /// Iteration cap per marker glyph. An item cannot carry this many affixes, so hitting it
+        /// means the matcher is locking onto noise rather than markers.
+        /// </summary>
+        public const int MaxAffixMarkersPerTooltip = 20;
+
         private int _mouseCoordsX;
         private int _mouseCoordsY;
         private Image<Bgr, byte>? _currentScreenTooltip;
@@ -892,45 +898,22 @@ namespace D4Companion.Services
             //_logger.LogDebug($"{MethodBase.GetCurrentMethod()?.Name}");
 
             List<ItemAffixLocationDescriptor> itemAffixLocations = new List<ItemAffixLocationDescriptor>();
-            Image<Gray, byte> currentTooltip;
-            Image<Gray, byte> currentItemAffixLocationImage;
-            int counter = 0;
-            double similarity = 0.0;
-            Point location = Point.Empty;
 
             try
             {
+                Image<Gray, byte> currentTooltip;
+                Image<Gray, byte> currentItemAffixLocationImage;
+
                 lock (_lockCloneImage)
                 {
                     currentTooltip = currentTooltipSource.Clone();
                     currentItemAffixLocationImage = _imageListItemAffixLocations[currentItemAffixLocation].Clone();
                 }
 
-                do
-                {
-                    counter++;
+                itemAffixLocations = FindAffixMarkers(currentTooltip, currentItemAffixLocation, currentItemAffixLocationImage,
+                    _settingsManager.Settings.ThresholdSimilarityAffixLocation, MaxAffixMarkersPerTooltip, out bool aborted);
 
-                    (similarity, location) = FindMatchTemplate(currentTooltip, currentItemAffixLocationImage);
-
-                    //_logger.LogDebug($"{MethodBase.GetCurrentMethod()?.Name}: ({currentItemAffixLocation}) Similarity: {String.Format("{0:0.0000000000}", similarity)}");
-
-                    if (similarity < _settingsManager.Settings.ThresholdSimilarityAffixLocation)
-                    {
-                        itemAffixLocations.Add(new ItemAffixLocationDescriptor
-                        {
-                            Similarity = similarity,
-                            Location = new Rectangle(location, currentItemAffixLocationImage.Size),
-                            Name = currentItemAffixLocation
-                        });
-                    }
-
-                    // Mark location so that it's only detected once.
-                    var rectangle = new Rectangle(location, currentItemAffixLocationImage.Size);
-                    CvInvoke.Rectangle(currentTooltip, rectangle, new MCvScalar(255, 255, 255), -1);
-
-                } while (similarity < _settingsManager.Settings.ThresholdSimilarityAffixLocation && counter < 20);
-
-                if (counter >= 20)
+                if (aborted)
                 {
                     WeakReferenceMessenger.Default.Send(new ErrorOccurredMessage(new ErrorOccurredMessageParams
                     {
@@ -944,6 +927,67 @@ namespace D4Companion.Services
             }
 
             return itemAffixLocations;
+        }
+
+        /// <summary>
+        /// Finds every occurrence of one marker glyph in a tooltip, top-most first, by matching
+        /// and then blanking each hit so the next pass finds the one below it.
+        /// </summary>
+        /// <remarks>
+        /// Blanking means this OVERWRITES <paramref name="tooltip"/> - pass a clone. Kept static
+        /// and free of app state so the marker-recognition eval drives this matcher rather than a
+        /// reimplementation of it, which would pass while the shipped one failed.
+        /// </remarks>
+        public static List<ItemAffixLocationDescriptor> FindAffixMarkers(Image<Gray, byte> tooltip, string markerName,
+            Image<Gray, byte> marker, double threshold, int maxMarkers, out bool aborted)
+        {
+            List<ItemAffixLocationDescriptor> itemAffixLocations = new List<ItemAffixLocationDescriptor>();
+            int counter = 0;
+            double similarity;
+            Point location;
+
+            do
+            {
+                counter++;
+
+                (similarity, location) = FindMatchTemplate(tooltip, marker);
+
+                // SqdiffNormed: lower is better, so a hit is a score BELOW the threshold.
+                if (similarity < threshold)
+                {
+                    itemAffixLocations.Add(new ItemAffixLocationDescriptor
+                    {
+                        Similarity = similarity,
+                        Location = new Rectangle(location, marker.Size),
+                        Name = markerName
+                    });
+                }
+
+                // Mark location so that it's only detected once.
+                CvInvoke.Rectangle(tooltip, new Rectangle(location, marker.Size), new MCvScalar(255, 255, 255), -1);
+
+            } while (similarity < threshold && counter < maxMarkers);
+
+            aborted = counter >= maxMarkers;
+
+            return itemAffixLocations;
+        }
+
+        /// <summary>
+        /// Maps a marker template's file name onto the affix type it marks.
+        /// </summary>
+        /// <remarks>
+        /// The loader globs every dot-affixes_* file in the system preset, so a new glyph variant
+        /// is added by dropping in a file named after the type it belongs to - no code change.
+        /// That is how dot-affixes_greater_large.png joins the greater arm.
+        /// </remarks>
+        public static string ClassifyAffixMarker(string markerName)
+        {
+            return markerName.StartsWith("dot-affixes_transfiguring") ? Constants.AffixTypeConstants.Transfigured :
+                markerName.StartsWith("dot-affixes_normal") || markerName.StartsWith("dot-affixes_reroll") ? Constants.AffixTypeConstants.Normal :
+                markerName.StartsWith("dot-affixes_greater") ? Constants.AffixTypeConstants.Greater :
+                markerName.StartsWith("dot-affixes_temper") ? Constants.AffixTypeConstants.Tempered :
+                markerName.StartsWith("dot-affixes_rune") ? Constants.AffixTypeConstants.Rune : Constants.AffixTypeConstants.Normal;
         }
 
         private void RemoveInvalidAffixLocations()
@@ -1034,11 +1078,7 @@ namespace D4Companion.Services
                         affixLocation.Location.Y - _settingsManager.Settings.AffixAreaHeightOffsetTop,
                         _currentTooltip.Location.Width - affixLocation.Location.X - offsetAffixMarker - _settingsManager.Settings.AffixAspectAreaWidthOffset,
                         yCoordsNextPoint - (affixLocation.Location.Y - _settingsManager.Settings.AffixAreaHeightOffsetTop)),
-                    AffixType = affixLocation.Name.StartsWith("dot-affixes_transfiguring") ? Constants.AffixTypeConstants.Transfigured :
-                    affixLocation.Name.StartsWith("dot-affixes_normal") || affixLocation.Name.StartsWith("dot-affixes_reroll") ? Constants.AffixTypeConstants.Normal :
-                    affixLocation.Name.StartsWith("dot-affixes_greater") ? Constants.AffixTypeConstants.Greater :
-                    affixLocation.Name.StartsWith("dot-affixes_temper") ? Constants.AffixTypeConstants.Tempered :
-                    affixLocation.Name.StartsWith("dot-affixes_rune") ? Constants.AffixTypeConstants.Rune : Constants.AffixTypeConstants.Normal
+                    AffixType = ClassifyAffixMarker(affixLocation.Name)
                 });
             }
 

@@ -42,6 +42,11 @@
     <None Update="Fixtures\tooltip-mythic-helm.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <!-- Globbed rather than listed: AffixMarkerRecognitionTests loads whatever glyph templates
+         are here, the same way the app globs the system preset, so adding one needs no edit. -->
+    <None Update="Fixtures\Markers\*.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
