@@ -79,10 +79,46 @@ namespace D4Companion.Services
         // note actually looks like - tops out at 56 ("Use whatever you have available"), so
         // the floor clears that by 4 and clears the correct "Cooldown" by 2. Short phrases do
         // NOT separate: "Two-Handed" scores 67 and "Any of the below" 62, at or above the
-        // real stat. No threshold splits those, under any scorer above. The floor is a filter
-        // against prose, not a proof of affix-hood. TransfigurationMatchFloorTests pins every
-        // number in this comment.
+        // real stat. No threshold splits those, under any scorer above. That is what the
+        // containment gate below exists for. TransfigurationMatchFloorTests pins every number
+        // in this comment.
         private const int TransfigurationMatchFloor = 60;
+
+        /// <summary>
+        /// Second gate: every word of the guide entry must appear in the description that
+        /// ExtractOne matched it to.
+        ///
+        /// The floor alone cannot deliver "a wrong match is worse than no match", because the
+        /// best junk string scores at or above the worst real stat under every scorer
+        /// measured - there is no threshold that separates them. Containment does: a real
+        /// stat is an abbreviation of its affix description ("Cooldown" of "Cooldown
+        /// Reduction"), so every word survives, while a phrase that merely scores well shares
+        /// almost no vocabulary with what it landed on ("Two-Handed" against "to Shred").
+        ///
+        /// Words are letters and digits only, so punctuation drops out and the leading "%" of
+        /// "% Physical Damage" costs nothing. A hyphen splits, which is why "Two-Handed" is
+        /// tested word by word.
+        ///
+        /// Not airtight, and deliberately not described as such: "Skills" is a genuine subset
+        /// of the affix "to All Skills", so it clears both gates. Nothing here rejects it.
+        /// Ruling out a real English word that is also a real affix word needs something this
+        /// importer does not have - the knowledge that the guide meant a section header.
+        /// </summary>
+        private static bool MatchContainsEveryWordOf(string prose, string description)
+        {
+            string[] proseWords = Words(prose);
+            if (proseWords.Length == 0) return false;
+
+            var descriptionWords = Words(description).ToHashSet(StringComparer.OrdinalIgnoreCase);
+
+            return proseWords.All(word => descriptionWords.Contains(word));
+        }
+
+        private static string[] Words(string text)
+        {
+            return new string(text.Select(character => char.IsLetterOrDigit(character) ? character : ' ').ToArray())
+                .Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        }
 
         // Start of Constructors region
 
@@ -185,7 +221,12 @@ namespace D4Companion.Services
             {
                 var match = Process.ExtractOne(transfiguration.Id, _affixDescriptions, scorer: ScorerCache.Get<DefaultRatioScorer>());
 
-                if (match is null || match.Score < TransfigurationMatchFloor)
+                // Two gates, both must pass, and a failure of either leaves through the same
+                // door: warn and drop. The floor screens out prose that looks nothing like an
+                // affix; containment screens out the short phrases the floor cannot reach.
+                if (match is null ||
+                    match.Score < TransfigurationMatchFloor ||
+                    !MatchContainsEveryWordOf(transfiguration.Id, match.Value))
                 {
                     _logger.LogWarning($"{MethodBase.GetCurrentMethod()?.Name}: Unmatched transfiguration: {transfiguration.Id}");
                     WeakReferenceMessenger.Default.Send(new WarningOccurredMessage(new WarningOccurredMessageParams

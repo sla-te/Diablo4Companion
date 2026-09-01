@@ -188,10 +188,11 @@ namespace D4Companion.Tests
         }
 
         [Test]
-        public void ShortNonStatPhrases_ClearTheFloor_WhichIsTheKnownLimit()
+        public void ShortNonStatPhrases_ClearTheFloor_WhichIsWhyTheGateExists()
         {
             // These score at or above the correct "Cooldown" match, so no threshold separates
-            // them. Rejecting them needs a different mechanism than a score floor.
+            // them. Rejecting them needs a different mechanism than a score floor - which is
+            // what MatchContainsEveryWordOf is, pinned in TransfigurationContainmentGateTests.
             foreach (string prose in ShortPhrasesTheFloorCannotReject)
             {
                 Assert.That(BestScore(prose), Is.GreaterThanOrEqualTo(Floor), $"prose: {prose}");
@@ -295,5 +296,81 @@ namespace D4Companion.Tests
         public Task<string> GetRequest(string uri) => throw new NotImplementedException();
         public Task DownloadZip(string uri) => throw new NotImplementedException();
         public Task DownloadZipSystemPreset(string uri) => throw new NotImplementedException();
+    }
+
+    /// <summary>
+    /// Pins the second gate: every word of the guide entry must appear in the description
+    /// ExtractOne matched it to. It exists because the score floor provably cannot deliver
+    /// "a wrong match is worse than no match" on its own - see
+    /// TransfigurationMatchFloorTests for the measurement that shows best-junk beats
+    /// worst-real-stat under every scorer.
+    ///
+    /// The accept direction is also covered end to end: if the real gate rejected any of the
+    /// six fixture entries, EndgamePreset_ContainsResolvedTransfigurations and
+    /// CooldownTransfiguration_IsScopedToTwoHandedWeapons would fail. What this class adds is
+    /// the reject direction, on strings the fixture cannot supply.
+    /// </summary>
+    public class TransfigurationContainmentGateTests
+    {
+        // Mirrors BuildsManagerMaxroll.MatchContainsEveryWordOf, which is private and cannot
+        // be reached from here without an InternalsVisibleTo this project does not have.
+        // Keep in sync; the fixture entries are the end-to-end check that it has not drifted.
+        private static string[] Words(string text)
+            => new string(text.Select(c => char.IsLetterOrDigit(c) ? c : ' ').ToArray())
+                .Split(' ', StringSplitOptions.RemoveEmptyEntries);
+
+        private static bool Gate(string prose, string description)
+        {
+            string[] proseWords = Words(prose);
+            if (proseWords.Length == 0) return false;
+
+            var descriptionWords = Words(description).ToHashSet(StringComparer.OrdinalIgnoreCase);
+            return proseWords.All(word => descriptionWords.Contains(word));
+        }
+
+        // prose, the description DefaultRatioScorer actually matches it to.
+        [TestCase("% Physical Damage", "Physical Damage")]
+        [TestCase("Cooldown", "Cooldown Reduction")]
+        [TestCase("Critical Strike Chance", "Critical Strike Chance")]
+        [TestCase("Attack Speed", "Attack Speed")]
+        [TestCase("Strength", "Strength")]
+        [TestCase("All Stats", "All Stats")]
+        public void EveryFixtureEntry_PassesTheGate(string prose, string description)
+        {
+            // The leading "%" costs nothing because words are letters and digits only.
+            Assert.That(Gate(prose, description), Is.True);
+        }
+
+        [TestCase("Two-Handed", "to Shred")]
+        [TestCase("Any of the below", "to Death Blow")]
+        [TestCase("Endgame", "Damage")]
+        public void ShortPhrasesTheFloorLetsThrough_AreRejectedByTheGate(string prose, string description)
+        {
+            // All three score at or above the floor. The gate is what stops them.
+            Assert.That(Gate(prose, description), Is.False);
+        }
+
+        [Test]
+        public void Skills_SurvivesBothGates_AndIsAKnownLimit()
+        {
+            // Documented, not overlooked. "Skills" scores 63 against the affix "to All
+            // Skills" and is a genuine subset of it, so neither the floor nor the gate has
+            // grounds to reject it. Separating a section header from a stat that shares its
+            // vocabulary needs knowledge this importer does not have.
+            Assert.That(Gate("Skills", "to All Skills"), Is.True);
+        }
+
+        [Test]
+        public void WordComparison_IsCaseInsensitive()
+        {
+            Assert.That(Gate("cooldown", "Cooldown Reduction"), Is.True);
+        }
+
+        [Test]
+        public void ProseWithNoWordCharacters_IsRejected()
+        {
+            // Otherwise "every word is contained" would be vacuously true.
+            Assert.That(Gate("%%%", "Physical Damage"), Is.False);
+        }
     }
 }
