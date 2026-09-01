@@ -1,6 +1,8 @@
 using System.Text.Json;
+using CommunityToolkit.Mvvm.Messaging;
 using D4Companion.Constants;
 using D4Companion.Entities;
+using D4Companion.Messages;
 using D4Companion.Helpers;
 using D4Companion.Interfaces;
 using D4Companion.Services;
@@ -22,13 +24,20 @@ namespace D4Companion.Tests
     /// </summary>
     public class BuildsManagerMaxrollTests
     {
-        private static AffixPreset CreatePreset(string profileName)
+        internal static MaxrollBuild LoadFixture()
         {
             string json = File.ReadAllText(@".\Fixtures\ce9zox0y.json");
             var outer = JsonSerializer.Deserialize<MaxrollBuildJson>(json)!;
             var data = JsonSerializer.Deserialize<MaxrollBuildDataJson>(outer.Data)!;
-            var maxrollBuild = new MaxrollBuild { Id = outer.Id, Name = outer.Name, Data = data };
+            return new MaxrollBuild { Id = outer.Id, Name = outer.Name, Data = data };
+        }
 
+        /// <summary>
+        /// Runs the real import and returns both what it produced and every warning it raised,
+        /// so a test can assert on an entry the resolver DROPPED as well as on the ones it kept.
+        /// </summary>
+        internal static (AffixPreset Preset, List<string> Warnings) Import(MaxrollBuild maxrollBuild, string profileName)
+        {
             var affixManager = new AffixManagerStub();
             var settingsManager = new SettingsManagerStub();
             settingsManager.Settings.IsImportParagonMaxrollEnabled = false;
@@ -41,11 +50,32 @@ namespace D4Companion.Tests
                 new HttpClientHandlerStub(),
                 settingsManager);
 
-            buildsManager.CreatePresetFromMaxrollBuild(maxrollBuild, profileName, profileName);
+            var warnings = new List<string>();
+            var recipient = new object();
+            WeakReferenceMessenger.Default.Register<WarningOccurredMessage>(
+                recipient, (_, message) => warnings.Add(message.Value.Message));
+            try
+            {
+                buildsManager.CreatePresetFromMaxrollBuild(maxrollBuild, profileName, profileName);
+            }
+            finally
+            {
+                WeakReferenceMessenger.Default.Unregister<WarningOccurredMessage>(recipient);
+                GC.KeepAlive(recipient);
+            }
 
             Assert.That(affixManager.AddedPreset, Is.Not.Null);
-            return affixManager.AddedPreset!;
+            return (affixManager.AddedPreset!, warnings);
         }
+
+        private static AffixPreset CreatePreset(string profileName)
+            => Import(LoadFixture(), profileName).Preset;
+
+        /// <summary>
+        /// The first sno of a resolved IdName. Affixes.enUS.json merges every matching sno into
+        /// one semicolon-joined string, so the head is the stable, readable identity.
+        /// </summary>
+        private static string FirstSno(string idName) => idName.Split(';')[0];
 
         [Test]
         public void CreatePresetFromMaxrollBuild_MidgameVariant_ProducesEightAspectsNotEighty()
@@ -65,24 +95,140 @@ namespace D4Companion.Tests
         }
 
         [Test]
+        public void EndgamePreset_ResolvesEveryStatToTheGenericAffix()
+        {
+            // Pins the SCORER through the production wiring, which asserting Type alone does
+            // not. Swap DefaultRatioScorer for any substring-tolerant one and "Cooldown"
+            // resolves to CDR_Imbues ("Imbuement Cooldown Reduction") while "% Physical Damage"
+            // resolves to Damage_Type_Bonus_NonPhysical or bare Damage - all of which clear
+            // both the floor and the containment gate, so nothing else in this suite notices.
+            var resolved = CreatePreset("Endgame").ItemTransfigurations
+                .Select(t => FirstSno(t.Id))
+                .Distinct()
+                .ToList();
+
+            Assert.That(resolved, Is.EquivalentTo(new[]
+            {
+                "Damage_Type_Bonus_Physical",
+                "CooldownReductionCDR",
+                "CritChance",
+                "AttackSpeed",
+                "CoreStat_Strength",
+                "CoreStats_All"
+            }));
+        }
+
+        [Test]
         public void CooldownTransfiguration_IsScopedToTwoHandedWeapons()
         {
             var scoped = CreatePreset("Endgame").ItemTransfigurations
                 .Where(t => !t.IsAnyType)
-                .Select(t => t.Type)
                 .ToList();
 
-            Assert.That(scoped, Is.EquivalentTo(new[]
+            Assert.Multiple(() =>
             {
-                ItemTypeConstants.WeaponBludgeoning,
-                ItemTypeConstants.WeaponSlicing
-            }));
+                Assert.That(scoped.Select(t => t.Type), Is.EquivalentTo(new[]
+                {
+                    ItemTypeConstants.WeaponBludgeoning,
+                    ItemTypeConstants.WeaponSlicing
+                }));
+
+                // The generic cooldown affix, not a skill-specific one.
+                Assert.That(scoped.Select(t => FirstSno(t.Id)).Distinct(),
+                    Is.EqualTo(new[] { "CooldownReductionCDR" }));
+            });
         }
 
         [Test]
         public void StarterPreset_HasNoTransfigurations()
         {
             Assert.That(CreatePreset("Starter").ItemTransfigurations, Is.Empty);
+        }
+
+        /// <summary>
+        /// Builds a widget-notes document of the shape MaxrollTransfigurationParser reads: a
+        /// transfiguration heading followed by one list item per entry.
+        /// </summary>
+        private static MaxrollWidgetNotesJson TransfigurationNotes(params string[] entries)
+        {
+            static MaxrollLexicalNodeJson Block(string type, string text) => new()
+            {
+                Type = type,
+                Children = [new MaxrollLexicalNodeJson { Type = "text", Text = text }]
+            };
+
+            var root = new MaxrollLexicalNodeJson { Type = "root" };
+            root.Children.Add(Block("heading", "Optimal Tranfigurations"));
+            foreach (string entry in entries)
+            {
+                root.Children.Add(Block("listitem", entry));
+            }
+
+            return new MaxrollWidgetNotesJson { Equipment = new MaxrollLexicalNodeJson { Root = root } };
+        }
+
+        [Test]
+        public void JunkTransfiguration_IsDroppedAndWarnedThroughTheProductionPath()
+        {
+            // The end-to-end pin for the containment gate. The six real fixture entries all
+            // pass both gates, so without this test the reject branch lives only in the mirror
+            // in TransfigurationContainmentGateTests - delete MatchContainsEveryWordOf from
+            // ResolveTransfigurations and the whole suite would stay green.
+            //
+            // "Two-Handed" scores 67 against "to Shred", clearing the floor, so only the gate
+            // can stop it. "Critical Strike Chance" alongside it proves the import still ran.
+            var build = LoadFixture();
+            build.Data.Profiles.Single(p => p.Name.Equals("Endgame")).WidgetNotes =
+                TransfigurationNotes("Two-Handed", "Critical Strike Chance");
+
+            var (preset, warnings) = Import(build, "Endgame");
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(preset.ItemTransfigurations.Select(t => FirstSno(t.Id)),
+                    Is.EqualTo(new[] { "CritChance" }), "the junk entry must not be imported");
+
+                Assert.That(warnings.Where(w => w.Contains("Two-Handed")), Is.Not.Empty,
+                    "the dropped entry must be reported");
+
+                // The containment warning names what it matched, so a maintainer can tell a
+                // near-miss from a nothing-like-an-affix miss.
+                Assert.That(warnings.Single(w => w.Contains("Two-Handed")), Does.Contain("to Shred"));
+            });
+        }
+
+        [Test]
+        public void ProseWithNoAffixLikeMatch_IsDroppedWithTheBelowFloorWarning()
+        {
+            // The other rejection branch: a sentence scores 48, below the floor, so it never
+            // reaches the containment gate and gets the generic wording instead.
+            var build = LoadFixture();
+            build.Data.Profiles.Single(p => p.Name.Equals("Endgame")).WidgetNotes =
+                TransfigurationNotes("See the video guide linked above");
+
+            var (preset, warnings) = Import(build, "Endgame");
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(preset.ItemTransfigurations, Is.Empty);
+                Assert.That(warnings.Single(w => w.Contains("See the video guide linked above")),
+                    Does.Contain("matched no affix"));
+            });
+        }
+
+        [Test]
+        public void DigitBearingProse_StillResolves()
+        {
+            // Purely numeric words are discarded before the containment check, so a guide that
+            // writes a rolled value does not lose the entry: no DescriptionClean carries "15".
+            var build = LoadFixture();
+            build.Data.Profiles.Single(p => p.Name.Equals("Endgame")).WidgetNotes =
+                TransfigurationNotes("15% Cooldown Reduction");
+
+            var (preset, _) = Import(build, "Endgame");
+
+            Assert.That(preset.ItemTransfigurations.Select(t => FirstSno(t.Id)),
+                Is.EqualTo(new[] { "CooldownReductionCDR" }));
         }
     }
 
@@ -314,10 +460,14 @@ namespace D4Companion.Tests
     {
         // Mirrors BuildsManagerMaxroll.MatchContainsEveryWordOf, which is private and cannot
         // be reached from here without an InternalsVisibleTo this project does not have.
-        // Keep in sync; the fixture entries are the end-to-end check that it has not drifted.
+        // Keep in sync. Drift is caught end to end by
+        // BuildsManagerMaxrollTests.JunkTransfiguration_IsDroppedAndWarnedThroughTheProductionPath
+        // (reject) and the fixture tests (accept).
         private static string[] Words(string text)
             => new string(text.Select(c => char.IsLetterOrDigit(c) ? c : ' ').ToArray())
-                .Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                .Split(' ', StringSplitOptions.RemoveEmptyEntries)
+                .Where(word => !word.All(char.IsDigit))
+                .ToArray();
 
         private static bool Gate(string prose, string description)
         {
@@ -366,11 +516,32 @@ namespace D4Companion.Tests
             Assert.That(Gate("cooldown", "Cooldown Reduction"), Is.True);
         }
 
+        [TestCase("15% Cooldown Reduction", "Cooldown Reduction")]
+        [TestCase("+3 Ranks to Core Skills", "Ranks to Core Skills")]
+        public void PurelyNumericWords_AreIgnored(string prose, string description)
+        {
+            // A guide is free to write a rolled value. No DescriptionClean carries one, so
+            // keeping "15" or "3" as a word would reject a perfect score-100 match.
+            Assert.That(Gate(prose, description), Is.True);
+        }
+
+        [Test]
+        public void AlphanumericWords_AreNotIgnored()
+        {
+            // Only PURELY numeric words drop. "2H" is still a word and still has to appear.
+            Assert.That(Gate("2H Damage", "Physical Damage"), Is.False);
+        }
+
         [Test]
         public void ProseWithNoWordCharacters_IsRejected()
         {
-            // Otherwise "every word is contained" would be vacuously true.
-            Assert.That(Gate("%%%", "Physical Damage"), Is.False);
+            // Otherwise "every word is contained" would be vacuously true. Digits alone count
+            // as no words, so a bare "15" is rejected too.
+            Assert.Multiple(() =>
+            {
+                Assert.That(Gate("%%%", "Physical Damage"), Is.False);
+                Assert.That(Gate("15", "Cooldown Reduction"), Is.False);
+            });
         }
     }
 }

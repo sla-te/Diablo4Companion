@@ -95,9 +95,11 @@ namespace D4Companion.Services
         /// Reduction"), so every word survives, while a phrase that merely scores well shares
         /// almost no vocabulary with what it landed on ("Two-Handed" against "to Shred").
         ///
-        /// Words are letters and digits only, so punctuation drops out and the leading "%" of
-        /// "% Physical Damage" costs nothing. A hyphen splits, which is why "Two-Handed" is
-        /// tested word by word.
+        /// A word is a run of letters and digits, so punctuation drops out and the leading "%"
+        /// of "% Physical Damage" costs nothing. A hyphen splits, which is why "Two-Handed" is
+        /// tested word by word. Purely numeric words are then discarded: a guide is free to
+        /// write "15% Cooldown Reduction" or "+3 Ranks to Core Skills", and no DescriptionClean
+        /// carries a rolled value, so keeping "15" would reject a perfect match.
         ///
         /// Not airtight, and deliberately not described as such: "Skills" is a genuine subset
         /// of the affix "to All Skills", so it clears both gates. Nothing here rejects it.
@@ -117,7 +119,9 @@ namespace D4Companion.Services
         private static string[] Words(string text)
         {
             return new string(text.Select(character => char.IsLetterOrDigit(character) ? character : ' ').ToArray())
-                .Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                .Split(' ', StringSplitOptions.RemoveEmptyEntries)
+                .Where(word => !word.All(char.IsDigit))
+                .ToArray();
         }
 
         // Start of Constructors region
@@ -221,17 +225,27 @@ namespace D4Companion.Services
             {
                 var match = Process.ExtractOne(transfiguration.Id, _affixDescriptions, scorer: ScorerCache.Get<DefaultRatioScorer>());
 
-                // Two gates, both must pass, and a failure of either leaves through the same
-                // door: warn and drop. The floor screens out prose that looks nothing like an
-                // affix; containment screens out the short phrases the floor cannot reach.
-                if (match is null ||
-                    match.Score < TransfigurationMatchFloor ||
-                    !MatchContainsEveryWordOf(transfiguration.Id, match.Value))
+                // Two gates, both must pass, and either one drops the entry. The floor screens
+                // out prose that looks nothing like an affix; containment screens out the short
+                // phrases the floor cannot reach. They warn differently on purpose: a
+                // containment rejection DID match something, and naming what it matched is what
+                // tells a maintainer whether the gate saved them or cost them an entry.
+                if (match is null || match.Score < TransfigurationMatchFloor)
                 {
                     _logger.LogWarning($"{MethodBase.GetCurrentMethod()?.Name}: Unmatched transfiguration: {transfiguration.Id}");
                     WeakReferenceMessenger.Default.Send(new WarningOccurredMessage(new WarningOccurredMessageParams
                     {
                         Message = $"Imported Maxroll build lists a transfiguration that matched no affix: {transfiguration.Id}."
+                    }));
+                    continue;
+                }
+
+                if (!MatchContainsEveryWordOf(transfiguration.Id, match.Value))
+                {
+                    _logger.LogWarning($"{MethodBase.GetCurrentMethod()?.Name}: Transfiguration \"{transfiguration.Id}\" matched \"{match.Value}\" ({match.Score}), which does not use every word of it. Skipped.");
+                    WeakReferenceMessenger.Default.Send(new WarningOccurredMessage(new WarningOccurredMessageParams
+                    {
+                        Message = $"Imported Maxroll build lists a transfiguration, {transfiguration.Id}, whose closest affix is \"{match.Value}\". That is not the same stat, so it was skipped rather than guessed."
                     }));
                     continue;
                 }
