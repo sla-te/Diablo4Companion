@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using System.IO;
 using System.Reflection;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 
 namespace D4Companion.Services
 {
@@ -85,6 +86,64 @@ namespace D4Companion.Services
         private const int TransfigurationMatchFloor = 60;
 
         /// <summary>
+        /// Sno name prefix that marks an affix as one Transfiguration can roll.
+        /// </summary>
+        /// <remarks>
+        /// Transfiguration is a Horadric Cube recipe that adds a stat line drawn from a curated
+        /// pool, not from the affix table at large. The game data names that pool: 51 of the 893
+        /// affixes in Affixes.enUS.json carry an IdName with this prefix, and nothing else
+        /// distinguishes them - Flags, Category, AffixType and MagicType all overlap with
+        /// ordinary affixes. Two entries in the set are not ordinary affixes at all ("Gem
+        /// Strength in this Item", "Item Quality"), which is what confirms it is the
+        /// Transfiguration pool rather than a coincidence of naming.
+        ///
+        /// Restricting the match corpus to it is what makes a bare stat word resolvable. "Resource"
+        /// against the whole corpus scores highest on "Resource On Hit" - DefaultRatioScorer
+        /// charges by length, so the shortest candidate containing the word wins, and both gates
+        /// pass a stat the guide never meant. The pool holds exactly two Resource affixes,
+        /// "Maximum Resource" and "Resource Cost Reduction", and the guide's "Resource" now lands
+        /// on the first. Resource Generation is not transfigurable at all.
+        /// </remarks>
+        private const string TransfigurationSnoPrefix = "X2_Transfiguration_";
+
+        public static bool IsTransfigurable(AffixInfo affix)
+            => affix.IdNameList.Any(idName => idName.StartsWith(TransfigurationSnoPrefix, StringComparison.OrdinalIgnoreCase));
+
+        /// <summary>
+        /// Rewrites guide shorthand into the wording the affix corpus uses, before either gate
+        /// sees it.
+        /// </summary>
+        /// <remarks>
+        /// Only skill ranks need this. A guide writes "Core ranks"; the affix reads "+# to Core
+        /// Skills". They share one word and "ranks" appears in no affix description at all, so no
+        /// scorer bridges them and the entry is lost either way: against the pool it scores 58 and
+        /// dies at the floor, and against the whole corpus it scores 63 on a Druid raven affix and
+        /// only containment stops it importing as that. Every other stat in a transfiguration list
+        /// is already an abbreviation of its description, which is what the gates are built for.
+        ///
+        /// Two forms, because guides write it both ways round. Neither can fire on the other:
+        /// the first anchors on a trailing "ranks", the second requires "to" after it.
+        /// </remarks>
+        public static string NormaliseTransfigurationProse(string prose)
+        {
+            string trimmed = prose.Trim();
+
+            var category = SkillCategoryRanks.Match(trimmed);
+            if (category.Success) return $"to {category.Groups["category"].Value.Trim()} Skills";
+
+            return RanksToSkills.Replace(trimmed, "to");
+        }
+
+        // "Core ranks" and "Core Skill ranks" both name the category, not the affix wording.
+        private static readonly Regex SkillCategoryRanks =
+            new(@"^(?<category>.+?)(?:\s+skills?)?\s+ranks?$", RegexOptions.IgnoreCase | RegexOptions.Compiled);
+
+        // "+3 Ranks to Core Skills" already names the affix, with one word in front of it that
+        // containment would reject. The numeric part drops out in Words().
+        private static readonly Regex RanksToSkills =
+            new(@"\branks?\s+to\b", RegexOptions.IgnoreCase | RegexOptions.Compiled);
+
+        /// <summary>
         /// Second gate: every word of the guide entry must appear in the description that
         /// ExtractOne matched it to.
         ///
@@ -106,7 +165,7 @@ namespace D4Companion.Services
         /// Ruling out a real English word that is also a real affix word needs something this
         /// importer does not have - the knowledge that the guide meant a section header.
         /// </summary>
-        private static bool MatchContainsEveryWordOf(string prose, string description)
+        public static bool MatchContainsEveryWordOf(string prose, string description)
         {
             string[] proseWords = Words(prose);
             if (proseWords.Length == 0) return false;
@@ -204,11 +263,22 @@ namespace D4Companion.Services
                 ? affix.DescriptionClean.Split(new char[] { '(', ')' }, StringSplitOptions.RemoveEmptyEntries)[0]
                 : affix.DescriptionClean;
 
+            var transfigurable = affixes.Where(IsTransfigurable).ToList();
+
+            if (transfigurable.Count == 0)
+            {
+                // The prefix is the only marker the data carries, so a rename would silently
+                // empty the corpus and drop every entry the guide lists. Fall back wide and say
+                // so rather than reporting eight unmatched transfigurations.
+                _logger.LogWarning($"{MethodBase.GetCurrentMethod()?.Name}: No affix carries a {TransfigurationSnoPrefix} name. Matching transfigurations against the whole corpus.");
+                transfigurable = affixes;
+            }
+
             // Create affix description list for FuzzierSharp
-            _affixDescriptions = affixes.Select(MatchKey).ToList();
+            _affixDescriptions = transfigurable.Select(MatchKey).ToList();
 
             // Create dictionary to map affix description with affix id
-            _affixMapDescriptionToId = affixes.ToDictionary(MatchKey, affix => affix.IdName);
+            _affixMapDescriptionToId = transfigurable.ToDictionary(MatchKey, affix => affix.IdName);
         }
 
         /// <summary>
@@ -223,7 +293,11 @@ namespace D4Companion.Services
 
             foreach (var transfiguration in variant.Transfigurations)
             {
-                var match = Process.ExtractOne(transfiguration.Id, _affixDescriptions, scorer: ScorerCache.Get<DefaultRatioScorer>());
+                // Warnings keep quoting transfiguration.Id, not this - a maintainer reading one
+                // needs the line as the guide printed it.
+                string prose = NormaliseTransfigurationProse(transfiguration.Id);
+
+                var match = Process.ExtractOne(prose, _affixDescriptions, scorer: ScorerCache.Get<DefaultRatioScorer>());
 
                 // Two gates, both must pass, and either one drops the entry. The floor screens
                 // out prose that looks nothing like an affix; containment screens out the short
@@ -240,7 +314,7 @@ namespace D4Companion.Services
                     continue;
                 }
 
-                if (!MatchContainsEveryWordOf(transfiguration.Id, match.Value))
+                if (!MatchContainsEveryWordOf(prose, match.Value))
                 {
                     _logger.LogWarning($"{MethodBase.GetCurrentMethod()?.Name}: Transfiguration \"{transfiguration.Id}\" matched \"{match.Value}\" ({match.Score}), which does not use every word of it. Skipped.");
                     WeakReferenceMessenger.Default.Send(new WarningOccurredMessage(new WarningOccurredMessageParams

@@ -175,11 +175,19 @@ namespace D4Companion.Tests
             // in TransfigurationContainmentGateTests - delete MatchContainsEveryWordOf from
             // ResolveTransfigurations and the whole suite would stay green.
             //
-            // "Two-Handed" scores 67 against "to Shred", clearing the floor, so only the gate
-            // can stop it. "Critical Strike Chance" alongside it proves the import still ran.
+            // "Critical Damage" scores 73 against "Physical Damage", clearing the floor, so only
+            // the gate can stop it. It is a plausible entry rather than obvious junk: Critical
+            // Strike Damage is a real stat, it is simply not one Transfiguration can roll, and
+            // sharing the word "Damage" is enough to score well. "Critical Strike Chance"
+            // alongside it proves the import still ran.
+            //
+            // This used to be "Two-Handed" against "to Shred". Since the match corpus was
+            // narrowed to the transfigurable pool there is no shred affix left to land on, and
+            // that phrase now dies at the floor instead - still dropped, but through the other
+            // gate, which is not what this test is for.
             var build = LoadFixture();
             build.Data.Profiles.Single(p => p.Name.Equals("Endgame")).WidgetNotes =
-                TransfigurationNotes("Two-Handed", "Critical Strike Chance");
+                TransfigurationNotes("Critical Damage", "Critical Strike Chance");
 
             var (preset, warnings) = Import(build, "Endgame");
 
@@ -188,12 +196,12 @@ namespace D4Companion.Tests
                 Assert.That(preset.ItemTransfigurations.Select(t => FirstSno(t.Id)),
                     Is.EqualTo(new[] { "CritChance" }), "the junk entry must not be imported");
 
-                Assert.That(warnings.Where(w => w.Contains("Two-Handed")), Is.Not.Empty,
+                Assert.That(warnings.Where(w => w.Contains("Critical Damage")), Is.Not.Empty,
                     "the dropped entry must be reported");
 
                 // The containment warning names what it matched, so a maintainer can tell a
                 // near-miss from a nothing-like-an-affix miss.
-                Assert.That(warnings.Single(w => w.Contains("Two-Handed")), Does.Contain("to Shred"));
+                Assert.That(warnings.Single(w => w.Contains("Critical Damage")), Does.Contain("Physical Damage"));
             });
         }
 
