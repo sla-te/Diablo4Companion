@@ -407,6 +407,7 @@ namespace D4Companion.Tests
         public AffixInfo? GetAffixInfoMaxrollByIdSno(string affixIdSno) => null;
         public AffixInfo? GetAffixInfoByIdName(string affixIdName) => throw new NotImplementedException();
         public double GetAffixMinimalValue(string idName) => throw new NotImplementedException();
+        public List<string> GetAffixTuningPrismsByIdName(string affixIdName) => new();
         public ItemAffix GetAspect(string aspectId, string itemType) => throw new NotImplementedException();
         public string GetAspectDescription(string aspectId) => throw new NotImplementedException();
         public string GetAspectName(string aspectId) => throw new NotImplementedException();
