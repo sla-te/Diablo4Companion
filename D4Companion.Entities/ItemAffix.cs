@@ -1,9 +1,14 @@
-﻿using System.Windows.Media;
+﻿using System.Collections.Generic;
+using System.Windows.Media;
 
 namespace D4Companion.Entities
 {
     public class ItemAffix
     {
+        /// <summary>
+        /// The unique identifier for the item affix.
+        /// From AffixInfo.IdName
+        /// </summary>
         public string Id { get; set; } = string.Empty;
         public string Type { get; set; } = string.Empty;
         public Color Color { get; set; } = Colors.Green;
@@ -32,5 +37,6 @@ namespace D4Companion.Entities
         public bool IsImplicit { get; set; } = false;
         public bool IsTempered { get; set; } = false;
         public bool IsTransfigured { get; set; } = false;
+        public List<string> TuningPrisms { get; set; } = new List<string>();
     }
 }

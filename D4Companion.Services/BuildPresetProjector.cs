@@ -58,7 +58,8 @@ namespace D4Companion.Services
                     IsGreater = affix.IsGreater,
                     IsImplicit = affix.IsImplicit,
                     IsTempered = affix.IsTempered,
-                    Rank = affix.Rank
+                    Rank = affix.Rank,
+                    TuningPrisms = affix.TuningPrisms
                 });
             }
         }

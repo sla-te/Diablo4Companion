@@ -554,6 +554,7 @@ namespace D4Companion.Services
                             .First();
 
                         affix.Id = _affixMapDescriptionToId[best.affixMatch];
+                        affix.TuningPrisms = _affixManager.GetAffixTuningPrismsByIdName(affix.Id).ToList();
                     }
 
                     // Resolve aspects.

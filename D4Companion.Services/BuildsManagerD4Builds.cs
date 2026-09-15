@@ -418,6 +418,7 @@ namespace D4Companion.Services
                     {
                         var affixResult = Process.ExtractOne(affix.Id, _affixDescriptions, scorer: ScorerCache.Get<DefaultRatioScorer>());
                         affix.Id = _affixMapDescriptionToId[affixResult.Value];
+                        affix.TuningPrisms = _affixManager.GetAffixTuningPrismsByIdName(affix.Id).ToList();
                     }
 
                     // Resolve aspects.

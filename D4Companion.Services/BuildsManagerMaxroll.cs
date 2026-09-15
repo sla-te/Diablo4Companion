@@ -501,7 +501,12 @@ namespace D4Companion.Services
                             }
                             else
                             {
-                                canonicalItem.Affixes.Add(new CanonicalAffix { Id = affixInfo.IdName, IsImplicit = true });
+                                canonicalItem.Affixes.Add(new CanonicalAffix
+                                {
+                                    Id = affixInfo.IdName,
+                                    IsImplicit = true,
+                                    TuningPrisms = affixInfo.TuningPrisms.ToList()
+                                });
                             }
                         }
                     }
@@ -616,7 +621,8 @@ namespace D4Companion.Services
                                 // managed to resolve. An entry that resolves to nothing is
                                 // still numbered in the guide, so renumbering around it would
                                 // shift every later stat one rank up.
-                                Rank = i + 1
+                                Rank = i + 1,
+                                TuningPrisms = affixInfo.TuningPrisms.ToList()
                             });
                         }
                     }
@@ -640,7 +646,8 @@ namespace D4Companion.Services
                             canonicalItem.Affixes.Add(new CanonicalAffix
                             {
                                 Id = affixInfo.IdName,
-                                IsTempered = true
+                                IsTempered = true,
+                                TuningPrisms = affixInfo.TuningPrisms.ToList()
                             });
                         }
                     }

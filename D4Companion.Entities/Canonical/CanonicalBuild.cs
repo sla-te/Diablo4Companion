@@ -70,5 +70,6 @@ namespace D4Companion.Entities.Canonical
         /// guide's priority list and keep 0.
         /// </summary>
         public int Rank { get; set; } = 0;
+        public List<string> TuningPrisms { get; set; } = new List<string>();
     }
 }

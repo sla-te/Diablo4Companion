@@ -1955,7 +1955,8 @@ namespace D4Companion.Services
                         // DrawGraphicsAffixesMulti calls DrawStatPriority just like the
                         // primary pass does, and it draws nothing at rank 0 - so leaving
                         // this out silently cost every multi-build mark its rank digit.
-                        Rank = rank
+                        Rank = rank,
+                        TuningPrisms = currentItemAffix.Item2.TuningPrisms.ToList()
                     }));
                 }
 

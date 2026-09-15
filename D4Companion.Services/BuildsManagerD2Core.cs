@@ -410,7 +410,8 @@ namespace D4Companion.Services
                         {
                             Id = affixInfo.IdName,
                             IsGreater = affix.Greater,
-                            IsTempered = affix.Name.StartsWith("Tempered_", StringComparison.OrdinalIgnoreCase)
+                            IsTempered = affix.Name.StartsWith("Tempered_", StringComparison.OrdinalIgnoreCase),
+                            TuningPrisms = affixInfo.TuningPrisms.ToList()
                         });
                     }
                 }

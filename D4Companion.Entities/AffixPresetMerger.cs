@@ -49,7 +49,8 @@ namespace D4Companion.Entities
                 IsImplicit = a.IsImplicit,
                 IsTempered = a.IsTempered,
                 IsAnyType = a.IsAnyType,
-                Rank = a.Rank
+                Rank = a.Rank,
+                TuningPrisms = a.TuningPrisms.ToList()
             }));
             merged.ItemAspects.AddRange(build1.ItemAspects.Select(a => new ItemAffix
             {
@@ -100,7 +101,8 @@ namespace D4Companion.Entities
                         IsImplicit = affix.IsImplicit,
                         IsTempered = affix.IsTempered,
                         IsAnyType = affix.IsAnyType,
-                        Rank = affix.Rank
+                        Rank = affix.Rank,
+                        TuningPrisms = affix.TuningPrisms.ToList()
                     });
                     continue;
                 }
