@@ -3,12 +3,14 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
@@ -22,6 +24,20 @@ namespace D4Companion.SystemPresets.Views
     /// </summary>
     public partial class ThumbnailWindow : Window
     {
+        #region Fields
+
+        private const int WM_SIZING = 0x0214;
+        private const int WMSZ_LEFT = 1;
+        private const int WMSZ_RIGHT = 2;
+        private const int WMSZ_TOP = 3;
+        private const int WMSZ_TOPLEFT = 4;
+        private const int WMSZ_TOPRIGHT = 5;
+        private const int WMSZ_BOTTOM = 6;
+        private const int WMSZ_BOTTOMLEFT = 7;
+        private const int WMSZ_BOTTOMRIGHT = 8;
+
+        #endregion
+
         #region Constructors
 
         public ThumbnailWindow(HWND handleSource)
@@ -54,6 +70,8 @@ namespace D4Companion.SystemPresets.Views
             //var extendedStyle = PInvoke.GetWindowLong((HWND)hWnd, WINDOW_LONG_PTR_INDEX.GWL_EXSTYLE);
             //int result = PInvoke.SetWindowLong((HWND)hWnd, WINDOW_LONG_PTR_INDEX.GWL_EXSTYLE, extendedStyle | (int)WINDOW_EX_STYLE.WS_EX_TOOLWINDOW);
 
+            HwndSource.FromHwnd(hWnd)?.AddHook(WndProc);
+
             UpdateActualSize();
         }
 
@@ -65,24 +83,58 @@ namespace D4Companion.SystemPresets.Views
 
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            this.SizeChanged -= Window_SizeChanged;
-            double ratio = ((ThumbnailWindowViewModel)DataContext).Ratio;
-            if (e.HeightChanged)
-            {
-                this.Width = e.NewSize.Height * ratio;
-            }
-            else if (e.WidthChanged)
-            {
-                this.Height = e.NewSize.Width / ratio;
-            }
-            this.SizeChanged += Window_SizeChanged;
-
             UpdateActualSize();
         }
 
         #endregion
 
         #region Methods
+
+        // The aspect ratio is enforced here, in WM_SIZING, rather than by re-setting
+        // Width/Height from Window_SizeChanged.
+        private IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
+        {
+            if (msg == WM_SIZING)
+            {
+                double ratio = ((ThumbnailWindowViewModel)DataContext).Ratio;
+                if (ratio > 0)
+                {
+                    RECT rect = Marshal.PtrToStructure<RECT>(lParam);
+                    int width = rect.right - rect.left;
+                    int height = rect.bottom - rect.top;
+
+                    switch (wParam.ToInt32())
+                    {
+                        case WMSZ_LEFT:
+                        case WMSZ_RIGHT:
+                            rect.bottom = rect.top + (int)Math.Round(width / ratio);
+                            break;
+                        case WMSZ_TOP:
+                        case WMSZ_BOTTOM:
+                            rect.right = rect.left + (int)Math.Round(height * ratio);
+                            break;
+                        case WMSZ_TOPLEFT:
+                            rect.left = rect.right - (int)Math.Round(height * ratio);
+                            break;
+                        case WMSZ_TOPRIGHT:
+                            rect.top = rect.bottom - (int)Math.Round(width / ratio);
+                            break;
+                        case WMSZ_BOTTOMLEFT:
+                            rect.bottom = rect.top + (int)Math.Round(width / ratio);
+                            break;
+                        case WMSZ_BOTTOMRIGHT:
+                        default:
+                            rect.bottom = rect.top + (int)Math.Round(width / ratio);
+                            break;
+                    }
+
+                    Marshal.StructureToPtr(rect, lParam, true);
+                    handled = true;
+                }
+            }
+
+            return IntPtr.Zero;
+        }
 
         private void UpdateActualSize()
         {
@@ -109,6 +161,8 @@ namespace D4Companion.SystemPresets.Views
             ((ThumbnailWindowViewModel)DataContext).ActualWidth = width;
             ((ThumbnailWindowViewModel)DataContext).ActualHeightPixels = this.PointToScreen(new Point(width, height)).Y - this.PointToScreen(new Point(0, 0)).Y;
             ((ThumbnailWindowViewModel)DataContext).ActualWidthPixels = this.PointToScreen(new Point(width, height)).X - this.PointToScreen(new Point(0, 0)).X;
+
+            ((ThumbnailWindowViewModel)DataContext).RefreshThumbnailDestination();
         }
 
         #endregion        

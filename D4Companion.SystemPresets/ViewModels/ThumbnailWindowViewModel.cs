@@ -17,10 +17,10 @@ namespace D4Companion.SystemPresets.ViewModels
         private RECT _regionSource = new RECT();
         private IntPtr _thumbnailHandle = IntPtr.Zero;
 
-        private int _height = 720;
+        private double _height = 720;
         private double _left = 0;
         private double _top = 0;
-        private int _width = 1280;                
+        private double _width = 1280;
 
         // Start of Constructors region
 
@@ -43,15 +43,15 @@ namespace D4Companion.SystemPresets.ViewModels
         public double ActualWidth { get; set; }
         public double ActualWidthPixels { get; set; }
 
-        public int Height
+        public double Height
         {
             get => _height;
             set
             {
-                _height = value;
-                OnPropertyChanged(nameof(Height));
-
-                UpdateThumbnail();
+                if (SetProperty(ref _height, value))
+                {
+                    UpdateThumbnail();
+                }
             }
         }
 
@@ -73,11 +73,7 @@ namespace D4Companion.SystemPresets.ViewModels
         public double Left
         {
             get => _left;
-            set
-            {
-                _left = value;
-                OnPropertyChanged(nameof(Left));
-            }
+            set => SetProperty(ref _left, value);
         }
 
         public int Opacity
@@ -102,22 +98,18 @@ namespace D4Companion.SystemPresets.ViewModels
         public double Top
         {
             get => _top;
-            set
-            {
-                _top = value;
-                OnPropertyChanged(nameof(Top));
-            }
+            set => SetProperty(ref _top, value);
         }
 
-        public int Width
+        public double Width
         {
             get => _width;
             set
             {
-                _width = value;
-                OnPropertyChanged(nameof(Width));
-
-                UpdateThumbnail();
+                if (SetProperty(ref _width, value))
+                {
+                    UpdateThumbnail();
+                }
             }
         }
 
@@ -136,6 +128,13 @@ namespace D4Companion.SystemPresets.ViewModels
         public void Init()
         {
             RegisterThumbnail(HandleSource);
+        }
+
+        public void RefreshThumbnailDestination()
+        {
+            if (_thumbnailHandle == IntPtr.Zero) return;
+
+            SetThumbnailProperties(0, 0, (int)ActualWidthPixels, (int)ActualHeightPixels);
         }
 
         private System.Drawing.Size? GetSourceSize()
@@ -217,7 +216,6 @@ namespace D4Companion.SystemPresets.ViewModels
         {
             if (_thumbnailHandle == IntPtr.Zero) return;
 
-            //RECT rectDestination = GetExtendedFrameBounds(Handle);
             System.Drawing.Point sourcePoint = new System.Drawing.Point(0, 0);
             System.Drawing.Size? sourceSize = GetSourceSize();
             if (sourceSize == null) return;
@@ -225,13 +223,17 @@ namespace D4Companion.SystemPresets.ViewModels
             if (_regionSource.IsEmpty)
             {
                 _regionSource = new RECT(sourcePoint, sourceSize.Value);
-                //ThumbnailConfigViewModel.RegionSource = new RegionSourceRECT
-                //{
-                //    Left = _regionSource.left,
-                //    Top = _regionSource.top,
-                //    Right = _regionSource.right,
-                //    Bottom = _regionSource.bottom
-                //};
+
+                double boxWidth = Width;
+                double boxHeight = Height;
+                if (Ratio >= boxWidth / boxHeight)
+                {
+                    Height = boxWidth / Ratio;
+                }
+                else
+                {
+                    Width = boxHeight * Ratio;
+                }
             }
 
             SetThumbnailProperties(0, 0, (int)ActualWidthPixels, (int)ActualHeightPixels);
