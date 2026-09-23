@@ -475,7 +475,8 @@ namespace D4Companion.Services
                     _currentTooltip.ItemType.Equals(ItemTypeConstants.WitcherSigil) ||
                     _currentTooltip.ItemType.Equals(ItemTypeConstants.DungeonEscalation) ||
                     _currentTooltip.ItemType.Equals(ItemTypeConstants.HoradricJewel) ||
-                    _currentTooltip.ItemType.Equals(ItemTypeConstants.BloodiedLair))
+                    _currentTooltip.ItemType.Equals(ItemTypeConstants.BloodiedLair) ||
+                    _currentTooltip.ItemType.Equals(ItemTypeConstants.SoulSplinter))
                 {
                     _currentTooltip.ItemAffixLocations.Clear();
                 }

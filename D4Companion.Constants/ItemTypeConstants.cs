@@ -43,5 +43,6 @@
         public const string DungeonEscalation = "dungeonescalation"; // Escalation Sigil - Season 9+
         public const string HoradricJewel = "horadricjewel"; // Season 9
         public const string BloodiedLair = "bloodiedlair"; // BloodiedLair Sigil - Season 12
+        public const string SoulSplinter = "soulsplinter"; // Soul Splinter - Season 15
     }
 }
