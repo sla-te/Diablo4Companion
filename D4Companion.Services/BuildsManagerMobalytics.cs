@@ -687,10 +687,9 @@ namespace D4Companion.Services
             _webDriverWait = null;
 
             _timerTimeout.Stop();
-
+           
             WeakReferenceMessenger.Default.Send(new MobalyticsCompletedMessage());
         }
-
 
         private List<MobalyticsAffix> GetAllAffixes(MobalyticsBuildDataBuildVariantJson buildVariant, string itemType)
         {
@@ -806,15 +805,6 @@ namespace D4Companion.Services
                 paragonBoards.Add(paragonBoard);
 
                 paragonBoard.Name = board.Board.Slug;
-                // Fix naming inconsistency
-                paragonBoard.Name = paragonBoard.Name.Replace("barbarian-starter-board", "barbarian-starting-board");
-                paragonBoard.Name = paragonBoard.Name.Replace("druid-starter-board", "druid-starting-board");
-                paragonBoard.Name = paragonBoard.Name.Replace("necromancer-starter-board", "necromancer-starting-board");
-                paragonBoard.Name = paragonBoard.Name.Replace("paladin-starter-board", "paladin-starting-board");
-                paragonBoard.Name = paragonBoard.Name.Replace("rogue-starter-board", "rogue-starting-board");
-                paragonBoard.Name = paragonBoard.Name.Replace("sorcerer-starter-board", "sorcerer-starting-board");
-                paragonBoard.Name = paragonBoard.Name.Replace("spiritborn-starter-board", "spiritborn-starting-board");
-                paragonBoard.Name = paragonBoard.Name.Replace("warlock-starter-board", "warlock-starting-board");
                 paragonBoard.Glyph = board.Glyph?.Slug ?? string.Empty;
 
                 int rotation = board.Rotation % 360;
@@ -960,6 +950,27 @@ namespace D4Companion.Services
             }
         }
 
+        private List<MobalyticsBuildWrapperQueryData>? ObjectToMobalyticsBuildWrapperQueryData(object? value)
+        {
+            var deserializeOptions = new JsonSerializerOptions();
+            deserializeOptions.Converters.Add(new BoolConverter());
+            deserializeOptions.Converters.Add(new IntConverter());
+
+            if (value is JsonElement el && el.ValueKind == JsonValueKind.Array)
+            {
+                try
+                {
+                    return JsonSerializer.Deserialize<List<MobalyticsBuildWrapperQueryData>>(el.GetRawText(), deserializeOptions);
+                }
+                catch
+                {
+                    return null;
+                }
+            }
+
+            return null;
+        }
+
         private void ParseJsonBuild(string json)
         {
             var deserializeOptions = new JsonSerializerOptions();
@@ -1010,11 +1021,14 @@ namespace D4Companion.Services
             var deserializeOptions = new JsonSerializerOptions();
             deserializeOptions.Converters.Add(new BoolConverter());
             deserializeOptions.Converters.Add(new IntConverter());
-            MobalyticsBuildWrapperJson? mobalyticsBuildWrapperJson = JsonSerializer.Deserialize<MobalyticsBuildWrapperJson>(json, deserializeOptions);
-            MobalyticsBuildUserGeneratedDocumentByIdJson? mobalyticsBuildUserGeneratedDocumentByIdJson = mobalyticsBuildWrapperJson?.Apollo.GraphqlV2.Queries.FirstOrDefault(q => !string.IsNullOrWhiteSpace(q.State.Data[0].Game.Documents.UserGeneratedDocumentBySlug.Data.Id))?.State.Data[0].Game.Documents.UserGeneratedDocumentBySlug;
+            MobalyticsBuildWrapperJson? mobalyticsBuildWrapperJson = JsonSerializer.Deserialize<MobalyticsBuildWrapperJson>(json, deserializeOptions);          
+            MobalyticsBuildWrapperQuery? mobalyticsBuildWrapperQuery = mobalyticsBuildWrapperJson?.Apollo.GraphqlV2.Queries.FirstOrDefault(q => !string.IsNullOrWhiteSpace(ObjectToMobalyticsBuildWrapperQueryData(q.State.Data)?[0].Game.Documents.UserGeneratedDocumentBySlug.Data.Id));
+            MobalyticsBuildUserGeneratedDocumentByIdJson? mobalyticsBuildUserGeneratedDocumentByIdJson = mobalyticsBuildWrapperQuery == null ? null : ObjectToMobalyticsBuildWrapperQueryData(mobalyticsBuildWrapperQuery.State.Data)?[0].Game.Documents.UserGeneratedDocumentBySlug;
+
             if (mobalyticsBuildUserGeneratedDocumentByIdJson == null)
             {
-                mobalyticsBuildUserGeneratedDocumentByIdJson = mobalyticsBuildWrapperJson?.Apollo.GraphqlV2.Queries.FirstOrDefault(q => !string.IsNullOrWhiteSpace(q.State.Data[0].Game.Documents.UserGeneratedDocumentBySlugifiedName.Data.Id))?.State.Data[0].Game.Documents.UserGeneratedDocumentBySlugifiedName;
+                mobalyticsBuildWrapperQuery = mobalyticsBuildWrapperJson?.Apollo.GraphqlV2.Queries.FirstOrDefault(q => !string.IsNullOrWhiteSpace(ObjectToMobalyticsBuildWrapperQueryData(q.State.Data)?[0].Game.Documents.UserGeneratedDocumentBySlugifiedName.Data.Id));
+                mobalyticsBuildUserGeneratedDocumentByIdJson = mobalyticsBuildWrapperQuery == null ? null : ObjectToMobalyticsBuildWrapperQueryData(mobalyticsBuildWrapperQuery.State.Data)?[0].Game.Documents.UserGeneratedDocumentBySlugifiedName;
             }
 
             if (mobalyticsBuildUserGeneratedDocumentByIdJson != null)
